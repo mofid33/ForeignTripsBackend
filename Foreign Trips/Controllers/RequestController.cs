@@ -42,8 +42,8 @@ namespace Foreign_Trips.Controllers
 
         #region Insert Request
         [HttpPost]
-        [Route("InsertRequest")]
-        public async Task<ActionResult<RequestTbl>> InsertRequestAsync(
+        [Route("InsertRequest2")]
+        public async Task<ActionResult<RequestTbl>> InsertRequest(
 [FromBody] RequestTbl Model
 )
         {

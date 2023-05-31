@@ -10,15 +10,14 @@ namespace Foreign_Trips.Repositories
     public class RequestRepository : IRequestRepository
     {
         private readonly AgentDbContext _context;
-        private readonly IRequestRepository _requestRepository;
+        //private readonly IRequestRepository _requestRepository;
         private readonly IAgentRepository _agentRepository;
 
-        public RequestRepository(AgentDbContext context, IRequestRepository requestRepository, IAgentRepository agentRepository)
+        public RequestRepository(AgentDbContext context,  IAgentRepository agentRepository)
 
         {
             _context = context ?? throw new ArgumentException(nameof(context));
-            _requestRepository = requestRepository ??
-               throw new ArgumentNullException(nameof(requestRepository));
+         
             _agentRepository = agentRepository ??
                throw new ArgumentNullException(nameof(agentRepository));
 
@@ -58,7 +57,7 @@ namespace Foreign_Trips.Repositories
                 qtbl.TravelTopic = request.TravelTopic;
                 qtbl.DestinationCountry = request.DestinationCountry;
                 qtbl.Payer = request.Payer;
-                qtbl.TravelCost= request.TravelCost;
+                qtbl.TravelCost = request.TravelCost;
                 qtbl.RejectDescription = request.RejectDescription;
                 qtbl.ConfirmDate = request.ConfirmDate;
                 await _context.RequestTbl.AddAsync(request);
@@ -69,28 +68,28 @@ namespace Foreign_Trips.Repositories
                 string date = persianDateTime.ToString().Substring(0, 10);
                 if (request.RequestStatusId == 1)
                 {
-                 qtbl.ConfirmDate = date;
+                    qtbl.ConfirmDate = date;
 
-            }
-                  var Req = await _context.RequestTbl.AddAsync(qtbl);
-                  await _context.SaveChangesAsync();
-            
-                  //var data = await _agentRepository.GetAgentAsync(request.AgentId);
-                  //data.RequestId = qtbl.RequestId;
-            
-                  await _context.SaveChangesAsync();
-                  return request;
-              
+                }
+                var Req = await _context.RequestTbl.AddAsync(qtbl);
+                await _context.SaveChangesAsync();
+
+                //var data = await _agentRepository.GetAgentAsync(request.AgentId);
+                //data.RequestId = qtbl.RequestId;
+
+                //await _context.SaveChangesAsync();
+                return request;
+
 
             }
 
             catch (System.Exception ex)
             {
-                 return null;
+                return null;
 
             }
-            
-        }      
+
+        }
 
         public async Task RemoveRequestAsync(int requestId)
         {
@@ -100,7 +99,7 @@ namespace Foreign_Trips.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public async Task<bool> RequestExistsAsync(long RequestId)
+        public async Task<bool> RequestExistsAsync(int RequestId)
         {
             return await _context.RequestTbl.AnyAsync(f => f.RequestId == RequestId);
         }
@@ -128,9 +127,9 @@ namespace Foreign_Trips.Repositories
         {
             try
             {
-                var req = await _requestRepository.GetRequestAsync(request.RequestId);
-                req.RequestStatusId = request.RequestStatusID;
-                req.RequestStatusId = request.RequestStatusID;
+                var req = GetRequestAsync(request.RequestId);
+                //req.RequestStatusId = request.RequestStatusID;
+                //req.RequestStatusId = request.RequestStatusID;
 
 
                 await _context.SaveChangesAsync();

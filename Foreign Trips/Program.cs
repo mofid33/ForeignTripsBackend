@@ -33,13 +33,12 @@ builder.Services.AddDbContext<AgentDbContext>(option =>
             builder.Configuration["ConnectionStrings:SqlConnection"]
             );
     });
-    builder.Services.AddSwaggerGen();
     builder.Services.AddScoped<IAgentRepository, AgentRepository>();
     builder.Services.AddScoped<IAuthRepository, AuthRepository>();
-    builder.Services.AddScoped<IRequestRepository, RequestRepository>();
-    builder.Services.AddScoped<IRequestStatusRepository, RequestStatusRepository>();
-    builder.Services.AddScoped<IRequestTravelRepository, RrequestTravelRepository>();
-    builder.Services.AddScoped<IAdminRepository, AdminRepository>();
+builder.Services.AddScoped<IRequestRepository, RequestRepository>();
+//builder.Services.AddScoped<IRequestStatusRepository, RequestStatusRepository>();
+//builder.Services.AddScoped<IRequestTravelRepository, RrequestTravelRepository>();
+builder.Services.AddScoped<IAdminRepository, AdminRepository>();
 
     builder.Services.AddAuthentication(options =>
     {
