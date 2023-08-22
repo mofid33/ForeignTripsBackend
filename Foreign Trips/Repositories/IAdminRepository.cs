@@ -9,11 +9,10 @@ namespace Foreign_Trips.Repositories
         Task<IEnumerable<AdminTbl?>> GetAdmins();
         Task<AdminTbl?> InsertAdmin(AdminTbl admin);
         Task<AdminTbl?> UpdateAdmin(AdminTbl admin);
+        Task<IEnumerable<LoginRegDto?>> GetUser();
         Task<LoginTbl?> GetUserLog(LoginTbl id);
-        Task<IEnumerable<AgentTbl>> GetAgent();
+        Task RemoveAdmin(int adminId);
 
-        //Task RemoveAdmin(int adminId);
-        
     }
 
 }

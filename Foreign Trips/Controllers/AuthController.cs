@@ -18,7 +18,7 @@ namespace Foreign_Trips.Controllers
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
 
-        #region login
+
         [HttpPost]
         [Route("Login")]
         public ActionResult<LoginDto> Login([FromBody] LoginDto
@@ -43,7 +43,7 @@ namespace Foreign_Trips.Controllers
 
             return Ok(auth);
         }
-        #endregion 
+
     }
 }
 

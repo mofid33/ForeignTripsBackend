@@ -1,4 +1,6 @@
-﻿using Foreign_Trips.Model;
+﻿using Foreign_Trips.Entities;
+using Foreign_Trips.Model;
+using Foreign_Trips.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 namespace Foreign_Trips.DbContexts
@@ -16,9 +18,14 @@ namespace Foreign_Trips.DbContexts
         public DbSet<LoginTbl> LoginTbl { get; set; } = null!;
         public DbSet<RequestStatusTbl> RequestStatusTbl { get; set; } = null!;
         public DbSet<RequestTbl> RequestTbl { get; set; } = null!;
-        public DbSet<RequestTravelTbl> RequestTravelTbl { get; set; } = null!;
         public DbSet<ProvinceTbl> ProvinceTbl { get; set; } = null!;
         public DbSet<CityTbl> CityTbl { get; set; } = null!;
-
+        public DbSet<TicketTbl> TicketTbl { get; set; } = null!;
+        public DbSet<TicketDetailsTbl> TicketDetailsTbl { get; set; } = null!;
+        public DbSet<Report> Report { get; set; } = null;
+        public DbSet<FileDetails> FileDetails { get; set; }
+        public DbSet<RuleTbl> RuleTbl { get; set; } = null!;
+        public DbSet<SupervisorTbl> SupervisorTbl { get; set; } = null!;
+        public DbSet<ForeignDelegrationTbl> ForeginDelegrationTbl { get; set; } = null!;
     }
 }

@@ -9,13 +9,17 @@ namespace Foreign_Trips.Repositories
         Task<bool> AgentExistsAsync(long agentId);
         Task<AgentTbl?> GetAgentAsync(long agentId);
         Task<AgentTbl?> InsertAgentAsync(AgentTbl agent);
-        Task<AgentDto?> UpdateAgentAsync(AgentDto agent, long agentId);
-        Task UpdatePassAgentAsync(AgentDto agent, long oagentId);
-        Task RemoveAgentAsync(int agentId);
-        Task<IEnumerable<RequestStatusTbl>> GetRequestStatusAsync();
+        Task<AgentTbl?> UpdateAgentAsync(AgentTbl agentId);
+        Task DeleteAgent(int agentId);
         Task<IEnumerable<ProvinceTbl>> GetProvincesAcync();
         Task<IEnumerable<CityTbl>> GetCitiesAcync(int? provinceId);
+        Task<string> GetAddress(AgentTbl postCode);
+        Task PostFileAsync(FileUploadModel fileData);
+        Task PostMultiFileAsync(List<FileUploadModel> fileData);
+        Task DownloadFileById(int fileName);
+        Task<AgentTbl?> InsertPassPortAsync(AgentTbl agent);
+        Task UpdatePassAgentAsync(AgentTbl agent, long agentId);
+        Task SuspendAgentAsync(long agentId);
         Task<bool> SaveChangesAsync();
-       
     }
 }

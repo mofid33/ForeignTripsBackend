@@ -35,13 +35,21 @@ public partial class RequestTbl
 
     public string Payer { get; set; } = null!;
 
+    public string PersonUpName { get; set; } = null!;
+
     public int TravelCost { get; set; }
 
     public string RejectDescription { get; set; } = null!;
 
+    public string? ReasonForUrgency { get; set; }
+
     public string? ConfirmDate { get; set; }
 
-    public virtual AgentTbl? Agent { get; set; }
+    public bool IsFinal { get; set; }
+
+    public virtual ICollection<FileDetailsTbl> FileDetailsTbls { get; set; } = new List<FileDetailsTbl>();
+
+    public virtual ICollection<Report> Reports { get; set; } = new List<Report>();
 
     public virtual RequestStatusTbl? RequestStatus { get; set; }
 }

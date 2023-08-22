@@ -11,7 +11,7 @@ public partial class RequestStatusTbl
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int RequestStatusId { get; set; }
 
-    public int RequestStatusTitle { get; set; }
+    public string RequestStatusTitle { get; set; } = null!;
 
     public virtual ICollection<RequestTbl> RequestTbls { get; set; } = new List<RequestTbl>();
 }

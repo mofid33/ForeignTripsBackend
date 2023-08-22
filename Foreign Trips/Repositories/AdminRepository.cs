@@ -3,6 +3,7 @@ using Foreign_Trips.Entities;
 using Foreign_Trips.Model;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using Serilog;
 
 namespace Foreign_Trips.Repositories
 {
@@ -30,18 +31,6 @@ namespace Foreign_Trips.Repositories
             return await _context.AdminTbl.ToListAsync();
         }
 
-        public async Task<IEnumerable<AgentTbl>> GetAgent()
-        {
-            try
-            {
-
-                return await _context.AgentTbl.ToListAsync();
-            }
-            catch (System.Exception ex)
-            {
-                return null;
-            }
-        }
 
         public async Task<LoginTbl?> GetUserLog(LoginTbl admin)
         {
@@ -49,7 +38,7 @@ namespace Foreign_Trips.Repositories
             {
 
                 var adm = await _context.LoginTbl.Where(t => t.AgentId == admin.AgentId
-                ).Include(t => t.Agent)
+                ).Include(t => t.AgentId)
                 .OrderBy(t => t.LoginId).LastOrDefaultAsync();
 
 
@@ -64,7 +53,28 @@ namespace Foreign_Trips.Repositories
 
             }
         }
-   
+
+        public async Task<IEnumerable<LoginRegDto?>> GetUser()
+        {
+            var agent = await _context.AgentTbl.ToListAsync();
+            List<LoginRegDto> log = new List<LoginRegDto>();
+            for (int i = 0; i < agent.Count; i++)
+            {
+                log.Add(new LoginRegDto
+                {
+
+                    Name = agent[i].AgentName,
+                    AgentID = agent[i].AgentId,
+                    Role = "Agent",
+                    Mobile = agent[i].Mobile,
+                    NationalCode = agent[i].NationalCode,
+                    EditInfo = false,
+                    CreateAgent = false
+                });
+            }
+            return (IEnumerable<LoginRegDto>)log;
+        }
+    
 
         public async Task<AdminTbl?> InsertAdmin(AdminTbl admin)
         {
@@ -86,13 +96,13 @@ namespace Foreign_Trips.Repositories
             }
         }
 
-       // public async Task RemoveAdmin(int adminId)
-       // {
-       //    var data = _context.AdminTbl.Find(adminId);
-       //     _context.AdminTbl.Remove(data);
+        public async Task RemoveAdmin(int adminId)
+        {
+            var data = _context.AdminTbl.Find(adminId);
+            _context.AdminTbl.Remove(data);
 
-       //     await _context.SaveChangesAsync();
-       //}
+            await _context.SaveChangesAsync();
+        }
 
         public async Task<AdminTbl?> UpdateAdmin(AdminTbl admin)
         {
@@ -100,6 +110,7 @@ namespace Foreign_Trips.Repositories
             {
 
                 var adm = await _context.AdminTbl.FindAsync(admin.AdminId);
+                adm.AdminName = admin.AdminName;
                 adm.AdminUsername = admin.AdminUsername;
                 adm.Password = admin.Password;
                 await _context.SaveChangesAsync();

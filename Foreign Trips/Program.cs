@@ -3,6 +3,7 @@ using Foreign_Trips.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,12 +14,14 @@ builder.Services.AddCors(options =>
     options.AddPolicy(name: MyAllowSpecificOrigins,
                       builder =>
                       {
-                          builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyOrigin().AllowAnyMethod();
+                          builder.AllowAnyHeader().AllowAnyOrigin().AllowAnyMethod();
                       });
 });
 builder.Services.AddControllers(options =>
     {
         options.ReturnHttpNotAcceptable = true;
+    }).AddNewtonsoftJson(options => {
+        options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
     })
         .AddXmlDataContractSerializerFormatters();
     // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -35,12 +38,15 @@ builder.Services.AddDbContext<AgentDbContext>(option =>
     });
     builder.Services.AddScoped<IAgentRepository, AgentRepository>();
     builder.Services.AddScoped<IAuthRepository, AuthRepository>();
-builder.Services.AddScoped<IRequestRepository, RequestRepository>();
+    builder.Services.AddScoped<IRequestRepository, RequestRepository>();
 //builder.Services.AddScoped<IRequestStatusRepository, RequestStatusRepository>();
 //builder.Services.AddScoped<IRequestTravelRepository, RrequestTravelRepository>();
-builder.Services.AddScoped<IAdminRepository, AdminRepository>();
+   builder.Services.AddScoped<IAdminRepository, AdminRepository>();
+   builder.Services.AddScoped<ITicketRepository, TicketRepository>();
+   builder.Services.AddScoped<IReportRepository, ReportRepository>();
+    builder.Services.AddScoped<ISupervisorRepository, SupervisorRepository>();  
 
-    builder.Services.AddAuthentication(options =>
+builder.Services.AddAuthentication(options =>
     {
         options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
         options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;

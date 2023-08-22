@@ -12,7 +12,6 @@ namespace Foreign_Trips.Controllers
     {
         private readonly IAgentRepository _agentRepository;
         private readonly IAuthRepository _authRepository;
-
         private readonly IMapper _mapper;
         public AgentController(IAgentRepository agentRepository, IAuthRepository authRepository, IMapper mapper)
         {
@@ -24,7 +23,7 @@ namespace Foreign_Trips.Controllers
         }
 
 
-        #region Get Agent
+
         [HttpGet]
         [Route("GetAgents")]
         public async Task<ActionResult<IEnumerable<AgentTbl>>> GetAgent()
@@ -36,34 +35,30 @@ namespace Foreign_Trips.Controllers
                 Agents
                 );
         }
-        #endregion
-
-
-        #region Get
+        
         [HttpGet]
         [Route("GetAgent")]
         public async Task<ActionResult<AgentDto>> GetAgent(long agentId)
         {
             string authHeader = HttpContext.Request.Headers["Authorization"].ToString().Replace("Bearer ", string.Empty);
 
-            var OrganID = _authRepository.GetIDFromToken(authHeader);
+            var AgentID = _authRepository.GetIDFromToken(authHeader);
             if (!await _agentRepository.AgentExistsAsync(agentId))
             {
                 return NotFound();
             }
-            var Agent = await _agentRepository.GetAgentAsync(OrganID);
+            var Agent = await _agentRepository.GetAgentAsync(AgentID);
             return Ok(
          _mapper.Map<AgentTbl>(Agent)
          );
 
         }
-        #endregion
 
 
-        #region Insert Agent
+
         [HttpPost]
         [Route("InsertAgent")]
-        public async Task<ActionResult<AgentDto>> InsertAgnet(
+        public async Task<ActionResult<AgentTbl>> InsertAgnet(
         [FromBody] AgentTbl Model
         )
         {
@@ -77,15 +72,13 @@ namespace Foreign_Trips.Controllers
             return Ok();
 
         }
-        #endregion
 
 
 
-        #region Edit
         [HttpPost]
         [Route("UpdateAgnet")]
-        public async Task<ActionResult<AgentDto>> UpdateAgnet(
-        [FromBody] AgentDto Model
+        public async Task<ActionResult<AgentTbl>> UpdateAgnet(
+        [FromBody] AgentTbl Model
              )
         {
             string authHeader = HttpContext.Request.Headers["Authorization"].ToString().Replace("Bearer ", string.Empty);
@@ -95,7 +88,7 @@ namespace Foreign_Trips.Controllers
             {
                 return NotFound();
             }
-            var Eagent = await _agentRepository.UpdateAgentAsync(Model, AgnetID);
+            var Eagent = await _agentRepository.UpdateAgentAsync(Model);
             if (Eagent == null)
             {
                 return BadRequest();
@@ -103,47 +96,102 @@ namespace Foreign_Trips.Controllers
             return Ok();
 
         }
-        #endregion
 
 
 
-        #region Delete
+
+        
+        //[HttpPost]
+        //[Route("RemoveAgent")]
+        //public async Task<ActionResult<AgentTbl>> RemoveAgent(
+        //[FromBody] AgentTbl Model
+        //)
+        //{
+        //    if (!await _agentRepository.AgentExistsAsync(Model.AgentId))
+        //    {
+        //        return NotFound();
+        //    }
+        //    _agentRepository.RemoveAgentAsync(Model.AgentId);
+
+        //    return Ok();
+
+        //}
+
+
+      
         [HttpPost]
         [Route("RemoveAgent")]
-        public async Task<ActionResult<AgentDto>> RemoveAgent(
-        [FromBody] AgentDto Model
+        public async Task<ActionResult<AgentTbl>> RemoveAgentAsync(
+        [FromBody] AgentTbl Model
         )
         {
             if (!await _agentRepository.AgentExistsAsync(Model.AgentId))
             {
                 return NotFound();
             }
-            _agentRepository.RemoveAgentAsync(Model.AgentId);
+            _agentRepository.DeleteAgent(Model.AgentId);
 
             return Ok();
 
         }
-        #endregion
 
-
-
-        #region Delete
         [HttpPost]
-        [Route("RemoveRequest")]
-        public async Task<ActionResult<AgentDto>> RemoveAgentAsync(
-        [FromBody] AgentDto Model
-        )
+        [Route("InsertPassPort")]
+        public async Task<ActionResult<AgentTbl>> InsertPassPort(
+[FromBody] AgentTbl Model
+)
         {
-            if (!await _agentRepository.AgentExistsAsync(Model.AgentId))
-            {
-                return NotFound();
-            }
-            _agentRepository.RemoveAgentAsync(Model.AgentId);
 
-            return Ok();
+            var Eagent = await _agentRepository.InsertPassPortAsync(Model);
+            if (Eagent == null)
+            {
+                return BadRequest();
+            }
+            return Ok(Eagent);
 
         }
+
+        #region File
+        [HttpPost("PostSingleFile")]
+        public async Task<ActionResult> PostSingleFile([FromForm] FileUploadModel fileDetails)
+        {
+            if (fileDetails == null)
+            {
+                return BadRequest();
+            }
+
+            try
+            {
+                await _agentRepository.PostFileAsync(fileDetails);
+                return Ok();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        [HttpPost("PostMultipleFile")]
+        public async Task<ActionResult> PostMultipleFile([FromForm] List<FileUploadModel> fileDetails)
+        {
+            if (fileDetails == null)
+            {
+                return BadRequest();
+            }
+
+            try
+            {
+                await _agentRepository.PostMultiFileAsync(fileDetails);
+                return Ok();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
         #endregion
+
+
 
 
     }

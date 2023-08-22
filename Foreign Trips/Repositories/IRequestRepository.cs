@@ -12,8 +12,10 @@ namespace Foreign_Trips.Repositories
         Task<RequestDto?> UpdateRequestAsync(RequestDto request);
         Task<RequestDto?> RejectRequest(RequestDto request);
         Task RemoveRequestAsync(int requestId);
+        Task<IEnumerable<RequestStatusTbl>> GetRequestStatusAsync();
+        Task<IEnumerable<RuleTbl?>> GetRule();
+        //Task<RuleTbl?> GetRuleAsync(int RuleId);
         Task<bool> SaveChangesAsync();
-
 
     }
 }

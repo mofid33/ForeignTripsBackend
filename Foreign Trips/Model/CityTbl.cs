@@ -19,5 +19,7 @@ public partial class CityTbl
 
     public virtual ICollection<AgentTbl> AgentTbls { get; set; } = new List<AgentTbl>();
 
+    public virtual ICollection<ForeignDelegrationTbl> ForeignDelegrationTbls { get; set; } = new List<ForeignDelegrationTbl>();
+
     public virtual ProvinceTbl? Province { get; set; }
 }
