@@ -22,6 +22,7 @@ namespace Foreign_Trips.Repositories
         Task PostMultiFileAsync(List<FileUploadModel> fileData);
         Task DownloadFileById(int fileName);
         Task UpdatePassAgentAsync(AgentTbl agent, long agentId);
+        Task SuspendAgentAsync(long agentId);
         Task<bool> SaveChangesAsync();
     }
 }

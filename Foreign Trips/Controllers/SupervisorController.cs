@@ -6,20 +6,20 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Foreign_Trips.Controllers
 {
-    [Route("api/SupervisorAdmin")]
+    [Route("api/Supervisor")]
     public class SupervisorController: ControllerBase
     {
         private readonly IAgentRepository _agentRepository;
-        private readonly IMainAdmin _supervisorRepository;
+        private readonly ISupervisorRepository _supervisorRepository;
         private readonly IAuthRepository _authRepository;
         private readonly IMapper _mapper;
-        public SupervisorController(IAgentRepository agentRepository, IMainAdmin supervisorRepository, IAuthRepository authRepository,
+        public SupervisorController(IAgentRepository agentRepository, ISupervisorRepository supervisorRepository, IAuthRepository authRepository,
                                 IMapper mapper)
         {
             _agentRepository = agentRepository ??
                 throw new ArgumentNullException(nameof(agentRepository));
             _supervisorRepository = supervisorRepository ??
-                throw new ArgumentNullException(nameof(supervisorRepository));
+               throw new ArgumentNullException(nameof(supervisorRepository));
             _authRepository = authRepository ??
                 throw new ArgumentNullException(nameof(authRepository));
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));

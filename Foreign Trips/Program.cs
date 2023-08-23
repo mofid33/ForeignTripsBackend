@@ -44,7 +44,7 @@ builder.Services.AddDbContext<AgentDbContext>(option =>
    builder.Services.AddScoped<IAdminRepository, AdminRepository>();
    builder.Services.AddScoped<ITicketRepository, TicketRepository>();
    builder.Services.AddScoped<IReportRepository, ReportRepository>();
-    builder.Services.AddScoped<IMainAdmin, SupervisorRepository>();  
+    builder.Services.AddScoped<ISupervisorRepository, SupervisorRepository>();  
 
 builder.Services.AddAuthentication(options =>
     {

@@ -366,7 +366,7 @@ namespace Foreign_Trips.Repositories
             }
         }
 
-        public async Task SuspendAgentAsync(int agentId)
+        public async Task SuspendAgentAsync(long agentId)
         {
                 try
                 {

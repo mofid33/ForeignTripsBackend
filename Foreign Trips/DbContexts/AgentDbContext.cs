@@ -20,9 +20,9 @@ namespace Foreign_Trips.DbContexts
         public DbSet<RequestTbl> RequestTbl { get; set; } = null!;
         public DbSet<ProvinceTbl> ProvinceTbl { get; set; } = null!;
         public DbSet<AgentStatusTbl> AgentStatusTbl { get; set; } = null!;
-        public DbSet<AgentStatusTbl> TypeOfMissionTbl { get; set; } = null!;
-        public DbSet<AgentStatusTbl> TypeOfEmploymentTbl { get; set; } = null!;
-        public DbSet<AgentStatusTbl> PositionTypeTbl { get; set; } = null!;
+        public DbSet<TypeOfMissionTbl> TypeOfMissionTbl { get; set; } = null!;
+        public DbSet<TypeOfEmploymentTbl> TypeOfEmploymentTbl { get; set; } = null!;
+        public DbSet<PositionTypeTbl> PositionTypeTbl { get; set; } = null!;
         public DbSet<CityTbl> CityTbl { get; set; } = null!;
         public DbSet<TicketTbl> TicketTbl { get; set; } = null!;
         public DbSet<TicketDetailsTbl> TicketDetailsTbl { get; set; } = null!;
