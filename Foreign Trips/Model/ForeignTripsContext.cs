@@ -35,7 +35,7 @@ public partial class ForeignTripsContext : DbContext
 
     public virtual DbSet<PassportTbl> PassportTbls { get; set; }
 
-    public virtual DbSet<PositionTbl> PositionTbls { get; set; }
+    public virtual DbSet<PositionTypeTbl> PositionTypeTbls { get; set; }
 
     public virtual DbSet<ProvinceTbl> ProvinceTbls { get; set; }
 
@@ -47,7 +47,7 @@ public partial class ForeignTripsContext : DbContext
 
     public virtual DbSet<RuleTbl> RuleTbls { get; set; }
 
-    public virtual DbSet<SubsidiaryOrganization> SubsidiaryOrganizations { get; set; }
+    public virtual DbSet<SubsidiaryOrganizationTypeTbl> SubsidiaryOrganizationTypeTbls { get; set; }
 
     public virtual DbSet<SupervisorTbl> SupervisorTbls { get; set; }
 
@@ -117,6 +117,10 @@ public partial class ForeignTripsContext : DbContext
             entity.Property(e => e.SupervisorId).HasColumnName("SupervisorID");
             entity.Property(e => e.TypeOfEmploymentId).HasColumnName("TypeOfEmploymentID");
             entity.Property(e => e.TypeOfMissionId).HasColumnName("TypeOfMissionID");
+
+            entity.HasOne(d => d.AgentStatus).WithMany(p => p.AgentTbls)
+                .HasForeignKey(d => d.AgentStatusId)
+                .HasConstraintName("FK_AgentTbl_AgentStatusTbl");
 
             entity.HasOne(d => d.City).WithMany(p => p.AgentTbls)
                 .HasForeignKey(d => d.CityId)
@@ -283,11 +287,11 @@ public partial class ForeignTripsContext : DbContext
             entity.Property(e => e.TypeOfMission).HasMaxLength(10);
         });
 
-        modelBuilder.Entity<PositionTbl>(entity =>
+        modelBuilder.Entity<PositionTypeTbl>(entity =>
         {
-            entity.HasKey(e => e.PositionId);
+            entity.HasKey(e => e.PositionId).HasName("PK_PositionTbl");
 
-            entity.ToTable("PositionTbl");
+            entity.ToTable("PositionTypeTbl");
 
             entity.Property(e => e.PositionId).HasColumnName("PositionID");
             entity.Property(e => e.PositionType).HasMaxLength(100);
@@ -370,9 +374,11 @@ public partial class ForeignTripsContext : DbContext
                 .HasColumnName("RuleID");
         });
 
-        modelBuilder.Entity<SubsidiaryOrganization>(entity =>
+        modelBuilder.Entity<SubsidiaryOrganizationTypeTbl>(entity =>
         {
-            entity.ToTable("SubsidiaryOrganization");
+            entity.HasKey(e => e.SubsidiaryOrganizationId).HasName("PK_SubsidiaryOrganization");
+
+            entity.ToTable("SubsidiaryOrganizationTypeTbl");
 
             entity.Property(e => e.SubsidiaryOrganizationId).HasColumnName("SubsidiaryOrganizationID");
             entity.Property(e => e.SubsidiaryOrganizationType).HasMaxLength(100);

@@ -10,10 +10,10 @@ namespace Foreign_Trips.Controllers
     public class SupervisorController: ControllerBase
     {
         private readonly IAgentRepository _agentRepository;
-        private readonly ISupervisorRepository _supervisorRepository;
+        private readonly IMainAdmin _supervisorRepository;
         private readonly IAuthRepository _authRepository;
         private readonly IMapper _mapper;
-        public SupervisorController(IAgentRepository agentRepository, ISupervisorRepository supervisorRepository, IAuthRepository authRepository,
+        public SupervisorController(IAgentRepository agentRepository, IMainAdmin supervisorRepository, IAuthRepository authRepository,
                                 IMapper mapper)
         {
             _agentRepository = agentRepository ??
@@ -177,5 +177,33 @@ namespace Foreign_Trips.Controllers
         }
         #endregion
 
+        #region province
+        [HttpGet]
+        [Route("GetProvinces")]
+        public async Task<ActionResult<IEnumerable<ProvinceTbl>>> GetProvinces()
+        {
+            var Organs = await _agentRepository.GetProvincesAcync();
+
+            return Ok(
+                _mapper.Map<IEnumerable<ProvinceTbl>>(Organs)
+                );
+
+        }
+        [HttpPost]
+        [Route("GetCities")]
+        public async Task<ActionResult<CityTbl>> GetCities(
+        [FromBody] CityTbl Model
+)
+        {
+
+
+            var Cities = await _agentRepository.GetCitiesAcync(Model.ProvinceId);
+            return Ok(
+         //_mapper.Map<CityTbl>(Cities)
+         Cities
+         );
+
+        }
+        #endregion
     }
 }

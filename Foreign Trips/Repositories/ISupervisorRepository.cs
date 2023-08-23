@@ -9,8 +9,9 @@ namespace Foreign_Trips.Repositories
         Task<IEnumerable<SupervisorTbl?>> GetSupervisor();
         Task<SupervisorTbl?> GetSupervisor(int  supervisorId);
         Task<SupervisorTbl?> InsertSuperviser(SupervisorTbl supervisor);
-        Task<SupervisorTbl?> UpdateSuperviserAsync(SupervisorTbl supervisoradmin);
-        //Task UpdatePassAgentAsync(AgentTbl agent, long agentId);
+        Task<SupervisorTbl?> UpdateSuperviserAsync(SupervisorTbl supervisor);
+        Task UpdatePassAgentAsync(int agentId);
+        Task<AgentTbl?> GetAgent(int agentId);
         Task<AgentTbl?> InsertAgent(AgentTbl agent);
         Task<AgentTbl?> UpdateAgent(AgentTbl agent);
         Task<AgentTbl?> DeleteAgent(int agentId);

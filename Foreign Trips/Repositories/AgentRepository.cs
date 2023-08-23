@@ -349,40 +349,14 @@ namespace Foreign_Trips.Repositories
             return (await _context.SaveChangesAsync() > 0);
         }
 
-        public async Task<AgentTbl?> InsertPassPortAsync(AgentTbl agent)
-        {
-            try
-            {
-                AgentTbl ptbl = new AgentTbl();
-                ptbl.AgentName = agent.AgentName;
-                ptbl.CityId = agent.CityId;              
-                ptbl.Mobile= agent.Mobile;
-                ptbl.TypeOfMission = agent.TypeOfMission;
-                ptbl.Email = agent.Email;
-                ptbl.PostalCode = agent.PostalCode;
-                ptbl.Phone = agent.Phone;
-
-                await _context.AgentTbl.AddAsync(agent);
-                await _context.SaveChangesAsync();
-
-
-                return agent;
-                
-            }
-            catch (System.Exception ex)
-            {
-                return null;
-
-            }
-
-        }
+        
 
         public async Task UpdatePassAgentAsync(AgentTbl agent, long agentId)
         {
             try
             {
                 var data = await GetAgentAsync(agentId);
-                //data.Password = organization.Password;
+                data.Password = agent.Password;
                 await _context.SaveChangesAsync();
 
 
@@ -392,22 +366,47 @@ namespace Foreign_Trips.Repositories
             }
         }
 
-
-        public async Task SuspendAgentAsync(long agentId)
+        public async Task SuspendAgentAsync(int agentId)
         {
-        //    try
-        //    {
-        //        var data = await GetAgentAsync(agentId);
-        //        data.National.NationalStatusId = 4;
+                try
+                {
+                    var data = await GetAgentAsync(agentId);
+                    data.AgentStatus.AgentStatusId = 5;
 
 
-        //        await _context.SaveChangesAsync();
+                    await _context.SaveChangesAsync();
 
-        //    }
-        //    catch (System.Exception e)
-        //    {
-        //    }
-        throw new NotImplementedException();
+                }
+                catch (System.Exception e)
+                {
+                }
+            
         }
+        #region AgentStatus
+        public async Task<IEnumerable<AgentStatusTbl>> GetAgentStatusAsync()
+        {
+            return await _context.AgentStatusTbl.ToListAsync();
+        }
+        #endregion
+
+        #region TypeOfMission
+        public async Task<IEnumerable<TypeOfMissionTbl>> GetTypeOfMissionTblAsync()
+        {
+            return await _context.TypeOfMissionTbl.ToListAsync();
+        }
+        #endregion 
+
+        #region TypeOfEmployment
+        public async  Task<IEnumerable<TypeOfEmploymentTbl>> TypeOfEmploymentTblAsync()
+        {
+            return await _context.TypeOfEmploymentTbl.ToListAsync();
+        }
+        #endregion
+        #region PositionType
+        public async Task<IEnumerable<PositionTypeTbl>> PositionTypeTblAsync()
+        {
+            return await _context.PositionTypeTbl.ToListAsync();
+        }
+        #endregion
     }
 }

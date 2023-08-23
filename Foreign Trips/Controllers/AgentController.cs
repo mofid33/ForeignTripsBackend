@@ -135,22 +135,6 @@ namespace Foreign_Trips.Controllers
 
         }
 
-        [HttpPost]
-        [Route("InsertPassPort")]
-        public async Task<ActionResult<AgentTbl>> InsertPassPort(
-[FromBody] AgentTbl Model
-)
-        {
-
-            var Eagent = await _agentRepository.InsertPassPortAsync(Model);
-            if (Eagent == null)
-            {
-                return BadRequest();
-            }
-            return Ok(Eagent);
-
-        }
-
         #region File
         [HttpPost("PostSingleFile")]
         public async Task<ActionResult> PostSingleFile([FromForm] FileUploadModel fileDetails)
@@ -191,7 +175,19 @@ namespace Foreign_Trips.Controllers
         }
         #endregion
 
+        #region AgentStatus
+        [HttpGet]
+        [Route("GetAgentStatus")]
+        public async Task<ActionResult<IEnumerable<AgentStatusTbl>>> GetAgentStatus()
+        {
+            var agnets = await _agentRepository.GetAgentStatusAsync();
 
+            return Ok(
+                _mapper.Map<IEnumerable<AgentStatusTbl>>(agnets)
+                );
+
+        }
+        #endregion
 
 
     }
