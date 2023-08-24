@@ -12,13 +12,23 @@ namespace Foreign_Trips.Controllers
     {
         private readonly IAgentRepository _agentRepository;
         private readonly IAuthRepository _authRepository;
+        private readonly IRequestRepository _requestRepository;
+        private readonly IReportRepository _reportRepository;
+        private readonly ITicketRepository _ticketRepository;
         private readonly IMapper _mapper;
-        public AgentController(IAgentRepository agentRepository, IAuthRepository authRepository, IMapper mapper)
+
+        public AgentController(IAgentRepository agentRepository, IAuthRepository authRepository, IReportRepository reportRepository, ITicketRepository ticketRepository, IRequestRepository requestRepository, IMapper mapper)
         {
             _agentRepository = agentRepository ??
                 throw new ArgumentNullException(nameof(agentRepository));
             _authRepository = authRepository ??
                 throw new ArgumentNullException(nameof(authRepository));
+            _requestRepository = requestRepository ??
+                throw new ArgumentNullException(nameof(requestRepository));
+            _reportRepository = reportRepository ??
+                throw new ArgumentNullException(nameof(reportRepository));
+            _ticketRepository = ticketRepository ??
+                throw new ArgumentNullException(nameof(ticketRepository));
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
 
@@ -51,6 +61,18 @@ namespace Foreign_Trips.Controllers
             return Ok(
          _mapper.Map<AgentTbl>(Agent)
          );
+
+        }
+
+        [HttpGet]
+        [Route("GetAgentStatus")]
+        public async Task<ActionResult<IEnumerable<AgentStatusTbl>>> GetAgentStatus()
+        {
+            var agnets = await _agentRepository.GetAgentStatusAsync();
+
+            return Ok(
+                _mapper.Map<IEnumerable<AgentStatusTbl>>(agnets)
+                );
 
         }
 
@@ -96,26 +118,6 @@ namespace Foreign_Trips.Controllers
             return Ok();
 
         }
-
-
-
-
-        
-        //[HttpPost]
-        //[Route("RemoveAgent")]
-        //public async Task<ActionResult<AgentTbl>> RemoveAgent(
-        //[FromBody] AgentTbl Model
-        //)
-        //{
-        //    if (!await _agentRepository.AgentExistsAsync(Model.AgentId))
-        //    {
-        //        return NotFound();
-        //    }
-        //    _agentRepository.RemoveAgentAsync(Model.AgentId);
-
-        //    return Ok();
-
-        //}
 
 
       
@@ -175,20 +177,106 @@ namespace Foreign_Trips.Controllers
         }
         #endregion
 
-        #region AgentStatus
+
+        #region Request
         [HttpGet]
-        [Route("GetAgentStatus")]
-        public async Task<ActionResult<IEnumerable<AgentStatusTbl>>> GetAgentStatus()
+        [Route("GetRequests")]
+        public async Task<ActionResult<IEnumerable<RequestTbl>>> GetRequest()
         {
-            var agnets = await _agentRepository.GetAgentStatusAsync();
+            var Requests = await _requestRepository.GetRequest();
 
             return Ok(
-                _mapper.Map<IEnumerable<AgentStatusTbl>>(agnets)
+                Requests
                 );
+        }
+
+        [HttpPost]
+        [Route("RejectRequest")]
+        public async Task<ActionResult<RequestDto>> RejectRequest(
+[FromBody] RequestDto Model
+)
+        {
+
+            var Req = await _requestRepository.RejectRequest(Model);
+            if (Req == null)
+            {
+                return BadRequest();
+            }
+            return Ok();
+
+        }
+
+        [HttpGet]
+        [Route("GetRule")]
+        public async Task<ActionResult<IEnumerable<RuleTbl>>> GetRule()
+        {
+            var rule = await _requestRepository.GetRule();
+
+            return Ok(
+                rule
+                );
+        }
+
+        #endregion
+
+        #region Report
+        [HttpGet]
+        [Route("GetReports")]
+        public async Task<ActionResult<IEnumerable<Report>>> GetReport()
+        {
+            var reports = await _reportRepository.GetReport();
+
+            return Ok(
+                reports
+                );
+        } 
+
+
+        [HttpPost]
+        [Route("InsertReport")]
+        public async Task<ActionResult<Report>> InsertReport(
+    [FromBody] Report Model
+    )
+        {
+
+            var Rep = await _reportRepository.InsertReport(Model);
+            if (Rep == null)
+            {
+                return BadRequest();
+            }
+            return Ok(Rep);
 
         }
         #endregion
 
+        #region Ticket
+        [HttpPost]
+        [Route("GetTicket")]
+        public async Task<ActionResult<TicketTbl>> GetTicket(
+      [FromBody] GetTicket Model
+      )
+        {
 
+            var Tickets = await _ticketRepository.GetTicket(Model.TicketID);
+            return Ok(Tickets);
+
+        }
+
+        [HttpPost]
+        [Route("InsertTicket")]
+        public async Task<ActionResult<TicketTbl>> InsertTicket(
+[FromBody] TicketTbl Model
+)
+        {
+
+            var Ticket = await _ticketRepository.InsertTicket(Model);
+            if (Ticket == null)
+            {
+                return BadRequest();
+            }
+            return Ok(Ticket);
+
+        }
+        #endregion
     }
 }

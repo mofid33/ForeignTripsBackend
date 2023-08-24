@@ -23,17 +23,31 @@ public partial class ForeignTripsContext : DbContext
 
     public virtual DbSet<CityTbl> CityTbls { get; set; }
 
+    public virtual DbSet<DeviceNameItypeTbl> DeviceNameItypeTbls { get; set; }
+
     public virtual DbSet<FileDetailsTbl> FileDetailsTbls { get; set; }
 
     public virtual DbSet<FileTypeTbl> FileTypeTbls { get; set; }
 
     public virtual DbSet<ForeignDelegrationTbl> ForeignDelegrationTbls { get; set; }
 
+    public virtual DbSet<GenderTypeTbl> GenderTypeTbls { get; set; }
+
+    public virtual DbSet<InternationalExpertTbl> InternationalExpertTbls { get; set; }
+
+    public virtual DbSet<JobGoalsTypeTbl> JobGoalsTypeTbls { get; set; }
+
+    public virtual DbSet<LanguageType> LanguageTypes { get; set; }
+
     public virtual DbSet<LoginTbl> LoginTbls { get; set; }
 
     public virtual DbSet<MaritalStatusTbl> MaritalStatusTbls { get; set; }
 
+    public virtual DbSet<OverseerTbl> OverseerTbls { get; set; }
+
     public virtual DbSet<PassportTbl> PassportTbls { get; set; }
+
+    public virtual DbSet<PassportType> PassportTypes { get; set; }
 
     public virtual DbSet<PositionTypeTbl> PositionTypeTbls { get; set; }
 
@@ -45,17 +59,29 @@ public partial class ForeignTripsContext : DbContext
 
     public virtual DbSet<RequestTbl> RequestTbls { get; set; }
 
+    public virtual DbSet<RightOfCommutingTypeTbl> RightOfCommutingTypeTbls { get; set; }
+
+    public virtual DbSet<RightOfMissionTbl> RightOfMissionTbls { get; set; }
+
+    public virtual DbSet<RightToEducationTbl> RightToEducationTbls { get; set; }
+
     public virtual DbSet<RuleTbl> RuleTbls { get; set; }
 
     public virtual DbSet<SubsidiaryOrganizationTypeTbl> SubsidiaryOrganizationTypeTbls { get; set; }
 
-    public virtual DbSet<SupervisorTbl> SupervisorTbls { get; set; }
+    public virtual DbSet<SupervisoerTbl> SupervisoerTbls { get; set; }
 
     public virtual DbSet<TicketDetailsTbl> TicketDetailsTbls { get; set; }
 
     public virtual DbSet<TicketStatusTbl> TicketStatusTbls { get; set; }
 
     public virtual DbSet<TicketTbl> TicketTbls { get; set; }
+
+    public virtual DbSet<TicketTypeTbl> TicketTypeTbls { get; set; }
+
+    public virtual DbSet<TollAmountTypeTbl> TollAmountTypeTbls { get; set; }
+
+    public virtual DbSet<TravelGoalsTypeTbl> TravelGoalsTypeTbls { get; set; }
 
     public virtual DbSet<TypeOfEmploymentTbl> TypeOfEmploymentTbls { get; set; }
 
@@ -102,9 +128,17 @@ public partial class ForeignTripsContext : DbContext
             entity.Property(e => e.AgentFamily).HasMaxLength(100);
             entity.Property(e => e.AgentName).HasMaxLength(100);
             entity.Property(e => e.AgentStatusId).HasColumnName("AgentStatusID");
+            entity.Property(e => e.BirthCertificateDate).HasMaxLength(10);
+            entity.Property(e => e.BirthCertificateNumber).HasMaxLength(50);
             entity.Property(e => e.CityId).HasColumnName("CityID");
             entity.Property(e => e.CompanyName).HasMaxLength(300);
+            entity.Property(e => e.Degree).HasMaxLength(50);
             entity.Property(e => e.Email).HasMaxLength(100);
+            entity.Property(e => e.FieldOfStudy).HasMaxLength(100);
+            entity.Property(e => e.LanguageId)
+                .HasMaxLength(50)
+                .HasColumnName("languageID");
+            entity.Property(e => e.MaritalStatusId).HasColumnName("MaritalStatusID");
             entity.Property(e => e.Mobile).HasMaxLength(11);
             entity.Property(e => e.NationalCode).HasMaxLength(10);
             entity.Property(e => e.Password).HasMaxLength(300);
@@ -114,33 +148,48 @@ public partial class ForeignTripsContext : DbContext
             entity.Property(e => e.PostalCode).HasMaxLength(100);
             entity.Property(e => e.RegisterDate).HasMaxLength(10);
             entity.Property(e => e.RegisterTime).HasMaxLength(5);
+            entity.Property(e => e.Servicelocation).HasMaxLength(200);
             entity.Property(e => e.SupervisorId).HasColumnName("SupervisorID");
             entity.Property(e => e.TypeOfEmploymentId).HasColumnName("TypeOfEmploymentID");
             entity.Property(e => e.TypeOfMissionId).HasColumnName("TypeOfMissionID");
 
             entity.HasOne(d => d.AgentStatus).WithMany(p => p.AgentTbls)
                 .HasForeignKey(d => d.AgentStatusId)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK_AgentTbl_AgentStatusTbl");
 
             entity.HasOne(d => d.City).WithMany(p => p.AgentTbls)
                 .HasForeignKey(d => d.CityId)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK_AgentTbl_CityTbl");
+
+            entity.HasOne(d => d.Gender).WithMany(p => p.AgentTbls)
+                .HasForeignKey(d => d.GenderId)
+                .OnDelete(DeleteBehavior.Cascade)
+                .HasConstraintName("FK_AgentTbl_GenderType");
+
+            entity.HasOne(d => d.MaritalStatus).WithMany(p => p.AgentTbls)
+                .HasForeignKey(d => d.MaritalStatusId)
+                .HasConstraintName("FK_AgentTbl_MaritalStatusTbl");
 
             entity.HasOne(d => d.Position).WithMany(p => p.AgentTbls)
                 .HasForeignKey(d => d.PositionId)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK_AgentTbl_PositionTbl");
 
             entity.HasOne(d => d.Supervisor).WithMany(p => p.AgentTbls)
                 .HasForeignKey(d => d.SupervisorId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_AgentTbl_SupervisorTbl");
+                .OnDelete(DeleteBehavior.Cascade)
+                .HasConstraintName("FK_AgentTbl_SupervisoerTbl");
 
             entity.HasOne(d => d.TypeOfEmployment).WithMany(p => p.AgentTbls)
                 .HasForeignKey(d => d.TypeOfEmploymentId)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK_AgentTbl_TypeOfEmploymentTbl");
 
             entity.HasOne(d => d.TypeOfMission).WithMany(p => p.AgentTbls)
                 .HasForeignKey(d => d.TypeOfMissionId)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK_AgentTbl_TypeOfMissionTbl");
         });
 
@@ -159,6 +208,16 @@ public partial class ForeignTripsContext : DbContext
                 .HasForeignKey(d => d.ProvinceId)
                 .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK_CityTbl_ProvinceTbl1");
+        });
+
+        modelBuilder.Entity<DeviceNameItypeTbl>(entity =>
+        {
+            entity.HasKey(e => e.DeviceNameId).HasName("PK_DeviceNameIType");
+
+            entity.ToTable("DeviceNameITypeTbl");
+
+            entity.Property(e => e.DeviceNameId).HasColumnName("DeviceNameID");
+            entity.Property(e => e.DeviceNameType).HasMaxLength(100);
         });
 
         modelBuilder.Entity<FileDetailsTbl>(entity =>
@@ -237,6 +296,48 @@ public partial class ForeignTripsContext : DbContext
                 .HasConstraintName("FK_ForeginDelegrationTbl_CityTbl");
         });
 
+        modelBuilder.Entity<GenderTypeTbl>(entity =>
+        {
+            entity.HasKey(e => e.GenderId).HasName("PK_GenderType");
+
+            entity.ToTable("GenderTypeTbl");
+
+            entity.Property(e => e.GenderId).HasColumnName("GenderID");
+            entity.Property(e => e.GenderType).HasMaxLength(100);
+        });
+
+        modelBuilder.Entity<InternationalExpertTbl>(entity =>
+        {
+            entity.HasKey(e => e.InternationalExpertId);
+
+            entity.ToTable("InternationalExpertTbl");
+
+            entity.Property(e => e.InternationalExpertId).HasColumnName("InternationalExpertID");
+            entity.Property(e => e.InternationalExpertUserName).HasMaxLength(100);
+        });
+
+        modelBuilder.Entity<JobGoalsTypeTbl>(entity =>
+        {
+            entity.HasKey(e => e.JobGoalsId).HasName("PK_JobGoalsType");
+
+            entity.ToTable("JobGoalsTypeTbl");
+
+            entity.Property(e => e.JobGoalsId).HasColumnName("JobGoalsID");
+            entity.Property(e => e.JobGoalsType).HasMaxLength(50);
+        });
+
+        modelBuilder.Entity<LanguageType>(entity =>
+        {
+            entity.HasKey(e => e.LanguageId);
+
+            entity.ToTable("languageType");
+
+            entity.Property(e => e.LanguageId).HasColumnName("languageID");
+            entity.Property(e => e.LanguageType1)
+                .HasMaxLength(100)
+                .HasColumnName("languageType");
+        });
+
         modelBuilder.Entity<LoginTbl>(entity =>
         {
             entity.HasKey(e => e.LoginId);
@@ -247,11 +348,6 @@ public partial class ForeignTripsContext : DbContext
             entity.Property(e => e.AgentId).HasColumnName("AgentID");
             entity.Property(e => e.Date).HasMaxLength(10);
             entity.Property(e => e.Time).HasMaxLength(10);
-
-            entity.HasOne(d => d.Agent).WithMany(p => p.LoginTbls)
-                .HasForeignKey(d => d.AgentId)
-                .OnDelete(DeleteBehavior.Cascade)
-                .HasConstraintName("FK_LoginTbl_AgentTbl");
         });
 
         modelBuilder.Entity<MaritalStatusTbl>(entity =>
@@ -262,6 +358,18 @@ public partial class ForeignTripsContext : DbContext
 
             entity.Property(e => e.MaritalStatusId).HasColumnName("MaritalStatusID");
             entity.Property(e => e.MaritalStatusTitle).HasMaxLength(300);
+        });
+
+        modelBuilder.Entity<OverseerTbl>(entity =>
+        {
+            entity.HasKey(e => e.OverseerId);
+
+            entity.ToTable("OverseerTbl");
+
+            entity.Property(e => e.OverseerId).HasColumnName("OverseerID");
+            entity.Property(e => e.OverseerUserName)
+                .HasMaxLength(50)
+                .HasColumnName("OverseerUSerName");
         });
 
         modelBuilder.Entity<PassportTbl>(entity =>
@@ -285,6 +393,16 @@ public partial class ForeignTripsContext : DbContext
             entity.Property(e => e.MaritalStatus).HasMaxLength(10);
             entity.Property(e => e.MissionLocation).HasMaxLength(300);
             entity.Property(e => e.TypeOfMission).HasMaxLength(10);
+        });
+
+        modelBuilder.Entity<PassportType>(entity =>
+        {
+            entity.ToTable("PassportType");
+
+            entity.Property(e => e.PassportTypeId).HasColumnName("PassportTypeID");
+            entity.Property(e => e.PassportType1)
+                .HasMaxLength(50)
+                .HasColumnName("PassportType");
         });
 
         modelBuilder.Entity<PositionTypeTbl>(entity =>
@@ -312,9 +430,21 @@ public partial class ForeignTripsContext : DbContext
             entity.ToTable("Report");
 
             entity.Property(e => e.ReportId).HasColumnName("ReportID");
+            entity.Property(e => e.EmailExternalDevice).HasMaxLength(100);
+            entity.Property(e => e.EmailInternalDevice).HasMaxLength(100);
+            entity.Property(e => e.ExternalDevice).HasMaxLength(100);
             entity.Property(e => e.FileId).HasColumnName("FileID");
+            entity.Property(e => e.InternalDevice).HasMaxLength(100);
+            entity.Property(e => e.LicenseDate).HasMaxLength(100);
+            entity.Property(e => e.LicenseNumber).HasMaxLength(100);
+            entity.Property(e => e.Period).HasMaxLength(100);
+            entity.Property(e => e.RequestDateNumber).HasMaxLength(100);
             entity.Property(e => e.RequestId).HasColumnName("RequestID");
             entity.Property(e => e.SubjectOfTravel).HasMaxLength(300);
+
+            entity.HasOne(d => d.File).WithMany(p => p.Reports)
+                .HasForeignKey(d => d.FileId)
+                .HasConstraintName("FK_Report_FileDetailsTbl");
 
             entity.HasOne(d => d.Request).WithMany(p => p.Reports)
                 .HasForeignKey(d => d.RequestId)
@@ -339,28 +469,108 @@ public partial class ForeignTripsContext : DbContext
 
             entity.Property(e => e.RequestId).HasColumnName("RequestID");
             entity.Property(e => e.AgentId).HasColumnName("AgentID");
-            entity.Property(e => e.ConfirmDate)
-                .HasMaxLength(10)
-                .IsUnicode(false)
-                .IsFixedLength();
-            entity.Property(e => e.DestinationCountry).HasMaxLength(50);
-            entity.Property(e => e.NationalCode).HasMaxLength(10);
-            entity.Property(e => e.Payer).HasMaxLength(100);
-            entity.Property(e => e.PersonUpName).HasMaxLength(100);
-            entity.Property(e => e.RejectDescription).HasMaxLength(300);
-            entity.Property(e => e.RequestName).HasMaxLength(100);
+            entity.Property(e => e.AirlineCompany).HasMaxLength(100);
+            entity.Property(e => e.AmountOfCost).HasMaxLength(100);
+            entity.Property(e => e.DestinationCity).HasMaxLength(100);
+            entity.Property(e => e.DestinationCountry).HasMaxLength(100);
+            entity.Property(e => e.DeviceNameId).HasColumnName("DeviceNameID");
+            entity.Property(e => e.ExecutiveDeviceName).HasMaxLength(100);
+            entity.Property(e => e.ExpertRightOfMission).HasMaxLength(100);
+            entity.Property(e => e.FlightPath).HasMaxLength(200);
+            entity.Property(e => e.ForeignTravelSummary).HasMaxLength(100);
+            entity.Property(e => e.ImportantTravel).HasMaxLength(100);
+            entity.Property(e => e.InternetAddressOfTheExecutiveDevice).HasMaxLength(100);
+            entity.Property(e => e.JobGoalId).HasColumnName("JobGoalID");
+            entity.Property(e => e.ManagerRightOfMission).HasMaxLength(100);
+            entity.Property(e => e.MissionAchievementRecords).HasMaxLength(100);
+            entity.Property(e => e.PassportTypeId).HasColumnName("PassportTypeID");
+            entity.Property(e => e.PayerCitizenShip).HasMaxLength(100);
+            entity.Property(e => e.PayerFood).HasMaxLength(100);
+            entity.Property(e => e.PaymentFromBank).HasMaxLength(100);
             entity.Property(e => e.RequestStatusId).HasColumnName("RequestStatusID");
-            entity.Property(e => e.Role).HasMaxLength(100);
+            entity.Property(e => e.RightOfCommutingCost).HasMaxLength(100);
+            entity.Property(e => e.RightOfCommutingId).HasColumnName("RightOfCommutingID");
+            entity.Property(e => e.RightOfMissionId).HasColumnName("RightOfMissionID");
+            entity.Property(e => e.RightToEducationCost).HasMaxLength(100);
+            entity.Property(e => e.RightToEducationId)
+                .HasMaxLength(100)
+                .HasColumnName("RightToEducationID");
+            entity.Property(e => e.SummaryInvitation).HasMaxLength(100);
+            entity.Property(e => e.TheCostOfFood).HasMaxLength(100);
+            entity.Property(e => e.TheCostOfTicket).HasMaxLength(100);
+            entity.Property(e => e.TickerTypeId)
+                .HasMaxLength(100)
+                .HasColumnName("TickerTypeID");
+            entity.Property(e => e.TicketCost).HasMaxLength(100);
+            entity.Property(e => e.TollAmountCost).HasMaxLength(100);
+            entity.Property(e => e.TollAmountId).HasColumnName("TollAmountID");
             entity.Property(e => e.TravelDate).HasMaxLength(50);
+            entity.Property(e => e.TravelGoalId).HasColumnName("TravelGoalID");
             entity.Property(e => e.TravelTime).HasMaxLength(5);
             entity.Property(e => e.TravelTopic).HasMaxLength(300);
-            entity.Property(e => e.TypeOfEmployment).HasMaxLength(50);
-            entity.Property(e => e.WorkLocation).HasMaxLength(200);
+            entity.Property(e => e.VisaCost).HasMaxLength(100);
+
+            entity.HasOne(d => d.Agent).WithMany(p => p.RequestTbls)
+                .HasForeignKey(d => d.AgentId)
+                .HasConstraintName("FK_RequestTbl_AgentTbl");
+
+            entity.HasOne(d => d.DeviceName).WithMany(p => p.RequestTbls)
+                .HasForeignKey(d => d.DeviceNameId)
+                .HasConstraintName("FK_RequestTbl_DeviceNameITypeTbl");
+
+            entity.HasOne(d => d.JobGoal).WithMany(p => p.RequestTbls)
+                .HasForeignKey(d => d.JobGoalId)
+                .HasConstraintName("FK_RequestTbl_JobGoalsTypeTbl");
+
+            entity.HasOne(d => d.PassportType).WithMany(p => p.RequestTbls)
+                .HasForeignKey(d => d.PassportTypeId)
+                .HasConstraintName("FK_RequestTbl_PassportType");
 
             entity.HasOne(d => d.RequestStatus).WithMany(p => p.RequestTbls)
                 .HasForeignKey(d => d.RequestStatusId)
-                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK_RequestTbl_RequestTbl");
+
+            entity.HasOne(d => d.RightOfCommuting).WithMany(p => p.RequestTbls)
+                .HasForeignKey(d => d.RightOfCommutingId)
+                .HasConstraintName("FK_RequestTbl_RightOfCommutingTypeTbl");
+
+            entity.HasOne(d => d.RightOfMission).WithMany(p => p.RequestTbls)
+                .HasForeignKey(d => d.RightOfMissionId)
+                .HasConstraintName("FK_RequestTbl_RightOfMissionTbl");
+
+            entity.HasOne(d => d.TollAmount).WithMany(p => p.RequestTbls)
+                .HasForeignKey(d => d.TollAmountId)
+                .HasConstraintName("FK_RequestTbl_TollAmountTypeTbl");
+        });
+
+        modelBuilder.Entity<RightOfCommutingTypeTbl>(entity =>
+        {
+            entity.HasKey(e => e.RightOfCommutingId);
+
+            entity.ToTable("RightOfCommutingTypeTbl");
+
+            entity.Property(e => e.RightOfCommutingId).HasColumnName("RightOfCommutingID");
+            entity.Property(e => e.RightOfCommutingType).HasMaxLength(100);
+        });
+
+        modelBuilder.Entity<RightOfMissionTbl>(entity =>
+        {
+            entity.HasKey(e => e.RightOfMissionId).HasName("PK_RightOfMission");
+
+            entity.ToTable("RightOfMissionTbl");
+
+            entity.Property(e => e.RightOfMissionId).HasColumnName("RightOfMissionID");
+            entity.Property(e => e.RightOfMissionType).HasMaxLength(100);
+        });
+
+        modelBuilder.Entity<RightToEducationTbl>(entity =>
+        {
+            entity.HasKey(e => e.RightToEducationId).HasName("PK_RightToEducation");
+
+            entity.ToTable("RightToEducationTbl");
+
+            entity.Property(e => e.RightToEducationId).HasColumnName("RightToEducationID");
+            entity.Property(e => e.RightToEducationType).HasMaxLength(100);
         });
 
         modelBuilder.Entity<RuleTbl>(entity =>
@@ -384,11 +594,11 @@ public partial class ForeignTripsContext : DbContext
             entity.Property(e => e.SubsidiaryOrganizationType).HasMaxLength(100);
         });
 
-        modelBuilder.Entity<SupervisorTbl>(entity =>
+        modelBuilder.Entity<SupervisoerTbl>(entity =>
         {
             entity.HasKey(e => e.SupervisorId).HasName("PK_SupervisorAdmin");
 
-            entity.ToTable("SupervisorTbl");
+            entity.ToTable("SupervisoerTbl");
 
             entity.Property(e => e.SupervisorId).HasColumnName("SupervisorID");
             entity.Property(e => e.AdminId).HasColumnName("AdminID");
@@ -397,10 +607,10 @@ public partial class ForeignTripsContext : DbContext
             entity.Property(e => e.SupervisorName).HasMaxLength(100);
             entity.Property(e => e.SupervisorUserName).HasMaxLength(100);
 
-            entity.HasOne(d => d.Admin).WithMany(p => p.SupervisorTbls)
+            entity.HasOne(d => d.Admin).WithMany(p => p.SupervisoerTbls)
                 .HasForeignKey(d => d.AdminId)
                 .OnDelete(DeleteBehavior.Cascade)
-                .HasConstraintName("FK_SupervisorAdminTbl_AdminTbl");
+                .HasConstraintName("FK_SupervisorTbl_AdminTbl");
         });
 
         modelBuilder.Entity<TicketDetailsTbl>(entity =>
@@ -452,6 +662,36 @@ public partial class ForeignTripsContext : DbContext
             entity.HasOne(d => d.TicketStatus).WithMany(p => p.TicketTbls)
                 .HasForeignKey(d => d.TicketStatusId)
                 .HasConstraintName("FK_TicketTbl_TicketStatusTbl");
+        });
+
+        modelBuilder.Entity<TicketTypeTbl>(entity =>
+        {
+            entity.HasKey(e => e.TicketTypeId).HasName("PK_TicketType");
+
+            entity.ToTable("TicketTypeTbl");
+
+            entity.Property(e => e.TicketTypeId).HasColumnName("TicketTypeID");
+            entity.Property(e => e.TicketType).HasMaxLength(100);
+        });
+
+        modelBuilder.Entity<TollAmountTypeTbl>(entity =>
+        {
+            entity.HasKey(e => e.TollAmountId);
+
+            entity.ToTable("TollAmountTypeTbl");
+
+            entity.Property(e => e.TollAmountId).HasColumnName("TollAmountID");
+            entity.Property(e => e.TollAmountType).HasMaxLength(100);
+        });
+
+        modelBuilder.Entity<TravelGoalsTypeTbl>(entity =>
+        {
+            entity.HasKey(e => e.TravelGoalsId).HasName("PK_TravelGoalsType");
+
+            entity.ToTable("TravelGoalsTypeTbl");
+
+            entity.Property(e => e.TravelGoalsId).HasColumnName("TravelGoalsID");
+            entity.Property(e => e.TravelGoalsType).HasMaxLength(100);
         });
 
         modelBuilder.Entity<TypeOfEmploymentTbl>(entity =>

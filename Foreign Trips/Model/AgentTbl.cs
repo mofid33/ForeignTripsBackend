@@ -7,55 +7,75 @@ public partial class AgentTbl
 {
     public int AgentId { get; set; }
 
-    public int CityId { get; set; }
+    public int? CityId { get; set; }
 
-    public int TypeOfMissionId { get; set; }
+    public int? TypeOfMissionId { get; set; }
 
-    public int SupervisorId { get; set; }
+    public int? SupervisorId { get; set; }
 
-    public int TypeOfEmploymentId { get; set; }
+    public int? TypeOfEmploymentId { get; set; }
 
-    public int PositionId { get; set; }
+    public int? PositionId { get; set; }
 
-    public int AgentStatusId { get; set; }
+    public int? AgentStatusId { get; set; }
 
-    public string AgentName { get; set; } = null!;
+    public string? AgentName { get; set; }
 
-    public string AgentFamily { get; set; } = null!;
+    public string? AgentFamily { get; set; }
 
-    public string NationalCode { get; set; } = null!;
+    public string? NationalCode { get; set; }
 
-    public string Mobile { get; set; } = null!;
+    public string? Mobile { get; set; }
 
-    public string Phone { get; set; } = null!;
+    public string? Phone { get; set; }
 
-    public string Address { get; set; } = null!;
+    public string? Address { get; set; }
 
-    public string CompanyName { get; set; } = null!;
+    public string? CompanyName { get; set; }
 
-    public string Password { get; set; } = null!;
+    public string? Password { get; set; }
 
-    public string Email { get; set; } = null!;
+    public string? Email { get; set; }
 
     public byte[]? Photo { get; set; }
 
-    public string RegisterDate { get; set; } = null!;
+    public string? RegisterDate { get; set; }
 
-    public string RegisterTime { get; set; } = null!;
+    public string? RegisterTime { get; set; }
 
-    public string PostalCode { get; set; } = null!;
+    public string? PostalCode { get; set; }
 
-    public virtual AgentStatusTbl AgentStatus { get; set; } = null!;
+    public string? BirthCertificateNumber { get; set; }
 
-    public virtual CityTbl City { get; set; } = null!;
+    public string? BirthCertificateDate { get; set; }
 
-    public virtual ICollection<LoginTbl> LoginTbls { get; set; } = new List<LoginTbl>();
+    public int? GenderId { get; set; }
 
-    public virtual PositionTypeTbl Position { get; set; } = null!;
+    public int? MaritalStatusId { get; set; }
 
-    public virtual SupervisorTbl Supervisor { get; set; } = null!;
+    public string? Degree { get; set; }
 
-    public virtual TypeOfEmploymentTbl TypeOfEmployment { get; set; } = null!;
+    public string? FieldOfStudy { get; set; }
 
-    public virtual TypeOfMissionTbl TypeOfMission { get; set; } = null!;
+    public string? LanguageId { get; set; }
+
+    public string? Servicelocation { get; set; }
+
+    public virtual AgentStatusTbl? AgentStatus { get; set; }
+
+    public virtual CityTbl? City { get; set; }
+
+    public virtual GenderTypeTbl? Gender { get; set; }
+
+    public virtual MaritalStatusTbl? MaritalStatus { get; set; }
+
+    public virtual PositionTypeTbl? Position { get; set; }
+
+    public virtual ICollection<RequestTbl> RequestTbls { get; set; } = new List<RequestTbl>();
+
+    public virtual SupervisoerTbl? Supervisor { get; set; }
+
+    public virtual TypeOfEmploymentTbl? TypeOfEmployment { get; set; }
+
+    public virtual TypeOfMissionTbl? TypeOfMission { get; set; }
 }

@@ -43,21 +43,12 @@ namespace Foreign_Trips.Repositories
             {
                 RequestTbl qtbl = new RequestTbl();
                 qtbl.AgentId = request.AgentId;
-                qtbl.RequestName = request.RequestName;
                 qtbl.RequestStatusId = request.RequestStatusId;
-                qtbl.NationalCode = request.NationalCode;
-                qtbl.Role = request.Role;
-                qtbl.WorkLocation = request.WorkLocation;
-                qtbl.TypeOfEmployment = request.TypeOfEmployment;
                 qtbl.TravelDate = request.TravelDate;
                 qtbl.TravelTime = request.TravelTime;
                 qtbl.TravelTopic = request.TravelTopic;
                 qtbl.DestinationCountry = request.DestinationCountry;
-                qtbl.Payer = request.Payer;
-                qtbl.PersonUpName = request.PersonUpName;
-                qtbl.TravelCost = request.TravelCost;
-                qtbl.RejectDescription = request.RejectDescription;
-                qtbl.ConfirmDate = request.ConfirmDate;
+
 
                 await _context.RequestTbl.AddAsync(request);
                 await _context.SaveChangesAsync();
@@ -67,7 +58,7 @@ namespace Foreign_Trips.Repositories
                 string date = persianDateTime.ToString().Substring(0, 10);
                 if (request.RequestStatusId == 1)
                 {
-                    qtbl.ConfirmDate = date;
+                    //qtbl.ConfirmDate = date;
 
                 }
                 var Req = await _context.RequestTbl.AddAsync(qtbl);
@@ -109,7 +100,7 @@ namespace Foreign_Trips.Repositories
             try
             {
                 var data = await GetRequestAsync(request.RequestId);
-                data.RejectDescription = request.RejectDescription;
+                //data.RejectDescription = request.RejectDescription;
 
                 await _context.SaveChangesAsync();
                 return request;
@@ -128,7 +119,7 @@ namespace Foreign_Trips.Repositories
             {
                 var req = await GetRequestAsync(request.RequestId);
                 req.TravelDate = request.TravelDate;
-                req.ReasonForUrgency = request.ReasonForUrgency;
+                
 
 
 

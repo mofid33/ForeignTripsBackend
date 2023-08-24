@@ -13,7 +13,7 @@ public partial class AdminTbl
 
     public string Password { get; set; } = null!;
 
-    public virtual ICollection<SupervisorTbl> SupervisorTbls { get; set; } = new List<SupervisorTbl>();
+    public virtual ICollection<SupervisoerTbl> SupervisoerTbls { get; set; } = new List<SupervisoerTbl>();
 
     public virtual ICollection<TicketTbl> TicketTbls { get; set; } = new List<TicketTbl>();
 }

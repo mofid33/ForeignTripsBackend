@@ -27,11 +27,17 @@ namespace Foreign_Trips.Repositories
             try
             {
                 Report data = new Report();
-                data.SubjectOfTravel = report.SubjectOfTravel;
-                data.Description = report.Description;
                 data.FileId = report.FileId;
+                data.RequestDateNumber = report.RequestDateNumber;
+                data.LicenseNumber = report.LicenseNumber;
+                data.LicenseDate = report.LicenseDate;
                 data.RequestId = report.RequestId;
-
+                data.Period = report.Period;    
+                data.EmailExternalDevice = report.EmailExternalDevice;
+                data.EmailInternalDevice = report.EmailInternalDevice;
+                data.InternalDevice = report.InternalDevice;
+                data.ExternalDevice = report.ExternalDevice;
+                
                 await _context.Report.AddAsync(data);
 
 
@@ -68,7 +74,7 @@ namespace Foreign_Trips.Repositories
             try
             {
                 var rep = await _context.Report.FindAsync(report.ReportId);
-                rep.Description = report.Description;
+                
                 rep.FileId = report.FileId;
 
 

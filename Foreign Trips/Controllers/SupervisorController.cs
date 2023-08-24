@@ -4,6 +4,7 @@ using Foreign_Trips.Model;
 using Foreign_Trips.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
+
 namespace Foreign_Trips.Controllers
 {
     [Route("api/Supervisor")]
@@ -29,10 +30,10 @@ namespace Foreign_Trips.Controllers
         [Route("GetSupervisor")]
         public async Task<ActionResult<IEnumerable<SupervisorTbl>>> GetSupervisor()
         {
-            var SupervisorAdmins = await _supervisorRepository.GetSupervisor();
+            var Supervisor= await _supervisorRepository.GetSupervisor();
 
             return Ok(
-                SupervisorAdmins
+                Supervisor
                 );
         }
 

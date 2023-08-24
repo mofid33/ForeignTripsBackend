@@ -17,5 +17,7 @@ public partial class FileDetailsTbl
 
     public virtual FileTypeTbl? FileType { get; set; }
 
+    public virtual ICollection<Report> Reports { get; set; } = new List<Report>();
+
     public virtual RequestTbl? Request { get; set; }
 }

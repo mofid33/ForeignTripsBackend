@@ -7,19 +7,19 @@ public partial class RequestTbl
 {
     public int RequestId { get; set; }
 
-    public int? AgentId { get; set; }
+    public int AgentId { get; set; }
 
-    public int? RequestStatusId { get; set; }
+    public int RequestStatusId { get; set; }
 
-    public string RequestName { get; set; } = null!;
+    public string ExecutiveDeviceName { get; set; } = null!;
 
-    public string NationalCode { get; set; } = null!;
+    public string InternetAddressOfTheExecutiveDevice { get; set; } = null!;
 
-    public string Role { get; set; } = null!;
+    public string DestinationCity { get; set; } = null!;
 
-    public string WorkLocation { get; set; } = null!;
+    public string DestinationCountry { get; set; } = null!;
 
-    public string TypeOfEmployment { get; set; } = null!;
+    public string FlightPath { get; set; } = null!;
 
     public string TravelDate { get; set; } = null!;
 
@@ -27,25 +27,89 @@ public partial class RequestTbl
 
     public string TravelTopic { get; set; } = null!;
 
-    public string DestinationCountry { get; set; } = null!;
+    public int TravelGoalId { get; set; }
 
-    public string Payer { get; set; } = null!;
+    public int JobGoalId { get; set; }
 
-    public string PersonUpName { get; set; } = null!;
+    public int DeviceNameId { get; set; }
 
-    public int TravelCost { get; set; }
+    public int PassportTypeId { get; set; }
 
-    public string RejectDescription { get; set; } = null!;
+    public bool GetVisa { get; set; }
 
-    public string? ReasonForUrgency { get; set; }
+    public bool JointTrip { get; set; }
 
-    public string? ConfirmDate { get; set; }
+    public bool DateLetter { get; set; }
+
+    public string PayerCitizenShip { get; set; } = null!;
+
+    public string AmountOfCost { get; set; } = null!;
+
+    public string PayerFood { get; set; } = null!;
+
+    public string TheCostOfFood { get; set; } = null!;
+
+    public string TickerTypeId { get; set; } = null!;
+
+    public string AirlineCompany { get; set; } = null!;
+
+    public string TicketCost { get; set; } = null!;
+
+    public string TheCostOfTicket { get; set; } = null!;
+
+    public int RightOfMissionId { get; set; }
+
+    public string ManagerRightOfMission { get; set; } = null!;
+
+    public string ExpertRightOfMission { get; set; } = null!;
+
+    public string RightToEducationCost { get; set; } = null!;
+
+    public string RightToEducationId { get; set; } = null!;
+
+    public string RightOfCommutingCost { get; set; } = null!;
+
+    public int RightOfCommutingId { get; set; }
+
+    public string VisaCost { get; set; } = null!;
+
+    public string TollAmountCost { get; set; } = null!;
+
+    public int TollAmountId { get; set; }
+
+    public string PaymentFromBank { get; set; } = null!;
+
+    public string ImportantTravel { get; set; } = null!;
+
+    public string MissionAchievementRecords { get; set; } = null!;
+
+    public string SummaryInvitation { get; set; } = null!;
+
+    public string ForeignTravelSummary { get; set; } = null!;
+
+    public bool ReferenceDeviceAgreement { get; set; }
+
+    public bool ResistanceEconomyTravel { get; set; }
 
     public bool IsFinal { get; set; }
 
+    public virtual AgentTbl Agent { get; set; } = null!;
+
+    public virtual DeviceNameItypeTbl DeviceName { get; set; } = null!;
+
     public virtual ICollection<FileDetailsTbl> FileDetailsTbls { get; set; } = new List<FileDetailsTbl>();
+
+    public virtual JobGoalsTypeTbl JobGoal { get; set; } = null!;
+
+    public virtual PassportType PassportType { get; set; } = null!;
 
     public virtual ICollection<Report> Reports { get; set; } = new List<Report>();
 
-    public virtual RequestStatusTbl? RequestStatus { get; set; }
+    public virtual RequestStatusTbl RequestStatus { get; set; } = null!;
+
+    public virtual RightOfCommutingTypeTbl RightOfCommuting { get; set; } = null!;
+
+    public virtual RightOfMissionTbl RightOfMission { get; set; } = null!;
+
+    public virtual TollAmountTypeTbl TollAmount { get; set; } = null!;
 }

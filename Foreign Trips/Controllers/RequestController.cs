@@ -58,7 +58,7 @@ namespace Foreign_Trips.Controllers
 
         [HttpPost]
         [Route("RejectRequest")]
-        public async Task<ActionResult<RequestTbl>> RejectRequest(
+        public async Task<ActionResult<RequestDto>> RejectRequest(
 [FromBody] RequestDto Model
 )
         {

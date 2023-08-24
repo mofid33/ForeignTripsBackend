@@ -31,5 +31,7 @@ namespace Foreign_Trips.DbContexts
         public DbSet<RuleTbl> RuleTbl { get; set; } = null!;
         public DbSet<SupervisorTbl> SupervisorTbl { get; set; } = null!;
         public DbSet<ForeignDelegrationTbl> ForeginDelegrationTbl { get; set; } = null!;
+        public DbSet<OverseerTbl> OverseerTbl { get; set; } = null;
+        public DbSet<InternationalExpertTbl> InternationalExpertTbl { get; set; } = null;
     }
 }
