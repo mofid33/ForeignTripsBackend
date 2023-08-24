@@ -8,11 +8,11 @@ namespace Foreign_Trips.Controllers
     [Route("api/Admin")]
     public class AdminController : ControllerBase
     {
-        private readonly IAdminRepository _adminRepository;
+        private readonly IInternationalAdminRepository _adminRepository;
         private readonly IMapper _mapper;
 
 
-        public AdminController(IAdminRepository adminRepository,
+        public AdminController(IInternationalAdminRepository adminRepository,
                                IMapper mapper)
         {
             _adminRepository = adminRepository ??
@@ -56,9 +56,9 @@ namespace Foreign_Trips.Controllers
 
       
         [HttpPost]
-        [Route("InsertAdmin")]
-        public async Task<ActionResult<AdminTbl>> InsertAdmin(
-    [FromBody] AdminTbl Model
+        [Route("InsertInternationalAdminTbl")]
+        public async Task<ActionResult<InternationalAdminTbl>> InsertAdmin(
+    [FromBody] InternationalAdminTbl Model
     )
         {
 
@@ -76,8 +76,8 @@ namespace Foreign_Trips.Controllers
 
         [HttpPost]
         [Route("UpdateAdmin")]
-        public async Task<ActionResult<AdminTbl>> UpdateAdmin(
-[FromBody] AdminTbl Model
+        public async Task<ActionResult<InternationalAdminTbl>> UpdateAdmin(
+[FromBody] InternationalAdminTbl Model
 )
         {
             if (!await _adminRepository.AdminExistsAsync(Model.AdminId))
@@ -97,8 +97,8 @@ namespace Foreign_Trips.Controllers
 
         [HttpPost]
         [Route("RemoveAdmin")]
-        public async Task<ActionResult<AdminTbl>> RemoveAdmin(
-[FromBody] AdminTbl Model
+        public async Task<ActionResult<InternationalAdminTbl>> RemoveAdmin(
+[FromBody] InternationalAdminTbl Model
 )
         {
             try

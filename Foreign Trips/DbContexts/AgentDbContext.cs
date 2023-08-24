@@ -13,7 +13,7 @@ namespace Foreign_Trips.DbContexts
         {
 
         }
-        public DbSet<AdminTbl> AdminTbl { get; set; } = null!;
+        public DbSet<InternationalAdminTbl> InternationalAdminTbl { get; set; } = null!;
         public DbSet<AgentTbl> AgentTbl { get; set; } = null!;
         public DbSet<LoginTbl> LoginTbl { get; set; } = null!;
         public DbSet<RequestStatusTbl> RequestStatusTbl { get; set; } = null!;

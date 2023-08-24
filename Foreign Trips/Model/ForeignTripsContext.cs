@@ -15,8 +15,6 @@ public partial class ForeignTripsContext : DbContext
     {
     }
 
-    public virtual DbSet<AdminTbl> AdminTbls { get; set; }
-
     public virtual DbSet<AgentStatusTbl> AgentStatusTbls { get; set; }
 
     public virtual DbSet<AgentTbl> AgentTbls { get; set; }
@@ -32,6 +30,8 @@ public partial class ForeignTripsContext : DbContext
     public virtual DbSet<ForeignDelegrationTbl> ForeignDelegrationTbls { get; set; }
 
     public virtual DbSet<GenderTypeTbl> GenderTypeTbls { get; set; }
+
+    public virtual DbSet<InternationalAdminTbl> InternationalAdminTbls { get; set; }
 
     public virtual DbSet<InternationalExpertTbl> InternationalExpertTbls { get; set; }
 
@@ -93,18 +93,6 @@ public partial class ForeignTripsContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<AdminTbl>(entity =>
-        {
-            entity.HasKey(e => e.AdminId);
-
-            entity.ToTable("AdminTbl");
-
-            entity.Property(e => e.AdminId).HasColumnName("AdminID");
-            entity.Property(e => e.AdminName).HasMaxLength(100);
-            entity.Property(e => e.AdminUsername).HasMaxLength(100);
-            entity.Property(e => e.Password).HasMaxLength(300);
-        });
-
         modelBuilder.Entity<AgentStatusTbl>(entity =>
         {
             entity.HasKey(e => e.AgentStatusId);
@@ -304,6 +292,18 @@ public partial class ForeignTripsContext : DbContext
 
             entity.Property(e => e.GenderId).HasColumnName("GenderID");
             entity.Property(e => e.GenderType).HasMaxLength(100);
+        });
+
+        modelBuilder.Entity<InternationalAdminTbl>(entity =>
+        {
+            entity.HasKey(e => e.AdminId).HasName("PK_AdminTbl");
+
+            entity.ToTable("InternationalAdminTbl");
+
+            entity.Property(e => e.AdminId).HasColumnName("AdminID");
+            entity.Property(e => e.AdminName).HasMaxLength(100);
+            entity.Property(e => e.AdminUsername).HasMaxLength(100);
+            entity.Property(e => e.Password).HasMaxLength(300);
         });
 
         modelBuilder.Entity<InternationalExpertTbl>(entity =>

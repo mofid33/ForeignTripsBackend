@@ -82,7 +82,7 @@ namespace Foreign_Trips.Repositories
         {
             try
             {
-                var admin = await _context.AdminTbl
+                var admin = await _context.InternationalAdminTbl
                 .Where(f => f.AdminUsername == username && f.Password == password).ToListAsync();
                 DateTime dt = new DateTime();
                 PersianDateTime persianDateTime = new PersianDateTime(DateTime.Now);

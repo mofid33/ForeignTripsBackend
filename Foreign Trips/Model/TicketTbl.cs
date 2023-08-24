@@ -19,7 +19,7 @@ public partial class TicketTbl
 
     public string RegisterTime { get; set; } = null!;
 
-    public virtual AdminTbl? Admin { get; set; }
+    public virtual InternationalAdminTbl? Admin { get; set; }
 
     public virtual ICollection<TicketDetailsTbl> TicketDetailsTbls { get; set; } = new List<TicketDetailsTbl>();
 

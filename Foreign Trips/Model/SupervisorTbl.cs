@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Foreign_Trips.Repositories;
+using System;
 using System.Collections.Generic;
 
 namespace Foreign_Trips.Model;
@@ -17,7 +18,7 @@ public partial class SupervisorTbl
 
     public string Password { get; set; } = null!;
 
-    public virtual AdminTbl? Admin { get; set; }
+    public virtual InternationalAdminTbl? Admin { get; set; }
 
     public virtual ICollection<AgentTbl> AgentTbls { get; set; } = new List<AgentTbl>();
 }

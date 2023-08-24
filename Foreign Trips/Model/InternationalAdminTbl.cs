@@ -5,7 +5,15 @@ namespace Foreign_Trips.Model;
 
 public partial class InternationalAdminTbl
 {
-    public int InternationalAdminId { get; set; }
+    public int AdminId { get; set; }
 
-    public string InternationalAdminUseranme { get; set; } = null!;
+    public string AdminName { get; set; } = null!;
+
+    public string AdminUsername { get; set; } = null!;
+
+    public string Password { get; set; } = null!;
+
+    public virtual ICollection<SupervisoerTbl> SupervisoerTbls { get; set; } = new List<SupervisoerTbl>();
+
+    public virtual ICollection<TicketTbl> TicketTbls { get; set; } = new List<TicketTbl>();
 }

@@ -7,12 +7,12 @@ using Serilog;
 
 namespace Foreign_Trips.Repositories
 {
-    public class AdminRepository : IAdminRepository
+    public class InternationalAdminRepository : IInternationalAdminRepository
     {
         private readonly AgentDbContext _context;
         private readonly IAgentRepository _agentRepository;
         
-        public AdminRepository(AgentDbContext context, IAgentRepository agentRepository)
+        public InternationalAdminRepository(AgentDbContext context, IAgentRepository agentRepository)
 
         {
             _context = context ?? throw new ArgumentException(nameof(context));
@@ -23,12 +23,12 @@ namespace Foreign_Trips.Repositories
 
         public async Task<bool> AdminExistsAsync(int adminId)
         {
-            return await _context.AdminTbl.AnyAsync(f => f.AdminId == adminId);
+            return await _context.InternationalAdminTbl.AnyAsync(f => f.AdminId == adminId);
         }
 
-        public async Task<IEnumerable<AdminTbl?>> GetAdmins()
+        public async Task<IEnumerable<InternationalAdminTbl?>> GetAdmins()
         {
-            return await _context.AdminTbl.ToListAsync();
+            return await _context.InternationalAdminTbl.ToListAsync();
         }
 
 
@@ -76,12 +76,12 @@ namespace Foreign_Trips.Repositories
         }
     
 
-        public async Task<AdminTbl?> InsertAdmin(AdminTbl admin)
+        public async Task<InternationalAdminTbl?> InsertAdmin(InternationalAdminTbl admin)
         {
             try
             {
 
-                var foreigntrip = await _context.AdminTbl.AddAsync(admin);
+                var foreigntrip = await _context.InternationalAdminTbl.AddAsync(admin);
                 await _context.SaveChangesAsync();
 
 
@@ -98,18 +98,18 @@ namespace Foreign_Trips.Repositories
 
         public async Task RemoveAdmin(int adminId)
         {
-            var data = _context.AdminTbl.Find(adminId);
-            _context.AdminTbl.Remove(data);
+            var data = _context.InternationalAdminTbl.Find(adminId);
+            _context.InternationalAdminTbl.Remove(data);
 
             await _context.SaveChangesAsync();
         }
 
-        public async Task<AdminTbl?> UpdateAdmin(AdminTbl admin)
+        public async Task<InternationalAdminTbl?> UpdateAdmin(InternationalAdminTbl admin)
         {
             try
             {
 
-                var adm = await _context.AdminTbl.FindAsync(admin.AdminId);
+                var adm = await _context.InternationalAdminTbl.FindAsync(admin.AdminId);
                 adm.AdminName = admin.AdminName;
                 adm.AdminUsername = admin.AdminUsername;
                 adm.Password = admin.Password;

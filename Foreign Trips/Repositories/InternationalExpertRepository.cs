@@ -56,8 +56,8 @@ namespace Foreign_Trips.Repositories
 
         public async Task RemoveInternationalExpert(int internationalexpertId)
         {
-            var data = _context.AdminTbl.Find(internationalexpertId);
-            _context.AdminTbl.Remove(data);
+            var data = _context.InternationalAdminTbl.Find(internationalexpertId);
+            _context.InternationalAdminTbl.Remove(data);
 
             await _context.SaveChangesAsync();
         }
