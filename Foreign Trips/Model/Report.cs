@@ -11,8 +11,6 @@ public partial class Report
 
     public int RequestId { get; set; }
 
-    public string SubjectOfTravel { get; set; } = null!;
-
     public string? RequestDateNumber { get; set; }
 
     public string? LicenseNumber { get; set; }

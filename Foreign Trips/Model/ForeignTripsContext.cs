@@ -440,7 +440,6 @@ public partial class ForeignTripsContext : DbContext
             entity.Property(e => e.Period).HasMaxLength(100);
             entity.Property(e => e.RequestDateNumber).HasMaxLength(100);
             entity.Property(e => e.RequestId).HasColumnName("RequestID");
-            entity.Property(e => e.SubjectOfTravel).HasMaxLength(300);
 
             entity.HasOne(d => d.File).WithMany(p => p.Reports)
                 .HasForeignKey(d => d.FileId)
