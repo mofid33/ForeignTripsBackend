@@ -179,16 +179,21 @@ namespace Foreign_Trips.Controllers
 
 
         #region Request
-        [HttpGet]
-        [Route("GetRequests")]
-        public async Task<ActionResult<IEnumerable<RequestTbl>>> GetRequest()
+        [HttpPost]
+        [Route("GetRequestagent")]
+        public async Task<ActionResult<RequestTbl>> GetRequestagent(
+       [FromBody] RequestTbl Model
+       )
         {
-            var Requests = await _requestRepository.GetRequest();
 
+            var reqagents = await _agentRepository.GetRequestAgentAsync(Model.RequestId);
             return Ok(
-                Requests
-                );
+         _mapper.Map<RequestTbl>(reqagents)
+         );
+
         }
+
+
 
 
         [HttpPost]

@@ -383,8 +383,25 @@ namespace Foreign_Trips.Repositories
             
         }
 
+        public async Task<RequestTbl?> GetRequestAgentAsync(int requestagentId)
+        {
+           
+                return await _context.RequestTbl
+                 .Include(c => c.TravelDate)
+                 .Include(x => x.TravelTopic)
+                 .Include(x => x.DestinationCountry)
+                 .Include(c => c.RequestStatus)
+                 .Include(c => c.DateOfLasteChange)
+                 .Include(c => c.OperationId)
 
-       
+
+                 .Where(c => c.RequestId == requestagentId).FirstOrDefaultAsync();
+
+            
+        }
+
+
+
         #region AgentStatus
         public async Task<IEnumerable<AgentStatusTbl>> GetAgentStatusAsync()
         {
@@ -424,11 +441,6 @@ namespace Foreign_Trips.Repositories
         public async Task<IEnumerable<LanguageType>> LanguageTypeAsync()
         {
             return await _context.LanguageType.ToListAsync();
-        }
-
-        public Task<RequestTbl?> GetRequestAsync(int RequestId)
-        {
-            throw new NotImplementedException();
         }
 
         #endregion

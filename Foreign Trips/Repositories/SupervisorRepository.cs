@@ -1,6 +1,7 @@
 ﻿using Foreign_Trips.DbContexts;
 using Foreign_Trips.Model;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace Foreign_Trips.Repositories
 {
@@ -18,6 +19,8 @@ namespace Foreign_Trips.Repositories
         throw new ArgumentNullException(nameof(agentRepository));
 
         }
+       
+
         public async Task<IEnumerable<SupervisorTbl?>> GetSupervisor()
         {
             try
@@ -41,9 +44,12 @@ namespace Foreign_Trips.Repositories
             {
 
                 SupervisorTbl supervisorTbl = new SupervisorTbl();
+                supervisorTbl.SupervisorName = supervisor.SupervisorName;
+                supervisorTbl.SupervisorFamily= supervisor.SupervisorFamily;
                 supervisorTbl.SupervisorUserName = supervisor.SupervisorUserName;
+                supervisorTbl.Password = supervisor.Password;
 
-                var exp = await _context.SupervisorTbl.AddAsync(supervisorTbl);
+                
                 await _context.SaveChangesAsync();
                 return supervisorTbl;
 
@@ -66,12 +72,15 @@ namespace Foreign_Trips.Repositories
             try
             {
 
-                var over = await _context.SupervisorTbl.FindAsync(supervisor.SupervisorId);
-                over.SupervisorUserName = supervisor.SupervisorUserName;
+                SupervisorTbl supervisorTbl = new SupervisorTbl();
+                supervisorTbl.SupervisorName = supervisor.SupervisorName;
+                supervisorTbl.SupervisorFamily = supervisor.SupervisorFamily;
+                supervisorTbl.SupervisorUserName = supervisor.SupervisorUserName;
+                supervisorTbl.Password = supervisor.Password;
+
+                
                 await _context.SaveChangesAsync();
-
-
-                return over;
+                return supervisorTbl;
 
             }
 
@@ -79,7 +88,39 @@ namespace Foreign_Trips.Repositories
             {
                 return null;
 
-            };
+            }
+        }
+
+        public async Task<AgentTbl?> GetAgentAsync(int agentId)
+        {
+
+            return await _context.AgentTbl
+             .Include(c => c.AgentName)
+             .Include(x => x.AgentFamily)
+             .Include(x => x.Position)
+             .Include(c => c.SubCategory)
+             .Include(c => c.CompanyName)
+
+
+             .Where(c => c.AgentId == agentId).FirstOrDefaultAsync();
+
+
+        }
+
+
+        public async Task<Report?> GetReportAsync(int reportId)
+        {
+            return await _context.Report
+             .Include(c => c.Request.Agent.AgentName)
+             .Include(x => x.Request.Agent.AgentFamily)
+             .Include(x => x.Request.TravelTopic)
+             .Include(c => c.Request.Agent.Joblocation)
+             .Include(c => c.LatestUpdate)
+             .Include(c => c.ReportStatusId)
+
+
+             .Where(c => c.ReportId == reportId).FirstOrDefaultAsync();
+
         }
     }
 }

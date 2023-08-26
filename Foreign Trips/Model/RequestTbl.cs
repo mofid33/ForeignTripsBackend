@@ -91,6 +91,12 @@ public partial class RequestTbl
 
     public bool ResistanceEconomyTravel { get; set; }
 
+    public string RejectRequest { get; set; } = null!;
+
+    public string DateOfLasteChange { get; set; } = null!;
+
+    public string OperationId { get; set; } = null!;
+
     public bool IsFinal { get; set; }
 
     public virtual AgentTbl Agent { get; set; } = null!;

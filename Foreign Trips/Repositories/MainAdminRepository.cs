@@ -92,18 +92,17 @@ namespace Foreign_Trips.Repositories
 
         public async Task<AgentTbl?> GetAgent(int agentId)
         {
-            try
-            {
-                var data = await _agentRepository.GetAgentAsync(agentId);
+           
+             return await _context.AgentTbl
+            .Include(c => c.AgentName)
+            .Include(x => x.AgentFamily)
+            .Include(c => c.NationalCode)
+            .Include(x => x.Position)
+            .Include(c => c.Mobile)
 
-                await _context.SaveChangesAsync();
-                return data;
 
-            }
-            catch (System.Exception e)
-            {
-                return null;
-            }
+            .Where(c => c.AgentId == agentId).FirstOrDefaultAsync();
+
         }
 
         public async Task<AgentTbl> InsertAgent(AgentTbl agent)
@@ -111,24 +110,24 @@ namespace Foreign_Trips.Repositories
             try
             {
                 AgentTbl data = new AgentTbl();
-                data.CityId = agent.CityId;
-                data.TypeOfMissionId = agent.TypeOfMissionId;
-                data.MainAdminId = agent.MainAdminId;
-                data.PositionId = agent.PositionId;
+                data.NationalCode = agent.NationalCode;
+                data.DateOfBirth = agent.DateOfBirth;
+                data.AgentName = agent.AgentName;
+                data.AgentFamily = agent.AgentFamily;
                 data.AgentStatusId = agent.AgentStatusId;
                 data.AgentName = agent.AgentName;
                 data.AgentFamily = agent.AgentFamily;
-                data.NationalCode = agent.NationalCode;
+                data.Mobile = agent.Mobile;
                 data.Mobile = agent.Mobile;
                 data.Phone = agent.Phone;
-                data.Address = agent.Address;
-                data.Password = agent.Password;
-                data.CompanyName = agent.CompanyName;
-                data.TypeOfEmployment = agent.TypeOfEmployment;
                 data.Email = agent.Email;
-                data.PostalCode = agent.PostalCode;
-                data.RegisterDate = agent.RegisterDate;
-                data.RegisterTime = agent.RegisterTime;
+                data.PostalCode= agent.PostalCode;
+                data.Address = agent.Address;
+                data.SubCategoryId = agent.SubCategoryId;
+                data.Subset = agent.Subset;
+                data.TypeOfEmploymentId = agent.TypeOfEmploymentId;
+                data.Position = agent.Position;
+                data.Password = agent.Password;
 
 
 
@@ -170,34 +169,37 @@ namespace Foreign_Trips.Repositories
         {
             try
             {
-                var data = await GetAgent(agent.AgentId);
-                data.CityId = agent.CityId;
-                data.TypeOfMissionId = agent.TypeOfMissionId;
-                data.MainAdminId = agent.MainAdminId;
-                data.PositionId = agent.PositionId;
+                AgentTbl data = new AgentTbl();
+                data.NationalCode = agent.NationalCode;
+                data.DateOfBirth = agent.DateOfBirth;
+                data.AgentName = agent.AgentName;
+                data.AgentFamily = agent.AgentFamily;
                 data.AgentStatusId = agent.AgentStatusId;
                 data.AgentName = agent.AgentName;
                 data.AgentFamily = agent.AgentFamily;
-                data.NationalCode = agent.NationalCode;
+                data.Mobile = agent.Mobile;
                 data.Mobile = agent.Mobile;
                 data.Phone = agent.Phone;
-                data.Address = agent.Address;
-                data.Password = agent.Password;
-                data.CompanyName = agent.CompanyName;
-                data.TypeOfEmployment = agent.TypeOfEmployment;
                 data.Email = agent.Email;
                 data.PostalCode = agent.PostalCode;
-                data.RegisterDate = agent.RegisterDate;
-                data.RegisterTime = agent.RegisterTime;
+                data.Address = agent.Address;
+                data.SubCategoryId = agent.SubCategoryId;
+                data.Subset = agent.Subset;
+                data.TypeOfEmploymentId = agent.TypeOfEmploymentId;
+                data.Position = agent.Position;
+                data.Password = agent.Password;
+
 
 
                 await _context.SaveChangesAsync();
                 return agent;
 
             }
-            catch (System.Exception e)
+
+            catch (System.Exception ex)
             {
                 return null;
+
             }
         }
 

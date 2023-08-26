@@ -24,7 +24,10 @@ namespace Foreign_Trips.Repositories
         public async Task<TicketTbl?> GetTicket(int ticketId)
         {
             return await _context.TicketTbl
-                .Include(t => t.AgentId)
+                .Include(t => t.TicketNumber)
+                .Include(t => t.Subject)
+                .Include(t => t.LatestUpdate)
+                .Include(t => t.TicketStatus)
                 .Where(t => t.TicketId == ticketId).FirstOrDefaultAsync();
         }
 

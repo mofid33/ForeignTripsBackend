@@ -13,6 +13,8 @@ public partial class AgentTbl
 
     public int MainAdminId { get; set; }
 
+    public int SubCategoryId { get; set; }
+
     public int TypeOfEmploymentId { get; set; }
 
     public int AgentStatusId { get; set; }
@@ -25,6 +27,8 @@ public partial class AgentTbl
 
     public string NationalCode { get; set; } = null!;
 
+    public string DateOfBirth { get; set; } = null!;
+
     public string Mobile { get; set; } = null!;
 
     public string Phone { get; set; } = null!;
@@ -36,6 +40,8 @@ public partial class AgentTbl
     public string Password { get; set; } = null!;
 
     public string Email { get; set; } = null!;
+
+    public string Subset { get; set; } = null!;
 
     public byte[]? Photo { get; set; }
 
@@ -78,6 +84,8 @@ public partial class AgentTbl
     public virtual PositionTypeTbl PositionNavigation { get; set; } = null!;
 
     public virtual ICollection<RequestTbl> RequestTbls { get; set; } = new List<RequestTbl>();
+
+    public virtual SubCategoryTbl SubCategory { get; set; } = null!;
 
     public virtual TypeOfEmploymentTbl TypeOfEmployment { get; set; } = null!;
 

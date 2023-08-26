@@ -13,11 +13,15 @@ public partial class TicketTbl
 
     public int TicketStatusId { get; set; }
 
+    public string TicketNumber { get; set; } = null!;
+
     public string Subject { get; set; } = null!;
 
     public string RegisterDate { get; set; } = null!;
 
     public string RegisterTime { get; set; } = null!;
+
+    public string LatestUpdate { get; set; } = null!;
 
     public virtual InternationalAdminTbl? Admin { get; set; }
 

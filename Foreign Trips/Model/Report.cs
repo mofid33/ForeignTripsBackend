@@ -7,27 +7,33 @@ public partial class Report
 {
     public int ReportId { get; set; }
 
-    public int? FileId { get; set; }
+    public int FileId { get; set; }
 
     public int RequestId { get; set; }
 
-    public string? RequestDateNumber { get; set; }
+    public int ReportStatusId { get; set; }
 
-    public string? LicenseNumber { get; set; }
+    public string RequestDateNumber { get; set; } = null!;
 
-    public string? LicenseDate { get; set; }
+    public string LicenseNumber { get; set; } = null!;
 
-    public string? Period { get; set; }
+    public string LicenseDate { get; set; } = null!;
 
-    public string? EmailInternalDevice { get; set; }
+    public string Period { get; set; } = null!;
 
-    public string? EmailExternalDevice { get; set; }
+    public string EmailInternalDevice { get; set; } = null!;
 
-    public string? InternalDevice { get; set; }
+    public string EmailExternalDevice { get; set; } = null!;
 
-    public string? ExternalDevice { get; set; }
+    public string InternalDevice { get; set; } = null!;
 
-    public virtual FileDetailsTbl? File { get; set; }
+    public string ExternalDevice { get; set; } = null!;
+
+    public string LatestUpdate { get; set; } = null!;
+
+    public virtual FileDetailsTbl File { get; set; } = null!;
+
+    public virtual ReportStatusTbl ReportStatus { get; set; } = null!;
 
     public virtual RequestTbl Request { get; set; } = null!;
 }

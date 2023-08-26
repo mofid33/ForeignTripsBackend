@@ -22,6 +22,21 @@ namespace Foreign_Trips.Repositories
             return await _context.Report.ToListAsync();
         }
 
+        public async Task<Report?> GetReportAsync(int reportId)
+        {
+            return await _context.Report
+             .Include(c => c.Request.Agent.AgentName)
+             .Include(x => x.Request.Agent.AgentFamily)
+             .Include(x => x.Request.TravelTopic)
+             .Include(c => c.Request.Agent.Joblocation)
+             .Include(c => c.LatestUpdate)
+             .Include(c => c.ReportStatusId)
+
+
+             .Where(c => c.ReportId == reportId).FirstOrDefaultAsync();
+
+        }
+
         public async Task<Report?> InsertReport(Report report)
         {
             try

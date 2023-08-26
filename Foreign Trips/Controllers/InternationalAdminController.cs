@@ -8,7 +8,7 @@ namespace Foreign_Trips.Controllers
     [Route("api/Admin")]
     public class InternationalAdminController : ControllerBase
     {
-        private readonly IInternationalAdminRepository _internatuinaladminRepository;
+        private readonly IInternationalAdminRepository _internatinaladminRepository;
         private readonly IRequestRepository _requestRepository;
         private readonly IReportRepository _reportRepository;
         private readonly IAgentRepository _agentRepository;
@@ -17,12 +17,12 @@ namespace Foreign_Trips.Controllers
         private readonly IMapper _mapper;
 
 
-        public InternationalAdminController(IInternationalAdminRepository internatuinaladminRepository, IRequestRepository requestRepository,
+        public InternationalAdminController(IInternationalAdminRepository internatinaladminRepository, IRequestRepository requestRepository,
                                             IReportRepository reportRepository, IAgentRepository agentRepository, ITicketRepository ticketRepository,
                                             IMapper mapper)
         {
-            _internatuinaladminRepository = internatuinaladminRepository ??
-                throw new ArgumentNullException(nameof(internatuinaladminRepository));
+            _internatinaladminRepository = internatinaladminRepository ??
+                throw new ArgumentNullException(nameof(internatinaladminRepository));
             _requestRepository = _requestRepository ??
                     throw new ArgumentNullException(nameof(requestRepository));
             _reportRepository = _reportRepository ??
@@ -39,7 +39,7 @@ namespace Foreign_Trips.Controllers
         [Route("GetUsers")]
         public async Task<ActionResult<IEnumerable<AgentTbl>>> GetAgents()
         {
-            var Agents = await _internatuinaladminRepository.GetUser();
+            var Agents = await _internatinaladminRepository.GetUser();
 
             return Ok(
                 Agents
@@ -55,7 +55,7 @@ namespace Foreign_Trips.Controllers
 )
         {
 
-            var logUser = await _internatuinaladminRepository.GetUserLog(Model);
+            var logUser = await _internatinaladminRepository.GetUserLog(Model);
             if (logUser == null)
             {
                 return BadRequest();
@@ -75,7 +75,7 @@ namespace Foreign_Trips.Controllers
     )
         {
 
-            var EAgent = await _internatuinaladminRepository.InsertAdmin(Model);
+            var EAgent = await _internatinaladminRepository.InsertAdmin(Model);
             if (EAgent == null)
             {
                 return BadRequest();
@@ -93,11 +93,11 @@ namespace Foreign_Trips.Controllers
 [FromBody] InternationalAdminTbl Model
 )
         {
-            if (!await _internatuinaladminRepository.AdminExistsAsync(Model.AdminId))
+            if (!await _internatinaladminRepository.AdminExistsAsync(Model.AdminId))
             {
                 return NotFound();
             }
-            var EAgent = await _internatuinaladminRepository.UpdateAdmin(Model);
+            var EAgent = await _internatinaladminRepository.UpdateAdmin(Model);
             if (EAgent == null)
             {
                 return BadRequest();
@@ -116,11 +116,11 @@ namespace Foreign_Trips.Controllers
         {
             try
             {
-                if (!await _internatuinaladminRepository.AdminExistsAsync(Model.AdminId))
+                if (!await _internatinaladminRepository.AdminExistsAsync(Model.AdminId))
                 {
                     return NoContent();
                 }
-                _internatuinaladminRepository.RemoveAdmin(Model.AdminId);
+                _internatinaladminRepository.RemoveAdmin(Model.AdminId);
 
                 return Ok();
             }

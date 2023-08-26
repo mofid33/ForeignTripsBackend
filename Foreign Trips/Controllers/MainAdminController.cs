@@ -13,9 +13,15 @@ namespace Foreign_Trips.Controllers
         private readonly IAgentRepository _agentRepository;
         private readonly IMainAdminRepository _mainadminRepository;
         private readonly IAuthRepository _authRepository;
+        private readonly IInternationalAdminRepository _internatinaladminRepository;
+        private readonly IReportRepository _reportRepository;
+        private readonly ISupervisorRepository _supervisorRepository;
+        private readonly ITicketRepository _ticketRepository;
         private readonly IMapper _mapper;
         public MainAdminController(IAgentRepository agentRepository, IMainAdminRepository mainadminRepository, IAuthRepository authRepository,
-                                IMapper mapper)
+                                   IInternationalAdminRepository internatinaladminRepository, IReportRepository reportRepository,
+                                   ISupervisorRepository supervisorRepository, ITicketRepository ticketRepository,
+        IMapper mapper)
         {
             _agentRepository = agentRepository ??
                 throw new ArgumentNullException(nameof(agentRepository));
@@ -23,6 +29,14 @@ namespace Foreign_Trips.Controllers
                throw new ArgumentNullException(nameof(mainadminRepository));
             _authRepository = authRepository ??
                 throw new ArgumentNullException(nameof(authRepository));
+            _internatinaladminRepository = internatinaladminRepository ??
+               throw new ArgumentNullException(nameof(internatinaladminRepository));
+            _reportRepository = reportRepository ??
+               throw new ArgumentNullException(nameof(reportRepository));
+            _supervisorRepository = supervisorRepository ??
+               throw new ArgumentNullException(nameof(supervisorRepository));
+            _ticketRepository = ticketRepository ??
+               throw new ArgumentNullException(nameof(ticketRepository));
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
 
@@ -138,6 +152,130 @@ namespace Foreign_Trips.Controllers
 
         }
 
+        #region Report
+        [HttpGet]
+        [Route("GetReports")]
+        public async Task<ActionResult<IEnumerable<Report>>> GetReport()
+        {
+            var reports = await _reportRepository.GetReport();
+
+            return Ok(
+                reports
+                );
+        }
+
+        [HttpGet]
+        [Route("GetReport")]
+        public async Task<ActionResult<Report>> GetReport(
+      [FromBody] Report Model
+      )
+        {
+
+            var rep = await _reportRepository.GetReportAsync(Model.ReportId);
+            return Ok(
+         _mapper.Map<Report>(rep)
+         );
+
+        }
+
+
+        #endregion
+
+        #region Supervisor
+        [HttpGet]
+        [Route("GetSupervisor")]
+        public async Task<ActionResult<IEnumerable<SupervisorTbl>>> GetSupervisor()
+        {
+            var sup = await _supervisorRepository.GetSupervisor();
+
+            return Ok(
+                sup
+                );
+        }
+
+        [HttpPost]
+        [Route("InsertSupervisor")]
+        public async Task<ActionResult<SupervisorTbl>> InsertSupervisor(
+[FromBody] SupervisorTbl Model
+)
+        {
+
+            var sup = await _supervisorRepository.InsertSupervisor(Model);
+            if (sup == null)
+            {
+                return BadRequest();
+            }
+            return Ok(sup);
+
+        }
+
+        [HttpPost]
+        [Route("UpdateSupervisor")]
+        public async Task<ActionResult<SupervisorTbl>> UpdateOverseerAsync(
+[FromBody] SupervisorTbl Model
+)
+        {
+            var sup = await _supervisorRepository.UpdateSupervisorAsync(Model);
+            if (sup == null)
+            {
+                return BadRequest();
+            }
+            return Ok();
+
+        }
+
+        #endregion
+
+        #region Ticket
+        [HttpPost]
+        [Route("GetTicket")]
+        public async Task<ActionResult<TicketTbl>> GetTicket(
+      [FromBody] GetTicket Model
+      )
+        {
+
+            var Tickets = await _ticketRepository.GetTicket(Model.TicketID);
+            return Ok(Tickets);
+
+        }
+
+        [HttpPost]
+        [Route("InsertTicket")]
+        public async Task<ActionResult<TicketTbl>> InsertTicket(
+[FromBody] TicketTbl Model
+)
+        {
+
+            var Ticket = await _ticketRepository.InsertTicket(Model);
+            if (Ticket == null)
+            {
+                return BadRequest();
+            }
+            return Ok(Ticket);
+
+        }
+        #endregion
+
+        #region Log
+        [HttpPost]
+        [Route("GetUserLog")]
+        public async Task<ActionResult<LoginTbl>> GetUserLog(
+[FromBody] LoginTbl Model
+)
+        {
+
+            var logUser = await _internatinaladminRepository.GetUserLog(Model);
+            if (logUser == null)
+            {
+                return BadRequest();
+            }
+            return Ok(
+                  _mapper.Map<LoginTbl>(logUser)
+                  );
+        }
+
+        #endregion
+
         #region File
         [HttpPost("PostSingleFile")]
         public async Task<ActionResult> PostSingleFile([FromForm] FileUploadModel fileDetails)
@@ -206,5 +344,7 @@ namespace Foreign_Trips.Controllers
 
         }
         #endregion
+
+
     }
 }
