@@ -25,6 +25,7 @@ namespace Foreign_Trips.Repositories
         Task DownloadFileById(int fileName);
         Task UpdatePassAgentAsync(AgentTbl agent, long agentId);
         Task SuspendAgentAsync(long agentId);
+        Task<RequestTbl?> GetRequestAsync(int RequestId);
         Task<bool> SaveChangesAsync();
     }
 }

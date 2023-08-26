@@ -382,6 +382,9 @@ namespace Foreign_Trips.Repositories
                 }
             
         }
+
+
+       
         #region AgentStatus
         public async Task<IEnumerable<AgentStatusTbl>> GetAgentStatusAsync()
         {
@@ -422,6 +425,12 @@ namespace Foreign_Trips.Repositories
         {
             return await _context.LanguageType.ToListAsync();
         }
+
+        public Task<RequestTbl?> GetRequestAsync(int RequestId)
+        {
+            throw new NotImplementedException();
+        }
+
         #endregion
     }
 }
