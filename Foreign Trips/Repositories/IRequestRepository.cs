@@ -8,13 +8,24 @@ namespace Foreign_Trips.Repositories
         Task<IEnumerable<RequestTbl?>> GetRequest();
         Task<RequestTbl?> GetRequestAsync(int RequestId);
         Task<bool> RequestExistsAsync(int RequestId);
-        Task<RequestTbl?> InsertRequestAsync(RequestTbl request);
+        Task<RequestTbl?> InsertRequest1Async(RequestTbl request);
+        Task<RequestTbl?> InsertRequest2Async(RequestTbl request);
+        Task<RequestTbl?> InsertRequest3Async(RequestTbl request);
         Task<RequestDto?> UpdateRequestAsync(RequestDto request);
         Task<RequestDto?> RejectRequest(RequestDto request);
         Task RemoveRequestAsync(int requestId);
         Task<IEnumerable<RequestStatusTbl>> GetRequestStatusAsync();
         Task<IEnumerable<RuleTbl?>> GetRule();
+
         //Task<RuleTbl?> GetRuleAsync(int RuleId);
+        Task<IEnumerable<RequestStatusTbl>> RequestStatusAsync();
+        Task<IEnumerable<TravelGoalsTypeTbl>> TravelGoalsTypeAsync();
+        Task<IEnumerable<JobGoalsTypeTbl>> JobGoalsTypeAsync();
+        Task<IEnumerable<DeviceNameItypeTbl>> DeviceNametypeAsync();
+        Task<IEnumerable<PassportTbl>> PassportTypeAsync();
+        Task<IEnumerable<RightOfMissionTbl>> RightOfMissionAsync();
+        Task<IEnumerable<RightOfCommutingTypeTbl>> RightOfCommutingTypeAsync();
+        Task<IEnumerable<RightToEducationTbl>> RightToEducationAsync();
         Task<bool> SaveChangesAsync();
 
     }

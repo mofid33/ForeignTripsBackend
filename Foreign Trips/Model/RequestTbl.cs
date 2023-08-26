@@ -47,7 +47,7 @@ public partial class RequestTbl
 
     public string PayerFood { get; set; } = null!;
 
-    public string TheCostOfFood { get; set; } = null!;
+    public string CostOfFood { get; set; } = null!;
 
     public string TickerTypeId { get; set; } = null!;
 
@@ -59,13 +59,13 @@ public partial class RequestTbl
 
     public int RightOfMissionId { get; set; }
 
-    public string ManagerRightOfMission { get; set; } = null!;
+    public string LevelRightOfMission { get; set; } = null!;
 
     public string ExpertRightOfMission { get; set; } = null!;
 
     public string RightToEducationCost { get; set; } = null!;
 
-    public string RightToEducationId { get; set; } = null!;
+    public int RightToEducationId { get; set; }
 
     public string RightOfCommutingCost { get; set; } = null!;
 
@@ -111,5 +111,9 @@ public partial class RequestTbl
 
     public virtual RightOfMissionTbl RightOfMission { get; set; } = null!;
 
+    public virtual RightToEducationTbl RightToEducation { get; set; } = null!;
+
     public virtual TollAmountTypeTbl TollAmount { get; set; } = null!;
+
+    public virtual TravelGoalsTypeTbl TravelGoal { get; set; } = null!;
 }

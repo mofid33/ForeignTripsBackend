@@ -62,7 +62,7 @@ namespace Foreign_Trips.Repositories
                 AgentTbl data = new AgentTbl();
                 data.CityId = agent.CityId;
                 data.TypeOfMissionId= agent.TypeOfMissionId;
-                data.SupervisorId =agent.SupervisorId;
+                data.MainAdminId =agent.MainAdminId;
                 data.PositionId= agent.PositionId; 
                 data.AgentStatusId= agent.AgentStatusId;
                 data.AgentName = agent.AgentName;
@@ -100,8 +100,8 @@ namespace Foreign_Trips.Repositories
                 var data = await GetAgentAsync(agent.AgentId);
                 data.CityId = agent.CityId;
                 data.TypeOfMissionId = agent.TypeOfMissionId;
-                data.SupervisorId = agent.SupervisorId;
-                data.PositionId = agent.PositionId;
+                data.MainAdminId = agent.MainAdminId;
+               data.PositionId = agent.PositionId;
                 data.AgentStatusId = agent.AgentStatusId;
                 data.AgentName = agent.AgentName;
                 data.AgentFamily = agent.AgentFamily;
@@ -402,10 +402,25 @@ namespace Foreign_Trips.Repositories
             return await _context.TypeOfEmploymentTbl.ToListAsync();
         }
         #endregion
+
         #region PositionType
         public async Task<IEnumerable<PositionTypeTbl>> PositionTypeTblAsync()
         {
             return await _context.PositionTypeTbl.ToListAsync();
+        }
+        #endregion
+
+        #region Marital Status
+        public async Task<IEnumerable<MaritalStatusTbl>> MaritalStatusTblAsync()
+        {
+            return await _context.MaritalStatusTbl.ToListAsync();
+        }
+        #endregion
+
+        #region Language Type
+        public async Task<IEnumerable<LanguageType>> LanguageTypeAsync()
+        {
+            return await _context.LanguageType.ToListAsync();
         }
         #endregion
     }

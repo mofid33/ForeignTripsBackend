@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Foreign_Trips.Entities;
 using Foreign_Trips.Model;
 using Foreign_Trips.Repositories;
 using Microsoft.AspNetCore.Mvc;

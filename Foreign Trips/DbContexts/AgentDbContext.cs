@@ -29,9 +29,18 @@ namespace Foreign_Trips.DbContexts
         public DbSet<Report> Report { get; set; } = null;
         public DbSet<FileDetails> FileDetails { get; set; }
         public DbSet<RuleTbl> RuleTbl { get; set; } = null!;
-        public DbSet<SupervisorTbl> SupervisorTbl { get; set; } = null!;
+        public DbSet<MainAdminTbl> MainAdminTbl { get; set; } = null!;
         public DbSet<ForeignDelegrationTbl> ForeginDelegrationTbl { get; set; } = null!;
-        public DbSet<OverseerTbl> OverseerTbl { get; set; } = null;
+        public DbSet<SupervisorTbl> SupervisorTbl { get; set; } = null;
         public DbSet<InternationalExpertTbl> InternationalExpertTbl { get; set; } = null;
+        public DbSet<MaritalStatusTbl> MaritalStatusTbl { get; set; } = null!;
+        public DbSet<LanguageType> LanguageType { get; set; } = null!;
+        public DbSet<TravelGoalsTypeTbl> TravelGoalsTypeTbl { get; set; } = null!;
+        public DbSet<JobGoalsTypeTbl> JobGoalsTypeTbl { get; set; } = null!;
+        public DbSet<DeviceNameItypeTbl> DeviceNameItypeTbl { get; set; } = null!;
+        public DbSet<PassportTbl> PassportTbl { get; set; } = null!;
+        public DbSet<RightOfMissionTbl> RightOfMissionTbl { get; set; } = null!;
+        public DbSet<RightOfCommutingTypeTbl> RightOfCommutingTypeTbl { get; set; } = null!;
+        public DbSet<RightToEducationTbl> RightToEducationTbl { get; set; } = null!;
     }
 }

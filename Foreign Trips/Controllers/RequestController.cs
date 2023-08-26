@@ -40,13 +40,13 @@ namespace Foreign_Trips.Controllers
 
 
         [HttpPost]
-        [Route("InsertRequest2")]
-        public async Task<ActionResult<RequestTbl>> InsertRequest(
+        [Route("InsertRequest1")]
+        public async Task<ActionResult<RequestTbl>> InsertRequest1(
 [FromBody] RequestTbl Model
 )
         {
 
-            var Req = await _requestRepository.InsertRequestAsync(Model);
+            var Req = await _requestRepository.InsertRequest1Async(Model);
             if (Req == null)
             {
                 return BadRequest();
@@ -54,6 +54,39 @@ namespace Foreign_Trips.Controllers
             return Ok(Req);
 
         }
+
+        [HttpPost]
+        [Route("InsertRequest2")]
+        public async Task<ActionResult<RequestTbl>> InsertRequest2(
+[FromBody] RequestTbl Model
+)
+        {
+
+            var Req = await _requestRepository.InsertRequest2Async(Model);
+            if (Req == null)
+            {
+                return BadRequest();
+            }
+            return Ok(Req);
+
+        }
+
+        [HttpPost]
+        [Route("InsertRequest3")]
+        public async Task<ActionResult<RequestTbl>> InsertRequest3(
+[FromBody] RequestTbl Model
+)
+        {
+
+            var Req = await _requestRepository.InsertRequest3Async(Model);
+            if (Req == null)
+            {
+                return BadRequest();
+            }
+            return Ok(Req);
+
+        }
+
 
 
         [HttpPost]

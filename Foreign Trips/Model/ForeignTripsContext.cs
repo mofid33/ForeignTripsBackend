@@ -41,9 +41,9 @@ public partial class ForeignTripsContext : DbContext
 
     public virtual DbSet<LoginTbl> LoginTbls { get; set; }
 
-    public virtual DbSet<MaritalStatusTbl> MaritalStatusTbls { get; set; }
+    public virtual DbSet<MainAdminTbl> MainAdminTbls { get; set; }
 
-    public virtual DbSet<OverseerTbl> OverseerTbls { get; set; }
+    public virtual DbSet<MaritalStatusTbl> MaritalStatusTbls { get; set; }
 
     public virtual DbSet<PassportTbl> PassportTbls { get; set; }
 
@@ -69,7 +69,7 @@ public partial class ForeignTripsContext : DbContext
 
     public virtual DbSet<SubsidiaryOrganizationTypeTbl> SubsidiaryOrganizationTypeTbls { get; set; }
 
-    public virtual DbSet<SupervisoerTbl> SupervisoerTbls { get; set; }
+    public virtual DbSet<SupervisorTbl> SupervisorTbls { get; set; }
 
     public virtual DbSet<TicketDetailsTbl> TicketDetailsTbls { get; set; }
 
@@ -123,61 +123,58 @@ public partial class ForeignTripsContext : DbContext
             entity.Property(e => e.Degree).HasMaxLength(50);
             entity.Property(e => e.Email).HasMaxLength(100);
             entity.Property(e => e.FieldOfStudy).HasMaxLength(100);
-            entity.Property(e => e.LanguageId)
-                .HasMaxLength(50)
-                .HasColumnName("languageID");
+            entity.Property(e => e.Joblocation).HasMaxLength(200);
+            entity.Property(e => e.LanguageId).HasColumnName("languageID");
+            entity.Property(e => e.MainAdminId).HasColumnName("MainAdminID");
             entity.Property(e => e.MaritalStatusId).HasColumnName("MaritalStatusID");
             entity.Property(e => e.Mobile).HasMaxLength(11);
             entity.Property(e => e.NationalCode).HasMaxLength(10);
             entity.Property(e => e.Password).HasMaxLength(300);
             entity.Property(e => e.Phone).HasMaxLength(11);
             entity.Property(e => e.Photo).HasColumnType("image");
-            entity.Property(e => e.PositionId).HasColumnName("PositionID");
+            entity.Property(e => e.Position).HasMaxLength(100);
             entity.Property(e => e.PostalCode).HasMaxLength(100);
             entity.Property(e => e.RegisterDate).HasMaxLength(10);
             entity.Property(e => e.RegisterTime).HasMaxLength(5);
-            entity.Property(e => e.Servicelocation).HasMaxLength(200);
-            entity.Property(e => e.SupervisorId).HasColumnName("SupervisorID");
             entity.Property(e => e.TypeOfEmploymentId).HasColumnName("TypeOfEmploymentID");
             entity.Property(e => e.TypeOfMissionId).HasColumnName("TypeOfMissionID");
+            entity.Property(e => e.WorkExperience).HasMaxLength(100);
 
             entity.HasOne(d => d.AgentStatus).WithMany(p => p.AgentTbls)
                 .HasForeignKey(d => d.AgentStatusId)
-                .OnDelete(DeleteBehavior.Cascade)
+                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_AgentTbl_AgentStatusTbl");
 
             entity.HasOne(d => d.City).WithMany(p => p.AgentTbls)
                 .HasForeignKey(d => d.CityId)
-                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK_AgentTbl_CityTbl");
 
-            entity.HasOne(d => d.Gender).WithMany(p => p.AgentTbls)
-                .HasForeignKey(d => d.GenderId)
-                .OnDelete(DeleteBehavior.Cascade)
-                .HasConstraintName("FK_AgentTbl_GenderType");
+            entity.HasOne(d => d.Language).WithMany(p => p.AgentTbls)
+                .HasForeignKey(d => d.LanguageId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_AgentTbl_languageType");
+
+            entity.HasOne(d => d.MainAdmin).WithMany(p => p.AgentTbls)
+                .HasForeignKey(d => d.MainAdminId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_AgentTbl_MainAdminTbl");
 
             entity.HasOne(d => d.MaritalStatus).WithMany(p => p.AgentTbls)
                 .HasForeignKey(d => d.MaritalStatusId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_AgentTbl_MaritalStatusTbl");
 
-            entity.HasOne(d => d.Position).WithMany(p => p.AgentTbls)
+            entity.HasOne(d => d.PositionNavigation).WithMany(p => p.AgentTbls)
                 .HasForeignKey(d => d.PositionId)
-                .OnDelete(DeleteBehavior.Cascade)
-                .HasConstraintName("FK_AgentTbl_PositionTbl");
-
-            entity.HasOne(d => d.Supervisor).WithMany(p => p.AgentTbls)
-                .HasForeignKey(d => d.SupervisorId)
-                .OnDelete(DeleteBehavior.Cascade)
-                .HasConstraintName("FK_AgentTbl_SupervisoerTbl");
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_AgentTbl_PositionTypeTbl");
 
             entity.HasOne(d => d.TypeOfEmployment).WithMany(p => p.AgentTbls)
                 .HasForeignKey(d => d.TypeOfEmploymentId)
-                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK_AgentTbl_TypeOfEmploymentTbl");
 
             entity.HasOne(d => d.TypeOfMission).WithMany(p => p.AgentTbls)
                 .HasForeignKey(d => d.TypeOfMissionId)
-                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK_AgentTbl_TypeOfMissionTbl");
         });
 
@@ -350,6 +347,25 @@ public partial class ForeignTripsContext : DbContext
             entity.Property(e => e.Time).HasMaxLength(10);
         });
 
+        modelBuilder.Entity<MainAdminTbl>(entity =>
+        {
+            entity.HasKey(e => e.MainAdminId).HasName("PK_SupervisorAdmin");
+
+            entity.ToTable("MainAdminTbl");
+
+            entity.Property(e => e.MainAdminId).HasColumnName("mainAdminID");
+            entity.Property(e => e.AdminId).HasColumnName("AdminID");
+            entity.Property(e => e.AgentId).HasColumnName("AgentID");
+            entity.Property(e => e.MainAdminName).HasMaxLength(100);
+            entity.Property(e => e.MainAdminUserName).HasMaxLength(100);
+            entity.Property(e => e.Password).HasMaxLength(300);
+
+            entity.HasOne(d => d.Admin).WithMany(p => p.MainAdminTbls)
+                .HasForeignKey(d => d.AdminId)
+                .OnDelete(DeleteBehavior.Cascade)
+                .HasConstraintName("FK_SupervisorTbl_AdminTbl");
+        });
+
         modelBuilder.Entity<MaritalStatusTbl>(entity =>
         {
             entity.HasKey(e => e.MaritalStatusId);
@@ -358,18 +374,6 @@ public partial class ForeignTripsContext : DbContext
 
             entity.Property(e => e.MaritalStatusId).HasColumnName("MaritalStatusID");
             entity.Property(e => e.MaritalStatusTitle).HasMaxLength(300);
-        });
-
-        modelBuilder.Entity<OverseerTbl>(entity =>
-        {
-            entity.HasKey(e => e.OverseerId);
-
-            entity.ToTable("OverseerTbl");
-
-            entity.Property(e => e.OverseerId).HasColumnName("OverseerID");
-            entity.Property(e => e.OverseerUserName)
-                .HasMaxLength(50)
-                .HasColumnName("OverseerUSerName");
         });
 
         modelBuilder.Entity<PassportTbl>(entity =>
@@ -470,6 +474,7 @@ public partial class ForeignTripsContext : DbContext
             entity.Property(e => e.AgentId).HasColumnName("AgentID");
             entity.Property(e => e.AirlineCompany).HasMaxLength(100);
             entity.Property(e => e.AmountOfCost).HasMaxLength(100);
+            entity.Property(e => e.CostOfFood).HasMaxLength(100);
             entity.Property(e => e.DestinationCity).HasMaxLength(100);
             entity.Property(e => e.DestinationCountry).HasMaxLength(100);
             entity.Property(e => e.DeviceNameId).HasColumnName("DeviceNameID");
@@ -480,7 +485,7 @@ public partial class ForeignTripsContext : DbContext
             entity.Property(e => e.ImportantTravel).HasMaxLength(100);
             entity.Property(e => e.InternetAddressOfTheExecutiveDevice).HasMaxLength(100);
             entity.Property(e => e.JobGoalId).HasColumnName("JobGoalID");
-            entity.Property(e => e.ManagerRightOfMission).HasMaxLength(100);
+            entity.Property(e => e.LevelRightOfMission).HasMaxLength(100);
             entity.Property(e => e.MissionAchievementRecords).HasMaxLength(100);
             entity.Property(e => e.PassportTypeId).HasColumnName("PassportTypeID");
             entity.Property(e => e.PayerCitizenShip).HasMaxLength(100);
@@ -491,11 +496,8 @@ public partial class ForeignTripsContext : DbContext
             entity.Property(e => e.RightOfCommutingId).HasColumnName("RightOfCommutingID");
             entity.Property(e => e.RightOfMissionId).HasColumnName("RightOfMissionID");
             entity.Property(e => e.RightToEducationCost).HasMaxLength(100);
-            entity.Property(e => e.RightToEducationId)
-                .HasMaxLength(100)
-                .HasColumnName("RightToEducationID");
+            entity.Property(e => e.RightToEducationId).HasColumnName("RightToEducationID");
             entity.Property(e => e.SummaryInvitation).HasMaxLength(100);
-            entity.Property(e => e.TheCostOfFood).HasMaxLength(100);
             entity.Property(e => e.TheCostOfTicket).HasMaxLength(100);
             entity.Property(e => e.TickerTypeId)
                 .HasMaxLength(100)
@@ -515,6 +517,7 @@ public partial class ForeignTripsContext : DbContext
 
             entity.HasOne(d => d.DeviceName).WithMany(p => p.RequestTbls)
                 .HasForeignKey(d => d.DeviceNameId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_RequestTbl_DeviceNameITypeTbl");
 
             entity.HasOne(d => d.JobGoal).WithMany(p => p.RequestTbls)
@@ -527,7 +530,7 @@ public partial class ForeignTripsContext : DbContext
 
             entity.HasOne(d => d.RequestStatus).WithMany(p => p.RequestTbls)
                 .HasForeignKey(d => d.RequestStatusId)
-                .HasConstraintName("FK_RequestTbl_RequestTbl");
+                .HasConstraintName("FK_RequestTbl_RequestStatusTbl");
 
             entity.HasOne(d => d.RightOfCommuting).WithMany(p => p.RequestTbls)
                 .HasForeignKey(d => d.RightOfCommutingId)
@@ -537,9 +540,17 @@ public partial class ForeignTripsContext : DbContext
                 .HasForeignKey(d => d.RightOfMissionId)
                 .HasConstraintName("FK_RequestTbl_RightOfMissionTbl");
 
+            entity.HasOne(d => d.RightToEducation).WithMany(p => p.RequestTbls)
+                .HasForeignKey(d => d.RightToEducationId)
+                .HasConstraintName("FK_RequestTbl_RightToEducationTbl");
+
             entity.HasOne(d => d.TollAmount).WithMany(p => p.RequestTbls)
                 .HasForeignKey(d => d.TollAmountId)
                 .HasConstraintName("FK_RequestTbl_TollAmountTypeTbl");
+
+            entity.HasOne(d => d.TravelGoal).WithMany(p => p.RequestTbls)
+                .HasForeignKey(d => d.TravelGoalId)
+                .HasConstraintName("FK_RequestTbl_TravelGoalsTypeTbl");
         });
 
         modelBuilder.Entity<RightOfCommutingTypeTbl>(entity =>
@@ -593,23 +604,16 @@ public partial class ForeignTripsContext : DbContext
             entity.Property(e => e.SubsidiaryOrganizationType).HasMaxLength(100);
         });
 
-        modelBuilder.Entity<SupervisoerTbl>(entity =>
+        modelBuilder.Entity<SupervisorTbl>(entity =>
         {
-            entity.HasKey(e => e.SupervisorId).HasName("PK_SupervisorAdmin");
+            entity.HasKey(e => e.SupervisorId).HasName("PK_OverseerTbl");
 
-            entity.ToTable("SupervisoerTbl");
+            entity.ToTable("SupervisorTbl");
 
             entity.Property(e => e.SupervisorId).HasColumnName("SupervisorID");
-            entity.Property(e => e.AdminId).HasColumnName("AdminID");
-            entity.Property(e => e.AgentId).HasColumnName("AgentID");
-            entity.Property(e => e.Password).HasMaxLength(300);
-            entity.Property(e => e.SupervisorName).HasMaxLength(100);
-            entity.Property(e => e.SupervisorUserName).HasMaxLength(100);
-
-            entity.HasOne(d => d.Admin).WithMany(p => p.SupervisoerTbls)
-                .HasForeignKey(d => d.AdminId)
-                .OnDelete(DeleteBehavior.Cascade)
-                .HasConstraintName("FK_SupervisorTbl_AdminTbl");
+            entity.Property(e => e.SupervisorUserName)
+                .HasMaxLength(100)
+                .HasColumnName("SupervisorUSerName");
         });
 
         modelBuilder.Entity<TicketDetailsTbl>(entity =>
