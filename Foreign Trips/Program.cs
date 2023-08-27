@@ -41,10 +41,10 @@ builder.Services.AddDbContext<AgentDbContext>(option =>
     builder.Services.AddScoped<IRequestRepository, RequestRepository>();
 //builder.Services.AddScoped<IRequestStatusRepository, RequestStatusRepository>();
 //builder.Services.AddScoped<IRequestTravelRepository, RrequestTravelRepository>();
-   builder.Services.AddScoped<IAdminRepository, AdminRepository>();
+   builder.Services.AddScoped<IInternationalAdminRepository, InternationalAdminRepository>();
    builder.Services.AddScoped<ITicketRepository, TicketRepository>();
    builder.Services.AddScoped<IReportRepository, ReportRepository>();
-    builder.Services.AddScoped<ISupervisorRepository, SupervisorRepository>();  
+    builder.Services.AddScoped<IMainAdminRepository, MainAdminRepository>();  
 
 builder.Services.AddAuthentication(options =>
     {

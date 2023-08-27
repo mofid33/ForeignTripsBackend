@@ -34,30 +34,107 @@ namespace Foreign_Trips.Repositories
         }
         public async Task<RequestTbl?> GetRequestAsync(int requestId)
         {
-            return await _context.RequestTbl.Where(f => f.RequestId == requestId).FirstOrDefaultAsync();
+            return await _context.RequestTbl
+             .Include(c => c.Agent.AgentName)
+             .Include(x => x.Agent.AgentFamily)
+             .Include(x => x.TravelTopic)
+             .Include(x => x.ApprovedBy)
+             .Include(c => c.TravelDate)
+             .Include(c => c.TravelTypeId)
+             .Include(c => c.RequestStatusId)
+
+             .Where(c => c.RequestId == requestId).FirstOrDefaultAsync();
         }
 
-        public async Task<RequestTbl?> InsertRequestAsync(RequestTbl request)
+        public async Task<RequestTbl?> InsertRequest1Async(RequestTbl request)
+        {
+            try
+            {
+                RequestTbl qtbl = new RequestTbl();
+                qtbl.ExecutiveDeviceName = request.ExecutiveDeviceName;
+                qtbl.InternetAddressOfTheExecutiveDevice = request.InternetAddressOfTheExecutiveDevice;
+                qtbl.DestinationCity = request.DestinationCity;
+                qtbl.DestinationCountry = request.DestinationCountry;
+                qtbl.FlightPath = request.FlightPath;
+                qtbl.TravelDate = request.TravelDate;
+                qtbl.TravelTime = request.TravelTime;
+                qtbl.TravelTopic = request.TravelTopic;
+                qtbl.TravelGoalId = request.TravelGoalId;
+                qtbl.JobGoalId = request.JobGoalId;
+                qtbl.DeviceNameId = request.DeviceNameId ;
+                qtbl.PassportTypeId = request.PassportTypeId;
+                qtbl.GetVisa = request.GetVisa;
+                qtbl.JointTrip = request.JointTrip;
+                qtbl.DateLetter = request.DateLetter;
+
+
+                await _context.RequestTbl.AddAsync(request);
+                await _context.SaveChangesAsync();
+
+                return request;
+
+
+            }
+
+            catch (System.Exception ex)
+            {
+                return null;
+
+            }
+
+        }
+
+
+        public async Task<RequestTbl?> InsertRequest2Async(RequestTbl request)
         {
             try
             {
                 RequestTbl qtbl = new RequestTbl();
                 qtbl.AgentId = request.AgentId;
-                qtbl.RequestName = request.RequestName;
-                qtbl.RequestStatusId = request.RequestStatusId;
-                qtbl.NationalCode = request.NationalCode;
-                qtbl.Role = request.Role;
-                qtbl.WorkLocation = request.WorkLocation;
-                qtbl.TypeOfEmployment = request.TypeOfEmployment;
-                qtbl.TravelDate = request.TravelDate;
-                qtbl.TravelTime = request.TravelTime;
-                qtbl.TravelTopic = request.TravelTopic;
-                qtbl.DestinationCountry = request.DestinationCountry;
-                qtbl.Payer = request.Payer;
-                qtbl.PersonUpName = request.PersonUpName;
-                qtbl.TravelCost = request.TravelCost;
-                qtbl.RejectDescription = request.RejectDescription;
-                qtbl.ConfirmDate = request.ConfirmDate;
+                
+
+
+                await _context.RequestTbl.AddAsync(request);
+                await _context.SaveChangesAsync();
+
+                return request;
+
+
+            }
+
+            catch (System.Exception ex)
+            {
+                return null;
+
+            }
+        }
+
+        public async Task<RequestTbl?> InsertRequest3Async(RequestTbl request)
+        {
+            try
+            {
+                RequestTbl qtbl = new RequestTbl();
+                qtbl.JobGoalId = request.JobGoalId;
+                qtbl.PayerCitizenShip = request.PayerCitizenShip;
+                qtbl.AmountOfCost = request.AmountOfCost;
+                qtbl.PayerFood = request.PayerFood;
+                qtbl.CostOfFood = request.CostOfFood;
+                qtbl.TickerTypeId = request.TickerTypeId;
+                qtbl.AirlineCompany = request.AirlineCompany;
+                qtbl.TicketCost = request.TicketCost;
+                qtbl.TheCostOfTicket = request.TheCostOfTicket;
+                qtbl.RightOfMissionId = request.RightOfMissionId;
+                qtbl.LevelRightOfMission = request.LevelRightOfMission;
+                qtbl.ExpertRightOfMission = request.ExpertRightOfMission;
+                qtbl.RightToEducationCost = request.RightToEducationCost;
+                qtbl.RightToEducationId = request.RightToEducationId;
+                qtbl.RightOfCommutingCost = request.RightOfCommutingCost;
+                qtbl.RightOfCommutingId = request.RightOfCommutingId;
+                qtbl.VisaCost = request.VisaCost;
+                qtbl.TollAmountCost = request.TollAmountCost;
+                qtbl.TollAmountId = request.TollAmountId;
+                qtbl.PaymentFromBank = request.PaymentFromBank;
+
 
                 await _context.RequestTbl.AddAsync(request);
                 await _context.SaveChangesAsync();
@@ -67,7 +144,7 @@ namespace Foreign_Trips.Repositories
                 string date = persianDateTime.ToString().Substring(0, 10);
                 if (request.RequestStatusId == 1)
                 {
-                    qtbl.ConfirmDate = date;
+                   //qtbl.ConfirmDate = date;
 
                 }
                 var Req = await _context.RequestTbl.AddAsync(qtbl);
@@ -109,7 +186,7 @@ namespace Foreign_Trips.Repositories
             try
             {
                 var data = await GetRequestAsync(request.RequestId);
-                data.RejectDescription = request.RejectDescription;
+               // data.RejectRequest = request.RejectRequest;
 
                 await _context.SaveChangesAsync();
                 return request;
@@ -128,7 +205,7 @@ namespace Foreign_Trips.Repositories
             {
                 var req = await GetRequestAsync(request.RequestId);
                 req.TravelDate = request.TravelDate;
-                req.ReasonForUrgency = request.ReasonForUrgency;
+                
 
 
 
@@ -169,5 +246,64 @@ namespace Foreign_Trips.Repositories
         {
             return (await _context.SaveChangesAsync() > 0);
         }
+
+
+        #region Request Status
+        public async Task<IEnumerable<RequestStatusTbl>> RequestStatusAsync()
+        {
+            return await _context.RequestStatusTbl.ToListAsync();
+        }
+        #endregion
+
+        #region Travel Goals Type
+        public async Task<IEnumerable<TravelGoalsTypeTbl>> TravelGoalsTypeAsync()
+        {
+            return await _context.TravelGoalsTypeTbl.ToListAsync();
+        }
+        #endregion
+
+        #region Job Goals Type
+        public async Task<IEnumerable<JobGoalsTypeTbl>> JobGoalsTypeAsync()
+        {
+            return await _context.JobGoalsTypeTbl.ToListAsync();
+        }
+        #endregion
+
+        #region Device Name type
+        public async Task<IEnumerable<DeviceNameItypeTbl>> DeviceNametypeAsync()
+        {
+            return await _context.DeviceNameItypeTbl.ToListAsync();
+        }
+        #endregion
+
+        #region Passport Type
+        public async Task<IEnumerable<PassportTbl>> PassportTypeAsync()
+        {
+            return await _context.PassportTbl.ToListAsync();
+        }
+        #endregion
+
+        #region Right Of Mission
+        public async Task<IEnumerable<RightOfMissionTbl>> RightOfMissionAsync()
+        {
+            return await _context.RightOfMissionTbl.ToListAsync();
+        }
+        #endregion
+
+        #region Right Of Commuting Type
+        public async Task<IEnumerable<RightOfCommutingTypeTbl>> RightOfCommutingTypeAsync()
+        {
+            return await _context.RightOfCommutingTypeTbl.ToListAsync();
+        }
+        #endregion
+
+        #region Right To Education
+        public async Task<IEnumerable<RightToEducationTbl>> RightToEducationAsync()
+        {
+            return await _context.RightToEducationTbl.ToListAsync();
+        }
+        #endregion
+
+
     }
 }

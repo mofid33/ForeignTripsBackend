@@ -1,23 +1,39 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
 
 namespace Foreign_Trips.Model;
 
 public partial class Report
 {
-    [Key]
-    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int ReportId { get; set; }
 
-    public int? FileId { get; set; }
+    public int FileId { get; set; }
 
     public int RequestId { get; set; }
 
-    public string SubjectOfTravel { get; set; } = null!;
+    public int ReportStatusId { get; set; }
 
-    public string Description { get; set; } = null!;
+    public string RequestDateNumber { get; set; } = null!;
+
+    public string LicenseNumber { get; set; } = null!;
+
+    public string LicenseDate { get; set; } = null!;
+
+    public string Period { get; set; } = null!;
+
+    public string EmailInternalDevice { get; set; } = null!;
+
+    public string EmailExternalDevice { get; set; } = null!;
+
+    public string InternalDevice { get; set; } = null!;
+
+    public string ExternalDevice { get; set; } = null!;
+
+    public string LatestUpdate { get; set; } = null!;
+
+    public virtual FileDetailsTbl File { get; set; } = null!;
+
+    public virtual ReportStatusTbl ReportStatus { get; set; } = null!;
 
     public virtual RequestTbl Request { get; set; } = null!;
 }

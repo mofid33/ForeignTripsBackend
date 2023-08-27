@@ -36,17 +36,63 @@ namespace Foreign_Trips.Controllers
                 Requests
                 );
         }
-        
+
+        [HttpGet]
+        [Route("GetRequest")]
+        public async Task<ActionResult<RequestTbl>> GetRequest(
+     [FromBody] RequestTbl Model
+     )
+        {
+
+            var req = await _requestRepository.GetRequestAsync(Model.RequestId);
+            return Ok(
+         _mapper.Map<RequestTbl>(req)
+         );
+
+        }
+
 
 
         [HttpPost]
-        [Route("InsertRequest2")]
-        public async Task<ActionResult<RequestTbl>> InsertRequest(
+        [Route("InsertRequest1")]
+        public async Task<ActionResult<RequestTbl>> InsertRequest1(
 [FromBody] RequestTbl Model
 )
         {
 
-            var Req = await _requestRepository.InsertRequestAsync(Model);
+            var Req = await _requestRepository.InsertRequest1Async(Model);
+            if (Req == null)
+            {
+                return BadRequest();
+            }
+            return Ok(Req);
+
+        }
+
+        [HttpPost]
+        [Route("InsertRequest2")]
+        public async Task<ActionResult<RequestTbl>> InsertRequest2(
+[FromBody] RequestTbl Model
+)
+        {
+
+            var Req = await _requestRepository.InsertRequest2Async(Model);
+            if (Req == null)
+            {
+                return BadRequest();
+            }
+            return Ok(Req);
+
+        }
+
+        [HttpPost]
+        [Route("InsertRequest3")]
+        public async Task<ActionResult<RequestTbl>> InsertRequest3(
+[FromBody] RequestTbl Model
+)
+        {
+
+            var Req = await _requestRepository.InsertRequest3Async(Model);
             if (Req == null)
             {
                 return BadRequest();
@@ -56,9 +102,10 @@ namespace Foreign_Trips.Controllers
         }
 
 
+
         [HttpPost]
         [Route("RejectRequest")]
-        public async Task<ActionResult<RequestTbl>> RejectRequest(
+        public async Task<ActionResult<RequestDto>> RejectRequest(
 [FromBody] RequestDto Model
 )
         {

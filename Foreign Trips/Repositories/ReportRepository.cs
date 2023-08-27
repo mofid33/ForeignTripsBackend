@@ -22,16 +22,37 @@ namespace Foreign_Trips.Repositories
             return await _context.Report.ToListAsync();
         }
 
+        public async Task<Report?> GetReportAsync(int reportId)
+        {
+            return await _context.Report
+             .Include(c => c.Request.Agent.AgentName)
+             .Include(x => x.Request.Agent.AgentFamily)
+             .Include(x => x.Request.TravelTopic)
+             .Include(c => c.Request.Agent.Joblocation)
+             .Include(c => c.LatestUpdate)
+             .Include(c => c.ReportStatusId)
+
+
+             .Where(c => c.ReportId == reportId).FirstOrDefaultAsync();
+
+        }
+
         public async Task<Report?> InsertReport(Report report)
         {
             try
             {
                 Report data = new Report();
-                data.SubjectOfTravel = report.SubjectOfTravel;
-                data.Description = report.Description;
                 data.FileId = report.FileId;
+                data.RequestDateNumber = report.RequestDateNumber;
+                data.LicenseNumber = report.LicenseNumber;
+                data.LicenseDate = report.LicenseDate;
                 data.RequestId = report.RequestId;
-
+                data.Period = report.Period;    
+                data.EmailExternalDevice = report.EmailExternalDevice;
+                data.EmailInternalDevice = report.EmailInternalDevice;
+                data.InternalDevice = report.InternalDevice;
+                data.ExternalDevice = report.ExternalDevice;
+                
                 await _context.Report.AddAsync(data);
 
 
@@ -68,7 +89,7 @@ namespace Foreign_Trips.Repositories
             try
             {
                 var rep = await _context.Report.FindAsync(report.ReportId);
-                rep.Description = report.Description;
+                
                 rep.FileId = report.FileId;
 
 

@@ -1,14 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
 
 namespace Foreign_Trips.Model;
 
-public partial class AdminTbl
+public partial class InternationalAdminTbl
 {
-    [Key]
-    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int AdminId { get; set; }
 
     public string AdminName { get; set; } = null!;
@@ -17,7 +13,7 @@ public partial class AdminTbl
 
     public string Password { get; set; } = null!;
 
-    public virtual ICollection<SupervisorTbl> SupervisorTbls { get; set; } = new List<SupervisorTbl>();
+    public virtual ICollection<MainAdminTbl> MainAdminTbls { get; set; } = new List<MainAdminTbl>();
 
     public virtual ICollection<TicketTbl> TicketTbls { get; set; } = new List<TicketTbl>();
 }

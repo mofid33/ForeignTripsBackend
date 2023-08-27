@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Foreign_Trips.Entities
 {
-    public class AdminDto
+    public class InternationalAdminDto
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

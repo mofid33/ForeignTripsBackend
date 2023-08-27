@@ -32,6 +32,21 @@ namespace Foreign_Trips.Controllers
                 );
         }
 
+        [HttpGet]
+        [Route("GetReport")]
+        public async Task<ActionResult<Report>> GetReport(
+     [FromBody] Report Model
+     )
+        {
+
+            var rep = await _reportRepository.GetReportAsync(Model.ReportId);
+            return Ok(
+         _mapper.Map<Report>(rep)
+         );
+
+        }
+
+
 
 
         [HttpPost]

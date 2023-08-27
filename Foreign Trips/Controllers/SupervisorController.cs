@@ -3,25 +3,29 @@ using Foreign_Trips.Entities;
 using Foreign_Trips.Model;
 using Foreign_Trips.Repositories;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 
 namespace Foreign_Trips.Controllers
 {
-    [Route("api/SupervisorAdmin")]
-    public class SupervisorController: ControllerBase
+    [Route("api/Supervisor")]
+    public class OverseerController : ControllerBase
     {
         private readonly IAgentRepository _agentRepository;
         private readonly ISupervisorRepository _supervisorRepository;
-        private readonly IAuthRepository _authRepository;
+        private readonly IReportRepository _reportRepository;
         private readonly IMapper _mapper;
-        public SupervisorController(IAgentRepository agentRepository, ISupervisorRepository supervisorRepository, IAuthRepository authRepository,
-                                IMapper mapper)
+
+
+        public OverseerController(IAgentRepository agentRepository, ISupervisorRepository supervisorRepository,
+                                  IReportRepository reportRepository,
+                                  IMapper mapper)
         {
             _agentRepository = agentRepository ??
                 throw new ArgumentNullException(nameof(agentRepository));
             _supervisorRepository = supervisorRepository ??
-                throw new ArgumentNullException(nameof(supervisorRepository));
-            _authRepository = authRepository ??
-                throw new ArgumentNullException(nameof(authRepository));
+               throw new ArgumentNullException(nameof(supervisorRepository));
+            _reportRepository = reportRepository ??
+            throw new ArgumentNullException(nameof(reportRepository));
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
 
@@ -29,10 +33,10 @@ namespace Foreign_Trips.Controllers
         [Route("GetSupervisor")]
         public async Task<ActionResult<IEnumerable<SupervisorTbl>>> GetSupervisor()
         {
-            var SupervisorAdmins = await _supervisorRepository.GetSupervisor();
+            var sup = await _supervisorRepository.GetSupervisor();
 
             return Ok(
-                SupervisorAdmins
+                sup
                 );
         }
 
@@ -43,139 +47,72 @@ namespace Foreign_Trips.Controllers
 )
         {
 
-            var Sup = await _supervisorRepository.InsertSuperviser(Model);
-            if (Sup == null)
+            var sup = await _supervisorRepository.InsertSupervisor(Model);
+            if (sup == null)
             {
                 return BadRequest();
             }
-            return Ok(Sup);
+            return Ok(sup);
 
         }
+
         [HttpPost]
         [Route("UpdateSupervisor")]
-        public async Task<ActionResult<SupervisorTbl>> UpdateSupervisorAsync(
+        public async Task<ActionResult<SupervisorTbl>> UpdateOverseerAsync(
 [FromBody] SupervisorTbl Model
 )
         {
-            var Sup = await _supervisorRepository.UpdateSuperviserAsync(Model);
-            if (Sup == null)
+            var sup = await _supervisorRepository.UpdateSupervisorAsync(Model);
+            if (sup == null)
             {
                 return BadRequest();
             }
             return Ok();
 
         }
+
+
+
+        [HttpGet]
+        [Route("GetAgent")]
+        public async Task<ActionResult<AgentTbl>> GetAgent(
+           [FromBody] AgentTbl Model
+           )
+        {
+
+            var agents = await _supervisorRepository.GetAgentAsync(Model.AgentId);
+            return Ok(
+         _mapper.Map<AgentTbl>(agents)
+         );
+
+        }
+
 
         [HttpPost]
-        [Route("InsertAgent")]
-        public async Task<ActionResult<AgentTbl>> InsertAgnet(
-        [FromBody] AgentTbl Model
-        )
+        [Route("GetReport")]
+        public async Task<ActionResult<Report>> GetReport(
+       [FromBody] Report Model
+       )
         {
 
-            var Sup = await _agentRepository.InsertAgentAsync(Model);
-            if (Sup == null)
-            {
-                return BadRequest();
-            }
-
-            return Ok();
+            var rep = await _reportRepository.GetReportAsync(Model.ReportId);
+            return Ok(
+         _mapper.Map<Report>(rep)
+         );
 
         }
 
-        [HttpPost]
-        [Route("UpdateAgnet")]
-        public async Task<ActionResult<AgentTbl>> UpdateAgnet(
-        [FromBody] AgentTbl Model
-             )
+
+        [HttpGet]
+        [Route("GetReports")]
+        public async Task<ActionResult<IEnumerable<Report>>> GetReport()
         {
-            string authHeader = HttpContext.Request.Headers["Authorization"].ToString().Replace("Bearer ", string.Empty);
+            var reports = await _reportRepository.GetReport();
 
-            var AgnetID = _authRepository.GetIDFromToken(authHeader);
-            if (!await _agentRepository.AgentExistsAsync(AgnetID))
-            {
-                return NotFound();
-            }
-            var Sup = await _agentRepository.UpdateAgentAsync(Model);
-            if (Sup == null)
-            {
-                return BadRequest();
-            }
-            return Ok();
-
+            return Ok(
+                reports
+                );
         }
-
-        [HttpPost]
-        [Route("DeleteAgent")]
-        public async Task<ActionResult<AgentTbl>> DeleteAgent(
-        [FromBody] AgentTbl Model
-        )
-        {
-            if (!await _agentRepository.AgentExistsAsync(Model.AgentId))
-            {
-                return NotFound();
-            }
-            _agentRepository.DeleteAgent(Model.AgentId);
-
-            return Ok();
-
-        }
-
-        [HttpPost]
-        [Route("SuspendAgent")]
-        public async Task<ActionResult<AgentTbl>> SuspendAgent(
-[FromBody] GetAgent Model
-)
-        {
-            if (!await _agentRepository.AgentExistsAsync(Model.AgentId))
-            {
-                return NotFound();
-            }
-            await _agentRepository.SuspendAgentAsync(Model.AgentId);
-
-            return Ok();
-
-        }
-
-        #region File
-        [HttpPost("PostSingleFile")]
-        public async Task<ActionResult> PostSingleFile([FromForm] FileUploadModel fileDetails)
-        {
-            if (fileDetails == null)
-            {
-                return BadRequest();
-            }
-
-            try
-            {
-                await _agentRepository.PostFileAsync(fileDetails);
-                return Ok();
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
-        [HttpPost("PostMultipleFile")]
-        public async Task<ActionResult> PostMultipleFile([FromForm] List<FileUploadModel> fileDetails)
-        {
-            if (fileDetails == null)
-            {
-                return BadRequest();
-            }
-
-            try
-            {
-                await _agentRepository.PostMultiFileAsync(fileDetails);
-                return Ok();
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-        #endregion
 
     }
 }

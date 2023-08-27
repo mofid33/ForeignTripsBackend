@@ -2,17 +2,8 @@
 {
     public class SupervisorDto
     {
-        public int SupervisorId { get; set; }
+        public int OverseerId { get; set; }
 
-        public int? AdminId { get; set; }
-
-        public int? AgentId { get; set; }
-
-        public string SupervisorName { get; set; } = null!;
-
-        public string SupervisorUserName { get; set; } = null!;
-
-        public string Password { get; set; } = null!;
-
+        public string OverseerUserName { get; set; } = null!;
     }
 }

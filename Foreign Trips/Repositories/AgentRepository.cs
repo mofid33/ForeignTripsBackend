@@ -62,7 +62,7 @@ namespace Foreign_Trips.Repositories
                 AgentTbl data = new AgentTbl();
                 data.CityId = agent.CityId;
                 data.TypeOfMissionId= agent.TypeOfMissionId;
-                data.SupervisorId =agent.SupervisorId;
+                data.MainAdminId =agent.MainAdminId;
                 data.PositionId= agent.PositionId; 
                 data.AgentStatusId= agent.AgentStatusId;
                 data.AgentName = agent.AgentName;
@@ -100,8 +100,8 @@ namespace Foreign_Trips.Repositories
                 var data = await GetAgentAsync(agent.AgentId);
                 data.CityId = agent.CityId;
                 data.TypeOfMissionId = agent.TypeOfMissionId;
-                data.SupervisorId = agent.SupervisorId;
-                data.PositionId = agent.PositionId;
+                data.MainAdminId = agent.MainAdminId;
+               data.PositionId = agent.PositionId;
                 data.AgentStatusId = agent.AgentStatusId;
                 data.AgentName = agent.AgentName;
                 data.AgentFamily = agent.AgentFamily;
@@ -349,40 +349,14 @@ namespace Foreign_Trips.Repositories
             return (await _context.SaveChangesAsync() > 0);
         }
 
-        public async Task<AgentTbl?> InsertPassPortAsync(AgentTbl agent)
-        {
-            try
-            {
-                AgentTbl ptbl = new AgentTbl();
-                ptbl.AgentName = agent.AgentName;
-                ptbl.CityId = agent.CityId;              
-                ptbl.Mobile= agent.Mobile;
-                ptbl.TypeOfMission = agent.TypeOfMission;
-                ptbl.Email = agent.Email;
-                ptbl.PostalCode = agent.PostalCode;
-                ptbl.Phone = agent.Phone;
-
-                await _context.AgentTbl.AddAsync(agent);
-                await _context.SaveChangesAsync();
-
-
-                return agent;
-                
-            }
-            catch (System.Exception ex)
-            {
-                return null;
-
-            }
-
-        }
+        
 
         public async Task UpdatePassAgentAsync(AgentTbl agent, long agentId)
         {
             try
             {
                 var data = await GetAgentAsync(agentId);
-                //data.Password = organization.Password;
+                data.Password = agent.Password;
                 await _context.SaveChangesAsync();
 
 
@@ -392,22 +366,83 @@ namespace Foreign_Trips.Repositories
             }
         }
 
-
         public async Task SuspendAgentAsync(long agentId)
         {
-        //    try
-        //    {
-        //        var data = await GetAgentAsync(agentId);
-        //        data.National.NationalStatusId = 4;
+                try
+                {
+                    var data = await GetAgentAsync(agentId);
+                    data.AgentStatus.AgentStatusId = 5;
 
 
-        //        await _context.SaveChangesAsync();
+                    await _context.SaveChangesAsync();
 
-        //    }
-        //    catch (System.Exception e)
-        //    {
-        //    }
-        throw new NotImplementedException();
+                }
+                catch (System.Exception e)
+                {
+                }
+            
         }
+
+        public async Task<RequestTbl?> GetRequestAgentAsync(int requestagentId)
+        {
+           
+                return await _context.RequestTbl
+                 .Include(c => c.TravelDate)
+                 .Include(x => x.TravelTopic)
+                 .Include(x => x.DestinationCountry)
+                 .Include(c => c.RequestStatus)
+                 .Include(c => c.DateOfLasteChange)
+                 .Include(c => c.OperationId)
+
+
+                 .Where(c => c.RequestId == requestagentId).FirstOrDefaultAsync();
+
+            
+        }
+
+
+
+        #region AgentStatus
+        public async Task<IEnumerable<AgentStatusTbl>> GetAgentStatusAsync()
+        {
+            return await _context.AgentStatusTbl.ToListAsync();
+        }
+        #endregion
+
+        #region TypeOfMission
+        public async Task<IEnumerable<TypeOfMissionTbl>> GetTypeOfMissionTblAsync()
+        {
+            return await _context.TypeOfMissionTbl.ToListAsync();
+        }
+        #endregion 
+
+        #region TypeOfEmployment
+        public async  Task<IEnumerable<TypeOfEmploymentTbl>> TypeOfEmploymentTblAsync()
+        {
+            return await _context.TypeOfEmploymentTbl.ToListAsync();
+        }
+        #endregion
+
+        #region PositionType
+        public async Task<IEnumerable<PositionTypeTbl>> PositionTypeTblAsync()
+        {
+            return await _context.PositionTypeTbl.ToListAsync();
+        }
+        #endregion
+
+        #region Marital Status
+        public async Task<IEnumerable<MaritalStatusTbl>> MaritalStatusTblAsync()
+        {
+            return await _context.MaritalStatusTbl.ToListAsync();
+        }
+        #endregion
+
+        #region Language Type
+        public async Task<IEnumerable<LanguageType>> LanguageTypeAsync()
+        {
+            return await _context.LanguageType.ToListAsync();
+        }
+
+        #endregion
     }
 }

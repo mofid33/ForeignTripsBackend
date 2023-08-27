@@ -1,5 +1,4 @@
-﻿using Foreign_Trips.Entities;
-using Foreign_Trips.Model;
+﻿using Foreign_Trips.Model;
 
 namespace Foreign_Trips.Repositories
 {
@@ -7,13 +6,10 @@ namespace Foreign_Trips.Repositories
     {
         Task<bool> SupervisorExistsAsync(int supervisorId);
         Task<IEnumerable<SupervisorTbl?>> GetSupervisor();
-        Task<SupervisorTbl?> GetSupervisor(int  supervisorId);
-        Task<SupervisorTbl?> InsertSuperviser(SupervisorTbl supervisor);
-        Task<SupervisorTbl?> UpdateSuperviserAsync(SupervisorTbl supervisoradmin);
-        //Task UpdatePassAgentAsync(AgentTbl agent, long agentId);
-        Task<AgentTbl?> InsertAgent(AgentTbl agent);
-        Task<AgentTbl?> UpdateAgent(AgentTbl agent);
-        Task<AgentTbl?> DeleteAgent(int agentId);
-        Task<bool> SaveChangesAsync();
+        Task<SupervisorTbl?> GetSupervisor(int supervisorId);
+        Task<SupervisorTbl?> InsertSupervisor(SupervisorTbl supervisor);
+        Task<SupervisorTbl?> UpdateSupervisorAsync(SupervisorTbl supervisor);
+        Task<AgentTbl?> GetAgentAsync(int agentId);
+       
     }
 }

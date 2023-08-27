@@ -1,5 +1,4 @@
 ﻿using Foreign_Trips.DbContexts;
-using Foreign_Trips.Entities;
 using Foreign_Trips.Model;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -7,6 +6,7 @@ using Microsoft.Extensions.Logging;
 namespace Foreign_Trips.Repositories
 {
     public class SupervisorRepository : ISupervisorRepository
+
     {
         private readonly AgentDbContext _context;
         private readonly IAgentRepository _agentRepository;
@@ -19,26 +19,7 @@ namespace Foreign_Trips.Repositories
         throw new ArgumentNullException(nameof(agentRepository));
 
         }
-        public async Task<AgentTbl?> DeleteAgent(int agentId)
-        {
-
-            try
-            {
-                var data = await _agentRepository.GetAgentAsync(agentId);
-                _context.AgentTbl.Remove(data);
-
-                await _context.SaveChangesAsync();
-                return data;
-
-            }
-
-            catch (System.Exception ex)
-            {
-                return null;
-
-            }
-
-        }
+       
 
         public async Task<IEnumerable<SupervisorTbl?>> GetSupervisor()
         {
@@ -57,22 +38,20 @@ namespace Foreign_Trips.Repositories
             return await _context.SupervisorTbl.Where(c => c.SupervisorId == supervisorId).FirstOrDefaultAsync();
         }
 
-        public async Task<AgentTbl> InsertAgent(AgentTbl agent)
+        public async Task<SupervisorTbl?> InsertSupervisor(SupervisorTbl supervisor)
         {
             try
             {
-                AgentTbl data = new AgentTbl();
-                data.CityId = agent.CityId;
-                data.AgentName = agent.AgentName;
-                data.NationalCode = agent.NationalCode;
-                data.Mobile = agent.Mobile;
-                data.Phone = agent.Phone;
-                data.CompanyName = agent.CompanyName;
-                data.TypeOfEmployment = agent.TypeOfEmployment; 
-                data.Email = agent.Email;
 
+                SupervisorTbl supervisorTbl = new SupervisorTbl();
+                supervisorTbl.SupervisorName = supervisor.SupervisorName;
+                supervisorTbl.SupervisorFamily= supervisor.SupervisorFamily;
+                supervisorTbl.SupervisorUserName = supervisor.SupervisorUserName;
+                supervisorTbl.Password = supervisor.Password;
+
+                
                 await _context.SaveChangesAsync();
-                return agent;
+                return supervisorTbl;
 
             }
 
@@ -83,25 +62,25 @@ namespace Foreign_Trips.Repositories
             }
         }
 
-        public async Task<SupervisorTbl?> InsertSuperviser(SupervisorTbl supervisor)
+            public async Task<bool> SupervisorExistsAsync(int supervisorId)
+        {
+            return await _context.SupervisorTbl.AnyAsync(c => c.SupervisorId == supervisorId);
+        }
+
+        public async Task<SupervisorTbl?> UpdateSupervisorAsync(SupervisorTbl supervisor)
         {
             try
             {
 
+                SupervisorTbl supervisorTbl = new SupervisorTbl();
+                supervisorTbl.SupervisorName = supervisor.SupervisorName;
+                supervisorTbl.SupervisorFamily = supervisor.SupervisorFamily;
+                supervisorTbl.SupervisorUserName = supervisor.SupervisorUserName;
+                supervisorTbl.Password = supervisor.Password;
 
-                var foreigntrip = await _context.SupervisorTbl.AddAsync(supervisor);
+                
                 await _context.SaveChangesAsync();
-
-
-                return supervisor;
-
-                //SupervisorAdminTbl supervisoradminTbl = new SupervisorAdminTbl();
-                //supervisoradminTbl.SupervisorName = supervisor.SupervisorName;
-                //supervisoradminTbl.SupervisorUserName = supervisor.SupervisorUserName;
-                //supervisoradminTbl.Password = supervisor.Password;
-                //var exp = await _context.SupervisorAdminTbl.AddAsync(supervisoradminTbl);
-                //await _context.SaveChangesAsync();
-                //return supervisoradminTbl;
+                return supervisorTbl;
 
             }
 
@@ -112,73 +91,36 @@ namespace Foreign_Trips.Repositories
             }
         }
 
-        public async Task<bool> SupervisorExistsAsync(int SupervisorId)
+        public async Task<AgentTbl?> GetAgentAsync(int agentId)
         {
-            return await _context.SupervisorTbl.AnyAsync(c => c.SupervisorId == SupervisorId);
+
+            return await _context.AgentTbl
+             .Include(c => c.AgentName)
+             .Include(x => x.AgentFamily)
+             .Include(x => x.Position)
+             .Include(c => c.SubCategory)
+             .Include(c => c.CompanyName)
+
+
+             .Where(c => c.AgentId == agentId).FirstOrDefaultAsync();
+
+
         }
 
-        public async Task<AgentTbl?> UpdateAgent(AgentTbl agent)
+
+        public async Task<Report?> GetReportAsync(int reportId)
         {
-            try
-            {
-                var data = await _agentRepository.GetAgentAsync(agent.AgentId);
-                data.AgentName = agent.AgentName;
-                data.NationalCode = agent.NationalCode;
-                data.Mobile = agent.Mobile;
+            return await _context.Report
+             .Include(c => c.Request.Agent.AgentName)
+             .Include(x => x.Request.Agent.AgentFamily)
+             .Include(x => x.Request.TravelTopic)
+             .Include(c => c.Request.Agent.Joblocation)
+             .Include(c => c.LatestUpdate)
+             .Include(c => c.ReportStatusId)
 
 
-                await _context.SaveChangesAsync();
-                return agent;
+             .Where(c => c.ReportId == reportId).FirstOrDefaultAsync();
 
-            }
-            catch (System.Exception e)
-            {
-                return null;
-            }
         }
-
-        //public async Task UpdatePassAgentAsync(AgentTbl agent, long agentId)
-        //{
-        //    try
-        //    {
-        //        var data = await GetAgentAsync(agentId);
-        //        //data.Password = organization.Password;
-        //        await _context.SaveChangesAsync();
-
-
-        //    }
-        //    catch (System.Exception e)
-        //    {
-        //    }
-        //}
-
-        public async Task<bool> SaveChangesAsync()
-        {
-            return (await _context.SaveChangesAsync() > 0);
-        }
-
-        public async Task<SupervisorTbl?> UpdateSuperviserAsync(SupervisorTbl supervisoradmin)
-        {
-            try
-            {
-
-                var sup = await _context.SupervisorTbl.FindAsync(supervisoradmin.SupervisorId);
-                sup.SupervisorName = supervisoradmin.SupervisorName;
-                sup.SupervisorUserName = supervisoradmin.SupervisorUserName;
-                sup.Password = supervisoradmin.Password;
-                await _context.SaveChangesAsync();
-
-
-                return supervisoradmin;
-
-            }
-
-            catch (System.Exception ex)
-            {
-                return null;
-
-            };
-        }
-
     }
 }
