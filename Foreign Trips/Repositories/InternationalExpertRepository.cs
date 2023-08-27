@@ -14,17 +14,24 @@ namespace Foreign_Trips.Repositories
         {
             _context = context ?? throw new ArgumentException(nameof(context));
             _agentRepository = agentRepository ??
-        throw new ArgumentNullException(nameof(agentRepository));
+            throw new ArgumentNullException(nameof(agentRepository));
 
         }
         public async Task<IEnumerable<InternationalExpertTbl?>> GetInternationalExpert()
         {
-            return await _context.InternationalExpertTbl.ToListAsync();
+            try
+            {
+                return await _context.InternationalExpertTbl.ToListAsync();
+            }
+            catch (System.Exception ex)
+            {
+                return null;
+            }
         }
 
-        public Task<InternationalExpertTbl?> GetInternationalExpert(int internationalExpertId)
+        public async Task<InternationalExpertTbl?> GetInternationalExpertAsync(int internationalExpertId)
         {
-            throw new NotImplementedException();
+            return await _context.InternationalExpertTbl.Where(c => c.InternationalExpertId == internationalExpertId).FirstOrDefaultAsync();
         }
 
         public async Task<InternationalExpertTbl?> InsertInternationalExpert(InternationalExpertTbl internationalexpert)
@@ -32,12 +39,18 @@ namespace Foreign_Trips.Repositories
             try
             {
 
-                var inter = await _context.InternationalExpertTbl.AddAsync(internationalexpert);
+                InternationalExpertTbl Intexpert = new InternationalExpertTbl();
+                Intexpert.InternationalExpertName = internationalexpert.InternationalExpertName;
+                Intexpert.InternationalExpertFamily = internationalexpert.InternationalExpertFamily;
+                Intexpert.InternationalExpertUserName = internationalexpert.InternationalExpertUserName;
+                Intexpert.Password = internationalexpert.Password;
+
+
+
+                await _context.InternationalExpertTbl.AddAsync(Intexpert);
                 await _context.SaveChangesAsync();
 
-
                 return internationalexpert;
-
             }
 
             catch (System.Exception ex)
@@ -66,20 +79,20 @@ namespace Foreign_Trips.Repositories
         {
             try
             {
-
-                var Intexpert = await _context.InternationalExpertTbl.FindAsync(internationalexpert.InternationalExpertId);
+                var Intexpert = await GetInternationalExpertAsync(internationalexpert.InternationalExpertId);
+                Intexpert.InternationalExpertName = internationalexpert.InternationalExpertName;
+                Intexpert.InternationalExpertFamily = internationalexpert.InternationalExpertFamily;
                 Intexpert.InternationalExpertUserName = internationalexpert.InternationalExpertUserName;
+                Intexpert.Password = internationalexpert.Password;
+
+
                 await _context.SaveChangesAsync();
-
-
                 return Intexpert;
 
             }
-
-            catch (System.Exception ex)
+            catch (System.Exception e)
             {
                 return null;
-
             }
         }
     }

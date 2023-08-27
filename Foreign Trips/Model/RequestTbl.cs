@@ -97,6 +97,10 @@ public partial class RequestTbl
 
     public string OperationId { get; set; } = null!;
 
+    public int? TravelTypeId { get; set; }
+
+    public string? ApprovedBy { get; set; }
+
     public bool IsFinal { get; set; }
 
     public virtual AgentTbl Agent { get; set; } = null!;
@@ -122,4 +126,6 @@ public partial class RequestTbl
     public virtual TollAmountTypeTbl TollAmount { get; set; } = null!;
 
     public virtual TravelGoalsTypeTbl TravelGoal { get; set; } = null!;
+
+    public virtual TravelTypeTbl? TravelType { get; set; }
 }

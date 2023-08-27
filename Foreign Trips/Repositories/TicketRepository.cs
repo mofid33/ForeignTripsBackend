@@ -13,6 +13,7 @@ namespace Foreign_Trips.Repositories
             _context = context ?? throw new ArgumentException(nameof(context));
 
         }
+
         //public async Task<IEnumerable<TicketDetailsTbl?>> GetSubTickets(int ticketId)
         //{
         //    return await _context.TicketDetailsTbl.Include(t => t.Ticket)

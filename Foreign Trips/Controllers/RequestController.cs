@@ -36,7 +36,21 @@ namespace Foreign_Trips.Controllers
                 Requests
                 );
         }
-        
+
+        [HttpGet]
+        [Route("GetRequest")]
+        public async Task<ActionResult<RequestTbl>> GetRequest(
+     [FromBody] RequestTbl Model
+     )
+        {
+
+            var req = await _requestRepository.GetRequestAsync(Model.RequestId);
+            return Ok(
+         _mapper.Map<RequestTbl>(req)
+         );
+
+        }
+
 
 
         [HttpPost]

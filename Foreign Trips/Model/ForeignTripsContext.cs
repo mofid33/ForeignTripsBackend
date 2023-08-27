@@ -23,6 +23,10 @@ public partial class ForeignTripsContext : DbContext
 
     public virtual DbSet<DeviceNameItypeTbl> DeviceNameItypeTbls { get; set; }
 
+    public virtual DbSet<DispatcherSelectionTbl> DispatcherSelectionTbls { get; set; }
+
+    public virtual DbSet<ExpertSelectionTbl> ExpertSelectionTbls { get; set; }
+
     public virtual DbSet<FileDetailsTbl> FileDetailsTbls { get; set; }
 
     public virtual DbSet<FileTypeTbl> FileTypeTbls { get; set; }
@@ -92,6 +96,8 @@ public partial class ForeignTripsContext : DbContext
     public virtual DbSet<TollAmountTypeTbl> TollAmountTypeTbls { get; set; }
 
     public virtual DbSet<TravelGoalsTypeTbl> TravelGoalsTypeTbls { get; set; }
+
+    public virtual DbSet<TravelTypeTbl> TravelTypeTbls { get; set; }
 
     public virtual DbSet<TypeOfEmploymentTbl> TypeOfEmploymentTbls { get; set; }
 
@@ -221,6 +227,26 @@ public partial class ForeignTripsContext : DbContext
             entity.Property(e => e.DeviceNameType).HasMaxLength(100);
         });
 
+        modelBuilder.Entity<DispatcherSelectionTbl>(entity =>
+        {
+            entity.HasKey(e => e.DispatcherSelectionId);
+
+            entity.ToTable("DispatcherSelectionTbl");
+
+            entity.Property(e => e.DispatcherSelectionId).HasColumnName("DispatcherSelectionID");
+            entity.Property(e => e.DispatcherSelectionType).HasMaxLength(300);
+        });
+
+        modelBuilder.Entity<ExpertSelectionTbl>(entity =>
+        {
+            entity.HasKey(e => e.ExpertSelectionId);
+
+            entity.ToTable("ExpertSelectionTbl");
+
+            entity.Property(e => e.ExpertSelectionId).HasColumnName("ExpertSelectionID");
+            entity.Property(e => e.ExpertSelectionType).HasMaxLength(200);
+        });
+
         modelBuilder.Entity<FileDetailsTbl>(entity =>
         {
             entity.HasKey(e => e.FileId);
@@ -326,7 +352,10 @@ public partial class ForeignTripsContext : DbContext
             entity.ToTable("InternationalExpertTbl");
 
             entity.Property(e => e.InternationalExpertId).HasColumnName("InternationalExpertID");
-            entity.Property(e => e.InternationalExpertUserName).HasMaxLength(100);
+            entity.Property(e => e.InternationalExpertFamily).HasMaxLength(300);
+            entity.Property(e => e.InternationalExpertName).HasMaxLength(300);
+            entity.Property(e => e.InternationalExpertUserName).HasMaxLength(300);
+            entity.Property(e => e.Password).HasMaxLength(300);
         });
 
         modelBuilder.Entity<JobGoalsTypeTbl>(entity =>
@@ -399,14 +428,31 @@ public partial class ForeignTripsContext : DbContext
             entity.ToTable("MessageTbl");
 
             entity.Property(e => e.MessageId).HasColumnName("MessageID");
+            entity.Property(e => e.AgentId).HasColumnName("AgentID");
+            entity.Property(e => e.DispatcherSelectionId).HasColumnName("DispatcherSelectionID");
+            entity.Property(e => e.ExpertSelectionId).HasColumnName("ExpertSelectionID");
             entity.Property(e => e.MessageText).HasMaxLength(500);
             entity.Property(e => e.MessageTopic).HasMaxLength(300);
-            entity.Property(e => e.ReciverMessageId)
-                .HasMaxLength(100)
-                .HasColumnName("ReciverMessageID");
+            entity.Property(e => e.ReciverMessageId).HasColumnName("ReciverMessageID");
             entity.Property(e => e.RegisterDate).HasMaxLength(10);
             entity.Property(e => e.RegisterTime).HasMaxLength(5);
             entity.Property(e => e.SubmitTime).HasMaxLength(50);
+
+            entity.HasOne(d => d.Agent).WithMany(p => p.MessageTbls)
+                .HasForeignKey(d => d.AgentId)
+                .HasConstraintName("FK_MessageTbl_AgentTbl");
+
+            entity.HasOne(d => d.DispatcherSelection).WithMany(p => p.MessageTbls)
+                .HasForeignKey(d => d.DispatcherSelectionId)
+                .HasConstraintName("FK_MessageTbl_DispatcherSelectionTbl");
+
+            entity.HasOne(d => d.ExpertSelection).WithMany(p => p.MessageTbls)
+                .HasForeignKey(d => d.ExpertSelectionId)
+                .HasConstraintName("FK_MessageTbl_ExpertSelectionTbl");
+
+            entity.HasOne(d => d.ReciverMessage).WithMany(p => p.MessageTbls)
+                .HasForeignKey(d => d.ReciverMessageId)
+                .HasConstraintName("FK_MessageTbl_MessageTbl");
         });
 
         modelBuilder.Entity<OperationTypeTbl>(entity =>
@@ -546,6 +592,7 @@ public partial class ForeignTripsContext : DbContext
             entity.Property(e => e.AgentId).HasColumnName("AgentID");
             entity.Property(e => e.AirlineCompany).HasMaxLength(100);
             entity.Property(e => e.AmountOfCost).HasMaxLength(100);
+            entity.Property(e => e.ApprovedBy).HasMaxLength(300);
             entity.Property(e => e.CostOfFood).HasMaxLength(100);
             entity.Property(e => e.DateOfLasteChange).HasMaxLength(100);
             entity.Property(e => e.DestinationCity).HasMaxLength(100);
@@ -626,6 +673,11 @@ public partial class ForeignTripsContext : DbContext
             entity.HasOne(d => d.TravelGoal).WithMany(p => p.RequestTbls)
                 .HasForeignKey(d => d.TravelGoalId)
                 .HasConstraintName("FK_RequestTbl_TravelGoalsTypeTbl");
+
+            entity.HasOne(d => d.TravelType).WithMany(p => p.RequestTbls)
+                .HasForeignKey(d => d.TravelTypeId)
+                .OnDelete(DeleteBehavior.Cascade)
+                .HasConstraintName("FK_RequestTbl_TravelTypeTbl");
         });
 
         modelBuilder.Entity<RightOfCommutingTypeTbl>(entity =>
@@ -789,6 +841,15 @@ public partial class ForeignTripsContext : DbContext
 
             entity.Property(e => e.TravelGoalsId).HasColumnName("TravelGoalsID");
             entity.Property(e => e.TravelGoalsType).HasMaxLength(100);
+        });
+
+        modelBuilder.Entity<TravelTypeTbl>(entity =>
+        {
+            entity.HasKey(e => e.TravelTypeId);
+
+            entity.ToTable("TravelTypeTbl");
+
+            entity.Property(e => e.TravelType).HasMaxLength(50);
         });
 
         modelBuilder.Entity<TypeOfEmploymentTbl>(entity =>

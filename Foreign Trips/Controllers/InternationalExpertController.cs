@@ -10,14 +10,17 @@ namespace Foreign_Trips.Controllers
     public class InternationalExpertController : ControllerBase
     {
         private readonly IInternationalExpertRepository _internationalexpertRepository;
+        private readonly IMessageRepository _messageRepository;
         private readonly IMapper _mapper;
 
 
-        public InternationalExpertController(IInternationalExpertRepository internationalexpertRepository,
-                               IMapper mapper)
+        public InternationalExpertController(IInternationalExpertRepository internationalexpertRepository, IMessageRepository messageRepository ,
+        IMapper mapper)
         {
             _internationalexpertRepository = internationalexpertRepository ??
                 throw new ArgumentNullException(nameof(internationalexpertRepository));
+            _messageRepository = messageRepository ??
+                throw new ArgumentNullException(nameof(messageRepository));
 
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
@@ -78,28 +81,64 @@ namespace Foreign_Trips.Controllers
 
 
 
-//        [HttpPost]
-//        [Route("RemoveInternationalExpert")]
-//        public async Task<ActionResult<InternationalExpertTbl>> RemoveInternationalExpert(
-//[FromBody] InternationalExpertTbl Model
-//)
-//        {
-//            try
-//            {
-//                if (!await _internationalexpertRepository.InternationalExpertExistsAsync(Model.AdminId))
-//                {
-//                    return NoContent();
-//                }
-//                _internationalexpertRepository.RemoveInternationalExpert(Model.InternationalExpertId);
+        [HttpPost]
+        [Route("RemoveInternationalExpert")]
+        public async Task<ActionResult<InternationalExpertTbl>> RemoveInternationalExpert(
+[FromBody] InternationalExpertTbl Model
+)
+        {
+            try
+            {
+                if (!await _internationalexpertRepository.InternationalExpertExistsAsync(Model.InternationalExpertId))
+                {
+                    return NoContent();
+                }
+                _internationalexpertRepository.RemoveInternationalExpert(Model.InternationalExpertId);
 
-//                return Ok();
-//            }
+                return Ok();
+            }
 
-//            catch (System.Exception ex)
-//            {
-//                return null;
+            catch (System.Exception ex)
+            {
+                return null;
 
-//            }
-//        }
+            }
+        }
+
+        #region Message
+
+        [HttpGet]
+        [Route("GetMessages")]
+        public async Task<ActionResult<MessageTbl>> GetMessage()
+        {
+
+            var messages = await _messageRepository.GetMessage();
+
+            return Ok(_mapper.Map<IEnumerable<MessageTbl>>(messages));
+
+        }
+
+        [HttpPost]
+        [Route("InsertMessage")]
+        public async Task<ActionResult<MessageTbl>> InsertMessage(
+[FromBody] MessageTbl Model
+)
+        {
+
+            var message = await _messageRepository.InsertMessage(Model);
+            if (message == null)
+            {
+                return BadRequest();
+            }
+            return Ok(message);
+
+        }
+
+        #endregion
+
+        #region Request
+
+
+        #endregion
     }
 }

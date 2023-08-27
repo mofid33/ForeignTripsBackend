@@ -17,10 +17,13 @@ namespace Foreign_Trips.Controllers
         private readonly IReportRepository _reportRepository;
         private readonly ISupervisorRepository _supervisorRepository;
         private readonly ITicketRepository _ticketRepository;
+        private readonly IMessageRepository _messageRepository;
+        private readonly IRequestRepository _requestRepository;
         private readonly IMapper _mapper;
         public MainAdminController(IAgentRepository agentRepository, IMainAdminRepository mainadminRepository, IAuthRepository authRepository,
                                    IInternationalAdminRepository internatinaladminRepository, IReportRepository reportRepository,
-                                   ISupervisorRepository supervisorRepository, ITicketRepository ticketRepository,
+                                   ISupervisorRepository supervisorRepository, ITicketRepository ticketRepository, IMessageRepository messageRepository,
+                                   IRequestRepository requestRepository,
         IMapper mapper)
         {
             _agentRepository = agentRepository ??
@@ -37,6 +40,10 @@ namespace Foreign_Trips.Controllers
                throw new ArgumentNullException(nameof(supervisorRepository));
             _ticketRepository = ticketRepository ??
                throw new ArgumentNullException(nameof(ticketRepository));
+            _messageRepository = messageRepository ??
+               throw new ArgumentNullException(nameof(messageRepository));
+            _requestRepository = requestRepository ??
+               throw new ArgumentNullException(nameof(requestRepository));
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
 
@@ -226,6 +233,38 @@ namespace Foreign_Trips.Controllers
 
         #endregion
 
+        #region Message
+        [HttpGet]
+        [Route("GetMessages")]
+        public async Task<ActionResult<MessageTbl>> GetMessage()
+        {
+
+            var messages = await _messageRepository.GetMessage();
+
+            return Ok(_mapper.Map<IEnumerable<MessageTbl>>(messages));
+
+        }
+
+        [HttpPost]
+        [Route("InsertMessage")]
+        public async Task<ActionResult<MessageTbl>> InsertMessage(
+[FromBody] MessageTbl Model
+)
+        {
+
+            var message = await _messageRepository.InsertMessage(Model);
+            if (message == null)
+            {
+                return BadRequest();
+            }
+            return Ok(message);
+
+        }
+
+
+
+        #endregion
+
         #region Ticket
         [HttpPost]
         [Route("GetTicket")]
@@ -254,6 +293,23 @@ namespace Foreign_Trips.Controllers
             return Ok(Ticket);
 
         }
+        #endregion
+
+        #region Request
+        [HttpGet]
+        [Route("GetRequest")]
+        public async Task<ActionResult<RequestTbl>> GetRequest(
+[FromBody] RequestTbl Model
+)
+        {
+
+            var req = await _requestRepository.GetRequestAsync(Model.RequestId);
+            return Ok(
+         _mapper.Map<RequestTbl>(req)
+         );
+
+        }
+
         #endregion
 
         #region Log

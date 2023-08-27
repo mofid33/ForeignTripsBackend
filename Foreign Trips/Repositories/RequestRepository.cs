@@ -34,7 +34,16 @@ namespace Foreign_Trips.Repositories
         }
         public async Task<RequestTbl?> GetRequestAsync(int requestId)
         {
-            return await _context.RequestTbl.Where(f => f.RequestId == requestId).FirstOrDefaultAsync();
+            return await _context.RequestTbl
+             .Include(c => c.Agent.AgentName)
+             .Include(x => x.Agent.AgentFamily)
+             .Include(x => x.TravelTopic)
+             .Include(x => x.ApprovedBy)
+             .Include(c => c.TravelDate)
+             .Include(c => c.TravelTypeId)
+             .Include(c => c.RequestStatusId)
+
+             .Where(c => c.RequestId == requestId).FirstOrDefaultAsync();
         }
 
         public async Task<RequestTbl?> InsertRequest1Async(RequestTbl request)

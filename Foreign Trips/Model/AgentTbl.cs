@@ -81,6 +81,8 @@ public partial class AgentTbl
 
     public virtual MaritalStatusTbl MaritalStatus { get; set; } = null!;
 
+    public virtual ICollection<MessageTbl> MessageTbls { get; set; } = new List<MessageTbl>();
+
     public virtual PositionTypeTbl PositionNavigation { get; set; } = null!;
 
     public virtual ICollection<RequestTbl> RequestTbls { get; set; } = new List<RequestTbl>();
