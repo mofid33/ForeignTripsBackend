@@ -19,12 +19,13 @@ namespace Foreign_Trips.Controllers
         private readonly ITicketRepository _ticketRepository;
         private readonly IMessageRepository _messageRepository;
         private readonly IRequestRepository _requestRepository;
+        private readonly IInternationalExpertRepository _internationalexpertRepository;
         private readonly IMapper _mapper;
         public MainAdminController(IAgentRepository agentRepository, IMainAdminRepository mainadminRepository, IAuthRepository authRepository,
                                    IInternationalAdminRepository internatinaladminRepository, IReportRepository reportRepository,
                                    ISupervisorRepository supervisorRepository, ITicketRepository ticketRepository, IMessageRepository messageRepository,
-                                   IRequestRepository requestRepository,
-        IMapper mapper)
+                                   IRequestRepository requestRepository, IInternationalExpertRepository internationalexpertRepository,
+                                   IMapper mapper)
         {
             _agentRepository = agentRepository ??
                 throw new ArgumentNullException(nameof(agentRepository));
@@ -44,6 +45,8 @@ namespace Foreign_Trips.Controllers
                throw new ArgumentNullException(nameof(messageRepository));
             _requestRepository = requestRepository ??
                throw new ArgumentNullException(nameof(requestRepository));
+            _internationalexpertRepository = internationalexpertRepository ??
+               throw new ArgumentNullException(nameof(internationalexpertRepository));
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
 
@@ -59,7 +62,7 @@ namespace Foreign_Trips.Controllers
         }
 
         [HttpPost]
-        [Route("Insert<AinAdmin")]
+        [Route("InsertMainAdmin")]
         public async Task<ActionResult<MainAdminTbl>> InsertMainAdmin(
 [FromBody] MainAdminTbl Model
 )
@@ -73,6 +76,7 @@ namespace Foreign_Trips.Controllers
             return Ok(Sup);
 
         }
+
         [HttpPost]
         [Route("UpdateMainAdmin")]
         public async Task<ActionResult<MainAdminTbl>> UpdateMainAdminAsync(
@@ -85,6 +89,21 @@ namespace Foreign_Trips.Controllers
                 return BadRequest();
             }
             return Ok();
+
+        }
+
+
+        [HttpGet]
+        [Route("GetAgent")]
+        public async Task<ActionResult<AgentTbl>> GetAgent(
+[FromBody] AgentTbl Model
+)
+        {
+
+            var agent = await _mainadminRepository.GetAgent(Model.AgentId);
+            return Ok(
+         _mapper.Map<RequestTbl>(agent)
+         );
 
         }
 
@@ -105,27 +124,22 @@ namespace Foreign_Trips.Controllers
 
         }
 
+
         [HttpPost]
         [Route("UpdateAgnet")]
-        public async Task<ActionResult<AgentTbl>> UpdateAgnet(
-        [FromBody] AgentTbl Model
-             )
+        public async Task<ActionResult<AgentTbl>> UpdateAgentAsync(
+[FromBody] AgentTbl Model
+)
         {
-            string authHeader = HttpContext.Request.Headers["Authorization"].ToString().Replace("Bearer ", string.Empty);
-
-            var AgnetID = _authRepository.GetIDFromToken(authHeader);
-            if (!await _agentRepository.AgentExistsAsync(AgnetID))
-            {
-                return NotFound();
-            }
-            var Sup = await _agentRepository.UpdateAgentAsync(Model);
-            if (Sup == null)
+            var agent = await _agentRepository.UpdateAgentAsync(Model);
+            if (agent == null)
             {
                 return BadRequest();
             }
             return Ok();
 
         }
+
 
         [HttpPost]
         [Route("DeleteAgent")]
@@ -218,7 +232,7 @@ namespace Foreign_Trips.Controllers
 
         [HttpPost]
         [Route("UpdateSupervisor")]
-        public async Task<ActionResult<SupervisorTbl>> UpdateOverseerAsync(
+        public async Task<ActionResult<SupervisorTbl>> UpdateSupervisorAsync(
 [FromBody] SupervisorTbl Model
 )
         {
@@ -229,6 +243,105 @@ namespace Foreign_Trips.Controllers
             }
             return Ok();
 
+        }
+
+        [HttpPost]
+        [Route("RemoveSupervisor")]
+        public async Task<ActionResult<SupervisorTbl>> RemoveSupervisorAsync(
+       [FromBody] SupervisorTbl Model
+       )
+        {
+            if (!await _supervisorRepository.SupervisorExistsAsync(Model.SupervisorId))
+            {
+                return NotFound();
+            }
+            _supervisorRepository.RemoveSupervisorAsync(Model.SupervisorId);
+
+            return Ok();
+
+        }
+
+
+        #endregion
+
+        #region InternationalExpert
+        [HttpGet]
+        [Route("GetInternationalExpert")]
+        public async Task<ActionResult<IEnumerable<InternationalExpertTbl>>> GetInternationalExpert()
+        {
+            var interexpert = await _internationalexpertRepository.GetInternationalExpert();
+
+            return Ok(
+                interexpert
+                );
+        }
+
+
+
+
+
+        [HttpPost]
+        [Route("InsertInternationalExpert")]
+        public async Task<ActionResult<InternationalExpertTbl>> InsertInternationalExpert(
+    [FromBody] InternationalExpertTbl Model
+    )
+        {
+
+            var Inter = await _internationalexpertRepository.InsertInternationalExpert(Model);
+            if (Inter == null)
+            {
+                return BadRequest();
+            }
+            return Ok();
+
+        }
+
+
+
+
+        [HttpPost]
+        [Route("UpdateInternationalExpert")]
+        public async Task<ActionResult<InternationalExpertTbl>> UpdateInternationalExpert(
+[FromBody] InternationalExpertTbl Model
+)
+        {
+            if (!await _internationalexpertRepository.InternationalExpertExistsAsync(Model.InternationalExpertId))
+            {
+                return NotFound();
+            }
+            var Inter = await _internationalexpertRepository.UpdateInternationalExpert(Model);
+            if (Inter == null)
+            {
+                return BadRequest();
+            }
+            return Ok();
+        }
+
+
+
+
+        [HttpPost]
+        [Route("RemoveInternationalExpert")]
+        public async Task<ActionResult<InternationalExpertTbl>> RemoveInternationalExpert(
+[FromBody] InternationalExpertTbl Model
+)
+        {
+            try
+            {
+                if (!await _internationalexpertRepository.InternationalExpertExistsAsync(Model.InternationalExpertId))
+                {
+                    return NoContent();
+                }
+                _internationalexpertRepository.RemoveInternationalExpert(Model.InternationalExpertId);
+
+                return Ok();
+            }
+
+            catch (System.Exception ex)
+            {
+                return null;
+
+            }
         }
 
         #endregion
@@ -312,26 +425,6 @@ namespace Foreign_Trips.Controllers
 
         #endregion
 
-        #region Log
-        [HttpPost]
-        [Route("GetUserLog")]
-        public async Task<ActionResult<LoginTbl>> GetUserLog(
-[FromBody] LoginTbl Model
-)
-        {
-
-            var logUser = await _internatinaladminRepository.GetUserLog(Model);
-            if (logUser == null)
-            {
-                return BadRequest();
-            }
-            return Ok(
-                  _mapper.Map<LoginTbl>(logUser)
-                  );
-        }
-
-        #endregion
-
         #region File
         [HttpPost("PostSingleFile")]
         public async Task<ActionResult> PostSingleFile([FromForm] FileUploadModel fileDetails)
@@ -343,7 +436,7 @@ namespace Foreign_Trips.Controllers
 
             try
             {
-                await _agentRepository.PostFileAsync(fileDetails);
+                await _requestRepository.PostFileAsync(fileDetails);
                 return Ok();
             }
             catch (Exception)
@@ -362,7 +455,7 @@ namespace Foreign_Trips.Controllers
 
             try
             {
-                await _agentRepository.PostMultiFileAsync(fileDetails);
+                await _requestRepository.PostMultiFileAsync(fileDetails);
                 return Ok();
             }
             catch (Exception)

@@ -233,116 +233,116 @@ namespace Foreign_Trips.Repositories
         #endregion
 
 
-        #region File
+        //#region File
 
-        public async Task PostFileAsync(FileUploadModel fileData)
-        {
-            try
-            {
-                var fileDetails = new FileDetails()
-                {
-                    FileId = 0,
-                    FileName = fileData.FileDetails.FileName,
-                };
-                var uniqueFileName = GetUniqueFileName(fileData.FileDetails.FileName);
+        //public async Task PostFileAsync(FileUploadModel fileData)
+        //{
+        //    try
+        //    {
+        //        var fileDetails = new FileDetails()
+        //        {
+        //            FileId = 0,
+        //            FileName = fileData.FileDetails.FileName,
+        //        };
+        //        var uniqueFileName = GetUniqueFileName(fileData.FileDetails.FileName);
 
-                var uploads = Path.Combine(_hostingEnvironment.WebRootPath, "uploads");
+        //        var uploads = Path.Combine(_hostingEnvironment.WebRootPath, "uploads");
 
-                var filePath = Path.Combine(uploads, uniqueFileName);
+        //        var filePath = Path.Combine(uploads, uniqueFileName);
 
-                using (var stream = new FileStream(filePath, FileMode.Create))
-                {
-                    fileData.FileDetails.CopyTo(new FileStream(filePath, FileMode.Create));
+        //        using (var stream = new FileStream(filePath, FileMode.Create))
+        //        {
+        //            fileData.FileDetails.CopyTo(new FileStream(filePath, FileMode.Create));
 
-                }
-                PersianDateTime persianDateTime = new PersianDateTime(DateTime.Now);
+        //        }
+        //        PersianDateTime persianDateTime = new PersianDateTime(DateTime.Now);
 
-                string date = persianDateTime.ToString().Substring(0, 10);
+        //        string date = persianDateTime.ToString().Substring(0, 10);
 
-                var result = _context.FileDetails.Add(fileDetails);
-                await _context.SaveChangesAsync();
-
-
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-        public static string GetUniqueFileName(string fileName)
-        {
-
-            fileName = Path.GetFileName(fileName);
+        //        var result = _context.FileDetails.Add(fileDetails);
+        //        await _context.SaveChangesAsync();
 
 
-            return string.Concat(Path.GetFileNameWithoutExtension(fileName)
+        //    }
+        //    catch (Exception)
+        //    {
+        //        throw;
+        //    }
+        //}
+        //public static string GetUniqueFileName(string fileName)
+        //{
+
+        //    fileName = Path.GetFileName(fileName);
 
 
-                                , "_"
+        //    return string.Concat(Path.GetFileNameWithoutExtension(fileName)
 
 
-                                , Guid.NewGuid().ToString().AsSpan(0, 4)
+        //                        , "_"
 
 
-                                , Path.GetExtension(fileName));
+        //                        , Guid.NewGuid().ToString().AsSpan(0, 4)
 
 
-        }
+        //                        , Path.GetExtension(fileName));
 
-        public async Task PostMultiFileAsync(List<FileUploadModel> fileData)
-        {
-            try
-            {
-                foreach (FileUploadModel file in fileData)
-                {
-                    var fileDetails = new FileDetails()
-                    {
-                        FileId = 0,
-                        FileName = file.FileDetails.FileName,
-                    };
 
-                    using (var stream = new MemoryStream())
-                    {
-                        file.FileDetails.CopyTo(stream);
-                    }
+        //}
 
-                    var result = _context.FileDetails.Add(fileDetails);
-                }
-                await _context.SaveChangesAsync();
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
+        //public async Task PostMultiFileAsync(List<FileUploadModel> fileData)
+        //{
+        //    try
+        //    {
+        //        foreach (FileUploadModel file in fileData)
+        //        {
+        //            var fileDetails = new FileDetails()
+        //            {
+        //                FileId = 0,
+        //                FileName = file.FileDetails.FileName,
+        //            };
 
-        public async Task DownloadFileById(int Id)
-        {
-            try
-            {
-                var file = _context.FileDetails.Where(x => x.FileId == Id).FirstOrDefaultAsync();
+        //            using (var stream = new MemoryStream())
+        //            {
+        //                file.FileDetails.CopyTo(stream);
+        //            }
 
-                var path = Path.Combine(
-                   Directory.GetCurrentDirectory(), "FileDownloaded",
-                   file.Result.FileName);
+        //            var result = _context.FileDetails.Add(fileDetails);
+        //        }
+        //        await _context.SaveChangesAsync();
+        //    }
+        //    catch (Exception)
+        //    {
+        //        throw;
+        //    }
+        //}
 
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+        //public async Task DownloadFileById(int Id)
+        //{
+        //    try
+        //    {
+        //        var file = _context.FileDetails.Where(x => x.FileId == Id).FirstOrDefaultAsync();
 
-        }
+        //        var path = Path.Combine(
+        //           Directory.GetCurrentDirectory(), "FileDownloaded",
+        //           file.Result.FileName);
 
-        public async Task CopyStream(Stream stream, string downloadPath)
-        {
-            using (var fileStream = new FileStream(downloadPath, FileMode.Create, FileAccess.Write))
-            {
-                await stream.CopyToAsync(fileStream);
-            }
-        }
+        //    }
+        //    catch (Exception)
+        //    {
+        //        throw;
+        //    }
 
-        #endregion
+        //}
+
+        //public async Task CopyStream(Stream stream, string downloadPath)
+        //{
+        //    using (var fileStream = new FileStream(downloadPath, FileMode.Create, FileAccess.Write))
+        //    {
+        //        await stream.CopyToAsync(fileStream);
+        //    }
+        //}
+
+        //#endregion
 
         public async Task<bool> SaveChangesAsync()
         {

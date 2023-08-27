@@ -1,4 +1,5 @@
-﻿using Foreign_Trips.DbContexts;
+﻿using Azure.Core;
+using Foreign_Trips.DbContexts;
 using Foreign_Trips.Model;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -121,6 +122,14 @@ namespace Foreign_Trips.Repositories
 
              .Where(c => c.ReportId == reportId).FirstOrDefaultAsync();
 
+        }
+
+        public async Task RemoveSupervisorAsync(int supervisorId)
+        {
+            var rsup = _context.SupervisorTbl.Find(supervisorId);
+            _context.RequestTbl.Remove(rsup);
+
+            await _context.SaveChangesAsync();
         }
     }
 }

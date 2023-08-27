@@ -20,9 +20,9 @@ namespace Foreign_Trips.Repositories
         Task<IEnumerable<MaritalStatusTbl>> MaritalStatusTblAsync();
         Task<IEnumerable<LanguageType>> LanguageTypeAsync();
         Task<string> GetAddress(AgentTbl postCode);
-        Task PostFileAsync(FileUploadModel fileData);
-        Task PostMultiFileAsync(List<FileUploadModel> fileData);
-        Task DownloadFileById(int fileName);
+        //Task PostFileAsync(FileUploadModel fileData);
+        //Task PostMultiFileAsync(List<FileUploadModel> fileData);
+        //Task DownloadFileById(int fileName);
         Task UpdatePassAgentAsync(AgentTbl agent, long agentId);
         Task SuspendAgentAsync(long agentId);
         Task<RequestTbl?> GetRequestAgentAsync(int requestagentId);

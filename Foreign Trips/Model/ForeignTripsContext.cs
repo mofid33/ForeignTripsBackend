@@ -130,6 +130,7 @@ public partial class ForeignTripsContext : DbContext
             entity.Property(e => e.AgentId).HasColumnName("AgentID");
             entity.Property(e => e.Address).HasMaxLength(100);
             entity.Property(e => e.AgentFamily).HasMaxLength(100);
+            entity.Property(e => e.AgentFatherName).HasMaxLength(100);
             entity.Property(e => e.AgentName).HasMaxLength(100);
             entity.Property(e => e.AgentStatusId).HasColumnName("AgentStatusID");
             entity.Property(e => e.BirthCertificateDate).HasMaxLength(10);
@@ -598,6 +599,7 @@ public partial class ForeignTripsContext : DbContext
             entity.Property(e => e.DestinationCity).HasMaxLength(100);
             entity.Property(e => e.DestinationCountry).HasMaxLength(100);
             entity.Property(e => e.DeviceNameId).HasColumnName("DeviceNameID");
+            entity.Property(e => e.EmployeeStatus).HasMaxLength(200);
             entity.Property(e => e.ExecutiveDeviceName).HasMaxLength(100);
             entity.Property(e => e.ExpertRightOfMission).HasMaxLength(100);
             entity.Property(e => e.FlightPath).HasMaxLength(200);
@@ -676,7 +678,6 @@ public partial class ForeignTripsContext : DbContext
 
             entity.HasOne(d => d.TravelType).WithMany(p => p.RequestTbls)
                 .HasForeignKey(d => d.TravelTypeId)
-                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK_RequestTbl_TravelTypeTbl");
         });
 

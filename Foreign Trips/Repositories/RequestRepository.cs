@@ -90,8 +90,25 @@ namespace Foreign_Trips.Repositories
             try
             {
                 RequestTbl qtbl = new RequestTbl();
-                qtbl.AgentId = request.AgentId;
-                
+                qtbl.Agent.AgentName= request.Agent.AgentName;
+                qtbl.Agent.AgentFamily = request.Agent.AgentFamily;
+                qtbl.Agent.AgentFatherName = request.Agent.AgentFatherName;
+                qtbl.Agent.BirthCertificateNumber = request.Agent.BirthCertificateNumber;
+                qtbl.Agent.NationalCode = request.Agent.NationalCode;
+                qtbl.Agent.DateOfBirth = request.Agent.DateOfBirth;
+                qtbl.Agent.GenderId = request.Agent.GenderId;
+                qtbl.Agent.MaritalStatusId = request.Agent.MaritalStatusId;
+                qtbl.Agent.Degree = request.Agent.Degree;
+                qtbl.Agent.FieldOfStudy= request.Agent.FieldOfStudy;
+                qtbl.Agent.WorkExperience = request.Agent.WorkExperience;
+                qtbl.Agent.LanguageId = request.Agent.LanguageId;
+                qtbl.Agent.Mobile = request.Agent.Mobile;
+                qtbl.Agent.Phone = request.Agent.Phone;
+                qtbl.PassportTypeId = request.PassportTypeId;
+                qtbl.Agent.Joblocation = request.Agent.Joblocation;
+                qtbl.Agent.Position = request.Agent.Position;
+                qtbl.EmployeeStatus = request.EmployeeStatus;
+
 
 
                 await _context.RequestTbl.AddAsync(request);
@@ -139,12 +156,43 @@ namespace Foreign_Trips.Repositories
                 await _context.RequestTbl.AddAsync(request);
                 await _context.SaveChangesAsync();
 
+                return request;
+
+
+            }
+
+            catch (System.Exception ex)
+            {
+                return null;
+
+            }
+
+        }
+
+        public async Task<RequestTbl?> InsertRequest4Async(RequestTbl request)
+        {
+            try
+            {
+                RequestTbl qtbl = new RequestTbl();
+                qtbl.ImportantTravel = request.ImportantTravel;
+                qtbl.MissionAchievementRecords= request.MissionAchievementRecords;
+                qtbl.SummaryInvitation = request.SummaryInvitation;
+                qtbl.ForeignTravelSummary = request.ForeignTravelSummary;
+                qtbl.ReferenceDeviceAgreement = request.ReferenceDeviceAgreement;
+                qtbl.ResistanceEconomyTravel = request.ResistanceEconomyTravel;
+
+
+
+                await _context.RequestTbl.AddAsync(request);
+                await _context.SaveChangesAsync();
+
+
                 PersianDateTime persianDateTime = new PersianDateTime(DateTime.Now);
 
                 string date = persianDateTime.ToString().Substring(0, 10);
                 if (request.RequestStatusId == 1)
                 {
-                   //qtbl.ConfirmDate = date;
+                    //qtbl.ConfirmDate = date;
 
                 }
                 var Req = await _context.RequestTbl.AddAsync(qtbl);
@@ -164,7 +212,6 @@ namespace Foreign_Trips.Repositories
                 return null;
 
             }
-
         }
 
         public async Task RemoveRequestAsync(int requestId)
@@ -181,23 +228,75 @@ namespace Foreign_Trips.Repositories
         }
 
 
-        public async Task<RequestDto?> RejectRequest(RequestDto request)
+        public async Task<RequestTbl?> RejectRequest(int requestId)
         {
-            try
-            {
-                var data = await GetRequestAsync(request.RequestId);
-               // data.RejectRequest = request.RejectRequest;
+            return await _context.RequestTbl
+            .Include(x => x.ExecutiveDeviceName)
+            .Include(x => x.InternetAddressOfTheExecutiveDevice)
+            .Include(x => x.DestinationCity)
+            .Include(x => x.DestinationCountry)
+            .Include(c => c.FlightPath)
+            .Include(c => c.TravelDate)
+            .Include(c => c.TravelTime)
+            .Include(c => c.TravelTopic)
+            .Include(c => c.TravelGoalId)
+            .Include(c => c.JobGoalId)
+            .Include(c => c.DeviceNameId)
+            .Include(c => c.PassportTypeId)
+            .Include(c => c.GetVisa)
+            .Include(c => c.JointTrip)
+            .Include(c => c.DateLetter)
+            .Include(c => c.Agent.AgentName)
+            .Include(c => c.Agent.AgentFamily)
+            .Include(c => c.Agent.AgentName)
+            .Include(c => c.Agent.AgentFamily)
+            .Include(c => c.Agent.AgentFatherName)
+            .Include(c => c.Agent.BirthCertificateDate)
+            .Include(c => c.Agent.BirthCertificateNumber)
+            .Include(c => c.Agent.NationalCode)
+            .Include(c => c.Agent.DateOfBirth)
+            .Include(c => c.Agent.GenderId)
+            .Include(c => c.Agent.MaritalStatusId)
+            .Include(c => c.Agent.Degree)
+            .Include(c => c.Agent.FieldOfStudy)
+            .Include(c => c.Agent.WorkExperience)
+            .Include(c => c.Agent.LanguageId)
+            .Include(c => c.Agent.Mobile)
+            .Include(c => c.Agent.Phone)
+            .Include(c => c.PassportTypeId)
+            .Include(c => c.Agent.Joblocation)
+            .Include(c => c.Agent.Position)
+            .Include(c => c.EmployeeStatus)
+            .Include(c => c.JobGoal)
+            .Include(c => c.PayerCitizenShip)
+            .Include(c => c.AmountOfCost)
+            .Include(c => c.PayerFood)
+            .Include(c => c.CostOfFood)
+            .Include(c => c.TickerTypeId)
+            .Include(c => c.AirlineCompany)
+            .Include(c => c.TicketCost)
+            .Include(c => c.TheCostOfTicket)
+            .Include(c => c.RightOfMission)
+            .Include(c => c.LevelRightOfMission)
+            .Include(c => c.ExpertRightOfMission)
+            .Include(c => c.RightToEducationCost)
+            .Include(c => c.RightToEducationId)
+            .Include(c => c.RightOfCommutingCost)
+            .Include(c => c.RightOfCommutingId)
+            .Include(c => c.VisaCost)
+            .Include(c => c.TollAmountCost)
+            .Include(c => c.TollAmountId)
+            .Include(c => c.PaymentFromBank)
+            .Include(c => c.ImportantTravel)
+            .Include(c => c.MissionAchievementRecords)
+            .Include(c => c.SummaryInvitation)
+            .Include(c => c.ForeignTravelSummary)
+            .Include(c => c.ReferenceDeviceAgreement)
+            .Include(c => c.ResistanceEconomyTravel)
 
-                await _context.SaveChangesAsync();
-                return request;
 
-            }
 
-            catch (System.Exception ex)
-            {
-                return null;
-
-            }
+            .Where(c => c.RequestId == requestId).FirstOrDefaultAsync();
         }
         public async Task<RequestDto?> UpdateRequestAsync(RequestDto request)
         {
@@ -240,6 +339,79 @@ namespace Foreign_Trips.Repositories
             {
                 return null;
             }
+        }
+
+        public async Task<RequestTbl?> AcceptRequest(int requestId)
+        {
+            
+             return await _context.RequestTbl
+            .Include(x => x.ExecutiveDeviceName)
+            .Include(x => x.InternetAddressOfTheExecutiveDevice)
+            .Include(x => x.DestinationCity)
+            .Include(x => x.DestinationCountry)
+            .Include(c => c.FlightPath)
+            .Include(c => c.TravelDate)
+            .Include(c => c.TravelTime)
+            .Include(c => c.TravelTopic)
+            .Include(c => c.TravelGoalId)
+            .Include(c => c.JobGoalId)
+            .Include(c => c.DeviceNameId)
+            .Include(c => c.PassportTypeId)
+            .Include(c => c.GetVisa)
+            .Include(c => c.JointTrip)
+            .Include(c => c.DateLetter)
+            .Include(c => c.Agent.AgentName)
+            .Include(c => c.Agent.AgentFamily)
+            .Include(c => c.Agent.AgentName)
+            .Include(c => c.Agent.AgentFamily)
+            .Include(c => c.Agent.AgentFatherName)
+            .Include(c => c.Agent.BirthCertificateDate)
+            .Include(c => c.Agent.BirthCertificateNumber)
+            .Include(c => c.Agent.NationalCode)
+            .Include(c => c.Agent.DateOfBirth)
+            .Include(c => c.Agent.GenderId)
+            .Include(c => c.Agent.MaritalStatusId)
+            .Include(c => c.Agent.Degree)
+            .Include(c => c.Agent.FieldOfStudy)
+            .Include(c => c.Agent.WorkExperience)
+            .Include(c => c.Agent.LanguageId)
+            .Include(c => c.Agent.Mobile)
+            .Include(c => c.Agent.Phone)
+            .Include(c => c.PassportTypeId)
+            .Include(c => c.Agent.Joblocation)
+            .Include(c => c.Agent.Position)
+            .Include(c => c.EmployeeStatus)
+            .Include(c => c.JobGoal)
+            .Include(c => c.PayerCitizenShip)
+            .Include(c => c.AmountOfCost)
+            .Include(c => c.PayerFood)
+            .Include(c => c.CostOfFood)
+            .Include(c => c.TickerTypeId)
+            .Include(c => c.AirlineCompany)
+            .Include(c => c.TicketCost)
+            .Include(c => c.TheCostOfTicket)
+            .Include(c => c.RightOfMission)
+            .Include(c => c.LevelRightOfMission)
+            .Include(c => c.ExpertRightOfMission)
+            .Include(c => c.RightToEducationCost)
+            .Include(c => c.RightToEducationId)
+            .Include(c => c.RightOfCommutingCost)
+            .Include(c => c.RightOfCommutingId)
+            .Include(c => c.VisaCost)
+            .Include(c => c.TollAmountCost)
+            .Include(c => c.TollAmountId)
+            .Include(c => c.PaymentFromBank)
+            .Include(c => c.ImportantTravel)
+            .Include(c => c.MissionAchievementRecords)
+            .Include(c => c.SummaryInvitation)
+            .Include(c => c.ForeignTravelSummary)
+            .Include(c => c.ReferenceDeviceAgreement)
+            .Include(c => c.ResistanceEconomyTravel)
+
+
+
+            .Where(c => c.RequestId == requestId).FirstOrDefaultAsync();
+          
         }
 
         public async Task<bool> SaveChangesAsync()
@@ -301,6 +473,124 @@ namespace Foreign_Trips.Repositories
         public async Task<IEnumerable<RightToEducationTbl>> RightToEducationAsync()
         {
             return await _context.RightToEducationTbl.ToListAsync();
+        }
+
+
+        #endregion
+
+        #region File
+
+
+        public async Task PostFileAsync(FileUploadModel fileData)
+        //public async Task PostFileAsync(IFormFile fileData)
+        {
+            try
+            {
+                var fileDetails = new FileDetails()
+                {
+                    FileId = 0,
+                    FileName = fileData.FileDetails.FileName,
+                };
+                var uniqueFileName = GetUniqueFileName(fileData.FileDetails.FileName);
+                //var uploads = Path.Combine(environment.WebRootPath, "users", "posts", postRequest.UserId.ToString());
+                var uploads = Path.Combine(_hostingEnvironment.WebRootPath, "uploads");
+
+                var filePath = Path.Combine(uploads, uniqueFileName);
+
+                //using (var stream = System.IO.File.Create(filePath))
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    fileData.FileDetails.CopyTo(new FileStream(filePath, FileMode.Create));
+                    //fileDetails.FileData = stream.ToArray();
+                }
+                PersianDateTime persianDateTime = new PersianDateTime(DateTime.Now);
+
+                string date = persianDateTime.ToString().Substring(0, 10);
+                //fileDetails.Date = date;
+
+                var result = _context.FileDetails.Add(fileDetails);
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public static string GetUniqueFileName(string fileName)
+
+
+        {
+
+
+            fileName = Path.GetFileName(fileName);
+
+
+            return string.Concat(Path.GetFileNameWithoutExtension(fileName)
+
+
+                                , "_"
+
+
+                                , Guid.NewGuid().ToString().AsSpan(0, 4)
+
+
+                                , Path.GetExtension(fileName));
+
+
+        }
+        public async Task PostMultiFileAsync(List<FileUploadModel> fileData)
+        {
+            try
+            {
+                foreach (FileUploadModel file in fileData)
+                {
+                    var fileDetails = new FileDetails()
+                    {
+                        FileId = 0,
+                        FileName = file.FileDetails.FileName,
+                    };
+
+                    using (var stream = new MemoryStream())
+                    {
+                        file.FileDetails.CopyTo(stream);
+                        //fileDetails.FileData = stream.ToArray();
+                    }
+
+                    var result = _context.FileDetails.Add(fileDetails);
+                }
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public async Task DownloadFileById(int Id)
+        {
+            try
+            {
+                var file = _context.FileDetails.Where(x => x.FileId == Id).FirstOrDefaultAsync();
+
+                //var content = new System.IO.MemoryStream(file.Result.FileData);
+                var path = Path.Combine(
+                   Directory.GetCurrentDirectory(), "FileDownloaded",
+                   file.Result.FileName);
+
+                //await CopyStream(content, path);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public async Task CopyStream(Stream stream, string downloadPath)
+        {
+            using (var fileStream = new FileStream(downloadPath, FileMode.Create, FileAccess.Write))
+            {
+                await stream.CopyToAsync(fileStream);
+            }
         }
         #endregion
 

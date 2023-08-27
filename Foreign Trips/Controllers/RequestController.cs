@@ -37,6 +37,7 @@ namespace Foreign_Trips.Controllers
                 );
         }
 
+
         [HttpGet]
         [Route("GetRequest")]
         public async Task<ActionResult<RequestTbl>> GetRequest(
@@ -101,23 +102,22 @@ namespace Foreign_Trips.Controllers
 
         }
 
-
-
         [HttpPost]
-        [Route("RejectRequest")]
-        public async Task<ActionResult<RequestDto>> RejectRequest(
-[FromBody] RequestDto Model
+        [Route("InsertRequest4")]
+        public async Task<ActionResult<RequestTbl>> InsertRequest4(
+[FromBody] RequestTbl Model
 )
         {
 
-            var Req = await _requestRepository.RejectRequest(Model);
+            var Req = await _requestRepository.InsertRequest4Async(Model);
             if (Req == null)
             {
                 return BadRequest();
             }
-            return Ok();
+            return Ok(Req);
 
         }
+
 
 
 
@@ -155,6 +155,39 @@ namespace Foreign_Trips.Controllers
         }
 
 
+        [HttpPost]
+        [Route("RejectRequest")]
+        public async Task<ActionResult<RequestTbl>> RejectRequest(
+[FromBody] RequestTbl Model
+)
+        {
+
+            var Req = await _requestRepository.RejectRequest(Model);
+            if (Req == null)
+            {
+                return BadRequest();
+            }
+            return Ok();
+
+        }
+
+
+        [Route("AcceptRequest")]
+        public async Task<ActionResult<RequestTbl>> AcceptRequest(
+[FromBody] RequestTbl Model
+)
+        {
+
+            var Req = await _requestRepository.RejectRequest(Model);
+            if (Req == null)
+            {
+                return BadRequest();
+            }
+            return Ok();
+
+        }
+
+
         #region RequestStatus
         [HttpGet]
         [Route("GetRequestStatus")]
@@ -183,6 +216,7 @@ namespace Foreign_Trips.Controllers
         #endregion
 
         #region File
+
         [HttpPost("PostSingleFile")]
         public async Task<ActionResult> PostSingleFile([FromForm] FileUploadModel fileDetails)
         {
@@ -193,7 +227,7 @@ namespace Foreign_Trips.Controllers
 
             try
             {
-                await _agentRepository.PostFileAsync(fileDetails);
+                await _requestRepository.PostFileAsync(fileDetails);
                 return Ok();
             }
             catch (Exception)
@@ -201,7 +235,6 @@ namespace Foreign_Trips.Controllers
                 throw;
             }
         }
-
         [HttpPost("PostMultipleFile")]
         public async Task<ActionResult> PostMultipleFile([FromForm] List<FileUploadModel> fileDetails)
         {
@@ -212,7 +245,7 @@ namespace Foreign_Trips.Controllers
 
             try
             {
-                await _agentRepository.PostMultiFileAsync(fileDetails);
+                await _requestRepository.PostMultiFileAsync(fileDetails);
                 return Ok();
             }
             catch (Exception)
@@ -221,6 +254,7 @@ namespace Foreign_Trips.Controllers
             }
         }
         #endregion
+
 
     }
 }

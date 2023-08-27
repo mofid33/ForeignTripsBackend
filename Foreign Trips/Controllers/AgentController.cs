@@ -99,19 +99,12 @@ namespace Foreign_Trips.Controllers
 
         [HttpPost]
         [Route("UpdateAgnet")]
-        public async Task<ActionResult<AgentTbl>> UpdateAgnet(
-        [FromBody] AgentTbl Model
-             )
+        public async Task<ActionResult<AgentTbl>> UpdateAgentAsync(
+[FromBody] AgentTbl Model
+)
         {
-            string authHeader = HttpContext.Request.Headers["Authorization"].ToString().Replace("Bearer ", string.Empty);
-
-            var AgnetID = _authRepository.GetIDFromToken(authHeader);
-            if (!await _agentRepository.AgentExistsAsync(AgnetID))
-            {
-                return NotFound();
-            }
-            var Eagent = await _agentRepository.UpdateAgentAsync(Model);
-            if (Eagent == null)
+            var agent = await _agentRepository.UpdateAgentAsync(Model);
+            if (agent == null)
             {
                 return BadRequest();
             }
@@ -120,7 +113,8 @@ namespace Foreign_Trips.Controllers
         }
 
 
-      
+
+
         [HttpPost]
         [Route("RemoveAgent")]
         public async Task<ActionResult<AgentTbl>> RemoveAgentAsync(
@@ -137,45 +131,45 @@ namespace Foreign_Trips.Controllers
 
         }
 
-        #region File
-        [HttpPost("PostSingleFile")]
-        public async Task<ActionResult> PostSingleFile([FromForm] FileUploadModel fileDetails)
-        {
-            if (fileDetails == null)
-            {
-                return BadRequest();
-            }
+        //#region File
+        //[HttpPost("PostSingleFile")]
+        //public async Task<ActionResult> PostSingleFile([FromForm] FileUploadModel fileDetails)
+        //{
+        //    if (fileDetails == null)
+        //    {
+        //        return BadRequest();
+        //    }
 
-            try
-            {
-                await _agentRepository.PostFileAsync(fileDetails);
-                return Ok();
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
+        //    try
+        //    {
+        //        await _agentRepository.PostFileAsync(fileDetails);
+        //        return Ok();
+        //    }
+        //    catch (Exception)
+        //    {
+        //        throw;
+        //    }
+        //}
 
-        [HttpPost("PostMultipleFile")]
-        public async Task<ActionResult> PostMultipleFile([FromForm] List<FileUploadModel> fileDetails)
-        {
-            if (fileDetails == null)
-            {
-                return BadRequest();
-            }
+        //[HttpPost("PostMultipleFile")]
+        //public async Task<ActionResult> PostMultipleFile([FromForm] List<FileUploadModel> fileDetails)
+        //{
+        //    if (fileDetails == null)
+        //    {
+        //        return BadRequest();
+        //    }
 
-            try
-            {
-                await _agentRepository.PostMultiFileAsync(fileDetails);
-                return Ok();
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-        #endregion
+        //    try
+        //    {
+        //        await _agentRepository.PostMultiFileAsync(fileDetails);
+        //        return Ok();
+        //    }
+        //    catch (Exception)
+        //    {
+        //        throw;
+        //    }
+        //}
+        //#endregion
 
 
         #region Request
@@ -245,22 +239,22 @@ namespace Foreign_Trips.Controllers
 
         }
 
-
         [HttpPost]
-        [Route("RejectRequest")]
-        public async Task<ActionResult<RequestDto>> RejectRequest(
-[FromBody] RequestDto Model
+        [Route("InsertRequest4")]
+        public async Task<ActionResult<RequestTbl>> InsertRequest4(
+[FromBody] RequestTbl Model
 )
         {
 
-            var Req = await _requestRepository.RejectRequest(Model);
+            var Req = await _requestRepository.InsertRequest4Async(Model);
             if (Req == null)
             {
                 return BadRequest();
             }
-            return Ok();
+            return Ok(Req);
 
         }
+
 
         [HttpGet]
         [Route("GetRule")]

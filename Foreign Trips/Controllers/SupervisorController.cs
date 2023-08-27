@@ -58,7 +58,7 @@ namespace Foreign_Trips.Controllers
 
         [HttpPost]
         [Route("UpdateSupervisor")]
-        public async Task<ActionResult<SupervisorTbl>> UpdateOverseerAsync(
+        public async Task<ActionResult<SupervisorTbl>> UpdateSupervisorAsync(
 [FromBody] SupervisorTbl Model
 )
         {
@@ -67,6 +67,22 @@ namespace Foreign_Trips.Controllers
             {
                 return BadRequest();
             }
+            return Ok();
+
+        }
+
+        [HttpPost]
+        [Route("RemoveSupervisor")]
+        public async Task<ActionResult<SupervisorTbl>> RemoveSupervisorAsync(
+       [FromBody] SupervisorTbl Model
+       )
+        {
+            if (!await _supervisorRepository.SupervisorExistsAsync(Model.SupervisorId))
+            {
+                return NotFound();
+            }
+            _supervisorRepository.RemoveSupervisorAsync(Model.SupervisorId);
+
             return Ok();
 
         }
