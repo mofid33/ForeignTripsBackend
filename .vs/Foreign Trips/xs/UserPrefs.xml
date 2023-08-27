@@ -1,12 +1,14 @@
 ﻿<Properties GitUserInfo="UsingGIT" StartupConfiguration="{8F23E8CC-3E31-49FF-AD10-C6C79B4877E0}|Default">
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
-  <MonoDevelop.Ide.DebuggingService.Breakpoints />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.Workbench ActiveDocument="Foreign Trips/Controllers/AgentController.cs">
     <Files>
       <File FileName="Foreign Trips/appsettings.json" />
-      <File FileName="Foreign Trips/appsettings.Development.json" Line="12" Column="41" />
+      <File FileName="Foreign Trips/appsettings.Development.json" />
       <File FileName="Foreign Trips/Controllers/AgentController.cs" Line="30" Column="1" />
-      <File FileName="Foreign Trips/Program.cs" Line="1" Column="1" />
+      <File FileName="Foreign Trips/Program.cs" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
