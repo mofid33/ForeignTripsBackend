@@ -30,50 +30,6 @@ namespace Foreign_Trips.Repositories
         {
             return await _context.InternationalAdminTbl.ToListAsync();
         }
-
-
-        public async Task<LoginTbl?> GetUserLog(LoginTbl admin)
-        {
-            try
-            {
-
-                var adm = await _context.LoginTbl.Where(t => t.AgentId == admin.AgentId
-                ).Include(t => t.AgentId)
-                .OrderBy(t => t.LoginId).LastOrDefaultAsync();
-
-
-
-                return adm;
-
-            }
-
-            catch (System.Exception ex)
-            {
-                return null;
-
-            }
-        }
-
-        public async Task<IEnumerable<LoginRegDto?>> GetUser()
-        {
-            var agent = await _context.AgentTbl.ToListAsync();
-            List<LoginRegDto> log = new List<LoginRegDto>();
-            for (int i = 0; i < agent.Count; i++)
-            {
-                log.Add(new LoginRegDto
-                {
-
-                    Name = agent[i].AgentName,
-                    AgentID = agent[i].AgentId,
-                    Role = "Agent",
-                    Mobile = agent[i].Mobile,
-                    NationalCode = agent[i].NationalCode,
-                    EditInfo = false,
-                    CreateAgent = false
-                });
-            }
-            return (IEnumerable<LoginRegDto>)log;
-        }
     
 
         public async Task<InternationalAdminTbl?> InsertAdmin(InternationalAdminTbl admin)

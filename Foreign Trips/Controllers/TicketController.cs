@@ -75,7 +75,7 @@ namespace Foreign_Trips.Controllers
        )
         {
 
-            var Tickets = await _ticketRepository.GetTicket(Model.TicketID);
+            var Tickets = await _ticketRepository.GetTicketAsync(Model.TicketID);
             return Ok(Tickets);
 
         }

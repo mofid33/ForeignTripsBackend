@@ -61,25 +61,22 @@ namespace Foreign_Trips.Repositories
             {
                 AgentTbl data = new AgentTbl();
                 data.CityId = agent.CityId;
-                data.TypeOfMissionId= agent.TypeOfMissionId;
-                data.MainAdminId =agent.MainAdminId;
-                data.PositionId= agent.PositionId; 
-                data.AgentStatusId= agent.AgentStatusId;
-                data.AgentName = agent.AgentName;
-                data.AgentFamily= agent.AgentFamily;
                 data.NationalCode = agent.NationalCode;
+                data.DateOfBirth = agent.DateOfBirth;
+                data.AgentName = agent.AgentName;
+                data.AgentFamily = agent.AgentFamily;
                 data.Mobile = agent.Mobile;
                 data.Phone = agent.Phone;
-                data.Address= agent.Address;
-                data.Password= agent.Password;
-                data.CompanyName = agent.CompanyName;
-                data.TypeOfEmployment = agent.TypeOfEmployment;
                 data.Email = agent.Email;
                 data.PostalCode = agent.PostalCode;
-                data.RegisterDate= agent.RegisterDate;
-                data.RegisterTime= agent.RegisterTime;
-
-
+                data.Address = agent.Address;
+                data.SubCategoryId= agent.SubCategoryId;
+                data.Subset = agent.Subset;
+                data.TypeOfEmployment = agent.TypeOfEmployment;
+                data.PositionId = agent.PositionId;
+                data.Password = agent.Password;
+                data.RegisterDate = agent.RegisterDate;
+                data.RegisterTime = agent.RegisterTime;
 
                 await _context.SaveChangesAsync();
                 return agent;
@@ -99,23 +96,20 @@ namespace Foreign_Trips.Repositories
             {
                 var data = await GetAgentAsync(agent.AgentId);
                 data.CityId = agent.CityId;
-                data.TypeOfMissionId = agent.TypeOfMissionId;
-                data.MainAdminId = agent.MainAdminId;
-               data.PositionId = agent.PositionId;
-                data.AgentStatusId = agent.AgentStatusId;
+                data.NationalCode = agent.NationalCode;
+                data.DateOfBirth = agent.DateOfBirth;
                 data.AgentName = agent.AgentName;
                 data.AgentFamily = agent.AgentFamily;
-                data.NationalCode = agent.NationalCode;
                 data.Mobile = agent.Mobile;
                 data.Phone = agent.Phone;
-                data.Address = agent.Address;
-                data.Password = agent.Password;
-                data.CompanyName = agent.CompanyName;
-                data.TypeOfEmployment = agent.TypeOfEmployment;
                 data.Email = agent.Email;
                 data.PostalCode = agent.PostalCode;
-                data.RegisterDate = agent.RegisterDate;
-                data.RegisterTime = agent.RegisterTime;
+                data.Address = agent.Address;
+                data.SubCategoryId = agent.SubCategoryId;
+                data.Subset = agent.Subset;
+                data.TypeOfEmployment = agent.TypeOfEmployment;
+                data.PositionId = agent.PositionId;
+                data.Password = agent.Password;
 
 
                 await _context.SaveChangesAsync();
@@ -233,122 +227,6 @@ namespace Foreign_Trips.Repositories
         #endregion
 
 
-        //#region File
-
-        //public async Task PostFileAsync(FileUploadModel fileData)
-        //{
-        //    try
-        //    {
-        //        var fileDetails = new FileDetails()
-        //        {
-        //            FileId = 0,
-        //            FileName = fileData.FileDetails.FileName,
-        //        };
-        //        var uniqueFileName = GetUniqueFileName(fileData.FileDetails.FileName);
-
-        //        var uploads = Path.Combine(_hostingEnvironment.WebRootPath, "uploads");
-
-        //        var filePath = Path.Combine(uploads, uniqueFileName);
-
-        //        using (var stream = new FileStream(filePath, FileMode.Create))
-        //        {
-        //            fileData.FileDetails.CopyTo(new FileStream(filePath, FileMode.Create));
-
-        //        }
-        //        PersianDateTime persianDateTime = new PersianDateTime(DateTime.Now);
-
-        //        string date = persianDateTime.ToString().Substring(0, 10);
-
-        //        var result = _context.FileDetails.Add(fileDetails);
-        //        await _context.SaveChangesAsync();
-
-
-        //    }
-        //    catch (Exception)
-        //    {
-        //        throw;
-        //    }
-        //}
-        //public static string GetUniqueFileName(string fileName)
-        //{
-
-        //    fileName = Path.GetFileName(fileName);
-
-
-        //    return string.Concat(Path.GetFileNameWithoutExtension(fileName)
-
-
-        //                        , "_"
-
-
-        //                        , Guid.NewGuid().ToString().AsSpan(0, 4)
-
-
-        //                        , Path.GetExtension(fileName));
-
-
-        //}
-
-        //public async Task PostMultiFileAsync(List<FileUploadModel> fileData)
-        //{
-        //    try
-        //    {
-        //        foreach (FileUploadModel file in fileData)
-        //        {
-        //            var fileDetails = new FileDetails()
-        //            {
-        //                FileId = 0,
-        //                FileName = file.FileDetails.FileName,
-        //            };
-
-        //            using (var stream = new MemoryStream())
-        //            {
-        //                file.FileDetails.CopyTo(stream);
-        //            }
-
-        //            var result = _context.FileDetails.Add(fileDetails);
-        //        }
-        //        await _context.SaveChangesAsync();
-        //    }
-        //    catch (Exception)
-        //    {
-        //        throw;
-        //    }
-        //}
-
-        //public async Task DownloadFileById(int Id)
-        //{
-        //    try
-        //    {
-        //        var file = _context.FileDetails.Where(x => x.FileId == Id).FirstOrDefaultAsync();
-
-        //        var path = Path.Combine(
-        //           Directory.GetCurrentDirectory(), "FileDownloaded",
-        //           file.Result.FileName);
-
-        //    }
-        //    catch (Exception)
-        //    {
-        //        throw;
-        //    }
-
-        //}
-
-        //public async Task CopyStream(Stream stream, string downloadPath)
-        //{
-        //    using (var fileStream = new FileStream(downloadPath, FileMode.Create, FileAccess.Write))
-        //    {
-        //        await stream.CopyToAsync(fileStream);
-        //    }
-        //}
-
-        //#endregion
-
-        public async Task<bool> SaveChangesAsync()
-        {
-            return (await _context.SaveChangesAsync() > 0);
-        }
-
         
 
         public async Task UpdatePassAgentAsync(AgentTbl agent, long agentId)
@@ -368,36 +246,19 @@ namespace Foreign_Trips.Repositories
 
         public async Task SuspendAgentAsync(long agentId)
         {
-                try
-                {
-                    var data = await GetAgentAsync(agentId);
-                    data.AgentStatus.AgentStatusId = 5;
+            try
+            {
+                var data = await GetAgentAsync(agentId);
+                data.AgentStatus.AgentStatusId = 5;
 
 
-                    await _context.SaveChangesAsync();
+                await _context.SaveChangesAsync();
 
-                }
-                catch (System.Exception e)
-                {
-                }
-            
-        }
+            }
+            catch (System.Exception e)
+            {
+            }
 
-        public async Task<RequestTbl?> GetRequestAgentAsync(int requestagentId)
-        {
-           
-                return await _context.RequestTbl
-                 .Include(c => c.TravelDate)
-                 .Include(x => x.TravelTopic)
-                 .Include(x => x.DestinationCountry)
-                 .Include(c => c.RequestStatus)
-                 .Include(c => c.DateOfLasteChange)
-                 .Include(c => c.OperationId)
-
-
-                 .Where(c => c.RequestId == requestagentId).FirstOrDefaultAsync();
-
-            
         }
 
 
@@ -444,5 +305,10 @@ namespace Foreign_Trips.Repositories
         }
 
         #endregion
+
+        public async Task<bool> SaveChangesAsync()
+        {
+            return (await _context.SaveChangesAsync() > 0);
+        }
     }
 }

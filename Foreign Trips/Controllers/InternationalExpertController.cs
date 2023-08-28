@@ -11,6 +11,7 @@ namespace Foreign_Trips.Controllers
     {
         private readonly IInternationalExpertRepository _internationalexpertRepository;
         private readonly IMessageRepository _messageRepository;
+        private readonly IRequestRepository _requestRepository;
         private readonly IMapper _mapper;
 
 
@@ -37,6 +38,19 @@ namespace Foreign_Trips.Controllers
                 );
         }
 
+        [HttpGet]
+        [Route("GetInternationalExpert")]
+        public async Task<ActionResult<InternationalExpertTbl>> GetInternationalExpert(
+     [FromBody] InternationalExpertTbl Model
+     )
+        {
+
+            var req = await _internationalexpertRepository.GetInternationalExpertAsync(Model.InternationalExpertId);
+            return Ok(
+         _mapper.Map<RequestTbl>(req)
+         );
+
+        }
 
 
 
@@ -119,6 +133,18 @@ namespace Foreign_Trips.Controllers
         }
 
         [HttpPost]
+        [Route("GetMessage")]
+        public async Task<ActionResult<MessageTbl>> GetMessage(
+       [FromBody] MessageTbl Model
+       )
+        {
+
+            var messages = await _messageRepository.GetMessageAsync(Model.MessageId);
+            return Ok(messages);
+
+        }
+
+        [HttpPost]
         [Route("InsertMessage")]
         public async Task<ActionResult<MessageTbl>> InsertMessage(
 [FromBody] MessageTbl Model
@@ -137,8 +163,125 @@ namespace Foreign_Trips.Controllers
         #endregion
 
         #region Request
+        [HttpGet]
+        [Route("GetRequests")]
+        public async Task<ActionResult<IEnumerable<RequestTbl>>> GetRequest()
+        {
+            var Requests = await _requestRepository.GetRequest();
+
+            return Ok(
+                Requests
+                );
+        }
 
 
+        [HttpGet]
+        [Route("GetRequest")]
+        public async Task<ActionResult<RequestTbl>> GetRequest(
+     [FromBody] RequestTbl Model
+     )
+        {
+
+            var req = await _requestRepository.GetRequestAsync(Model.RequestId);
+            return Ok(
+         _mapper.Map<RequestTbl>(req)
+         );
+
+        }
+
+        [HttpGet]
+        [Route("GetnewRequest")]
+        public async Task<ActionResult<RequestTbl>> GetNewRequest(
+    [FromBody] RequestTbl Model
+    )
+        {
+
+            var req = await _requestRepository.GetNewRequest(Model.RequestId);
+            return Ok(
+         _mapper.Map<RequestTbl>(req)
+         );
+
+        }
+
+        [HttpPost]
+        [Route("AcceptRequest")]
+        public async Task<ActionResult<RequestTbl>> AcceptRequest(
+[FromBody] RequestTbl Model
+)
+        {
+            if (!await _requestRepository.RequestExistsAsync(Model.RequestId))
+            {
+                return NotFound();
+            }
+            var req = await _requestRepository.AcceptRequest(Model);
+            if (req == null)
+            {
+                return BadRequest();
+            }
+            return Ok();
+
+        }
+
+
+
+        [HttpPost]
+        [Route("RejectRequest")]
+        public async Task<ActionResult<RequestTbl>> RejectRequest(
+[FromBody] RequestTbl Model
+)
+        {
+            if (!await _requestRepository.RequestExistsAsync(Model.RequestId))
+            {
+                return NotFound();
+            }
+            var req = await _requestRepository.RejectRequest(Model);
+            if (req == null)
+            {
+                return BadRequest();
+            }
+            return Ok();
+
+        }
+        #endregion
+
+        #region File
+
+        [HttpPost("PostSingleFile")]
+        public async Task<ActionResult> PostSingleFile([FromForm] FileUploadModel fileDetails)
+        {
+            if (fileDetails == null)
+            {
+                return BadRequest();
+            }
+
+            try
+            {
+                await _internationalexpertRepository.PostFileAsync(fileDetails);
+                return Ok();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        [HttpPost("PostMultipleFile")]
+        public async Task<ActionResult> PostMultipleFile([FromForm] List<FileUploadModel> fileDetails)
+        {
+            if (fileDetails == null)
+            {
+                return BadRequest();
+            }
+
+            try
+            {
+                await _internationalexpertRepository.PostMultiFileAsync(fileDetails);
+                return Ok();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
         #endregion
     }
 }

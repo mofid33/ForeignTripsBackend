@@ -20,15 +20,9 @@ namespace Foreign_Trips.Repositories
             return await _context.MessageTbl.ToListAsync();
         }
 
-        public async Task<MessageTbl?> GetMessage(int messageId)
+        public async Task<MessageTbl?> GetMessageAsync(int messageId)
         {
-            return await _context.MessageTbl
-             .Include(c => c.MessageTopic)
-             .Include(x => x.MessageText)
-             .Include(x => x.ReciverMessageId)
-             .Include(c => c.SubmitTime)
-
-             .Where(c => c.MessageId == messageId).FirstOrDefaultAsync();
+            return await _context.MessageTbl.Where(c => c.MessageId == messageId).FirstOrDefaultAsync();
         }
 
         public async Task<MessageTbl?> InsertMessage(MessageTbl message)
@@ -44,7 +38,11 @@ namespace Foreign_Trips.Repositories
                 Mtbl.Agent.SubCategoryId = message.Agent.SubCategoryId;
                 Mtbl.Agent.Subset = message.Agent.Subset;
                 Mtbl.ExpertSelectionId = message.ExpertSelectionId;
-              
+                Mtbl.RegisterDate = message.RegisterDate;
+                Mtbl.RegisterTime = message.RegisterTime;
+
+
+
 
                 await _context.MessageTbl.AddAsync(Mtbl);
                 await _context.SaveChangesAsync();

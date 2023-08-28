@@ -1,6 +1,8 @@
 ﻿using Azure.Core;
 using Foreign_Trips.DbContexts;
+using Foreign_Trips.Entities;
 using Foreign_Trips.Model;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
@@ -34,7 +36,7 @@ namespace Foreign_Trips.Repositories
             }
         }
 
-        public async Task<SupervisorTbl?> GetSupervisor(int supervisorId)
+        public async Task<SupervisorTbl?> GetSupervisorAsync(int supervisorId)
         {
             return await _context.SupervisorTbl.Where(c => c.SupervisorId == supervisorId).FirstOrDefaultAsync();
         }
@@ -92,44 +94,15 @@ namespace Foreign_Trips.Repositories
             }
         }
 
-        public async Task<AgentTbl?> GetAgentAsync(int agentId)
-        {
-
-            return await _context.AgentTbl
-             .Include(c => c.AgentName)
-             .Include(x => x.AgentFamily)
-             .Include(x => x.Position)
-             .Include(c => c.SubCategory)
-             .Include(c => c.CompanyName)
-
-
-             .Where(c => c.AgentId == agentId).FirstOrDefaultAsync();
-
-
-        }
-
-
-        public async Task<Report?> GetReportAsync(int reportId)
-        {
-            return await _context.Report
-             .Include(c => c.Request.Agent.AgentName)
-             .Include(x => x.Request.Agent.AgentFamily)
-             .Include(x => x.Request.TravelTopic)
-             .Include(c => c.Request.Agent.Joblocation)
-             .Include(c => c.LatestUpdate)
-             .Include(c => c.ReportStatusId)
-
-
-             .Where(c => c.ReportId == reportId).FirstOrDefaultAsync();
-
-        }
-
+    
         public async Task RemoveSupervisorAsync(int supervisorId)
         {
-            var rsup = _context.SupervisorTbl.Find(supervisorId);
-            _context.RequestTbl.Remove(rsup);
+            var data = _context.SupervisorTbl.Find(supervisorId);
+            _context.SupervisorTbl.Remove(data);
 
             await _context.SaveChangesAsync();
+
+            
         }
     }
 }

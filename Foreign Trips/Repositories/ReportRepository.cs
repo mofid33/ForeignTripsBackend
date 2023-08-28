@@ -19,18 +19,18 @@ namespace Foreign_Trips.Repositories
 
         public async Task<IEnumerable<Report?>> GetReport()
         {
-            return await _context.Report.ToListAsync();
+            return await _context.Report
+                .Include(c => c.Request.Agent)
+                .Include(x => x.Request)
+                .ToListAsync();
         }
 
         public async Task<Report?> GetReportAsync(int reportId)
         {
             return await _context.Report
-             .Include(c => c.Request.Agent.AgentName)
-             .Include(x => x.Request.Agent.AgentFamily)
-             .Include(x => x.Request.TravelTopic)
-             .Include(c => c.Request.Agent.Joblocation)
-             .Include(c => c.LatestUpdate)
-             .Include(c => c.ReportStatusId)
+             .Include(c => c.Request.Agent)
+             .Include(x => x.Request)
+             
 
 
              .Where(c => c.ReportId == reportId).FirstOrDefaultAsync();
@@ -46,13 +46,17 @@ namespace Foreign_Trips.Repositories
                 data.RequestDateNumber = report.RequestDateNumber;
                 data.LicenseNumber = report.LicenseNumber;
                 data.LicenseDate = report.LicenseDate;
-                data.RequestId = report.RequestId;
                 data.Period = report.Period;    
                 data.EmailExternalDevice = report.EmailExternalDevice;
                 data.EmailInternalDevice = report.EmailInternalDevice;
                 data.InternalDevice = report.InternalDevice;
                 data.ExternalDevice = report.ExternalDevice;
-                
+                data.Request.DestinationCountry = report.Request.DestinationCountry;
+                data.Request.DestinationCity = report.Request.DestinationCity;
+                data.Request.MissionAchievementRecords = data.Request.MissionAchievementRecords;
+
+
+
                 await _context.Report.AddAsync(data);
 
 

@@ -22,20 +22,17 @@ namespace Foreign_Trips.Repositories
         //        .Where(t => t.TicketId == ticketId).ToListAsync();
         //}
 
-        public async Task<TicketTbl?> GetTicket(int ticketId)
+        public async Task<TicketTbl?> GetTicketAsync(int ticketId)
         {
             return await _context.TicketTbl
-                .Include(t => t.TicketNumber)
-                .Include(t => t.Subject)
-                .Include(t => t.LatestUpdate)
                 .Include(t => t.TicketStatus)
                 .Where(t => t.TicketId == ticketId).FirstOrDefaultAsync();
         }
 
         public async Task<IEnumerable<TicketTbl?>> GetTickets()
         {
-            return await _context.TicketTbl.Include(t => t.TicketStatus)
-               .Include(t => t.AgentId)
+            return await _context.TicketTbl
+               .Include(t => t.TicketStatus)
                .ToListAsync();
         }
 

@@ -40,6 +40,20 @@ namespace Foreign_Trips.Controllers
                 );
         }
 
+        [HttpGet]
+        [Route("GetSupervisors")]
+        public async Task<ActionResult<SupervisorTbl>> GetSupervisors(
+             [FromBody] SupervisorTbl Model
+             )
+        {
+
+            var sup = await _supervisorRepository.GetSupervisorAsync(Model.SupervisorId);
+            return Ok(
+         _mapper.Map<SupervisorTbl>(sup)
+         );
+
+        }
+
         [HttpPost]
         [Route("InsertSupervisor")]
         public async Task<ActionResult<SupervisorTbl>> InsertSupervisor(
@@ -88,36 +102,26 @@ namespace Foreign_Trips.Controllers
         }
 
 
+        #region Agent
+
 
         [HttpGet]
-        [Route("GetAgent")]
-        public async Task<ActionResult<AgentTbl>> GetAgent(
-           [FromBody] AgentTbl Model
-           )
+        [Route("GetAgents")]
+        public async Task<ActionResult<IEnumerable<AgentTbl>>> GetAgent()
         {
+            var Agents = await _agentRepository.GetAgent();
 
-            var agents = await _supervisorRepository.GetAgentAsync(Model.AgentId);
-            return Ok(
-         _mapper.Map<AgentTbl>(agents)
-         );
+            return Ok(Agents);
+
 
         }
+        #endregion
 
 
-        [HttpPost]
-        [Route("GetReport")]
-        public async Task<ActionResult<Report>> GetReport(
-       [FromBody] Report Model
-       )
-        {
 
-            var rep = await _reportRepository.GetReportAsync(Model.ReportId);
-            return Ok(
-         _mapper.Map<Report>(rep)
-         );
 
-        }
 
+        #region Report
 
         [HttpGet]
         [Route("GetReports")]
@@ -130,5 +134,23 @@ namespace Foreign_Trips.Controllers
                 );
         }
 
+        [HttpGet]
+        [Route("GetReport")]
+        public async Task<ActionResult<Report>> GetReport(
+     [FromBody] Report Model
+     )
+        {
+
+            var rep = await _reportRepository.GetReportAsync(Model.ReportId);
+            return Ok(
+         _mapper.Map<Report>(rep)
+         );
+
+        }
+
+        #endregion
+
     }
 }
+
+

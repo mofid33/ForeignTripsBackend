@@ -115,80 +115,50 @@ namespace Foreign_Trips.Controllers
 
 
 
-        [HttpPost]
-        [Route("RemoveAgent")]
-        public async Task<ActionResult<AgentTbl>> RemoveAgentAsync(
-        [FromBody] AgentTbl Model
-        )
-        {
-            if (!await _agentRepository.AgentExistsAsync(Model.AgentId))
-            {
-                return NotFound();
-            }
-            _agentRepository.DeleteAgent(Model.AgentId);
-
-            return Ok();
-
-        }
-
-        //#region File
-        //[HttpPost("PostSingleFile")]
-        //public async Task<ActionResult> PostSingleFile([FromForm] FileUploadModel fileDetails)
+        //[HttpPost]
+        //[Route("DeleteAgent")]
+        //public async Task<ActionResult<AgentTbl>> DeleteAgentAsync(
+        //[FromBody] AgentTbl Model
+        //)
         //{
-        //    if (fileDetails == null)
+        //    if (!await _agentRepository.AgentExistsAsync(Model.AgentId))
         //    {
-        //        return BadRequest();
+        //        return NotFound();
         //    }
+        //    _agentRepository.DeleteAgent(Model.AgentId);
 
-        //    try
-        //    {
-        //        await _agentRepository.PostFileAsync(fileDetails);
-        //        return Ok();
-        //    }
-        //    catch (Exception)
-        //    {
-        //        throw;
-        //    }
+        //    return Ok();
+
         //}
-
-        //[HttpPost("PostMultipleFile")]
-        //public async Task<ActionResult> PostMultipleFile([FromForm] List<FileUploadModel> fileDetails)
-        //{
-        //    if (fileDetails == null)
-        //    {
-        //        return BadRequest();
-        //    }
-
-        //    try
-        //    {
-        //        await _agentRepository.PostMultiFileAsync(fileDetails);
-        //        return Ok();
-        //    }
-        //    catch (Exception)
-        //    {
-        //        throw;
-        //    }
-        //}
-        //#endregion
 
 
         #region Request
-        [HttpPost]
-        [Route("GetRequestagent")]
-        public async Task<ActionResult<RequestTbl>> GetRequestagent(
-       [FromBody] RequestTbl Model
-       )
+
+        [HttpGet]
+        [Route("GetRequests")]
+        public async Task<ActionResult<IEnumerable<RequestTbl>>> GetRequest()
         {
+            var Requests = await _requestRepository.GetRequest();
 
-            var reqagents = await _agentRepository.GetRequestAgentAsync(Model.RequestId);
             return Ok(
-         _mapper.Map<RequestTbl>(reqagents)
-         );
-
+                Requests
+                );
         }
 
 
+        [HttpGet]
+        [Route("GetRequest")]
+        public async Task<ActionResult<RequestTbl>> GetRequest(
+     [FromBody] RequestTbl Model
+     )
+        {
 
+            var req = await _requestRepository.GetRequestAsync(Model.RequestId);
+            return Ok(
+         _mapper.Map<RequestTbl>(req)
+         );
+
+        }
 
         [HttpPost]
         [Route("InsertRequest1")]
@@ -256,17 +226,6 @@ namespace Foreign_Trips.Controllers
         }
 
 
-        [HttpGet]
-        [Route("GetRule")]
-        public async Task<ActionResult<IEnumerable<RuleTbl>>> GetRule()
-        {
-            var rule = await _requestRepository.GetRule();
-
-            return Ok(
-                rule
-                );
-        }
-
         #endregion
 
         #region Report
@@ -279,7 +238,21 @@ namespace Foreign_Trips.Controllers
             return Ok(
                 reports
                 );
-        } 
+        }
+
+        [HttpGet]
+        [Route("GetReport")]
+        public async Task<ActionResult<Report>> GetReport(
+     [FromBody] Report Model
+     )
+        {
+
+            var rep = await _reportRepository.GetReportAsync(Model.ReportId);
+            return Ok(
+         _mapper.Map<Report>(rep)
+         );
+
+        }
 
 
         [HttpPost]
@@ -300,14 +273,26 @@ namespace Foreign_Trips.Controllers
         #endregion
 
         #region Ticket
+
+        [HttpGet]
+        [Route("GetTickets")]
+        public async Task<ActionResult<TicketTbl>> GetTickets()
+        {
+
+            var Tickets = await _ticketRepository.GetTickets();
+
+            return Ok(_mapper.Map<IEnumerable<TicketTbl>>(Tickets));
+
+        }
+
         [HttpPost]
         [Route("GetTicket")]
         public async Task<ActionResult<TicketTbl>> GetTicket(
-      [FromBody] GetTicket Model
-      )
+       [FromBody] GetTicket Model
+       )
         {
 
-            var Tickets = await _ticketRepository.GetTicket(Model.TicketID);
+            var Tickets = await _ticketRepository.GetTicketAsync(Model.TicketID);
             return Ok(Tickets);
 
         }
@@ -328,5 +313,35 @@ namespace Foreign_Trips.Controllers
 
         }
         #endregion
+
+        #region province
+        [HttpGet]
+        [Route("GetProvinces")]
+        public async Task<ActionResult<IEnumerable<ProvinceTbl>>> GetProvinces()
+        {
+            var Organs = await _agentRepository.GetProvincesAcync();
+
+            return Ok(
+                _mapper.Map<IEnumerable<ProvinceTbl>>(Organs)
+                );
+
+        }
+        [HttpPost]
+        [Route("GetCities")]
+        public async Task<ActionResult<CityTbl>> GetCities(
+        [FromBody] CityTbl Model
+)
+        {
+
+
+            var Cities = await _agentRepository.GetCitiesAcync(Model.ProvinceId);
+            return Ok(
+         //_mapper.Map<CityTbl>(Cities)
+         Cities
+         );
+
+        }
+        #endregion
+
     }
 }
