@@ -29,6 +29,8 @@ namespace Foreign_Trips.Repositories
         Task<IEnumerable<RightOfMissionTbl>> RightOfMissionAsync();
         Task<IEnumerable<RightOfCommutingTypeTbl>> RightOfCommutingTypeAsync();
         Task<IEnumerable<RightToEducationTbl>> RightToEducationAsync();
+        Task<IEnumerable<TollAmountTypeTbl>> TollAmountTypeAsync();
+        Task<IEnumerable<TravelTypeTbl>>TravelTypeAsync();
         Task<bool> SaveChangesAsync();
 
     }

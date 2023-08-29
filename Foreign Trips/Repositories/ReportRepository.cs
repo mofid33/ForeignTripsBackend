@@ -42,7 +42,6 @@ namespace Foreign_Trips.Repositories
             try
             {
                 Report data = new Report();
-                data.FileId = report.FileId;
                 data.RequestDateNumber = report.RequestDateNumber;
                 data.LicenseNumber = report.LicenseNumber;
                 data.LicenseDate = report.LicenseDate;
@@ -92,9 +91,20 @@ namespace Foreign_Trips.Repositories
         {
             try
             {
-                var rep = await _context.Report.FindAsync(report.ReportId);
-                
-                rep.FileId = report.FileId;
+                var data = await _context.Report.FindAsync(report.ReportId);
+                data.RequestDateNumber = report.RequestDateNumber;
+                data.LicenseNumber = report.LicenseNumber;
+                data.LicenseDate = report.LicenseDate;
+                data.Period = report.Period;
+                data.EmailExternalDevice = report.EmailExternalDevice;
+                data.EmailInternalDevice = report.EmailInternalDevice;
+                data.InternalDevice = report.InternalDevice;
+                data.ExternalDevice = report.ExternalDevice;
+                data.Request.DestinationCountry = report.Request.DestinationCountry;
+                data.Request.DestinationCity = report.Request.DestinationCity;
+                data.Request.MissionAchievementRecords = data.Request.MissionAchievementRecords;
+
+
 
 
 

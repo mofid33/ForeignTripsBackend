@@ -14,6 +14,4 @@ public partial class InternationalAdminTbl
     public string Password { get; set; } = null!;
 
     public virtual ICollection<MainAdminTbl> MainAdminTbls { get; set; } = new List<MainAdminTbl>();
-
-    public virtual ICollection<TicketTbl> TicketTbls { get; set; } = new List<TicketTbl>();
 }

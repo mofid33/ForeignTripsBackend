@@ -35,6 +35,8 @@ public partial class ForeignTripsContext : DbContext
 
     public virtual DbSet<GenderTypeTbl> GenderTypeTbls { get; set; }
 
+    public virtual DbSet<InfoTbl> InfoTbls { get; set; }
+
     public virtual DbSet<InternationalAdminTbl> InternationalAdminTbls { get; set; }
 
     public virtual DbSet<InternationalExpertTbl> InternationalExpertTbls { get; set; }
@@ -76,8 +78,6 @@ public partial class ForeignTripsContext : DbContext
     public virtual DbSet<RightOfMissionTbl> RightOfMissionTbls { get; set; }
 
     public virtual DbSet<RightToEducationTbl> RightToEducationTbls { get; set; }
-
-    public virtual DbSet<RuleTbl> RuleTbls { get; set; }
 
     public virtual DbSet<SubCategoryTbl> SubCategoryTbls { get; set; }
 
@@ -260,6 +260,7 @@ public partial class ForeignTripsContext : DbContext
                 .HasMaxLength(80)
                 .IsFixedLength();
             entity.Property(e => e.FileTypeId).HasColumnName("FileTypeID");
+            entity.Property(e => e.ReportId).HasColumnName("ReportID");
             entity.Property(e => e.RequestId).HasColumnName("RequestID");
 
             entity.HasOne(d => d.FileType).WithMany(p => p.FileDetailsTbls)
@@ -267,10 +268,14 @@ public partial class ForeignTripsContext : DbContext
                 .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK_FileDetailsTbl_FileTypeTbl");
 
+            entity.HasOne(d => d.Report).WithMany(p => p.FileDetailsTbls)
+                .HasForeignKey(d => d.ReportId)
+                .HasConstraintName("FK_FileDetailsTbl_Report");
+
             entity.HasOne(d => d.Request).WithMany(p => p.FileDetailsTbls)
                 .HasForeignKey(d => d.RequestId)
                 .OnDelete(DeleteBehavior.Cascade)
-                .HasConstraintName("FK_FileDetailsTbl_FileDetailsTbl");
+                .HasConstraintName("FK_FileDetailsTbl_RequestTbl");
         });
 
         modelBuilder.Entity<FileTypeTbl>(entity =>
@@ -332,6 +337,15 @@ public partial class ForeignTripsContext : DbContext
 
             entity.Property(e => e.GenderId).HasColumnName("GenderID");
             entity.Property(e => e.GenderType).HasMaxLength(100);
+        });
+
+        modelBuilder.Entity<InfoTbl>(entity =>
+        {
+            entity.HasKey(e => e.InfoId).HasName("PK_RuleTbl");
+
+            entity.ToTable("InfoTbl");
+
+            entity.Property(e => e.InfoId).HasColumnName("InfoID");
         });
 
         modelBuilder.Entity<InternationalAdminTbl>(entity =>
@@ -537,7 +551,6 @@ public partial class ForeignTripsContext : DbContext
             entity.Property(e => e.EmailExternalDevice).HasMaxLength(100);
             entity.Property(e => e.EmailInternalDevice).HasMaxLength(100);
             entity.Property(e => e.ExternalDevice).HasMaxLength(100);
-            entity.Property(e => e.FileId).HasColumnName("FileID");
             entity.Property(e => e.InternalDevice).HasMaxLength(100);
             entity.Property(e => e.LatestUpdate)
                 .HasMaxLength(200)
@@ -548,11 +561,6 @@ public partial class ForeignTripsContext : DbContext
             entity.Property(e => e.ReportStatusId).HasColumnName("ReportStatusID");
             entity.Property(e => e.RequestDateNumber).HasMaxLength(100);
             entity.Property(e => e.RequestId).HasColumnName("RequestID");
-
-            entity.HasOne(d => d.File).WithMany(p => p.Reports)
-                .HasForeignKey(d => d.FileId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_Report_FileDetailsTbl");
 
             entity.HasOne(d => d.ReportStatus).WithMany(p => p.Reports)
                 .HasForeignKey(d => d.ReportStatusId)
@@ -711,17 +719,6 @@ public partial class ForeignTripsContext : DbContext
             entity.Property(e => e.RightToEducationType).HasMaxLength(100);
         });
 
-        modelBuilder.Entity<RuleTbl>(entity =>
-        {
-            entity.HasKey(e => e.RuleId);
-
-            entity.ToTable("RuleTbl");
-
-            entity.Property(e => e.RuleId)
-                .ValueGeneratedNever()
-                .HasColumnName("RuleID");
-        });
-
         modelBuilder.Entity<SubCategoryTbl>(entity =>
         {
             entity.HasKey(e => e.SubCategoryId);
@@ -794,7 +791,6 @@ public partial class ForeignTripsContext : DbContext
             entity.ToTable("TicketTbl");
 
             entity.Property(e => e.TicketId).HasColumnName("TicketID");
-            entity.Property(e => e.AdminId).HasColumnName("AdminID");
             entity.Property(e => e.AgentId).HasColumnName("AgentID");
             entity.Property(e => e.LatestUpdate)
                 .HasMaxLength(100)
@@ -803,11 +799,6 @@ public partial class ForeignTripsContext : DbContext
             entity.Property(e => e.RegisterTime).HasMaxLength(8);
             entity.Property(e => e.TicketNumber).HasMaxLength(100);
             entity.Property(e => e.TicketStatusId).HasColumnName("TicketStatusID");
-
-            entity.HasOne(d => d.Admin).WithMany(p => p.TicketTbls)
-                .HasForeignKey(d => d.AdminId)
-                .OnDelete(DeleteBehavior.Cascade)
-                .HasConstraintName("FK_TicketTbl_TicketTbl");
 
             entity.HasOne(d => d.TicketStatus).WithMany(p => p.TicketTbls)
                 .HasForeignKey(d => d.TicketStatusId)

@@ -43,5 +43,7 @@ namespace Foreign_Trips.DbContexts
         public DbSet<RightOfCommutingTypeTbl> RightOfCommutingTypeTbl { get; set; } = null!;
         public DbSet<RightToEducationTbl> RightToEducationTbl { get; set; } = null!;
         public DbSet<MessageTbl> MessageTbl { get; set; } = null!;
+        public DbSet<TollAmountTypeTbl> TollAmountTypeTbl { get; set; } = null!;
+        public DbSet<TravelTypeTbl> TravelTypeTbl { get; set; } = null!;
     }
 }

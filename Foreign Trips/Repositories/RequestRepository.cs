@@ -221,9 +221,8 @@ namespace Foreign_Trips.Repositories
         {
             try
             {
-                var req = await GetRequestAsync(request.RequestId);
-                req.TravelDate = request.TravelDate;
-                
+                var req = await _context.RequestTbl.FindAsync(request.RequestId);
+
 
 
 
@@ -376,7 +375,22 @@ namespace Foreign_Trips.Repositories
 
         #endregion
 
-       
+
+        #region Toll Amount
+        public async Task<IEnumerable<TollAmountTypeTbl>> TollAmountTypeAsync()
+        {
+            return await _context.TollAmountTypeTbl.ToListAsync();
+        }
+
+        #endregion
+
+        #region Travel Type
+        public async Task<IEnumerable<TravelTypeTbl>> TravelTypeAsync()
+        {
+            return await _context.TravelTypeTbl.ToListAsync();
+        }
+
+        #endregion
 
 
     }
