@@ -1,14 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
 
 namespace Foreign_Trips.Model;
 
 public partial class ForeignDelegrationTbl
 {
-    [Key]
-    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int ForeignDelegationId { get; set; }
 
     public int CityId { get; set; }
