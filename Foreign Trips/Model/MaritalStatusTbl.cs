@@ -5,6 +5,8 @@ namespace Foreign_Trips.Model;
 
 public partial class MaritalStatusTbl
 {
+    [Key]
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int MaritalStatusId { get; set; }
 
     public string? MaritalStatusTitle { get; set; }

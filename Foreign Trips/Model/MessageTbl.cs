@@ -5,6 +5,8 @@ namespace Foreign_Trips.Model;
 
 public partial class MessageTbl
 {
+    [Key]
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int MessageId { get; set; }
 
     public int AgentId { get; set; }

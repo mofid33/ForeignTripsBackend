@@ -5,6 +5,8 @@ namespace Foreign_Trips.Model;
 
 public partial class TravelGoalsTypeTbl
 {
+    [Key]
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int TravelGoalsId { get; set; }
 
     public string TravelGoalsType { get; set; } = null!;

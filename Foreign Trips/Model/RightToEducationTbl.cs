@@ -5,6 +5,8 @@ namespace Foreign_Trips.Model;
 
 public partial class RightToEducationTbl
 {
+    [Key]
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int RightToEducationId { get; set; }
 
     public string RightToEducationType { get; set; } = null!;

@@ -5,6 +5,8 @@ namespace Foreign_Trips.Model;
 
 public partial class RequestTbl
 {
+    [Key]
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int RequestId { get; set; }
 
     public int AgentId { get; set; }
