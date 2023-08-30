@@ -69,13 +69,14 @@ namespace Foreign_Trips.Controllers
 
 
         [HttpPost]
-        [Route("InsertRequest1")]
-        public async Task<ActionResult<RequestTbl>> InsertRequest1(
+        [Route("InsertRequest")]
+        public async Task<ActionResult<RequestTbl>> InsertRequest(
 [FromBody] RequestTbl Model
-)
+            )
+
         {
 
-            var Req = await _requestRepository.InsertRequest1Async(Model);
+            var Req = await _requestRepository.InsertRequestAsync(Model);
             if (Req == null)
             {
                 return BadRequest();
@@ -85,63 +86,12 @@ namespace Foreign_Trips.Controllers
         }
 
         [HttpPost]
-        [Route("InsertRequest2")]
-        public async Task<ActionResult<RequestTbl>> InsertRequest2(
+        [Route("UpdateRequest2")]
+        public async Task<ActionResult<RequestTbl>> UpdateRequest2Async(
 [FromBody] RequestTbl Model
 )
         {
-
-            var Req = await _requestRepository.InsertRequest2Async(Model);
-            if (Req == null)
-            {
-                return BadRequest();
-            }
-            return Ok(Req);
-
-        }
-
-        [HttpPost]
-        [Route("InsertRequest3")]
-        public async Task<ActionResult<RequestTbl>> InsertRequest3(
-[FromBody] RequestTbl Model
-)
-        {
-
-            var Req = await _requestRepository.InsertRequest3Async(Model);
-            if (Req == null)
-            {
-                return BadRequest();
-            }
-            return Ok(Req);
-
-        }
-
-        [HttpPost]
-        [Route("InsertRequest4")]
-        public async Task<ActionResult<RequestTbl>> InsertRequest4(
-[FromBody] RequestTbl Model
-)
-        {
-
-            var Req = await _requestRepository.InsertRequest4Async(Model);
-            if (Req == null)
-            {
-                return BadRequest();
-            }
-            return Ok(Req);
-
-        }
-
-
-
-
-        [HttpPost]
-        [Route("UpdateRequest")]
-        public async Task<ActionResult<RequestTbl>> UpdateRequestAsync(
-[FromBody] RequestDto Model
-)
-        {
-            var Req = await _requestRepository.UpdateRequestAsync(Model);
+            var Req = await _requestRepository.UpdateRequest2Async(Model);
             if (Req == null)
             {
                 return BadRequest();
@@ -149,6 +99,41 @@ namespace Foreign_Trips.Controllers
             return Ok();
 
         }
+
+        [HttpPost]
+        [Route("UpdateRequest3")]
+        public async Task<ActionResult<RequestTbl>> UpdateRequest3Async(
+[FromBody] RequestTbl Model
+)
+        {
+            var Req = await _requestRepository.UpdateRequest3Async(Model);
+            if (Req == null)
+            {
+                return BadRequest();
+            }
+            return Ok();
+
+        }
+
+        [HttpPost]
+        [Route("UpdateRequest4")]
+        public async Task<ActionResult<RequestTbl>> UpdateRequest4Async(
+[FromBody] RequestTbl Model
+)
+        {
+            var Req = await _requestRepository.UpdateRequest4Async(Model);
+            if (Req == null)
+            {
+                return BadRequest();
+            }
+            return Ok();
+
+        }
+
+
+
+
+
 
 
 
@@ -208,20 +193,6 @@ namespace Foreign_Trips.Controllers
         }
 
 
-
-        #region RequestStatus
-        [HttpGet]
-        [Route("GetRequestStatus")]
-        public async Task<ActionResult<IEnumerable<RequestStatusTbl>>> GetRequestStatus()
-        {
-            var Agents = await _requestRepository.GetRequestStatusAsync();
-
-            return Ok(
-                _mapper.Map<IEnumerable<RequestStatusTbl>>(Agents)
-                );
-
-        }
-        #endregion
 
 
 

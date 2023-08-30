@@ -64,17 +64,17 @@ namespace Foreign_Trips.Controllers
 
         }
 
-        [HttpGet]
-        [Route("GetAgentStatus")]
-        public async Task<ActionResult<IEnumerable<AgentStatusTbl>>> GetAgentStatus()
-        {
-            var agnets = await _agentRepository.GetAgentStatusAsync();
+        //[HttpGet]
+        //[Route("GetAgentStatus")]
+        //public async Task<ActionResult<IEnumerable<AgentStatusTbl>>> GetAgentStatus()
+        //{
+        //    var agnets = await _agentRepository.GetAgentStatusAsync();
 
-            return Ok(
-                _mapper.Map<IEnumerable<AgentStatusTbl>>(agnets)
-                );
+        //    return Ok(
+        //        _mapper.Map<IEnumerable<AgentStatusTbl>>(agnets)
+        //        );
 
-        }
+        //}
 
 
 
@@ -161,13 +161,14 @@ namespace Foreign_Trips.Controllers
         }
 
         [HttpPost]
-        [Route("InsertRequest1")]
-        public async Task<ActionResult<RequestTbl>> InsertRequest1(
+        [Route("InsertRequest")]
+        public async Task<ActionResult<RequestTbl>> InsertRequest(
 [FromBody] RequestTbl Model
-)
+            )
+
         {
 
-            var Req = await _requestRepository.InsertRequest1Async(Model);
+            var Req = await _requestRepository.InsertRequestAsync(Model);
             if (Req == null)
             {
                 return BadRequest();
@@ -177,51 +178,47 @@ namespace Foreign_Trips.Controllers
         }
 
         [HttpPost]
-        [Route("InsertRequest2")]
-        public async Task<ActionResult<RequestTbl>> InsertRequest2(
+        [Route("UpdateRequest2")]
+        public async Task<ActionResult<RequestTbl>> UpdateRequest2Async(
 [FromBody] RequestTbl Model
 )
         {
-
-            var Req = await _requestRepository.InsertRequest2Async(Model);
+            var Req = await _requestRepository.UpdateRequest2Async(Model);
             if (Req == null)
             {
                 return BadRequest();
             }
-            return Ok(Req);
-
-        }
-
-
-        [HttpPost]
-        [Route("InsertRequest3")]
-        public async Task<ActionResult<RequestTbl>> InsertRequest3(
-[FromBody] RequestTbl Model
-)
-        {
-
-            var Req = await _requestRepository.InsertRequest3Async(Model);
-            if (Req == null)
-            {
-                return BadRequest();
-            }
-            return Ok(Req);
+            return Ok();
 
         }
 
         [HttpPost]
-        [Route("InsertRequest4")]
-        public async Task<ActionResult<RequestTbl>> InsertRequest4(
+        [Route("UpdateRequest3")]
+        public async Task<ActionResult<RequestTbl>> UpdateRequest3Async(
 [FromBody] RequestTbl Model
 )
         {
-
-            var Req = await _requestRepository.InsertRequest4Async(Model);
+            var Req = await _requestRepository.UpdateRequest3Async(Model);
             if (Req == null)
             {
                 return BadRequest();
             }
-            return Ok(Req);
+            return Ok();
+
+        }
+
+        [HttpPost]
+        [Route("UpdateRequest4")]
+        public async Task<ActionResult<RequestTbl>> UpdateRequest4Async(
+[FromBody] RequestTbl Model
+)
+        {
+            var Req = await _requestRepository.UpdateRequest4Async(Model);
+            if (Req == null)
+            {
+                return BadRequest();
+            }
+            return Ok();
 
         }
 
@@ -326,7 +323,7 @@ namespace Foreign_Trips.Controllers
                 );
 
         }
-        [HttpPost]
+        [HttpGet]
         [Route("GetCities")]
         public async Task<ActionResult<CityTbl>> GetCities(
         [FromBody] CityTbl Model

@@ -39,8 +39,8 @@ namespace Foreign_Trips.Controllers
         }
 
         [HttpGet]
-        [Route("GetInternationalExpert")]
-        public async Task<ActionResult<InternationalExpertTbl>> GetInternationalExpert(
+        [Route("GetInternationalExpertByID")]
+        public async Task<ActionResult<InternationalExpertTbl>> GetInternationalExpertByID(
      [FromBody] InternationalExpertTbl Model
      )
         {

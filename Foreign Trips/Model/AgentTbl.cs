@@ -1,10 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 
 namespace Foreign_Trips.Model;
 
 public partial class AgentTbl
 {
+    [Key]
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int AgentId { get; set; }
 
     public int CityId { get; set; }
@@ -90,6 +94,8 @@ public partial class AgentTbl
     public virtual ICollection<RequestTbl> RequestTbls { get; set; } = new List<RequestTbl>();
 
     public virtual SubCategoryTbl SubCategory { get; set; } = null!;
+
+    public virtual ICollection<TicketTbl> TicketTbls { get; set; } = new List<TicketTbl>();
 
     public virtual TypeOfEmploymentTbl TypeOfEmployment { get; set; } = null!;
 

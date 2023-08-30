@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Foreign_Trips.Controllers
 {
-    [Route("api/Supervisor")]
+    [Route("api/MainAdmin")]
     public class MainAdminController: ControllerBase
     {
         private readonly IAgentRepository _agentRepository;
@@ -310,8 +310,8 @@ namespace Foreign_Trips.Controllers
         }
 
         [HttpGet]
-        [Route("GetInternationalExpert")]
-        public async Task<ActionResult<InternationalExpertTbl>> GetInternationalExpert(
+        [Route("GetInternationalExpertByID")]
+        public async Task<ActionResult<InternationalExpertTbl>> GetInternationalExpertByID(
      [FromBody] InternationalExpertTbl Model
      )
         {
@@ -322,6 +322,7 @@ namespace Foreign_Trips.Controllers
          );
 
         }
+
 
 
 

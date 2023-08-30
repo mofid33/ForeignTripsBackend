@@ -34,7 +34,7 @@ namespace Foreign_Trips.Repositories
              .Where(c => c.RequestId == requestId).FirstOrDefaultAsync();
         }
 
-        public async Task<RequestTbl?> InsertRequest1Async(RequestTbl request)
+        public async Task<RequestTbl?> InsertRequestAsync(RequestTbl request)
         {
             try
             {
@@ -73,7 +73,7 @@ namespace Foreign_Trips.Repositories
         }
 
 
-        public async Task<RequestTbl?> InsertRequest2Async(RequestTbl request)
+        public async Task<RequestTbl?> UpdateRequest2Async(RequestTbl request)
         {
             try
             {
@@ -114,7 +114,7 @@ namespace Foreign_Trips.Repositories
             }
         }
 
-        public async Task<RequestTbl?> InsertRequest3Async(RequestTbl request)
+        public async Task<RequestTbl?> UpdateRequest3Async(RequestTbl request)
         {
             try
             {
@@ -157,7 +157,7 @@ namespace Foreign_Trips.Repositories
 
         }
 
-        public async Task<RequestTbl?> InsertRequest4Async(RequestTbl request)
+        public async Task<RequestTbl?> UpdateRequest4Async(RequestTbl request)
         {
             try
             {
@@ -175,21 +175,6 @@ namespace Foreign_Trips.Repositories
                 await _context.SaveChangesAsync();
 
 
-                //PersianDateTime persianDateTime = new PersianDateTime(DateTime.Now);
-
-                //string date = persianDateTime.ToString().Substring(0, 10);
-                //if (request.RequestStatusId == 1)
-                //{
-                //    qtbl.ConfirmDate = date;
-
-                //}
-                //var Req = await _context.RequestTbl.AddAsync(qtbl);
-                //await _context.SaveChangesAsync();
-
-                //var data = await _agentRepository.GetAgentAsync(request.AgentId);
-                //data.RequestId = qtbl.RequestId;
-
-                //await _context.SaveChangesAsync();
                 return request;
 
 
@@ -216,48 +201,12 @@ namespace Foreign_Trips.Repositories
         }
 
 
-        
-        public async Task<RequestDto?> UpdateRequestAsync(RequestDto request)
-        {
-            try
-            {
-                var req = await _context.RequestTbl.FindAsync(request.RequestId);
-
-
-
-
-                await _context.SaveChangesAsync();
-                return request;
-            }
-
-            catch (System.Exception ex)
-            {
-                return null;
-
-            }
-        }
-
-        public async Task<IEnumerable<RequestStatusTbl>> GetRequestStatusAsync()
-        {
-            return await _context.RequestStatusTbl.ToListAsync();
-        }
+      
 
         //public async Task<RuleTbl?> GetRuleAsync(int RuleId)
         //{
         //    return await _context.RuleTbl.Where(f => f.RuleId == RuleId).FirstOrDefaultAsync();
         //}
-
-        public async Task<IEnumerable<RuleTbl?>> GetRule()
-        {
-            try
-            {
-                return await _context.RuleTbl.ToListAsync();
-            }
-            catch (System.Exception ex)
-            {
-                return null;
-            }
-        }
 
 
         public async Task<RequestTbl?> GetNewRequest(int requestId)
