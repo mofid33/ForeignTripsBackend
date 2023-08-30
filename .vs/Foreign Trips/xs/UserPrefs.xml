@@ -3,18 +3,14 @@
     <Files>
       <File FileName="Foreign Trips/appsettings.json" />
       <File FileName="Foreign Trips/appsettings.Development.json" />
-      <File FileName="Foreign Trips/Controllers/AgentController.cs" Line="31" Column="1" />
+      <File FileName="Foreign Trips/Controllers/AgentController.cs" Line="35" Column="1" />
       <File FileName="Foreign Trips/Program.cs" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
-          <Node name="Foreign Trips" expanded="True">
-            <Node name="Foreign Trips" expanded="True">
-              <Node name="Controllers" expanded="True">
-                <Node name="AgentController.cs" selected="True" />
-              </Node>
-            </Node>
+          <Node name="Foreign Trips" expanded="True" selected="True">
+            <Node name="Foreign Trips" expanded="True" />
           </Node>
         </State>
       </Pad>
