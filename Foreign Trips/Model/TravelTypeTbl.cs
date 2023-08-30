@@ -6,6 +6,7 @@ using System.ComponentModel.DataAnnotations;
 namespace Foreign_Trips.Model;
 
 public partial class TravelTypeTbl
+
 {
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
