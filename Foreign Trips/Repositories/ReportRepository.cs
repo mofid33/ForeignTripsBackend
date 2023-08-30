@@ -42,6 +42,8 @@ namespace Foreign_Trips.Repositories
             try
             {
                 Report data = new Report();
+                data.Request.Agent.AgentName = report.Request.Agent.AgentName;
+                data.Request.Agent.AgentFamily = report.Request.Agent.AgentFamily;
                 data.RequestDateNumber = report.RequestDateNumber;
                 data.LicenseNumber = report.LicenseNumber;
                 data.LicenseDate = report.LicenseDate;

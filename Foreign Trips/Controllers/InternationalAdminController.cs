@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Foreign_Trips.Controllers
 {
-    [Route("api/Admin")]
+    [Route("api/InternationalAdmin")]
     public class InternationalAdminController : ControllerBase
     {
         private readonly IInternationalAdminRepository _internationaladminRepository;

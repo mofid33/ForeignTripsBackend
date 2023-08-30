@@ -72,11 +72,9 @@ namespace Foreign_Trips.Repositories
                 data.Address = agent.Address;
                 data.SubCategoryId= agent.SubCategoryId;
                 data.Subset = agent.Subset;
-                data.TypeOfEmployment = agent.TypeOfEmployment;
+                data.TypeOfEmploymentId = agent.TypeOfEmploymentId;
                 data.PositionId = agent.PositionId;
                 data.Password = agent.Password;
-                data.RegisterDate = agent.RegisterDate;
-                data.RegisterTime = agent.RegisterTime;
 
                 await _context.SaveChangesAsync();
                 return agent;
@@ -116,7 +114,7 @@ namespace Foreign_Trips.Repositories
                 return agent;
 
             }
-            catch (System.Exception e)
+            catch (System.Exception ex)
             {
                 return null;
             }

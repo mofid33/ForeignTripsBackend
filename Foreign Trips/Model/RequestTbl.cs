@@ -1,10 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 
 namespace Foreign_Trips.Model;
 
 public partial class RequestTbl
 {
+    [Key]
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int RequestId { get; set; }
 
     public int AgentId { get; set; }
@@ -39,71 +43,71 @@ public partial class RequestTbl
 
     public bool JointTrip { get; set; }
 
-    public bool DateLetter { get; set; }
+    public string DateLetter { get; set; } = null!;
 
-    public string PayerCitizenShip { get; set; } = null!;
+    public string? PayerCitizenShip { get; set; }
 
-    public string AmountOfCost { get; set; } = null!;
+    public string? AmountOfCost { get; set; }
 
-    public string PayerFood { get; set; } = null!;
+    public string? PayerFood { get; set; }
 
-    public string CostOfFood { get; set; } = null!;
+    public string? CostOfFood { get; set; }
 
-    public string TickerTypeId { get; set; } = null!;
+    public string? TickerTypeId { get; set; }
 
-    public string AirlineCompany { get; set; } = null!;
+    public string? AirlineCompany { get; set; }
 
-    public string TicketCost { get; set; } = null!;
+    public string? TicketCost { get; set; }
 
-    public string TheCostOfTicket { get; set; } = null!;
+    public string? TheCostOfTicket { get; set; }
 
-    public int RightOfMissionId { get; set; }
+    public int? RightOfMissionId { get; set; }
 
-    public string LevelRightOfMission { get; set; } = null!;
+    public string? LevelRightOfMission { get; set; }
 
-    public string ExpertRightOfMission { get; set; } = null!;
+    public string? ExpertRightOfMission { get; set; }
 
-    public string RightToEducationCost { get; set; } = null!;
+    public string? RightToEducationCost { get; set; }
 
-    public int RightToEducationId { get; set; }
+    public int? RightToEducationId { get; set; }
 
-    public string RightOfCommutingCost { get; set; } = null!;
+    public string? RightOfCommutingCost { get; set; }
 
-    public int RightOfCommutingId { get; set; }
+    public int? RightOfCommutingId { get; set; }
 
-    public string VisaCost { get; set; } = null!;
+    public string? VisaCost { get; set; }
 
-    public string TollAmountCost { get; set; } = null!;
+    public string? TollAmountCost { get; set; }
 
-    public int TollAmountId { get; set; }
+    public int? TollAmountId { get; set; }
 
-    public string PaymentFromBank { get; set; } = null!;
+    public string? PaymentFromBank { get; set; }
 
-    public string ImportantTravel { get; set; } = null!;
+    public string? ImportantTravel { get; set; }
 
-    public string MissionAchievementRecords { get; set; } = null!;
+    public string? MissionAchievementRecords { get; set; }
 
-    public string SummaryInvitation { get; set; } = null!;
+    public string? SummaryInvitation { get; set; }
 
-    public string ForeignTravelSummary { get; set; } = null!;
+    public string? ForeignTravelSummary { get; set; }
 
-    public bool ReferenceDeviceAgreement { get; set; }
+    public bool? ReferenceDeviceAgreement { get; set; }
 
-    public bool ResistanceEconomyTravel { get; set; }
+    public bool? ResistanceEconomyTravel { get; set; }
 
-    public string RejectRequest { get; set; } = null!;
+    public string? RejectRequest { get; set; }
 
-    public string DateOfLasteChange { get; set; } = null!;
+    public string? DateOfLasteChange { get; set; }
 
-    public string OperationId { get; set; } = null!;
+    public string? OperationId { get; set; }
 
-    public int TravelTypeId { get; set; }
+    public int? TravelTypeId { get; set; }
 
-    public string ApprovedBy { get; set; } = null!;
+    public string? ApprovedBy { get; set; }
 
-    public string EmployeeStatus { get; set; } = null!;
+    public string? EmployeeStatus { get; set; }
 
-    public bool IsFinal { get; set; }
+    public bool? IsFinal { get; set; }
 
     public virtual AgentTbl Agent { get; set; } = null!;
 
@@ -119,15 +123,15 @@ public partial class RequestTbl
 
     public virtual RequestStatusTbl RequestStatus { get; set; } = null!;
 
-    public virtual RightOfCommutingTypeTbl RightOfCommuting { get; set; } = null!;
+    public virtual RightOfCommutingTypeTbl? RightOfCommuting { get; set; }
 
-    public virtual RightOfMissionTbl RightOfMission { get; set; } = null!;
+    public virtual RightOfMissionTbl? RightOfMission { get; set; }
 
-    public virtual RightToEducationTbl RightToEducation { get; set; } = null!;
+    public virtual RightToEducationTbl? RightToEducation { get; set; }
 
-    public virtual TollAmountTypeTbl TollAmount { get; set; } = null!;
+    public virtual TollAmountTypeTbl? TollAmount { get; set; }
 
     public virtual TravelGoalsTypeTbl TravelGoal { get; set; } = null!;
 
-    public virtual TravelTypeTbl TravelType { get; set; } = null!;
+    public virtual TravelTypeTbl? TravelType { get; set; }
 }
