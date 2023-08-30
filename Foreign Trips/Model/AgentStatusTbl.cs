@@ -9,6 +9,7 @@ public partial class AgentStatusTbl
 {
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+
     public int AgentStatusId { get; set; }
 
     public string AgentStatusType { get; set; } = null!;
