@@ -4,13 +4,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Foreign_Trips.Model;
 
-public partial class ForeignTripsContext : DbContext
+public partial class ForeignDbContext : DbContext
 {
-    public ForeignTripsContext()
+    public ForeignDbContext()
     {
     }
 
-    public ForeignTripsContext(DbContextOptions<ForeignTripsContext> options)
+    public ForeignDbContext(DbContextOptions<ForeignDbContext> options)
         : base(options)
     {
     }
@@ -105,15 +105,19 @@ public partial class ForeignTripsContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Data Source=.;Initial Catalog=Foreign Trips;Integrated Security=true;TrustServerCertificate=true;");
+        => optionsBuilder.UseSqlServer("Data Source=rogstrix.com;Initial Catalog=ForeignDB;User ID=foreign;Password=Aa@1234567891011;TrustServerCertificate=true;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder
+            .HasDefaultSchema("foreign")
+            .UseCollation("SQL_Latin1_General_CP1_CI_AS");
+
         modelBuilder.Entity<AgentStatusTbl>(entity =>
         {
             entity.HasKey(e => e.AgentStatusId);
 
-            entity.ToTable("AgentStatusTbl");
+            entity.ToTable("AgentStatusTbl", "dbo");
 
             entity.Property(e => e.AgentStatusId)
                 .ValueGeneratedNever()
@@ -125,7 +129,7 @@ public partial class ForeignTripsContext : DbContext
         {
             entity.HasKey(e => e.AgentId);
 
-            entity.ToTable("AgentTbl");
+            entity.ToTable("AgentTbl", "dbo");
 
             entity.Property(e => e.AgentId).HasColumnName("AgentID");
             entity.Property(e => e.Address).HasMaxLength(100);
@@ -150,7 +154,6 @@ public partial class ForeignTripsContext : DbContext
             entity.Property(e => e.Password).HasMaxLength(300);
             entity.Property(e => e.Phone).HasMaxLength(11);
             entity.Property(e => e.Photo).HasColumnType("image");
-            entity.Property(e => e.Position).HasMaxLength(100);
             entity.Property(e => e.PostalCode).HasMaxLength(100);
             entity.Property(e => e.RegisterDate).HasMaxLength(10);
             entity.Property(e => e.RegisterTime).HasMaxLength(5);
@@ -161,32 +164,29 @@ public partial class ForeignTripsContext : DbContext
 
             entity.HasOne(d => d.AgentStatus).WithMany(p => p.AgentTbls)
                 .HasForeignKey(d => d.AgentStatusId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_AgentTbl_AgentStatusTbl");
 
             entity.HasOne(d => d.City).WithMany(p => p.AgentTbls)
                 .HasForeignKey(d => d.CityId)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK_AgentTbl_CityTbl");
 
             entity.HasOne(d => d.Language).WithMany(p => p.AgentTbls)
                 .HasForeignKey(d => d.LanguageId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_AgentTbl_languageType");
 
             entity.HasOne(d => d.MainAdmin).WithMany(p => p.AgentTbls)
                 .HasForeignKey(d => d.MainAdminId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_AgentTbl_MainAdminTbl");
 
             entity.HasOne(d => d.MaritalStatus).WithMany(p => p.AgentTbls)
                 .HasForeignKey(d => d.MaritalStatusId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_AgentTbl_MaritalStatusTbl");
 
-            //entity.HasOne(d => d.PositionNavigation).WithMany(p => p.AgentTbls)
-            //    .HasForeignKey(d => d.PositionId)
-            //    .OnDelete(DeleteBehavior.ClientSetNull)
-            //    .HasConstraintName("FK_AgentTbl_PositionTypeTbl");
+            entity.HasOne(d => d.Position).WithMany(p => p.AgentTbls)
+                .HasForeignKey(d => d.PositionId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_AgentTbl_PositionTypeTbl");
 
             entity.HasOne(d => d.SubCategory).WithMany(p => p.AgentTbls)
                 .HasForeignKey(d => d.SubCategoryId)
@@ -198,6 +198,7 @@ public partial class ForeignTripsContext : DbContext
 
             entity.HasOne(d => d.TypeOfMission).WithMany(p => p.AgentTbls)
                 .HasForeignKey(d => d.TypeOfMissionId)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK_AgentTbl_TypeOfMissionTbl");
         });
 
@@ -205,7 +206,7 @@ public partial class ForeignTripsContext : DbContext
         {
             entity.HasKey(e => e.CityId);
 
-            entity.ToTable("CityTbl");
+            entity.ToTable("CityTbl", "dbo");
 
             entity.Property(e => e.CityId).HasColumnName("CityID");
             entity.Property(e => e.CityName).HasMaxLength(250);
@@ -222,7 +223,7 @@ public partial class ForeignTripsContext : DbContext
         {
             entity.HasKey(e => e.DeviceNameId).HasName("PK_DeviceNameIType");
 
-            entity.ToTable("DeviceNameITypeTbl");
+            entity.ToTable("DeviceNameITypeTbl", "dbo");
 
             entity.Property(e => e.DeviceNameId).HasColumnName("DeviceNameID");
             entity.Property(e => e.DeviceNameType).HasMaxLength(100);
@@ -232,7 +233,7 @@ public partial class ForeignTripsContext : DbContext
         {
             entity.HasKey(e => e.DispatcherSelectionId);
 
-            entity.ToTable("DispatcherSelectionTbl");
+            entity.ToTable("DispatcherSelectionTbl", "dbo");
 
             entity.Property(e => e.DispatcherSelectionId).HasColumnName("DispatcherSelectionID");
             entity.Property(e => e.DispatcherSelectionType).HasMaxLength(300);
@@ -242,7 +243,7 @@ public partial class ForeignTripsContext : DbContext
         {
             entity.HasKey(e => e.ExpertSelectionId);
 
-            entity.ToTable("ExpertSelectionTbl");
+            entity.ToTable("ExpertSelectionTbl", "dbo");
 
             entity.Property(e => e.ExpertSelectionId).HasColumnName("ExpertSelectionID");
             entity.Property(e => e.ExpertSelectionType).HasMaxLength(200);
@@ -252,7 +253,7 @@ public partial class ForeignTripsContext : DbContext
         {
             entity.HasKey(e => e.FileId);
 
-            entity.ToTable("FileDetailsTbl");
+            entity.ToTable("FileDetailsTbl", "dbo");
 
             entity.Property(e => e.FileId).HasColumnName("FileID");
             entity.Property(e => e.Date).HasMaxLength(10);
@@ -282,7 +283,7 @@ public partial class ForeignTripsContext : DbContext
         {
             entity.HasKey(e => e.FileTypeId).HasName("PK_dbo.FileTypeTbl");
 
-            entity.ToTable("FileTypeTbl");
+            entity.ToTable("FileTypeTbl", "dbo");
 
             entity.Property(e => e.FileTypeId).HasColumnName("FileTypeID");
             entity.Property(e => e.FileTypeTitle).HasMaxLength(300);
@@ -292,7 +293,7 @@ public partial class ForeignTripsContext : DbContext
         {
             entity.HasKey(e => e.ForeignDelegationId).HasName("PK_ForeginDelegration");
 
-            entity.ToTable("ForeignDelegrationTbl");
+            entity.ToTable("ForeignDelegrationTbl", "dbo");
 
             entity.Property(e => e.ForeignDelegationId)
                 .ValueGeneratedNever()
@@ -333,7 +334,7 @@ public partial class ForeignTripsContext : DbContext
         {
             entity.HasKey(e => e.GenderId).HasName("PK_GenderType");
 
-            entity.ToTable("GenderTypeTbl");
+            entity.ToTable("GenderTypeTbl", "dbo");
 
             entity.Property(e => e.GenderId).HasColumnName("GenderID");
             entity.Property(e => e.GenderType).HasMaxLength(100);
@@ -343,7 +344,7 @@ public partial class ForeignTripsContext : DbContext
         {
             entity.HasKey(e => e.InfoId).HasName("PK_RuleTbl");
 
-            entity.ToTable("InfoTbl");
+            entity.ToTable("InfoTbl", "dbo");
 
             entity.Property(e => e.InfoId).HasColumnName("InfoID");
         });
@@ -352,7 +353,7 @@ public partial class ForeignTripsContext : DbContext
         {
             entity.HasKey(e => e.AdminId).HasName("PK_AdminTbl");
 
-            entity.ToTable("InternationalAdminTbl");
+            entity.ToTable("InternationalAdminTbl", "dbo");
 
             entity.Property(e => e.AdminId).HasColumnName("AdminID");
             entity.Property(e => e.AdminName).HasMaxLength(100);
@@ -364,7 +365,7 @@ public partial class ForeignTripsContext : DbContext
         {
             entity.HasKey(e => e.InternationalExpertId);
 
-            entity.ToTable("InternationalExpertTbl");
+            entity.ToTable("InternationalExpertTbl", "dbo");
 
             entity.Property(e => e.InternationalExpertId).HasColumnName("InternationalExpertID");
             entity.Property(e => e.InternationalExpertFamily).HasMaxLength(300);
@@ -377,7 +378,7 @@ public partial class ForeignTripsContext : DbContext
         {
             entity.HasKey(e => e.JobGoalsId).HasName("PK_JobGoalsType");
 
-            entity.ToTable("JobGoalsTypeTbl");
+            entity.ToTable("JobGoalsTypeTbl", "dbo");
 
             entity.Property(e => e.JobGoalsId).HasColumnName("JobGoalsID");
             entity.Property(e => e.JobGoalsType).HasMaxLength(50);
@@ -387,7 +388,7 @@ public partial class ForeignTripsContext : DbContext
         {
             entity.HasKey(e => e.LanguageId);
 
-            entity.ToTable("languageType");
+            entity.ToTable("languageType", "dbo");
 
             entity.Property(e => e.LanguageId).HasColumnName("languageID");
             entity.Property(e => e.LanguageType1)
@@ -399,7 +400,7 @@ public partial class ForeignTripsContext : DbContext
         {
             entity.HasKey(e => e.LoginId);
 
-            entity.ToTable("LoginTbl");
+            entity.ToTable("LoginTbl", "dbo");
 
             entity.Property(e => e.LoginId).HasColumnName("LoginID");
             entity.Property(e => e.AgentId).HasColumnName("AgentID");
@@ -411,7 +412,7 @@ public partial class ForeignTripsContext : DbContext
         {
             entity.HasKey(e => e.MainAdminId).HasName("PK_SupervisorAdmin");
 
-            entity.ToTable("MainAdminTbl");
+            entity.ToTable("MainAdminTbl", "dbo");
 
             entity.Property(e => e.MainAdminId).HasColumnName("mainAdminID");
             entity.Property(e => e.AdminId).HasColumnName("AdminID");
@@ -430,7 +431,7 @@ public partial class ForeignTripsContext : DbContext
         {
             entity.HasKey(e => e.MaritalStatusId);
 
-            entity.ToTable("MaritalStatusTbl");
+            entity.ToTable("MaritalStatusTbl", "dbo");
 
             entity.Property(e => e.MaritalStatusId).HasColumnName("MaritalStatusID");
             entity.Property(e => e.MaritalStatusTitle).HasMaxLength(300);
@@ -440,7 +441,7 @@ public partial class ForeignTripsContext : DbContext
         {
             entity.HasKey(e => e.MessageId);
 
-            entity.ToTable("MessageTbl");
+            entity.ToTable("MessageTbl", "dbo");
 
             entity.Property(e => e.MessageId).HasColumnName("MessageID");
             entity.Property(e => e.AgentId).HasColumnName("AgentID");
@@ -474,7 +475,7 @@ public partial class ForeignTripsContext : DbContext
         {
             entity.HasKey(e => e.OperationId).HasName("PK_OperationTbl");
 
-            entity.ToTable("OperationTypeTbl");
+            entity.ToTable("OperationTypeTbl", "dbo");
 
             entity.Property(e => e.OperationId).HasColumnName("OperationID");
             entity.Property(e => e.OperationType).HasMaxLength(100);
@@ -484,7 +485,7 @@ public partial class ForeignTripsContext : DbContext
         {
             entity.HasKey(e => e.PassportId);
 
-            entity.ToTable("PassportTbl");
+            entity.ToTable("PassportTbl", "dbo");
 
             entity.Property(e => e.PassportId)
                 .ValueGeneratedNever()
@@ -505,7 +506,7 @@ public partial class ForeignTripsContext : DbContext
 
         modelBuilder.Entity<PassportType>(entity =>
         {
-            entity.ToTable("PassportType");
+            entity.ToTable("PassportType", "dbo");
 
             entity.Property(e => e.PassportTypeId).HasColumnName("PassportTypeID");
             entity.Property(e => e.PassportType1)
@@ -517,7 +518,7 @@ public partial class ForeignTripsContext : DbContext
         {
             entity.HasKey(e => e.PositionId).HasName("PK_PositionTbl");
 
-            entity.ToTable("PositionTypeTbl");
+            entity.ToTable("PositionTypeTbl", "dbo");
 
             entity.Property(e => e.PositionId).HasColumnName("PositionID");
             entity.Property(e => e.PositionType).HasMaxLength(100);
@@ -527,7 +528,7 @@ public partial class ForeignTripsContext : DbContext
         {
             entity.HasKey(e => e.ProvinceId);
 
-            entity.ToTable("ProvinceTbl");
+            entity.ToTable("ProvinceTbl", "dbo");
 
             entity.Property(e => e.ProvinceId).HasColumnName("ProvinceID");
             entity.Property(e => e.ProvinceName).HasMaxLength(250);
@@ -537,7 +538,7 @@ public partial class ForeignTripsContext : DbContext
         {
             entity.HasKey(e => e.ReciverMessageId);
 
-            entity.ToTable("ReciverMessageTbl");
+            entity.ToTable("ReciverMessageTbl", "dbo");
 
             entity.Property(e => e.ReciverMessageId).HasColumnName("ReciverMessageID");
             entity.Property(e => e.ReciverMessageType).HasMaxLength(100);
@@ -545,7 +546,7 @@ public partial class ForeignTripsContext : DbContext
 
         modelBuilder.Entity<Report>(entity =>
         {
-            entity.ToTable("Report");
+            entity.ToTable("Report", "dbo");
 
             entity.Property(e => e.ReportId).HasColumnName("ReportID");
             entity.Property(e => e.EmailExternalDevice).HasMaxLength(100);
@@ -575,7 +576,7 @@ public partial class ForeignTripsContext : DbContext
         {
             entity.HasKey(e => e.ReportStatusId);
 
-            entity.ToTable("ReportStatusTbl");
+            entity.ToTable("ReportStatusTbl", "dbo");
 
             entity.Property(e => e.ReportStatusId).HasColumnName("ReportStatusID");
             entity.Property(e => e.ReportStatusType).HasMaxLength(200);
@@ -585,7 +586,7 @@ public partial class ForeignTripsContext : DbContext
         {
             entity.HasKey(e => e.RequestStatusId);
 
-            entity.ToTable("RequestStatusTbl");
+            entity.ToTable("RequestStatusTbl", "dbo");
 
             entity.Property(e => e.RequestStatusId).HasColumnName("RequestStatusID");
             entity.Property(e => e.RequestStatusTitle).HasMaxLength(50);
@@ -595,7 +596,7 @@ public partial class ForeignTripsContext : DbContext
         {
             entity.HasKey(e => e.RequestId);
 
-            entity.ToTable("RequestTbl");
+            entity.ToTable("RequestTbl", "dbo");
 
             entity.Property(e => e.RequestId).HasColumnName("RequestID");
             entity.Property(e => e.AgentId).HasColumnName("AgentID");
@@ -699,7 +700,7 @@ public partial class ForeignTripsContext : DbContext
         {
             entity.HasKey(e => e.RightOfCommutingId);
 
-            entity.ToTable("RightOfCommutingTypeTbl");
+            entity.ToTable("RightOfCommutingTypeTbl", "dbo");
 
             entity.Property(e => e.RightOfCommutingId).HasColumnName("RightOfCommutingID");
             entity.Property(e => e.RightOfCommutingType).HasMaxLength(100);
@@ -709,7 +710,7 @@ public partial class ForeignTripsContext : DbContext
         {
             entity.HasKey(e => e.RightOfMissionId).HasName("PK_RightOfMission");
 
-            entity.ToTable("RightOfMissionTbl");
+            entity.ToTable("RightOfMissionTbl", "dbo");
 
             entity.Property(e => e.RightOfMissionId).HasColumnName("RightOfMissionID");
             entity.Property(e => e.RightOfMissionType).HasMaxLength(100);
@@ -719,7 +720,7 @@ public partial class ForeignTripsContext : DbContext
         {
             entity.HasKey(e => e.RightToEducationId).HasName("PK_RightToEducation");
 
-            entity.ToTable("RightToEducationTbl");
+            entity.ToTable("RightToEducationTbl", "dbo");
 
             entity.Property(e => e.RightToEducationId).HasColumnName("RightToEducationID");
             entity.Property(e => e.RightToEducationType).HasMaxLength(100);
@@ -729,7 +730,7 @@ public partial class ForeignTripsContext : DbContext
         {
             entity.HasKey(e => e.SubCategoryId);
 
-            entity.ToTable("SubCategoryTbl");
+            entity.ToTable("SubCategoryTbl", "dbo");
 
             entity.Property(e => e.SubCategoryId).HasColumnName("SubCategoryID");
             entity.Property(e => e.SubCategoryType).HasMaxLength(100);
@@ -739,7 +740,7 @@ public partial class ForeignTripsContext : DbContext
         {
             entity.HasKey(e => e.SubsidiaryOrganizationId).HasName("PK_SubsidiaryOrganization");
 
-            entity.ToTable("SubsidiaryOrganizationTypeTbl");
+            entity.ToTable("SubsidiaryOrganizationTypeTbl", "dbo");
 
             entity.Property(e => e.SubsidiaryOrganizationId).HasColumnName("SubsidiaryOrganizationID");
             entity.Property(e => e.SubsidiaryOrganizationType).HasMaxLength(100);
@@ -749,7 +750,7 @@ public partial class ForeignTripsContext : DbContext
         {
             entity.HasKey(e => e.SupervisorId).HasName("PK_OverseerTbl");
 
-            entity.ToTable("SupervisorTbl");
+            entity.ToTable("SupervisorTbl", "dbo");
 
             entity.Property(e => e.SupervisorId).HasColumnName("SupervisorID");
             entity.Property(e => e.Password)
@@ -766,7 +767,7 @@ public partial class ForeignTripsContext : DbContext
         {
             entity.HasKey(e => e.TicketDetailId);
 
-            entity.ToTable("TicketDetailsTbl");
+            entity.ToTable("TicketDetailsTbl", "dbo");
 
             entity.Property(e => e.TicketDetailId)
                 .ValueGeneratedNever()
@@ -784,7 +785,7 @@ public partial class ForeignTripsContext : DbContext
         {
             entity.HasKey(e => e.TicketStatusId);
 
-            entity.ToTable("TicketStatusTbl");
+            entity.ToTable("TicketStatusTbl", "dbo");
 
             entity.Property(e => e.TicketStatusId).HasColumnName("TicketStatusID");
             entity.Property(e => e.TicketStatusTitle).HasMaxLength(100);
@@ -794,7 +795,7 @@ public partial class ForeignTripsContext : DbContext
         {
             entity.HasKey(e => e.TicketId);
 
-            entity.ToTable("TicketTbl");
+            entity.ToTable("TicketTbl", "dbo");
 
             entity.Property(e => e.TicketId).HasColumnName("TicketID");
             entity.Property(e => e.AgentId).HasColumnName("AgentID");
@@ -819,7 +820,7 @@ public partial class ForeignTripsContext : DbContext
         {
             entity.HasKey(e => e.TicketTypeId).HasName("PK_TicketType");
 
-            entity.ToTable("TicketTypeTbl");
+            entity.ToTable("TicketTypeTbl", "dbo");
 
             entity.Property(e => e.TicketTypeId).HasColumnName("TicketTypeID");
             entity.Property(e => e.TicketType).HasMaxLength(100);
@@ -829,7 +830,7 @@ public partial class ForeignTripsContext : DbContext
         {
             entity.HasKey(e => e.TollAmountId);
 
-            entity.ToTable("TollAmountTypeTbl");
+            entity.ToTable("TollAmountTypeTbl", "dbo");
 
             entity.Property(e => e.TollAmountId).HasColumnName("TollAmountID");
             entity.Property(e => e.TollAmountType).HasMaxLength(100);
@@ -839,7 +840,7 @@ public partial class ForeignTripsContext : DbContext
         {
             entity.HasKey(e => e.TravelGoalsId).HasName("PK_TravelGoalsType");
 
-            entity.ToTable("TravelGoalsTypeTbl");
+            entity.ToTable("TravelGoalsTypeTbl", "dbo");
 
             entity.Property(e => e.TravelGoalsId).HasColumnName("TravelGoalsID");
             entity.Property(e => e.TravelGoalsType).HasMaxLength(100);
@@ -849,7 +850,7 @@ public partial class ForeignTripsContext : DbContext
         {
             entity.HasKey(e => e.TravelTypeId);
 
-            entity.ToTable("TravelTypeTbl");
+            entity.ToTable("TravelTypeTbl", "dbo");
 
             entity.Property(e => e.TravelType).HasMaxLength(50);
         });
@@ -858,7 +859,7 @@ public partial class ForeignTripsContext : DbContext
         {
             entity.HasKey(e => e.TypeOfEmploymentId);
 
-            entity.ToTable("TypeOfEmploymentTbl");
+            entity.ToTable("TypeOfEmploymentTbl", "dbo");
 
             entity.Property(e => e.TypeOfEmploymentId).HasColumnName("TypeOfEmploymentID");
             entity.Property(e => e.TypeOfEmploymentTitle).HasMaxLength(300);
@@ -868,7 +869,7 @@ public partial class ForeignTripsContext : DbContext
         {
             entity.HasKey(e => e.TypeOfMissionId).HasName("PK_TypeOfMission");
 
-            entity.ToTable("TypeOfMissionTbl");
+            entity.ToTable("TypeOfMissionTbl", "dbo");
 
             entity.Property(e => e.TypeOfMissionId).HasColumnName("TypeOfMissionID");
             entity.Property(e => e.TypeOfMissionTitle).HasMaxLength(300);

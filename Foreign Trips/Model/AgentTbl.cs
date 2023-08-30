@@ -11,17 +11,17 @@ public partial class AgentTbl
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int AgentId { get; set; }
 
-    public int CityId { get; set; }
+    public int? CityId { get; set; }
 
-    public int TypeOfMissionId { get; set; }
+    public int? TypeOfMissionId { get; set; }
 
-    public int MainAdminId { get; set; }
+    public int? MainAdminId { get; set; }
 
     public int SubCategoryId { get; set; }
 
     public int TypeOfEmploymentId { get; set; }
 
-    public int AgentStatusId { get; set; }
+    public int? AgentStatusId { get; set; }
 
     public int PositionId { get; set; }
 
@@ -29,7 +29,7 @@ public partial class AgentTbl
 
     public string AgentFamily { get; set; } = null!;
 
-    public string AgentFatherName { get; set; } = null!;
+    public string? AgentFatherName { get; set; }
 
     public string NationalCode { get; set; } = null!;
 
@@ -57,39 +57,37 @@ public partial class AgentTbl
 
     public string PostalCode { get; set; } = null!;
 
-    public string BirthCertificateNumber { get; set; } = null!;
+    public string? BirthCertificateNumber { get; set; }
 
-    public string BirthCertificateDate { get; set; } = null!;
+    public string? BirthCertificateDate { get; set; }
 
-    public int GenderId { get; set; }
+    public int? GenderId { get; set; }
 
-    public int MaritalStatusId { get; set; }
+    public int? MaritalStatusId { get; set; }
 
-    public string Degree { get; set; } = null!;
+    public string? Degree { get; set; }
 
-    public string FieldOfStudy { get; set; } = null!;
+    public string? FieldOfStudy { get; set; }
 
-    public int LanguageId { get; set; }
+    public int? LanguageId { get; set; }
 
-    public string WorkExperience { get; set; } = null!;
+    public string? WorkExperience { get; set; }
 
-    public string Joblocation { get; set; } = null!;
+    public string? Joblocation { get; set; }
 
-    public string Position { get; set; } = null!;
+    public virtual AgentStatusTbl? AgentStatus { get; set; }
 
-    public virtual AgentStatusTbl AgentStatus { get; set; } = null!;
+    public virtual CityTbl? City { get; set; }
 
-    public virtual CityTbl City { get; set; } = null!;
+    public virtual LanguageType? Language { get; set; }
 
-    public virtual LanguageType Language { get; set; } = null!;
+    public virtual MainAdminTbl? MainAdmin { get; set; }
 
-    public virtual MainAdminTbl MainAdmin { get; set; } = null!;
-
-    public virtual MaritalStatusTbl MaritalStatus { get; set; } = null!;
+    public virtual MaritalStatusTbl? MaritalStatus { get; set; }
 
     public virtual ICollection<MessageTbl> MessageTbls { get; set; } = new List<MessageTbl>();
 
-    public virtual PositionTypeTbl PositionNavigation { get; set; } = null!;
+    public virtual PositionTypeTbl Position { get; set; } = null!;
 
     public virtual ICollection<RequestTbl> RequestTbls { get; set; } = new List<RequestTbl>();
 
@@ -99,5 +97,5 @@ public partial class AgentTbl
 
     public virtual TypeOfEmploymentTbl TypeOfEmployment { get; set; } = null!;
 
-    public virtual TypeOfMissionTbl TypeOfMission { get; set; } = null!;
+    public virtual TypeOfMissionTbl? TypeOfMission { get; set; }
 }
