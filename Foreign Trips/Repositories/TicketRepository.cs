@@ -1,4 +1,6 @@
-﻿using Foreign_Trips.DbContexts;
+﻿using Azure.Core;
+using Foreign_Trips.DbContexts;
+using Foreign_Trips.Entities;
 using Foreign_Trips.Model;
 using Microsoft.EntityFrameworkCore;
 
@@ -64,8 +66,17 @@ namespace Foreign_Trips.Repositories
             try
             {
 
-                var exp = await _context.TicketTbl.AddAsync(ticket);
+                TicketTbl ttbl = new TicketTbl();
+                ttbl.AgentId = ticket.AgentId;
+                ttbl.TicketStatusId = ticket.TicketStatusId;
+                ttbl.TicketNumber = ticket.TicketNumber;
+                ttbl.Subject = ticket.Subject;
+                ttbl.LatestUpdate = ticket.LatestUpdate;
+               
+
+                await _context.TicketTbl.AddAsync(ticket);
                 await _context.SaveChangesAsync();
+
 
 
                 return ticket;
