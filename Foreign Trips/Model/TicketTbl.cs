@@ -7,9 +7,7 @@ public partial class TicketTbl
 {
     public int TicketId { get; set; }
 
-    public int? AdminId { get; set; }
-
-    public int? AgentId { get; set; }
+    public int AgentId { get; set; }
 
     public int TicketStatusId { get; set; }
 
@@ -22,8 +20,6 @@ public partial class TicketTbl
     public string RegisterTime { get; set; } = null!;
 
     public string LatestUpdate { get; set; } = null!;
-
-    public virtual InternationalAdminTbl? Admin { get; set; }
 
     public virtual ICollection<TicketDetailsTbl> TicketDetailsTbls { get; set; } = new List<TicketDetailsTbl>();
 

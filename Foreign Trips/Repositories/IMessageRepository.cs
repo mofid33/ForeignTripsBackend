@@ -6,7 +6,7 @@ namespace Foreign_Trips.Repositories
     {
         Task<bool> MessageExistsAsync(int messageId);
         Task<IEnumerable<MessageTbl?>> GetMessage();
-        Task<MessageTbl?> GetMessage(int messageId);
+        Task<MessageTbl?> GetMessageAsync(int messageId);
         Task<MessageTbl?> InsertMessage(MessageTbl message);
     }
 }

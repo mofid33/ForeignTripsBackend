@@ -13,11 +13,13 @@ public partial class FileDetailsTbl
 
     public int? FileTypeId { get; set; }
 
+    public int? ReportId { get; set; }
+
     public string? Date { get; set; }
 
     public virtual FileTypeTbl? FileType { get; set; }
 
-    public virtual ICollection<Report> Reports { get; set; } = new List<Report>();
+    public virtual Report? Report { get; set; }
 
     public virtual RequestTbl? Request { get; set; }
 }

@@ -7,7 +7,7 @@ namespace Foreign_Trips.Repositories
     {
         Task<bool> MainAdminExistsAsync(int mainadminId);
         Task<IEnumerable<MainAdminTbl?>> GetMainAdmin();
-        Task<MainAdminTbl?> GetMainAdmin(int  mainadminId);
+        Task<MainAdminTbl?> GetMainAdminAsync(int  mainadminId);
         Task<MainAdminTbl?> InsertMainAdmin(MainAdminTbl mainadmin);
         Task<MainAdminTbl?> UpdateMainAdminAsync(MainAdminTbl mainadmin);
         Task UpdatePassAgentAsync(int agentId);
@@ -15,6 +15,8 @@ namespace Foreign_Trips.Repositories
         Task<AgentTbl?> InsertAgent(AgentTbl agent);
         Task<AgentTbl?> UpdateAgent(AgentTbl agent);
         Task<AgentTbl?> DeleteAgent(int agentId);
+        Task<IEnumerable<LoginRegDto?>> GetUser();
+        Task<LoginTbl?> GetUserLog(LoginTbl id);
         Task<bool> SaveChangesAsync();
     }
 }

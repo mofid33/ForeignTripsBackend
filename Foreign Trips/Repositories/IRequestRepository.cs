@@ -11,8 +11,11 @@ namespace Foreign_Trips.Repositories
         Task<RequestTbl?> InsertRequest1Async(RequestTbl request);
         Task<RequestTbl?> InsertRequest2Async(RequestTbl request);
         Task<RequestTbl?> InsertRequest3Async(RequestTbl request);
+        Task<RequestTbl?> InsertRequest4Async(RequestTbl request);
         Task<RequestDto?> UpdateRequestAsync(RequestDto request);
-        Task<RequestDto?> RejectRequest(RequestDto request);
+        Task<RequestTbl?> GetNewRequest(int requestId);
+        Task<RequestTbl?> AcceptRequest(RequestTbl request);
+        Task<RequestTbl?> RejectRequest(RequestTbl request);
         Task RemoveRequestAsync(int requestId);
         Task<IEnumerable<RequestStatusTbl>> GetRequestStatusAsync();
         Task<IEnumerable<RuleTbl?>> GetRule();
@@ -26,6 +29,8 @@ namespace Foreign_Trips.Repositories
         Task<IEnumerable<RightOfMissionTbl>> RightOfMissionAsync();
         Task<IEnumerable<RightOfCommutingTypeTbl>> RightOfCommutingTypeAsync();
         Task<IEnumerable<RightToEducationTbl>> RightToEducationAsync();
+        Task<IEnumerable<TollAmountTypeTbl>> TollAmountTypeAsync();
+        Task<IEnumerable<TravelTypeTbl>>TravelTypeAsync();
         Task<bool> SaveChangesAsync();
 
     }

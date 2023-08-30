@@ -37,6 +37,7 @@ namespace Foreign_Trips.Controllers
                 );
         }
 
+
         [HttpGet]
         [Route("GetRequest")]
         public async Task<ActionResult<RequestTbl>> GetRequest(
@@ -45,6 +46,20 @@ namespace Foreign_Trips.Controllers
         {
 
             var req = await _requestRepository.GetRequestAsync(Model.RequestId);
+            return Ok(
+         _mapper.Map<RequestTbl>(req)
+         );
+
+        }
+
+        [HttpGet]
+        [Route("GetnewRequest")]
+        public async Task<ActionResult<RequestTbl>> GetNewRequest(
+    [FromBody] RequestTbl Model
+    )
+        {
+
+            var req = await _requestRepository.GetNewRequest(Model.RequestId);
             return Ok(
          _mapper.Map<RequestTbl>(req)
          );
@@ -101,23 +116,22 @@ namespace Foreign_Trips.Controllers
 
         }
 
-
-
         [HttpPost]
-        [Route("RejectRequest")]
-        public async Task<ActionResult<RequestDto>> RejectRequest(
-[FromBody] RequestDto Model
+        [Route("InsertRequest4")]
+        public async Task<ActionResult<RequestTbl>> InsertRequest4(
+[FromBody] RequestTbl Model
 )
         {
 
-            var Req = await _requestRepository.RejectRequest(Model);
+            var Req = await _requestRepository.InsertRequest4Async(Model);
             if (Req == null)
             {
                 return BadRequest();
             }
-            return Ok();
+            return Ok(Req);
 
         }
+
 
 
 
@@ -154,6 +168,46 @@ namespace Foreign_Trips.Controllers
 
         }
 
+        [HttpPost]
+        [Route("AcceptRequest")]
+        public async Task<ActionResult<RequestTbl>> AcceptRequest(
+[FromBody] RequestTbl Model
+)
+        {
+            if (!await _requestRepository.RequestExistsAsync(Model.RequestId))
+            {
+                return NotFound();
+            }
+            var req = await _requestRepository.AcceptRequest(Model);
+            if (req == null)
+            {
+                return BadRequest();
+            }
+            return Ok();
+
+        }
+
+
+        [HttpPost]
+        [Route("RejectRequest")]
+        public async Task<ActionResult<RequestTbl>> RejectRequest(
+[FromBody] RequestTbl Model
+)
+        {
+            if (!await _requestRepository.RequestExistsAsync(Model.RequestId))
+            {
+                return NotFound();
+            }
+            var req = await _requestRepository.RejectRequest(Model);
+            if (req == null)
+            {
+                return BadRequest();
+            }
+            return Ok();
+
+        }
+
+
 
         #region RequestStatus
         [HttpGet]
@@ -169,58 +223,7 @@ namespace Foreign_Trips.Controllers
         }
         #endregion
 
-        #region Get Rule
-        [HttpGet]
-        [Route("GetRule")]
-        public async Task<ActionResult<IEnumerable<RuleTbl>>> GetRule()
-        {
-            var rule = await _requestRepository.GetRule();
 
-            return Ok(
-                rule
-                );
-        }
-        #endregion
-
-        #region File
-        [HttpPost("PostSingleFile")]
-        public async Task<ActionResult> PostSingleFile([FromForm] FileUploadModel fileDetails)
-        {
-            if (fileDetails == null)
-            {
-                return BadRequest();
-            }
-
-            try
-            {
-                await _agentRepository.PostFileAsync(fileDetails);
-                return Ok();
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
-        [HttpPost("PostMultipleFile")]
-        public async Task<ActionResult> PostMultipleFile([FromForm] List<FileUploadModel> fileDetails)
-        {
-            if (fileDetails == null)
-            {
-                return BadRequest();
-            }
-
-            try
-            {
-                await _agentRepository.PostMultiFileAsync(fileDetails);
-                return Ok();
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-        #endregion
 
     }
 }

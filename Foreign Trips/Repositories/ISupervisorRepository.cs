@@ -6,10 +6,11 @@ namespace Foreign_Trips.Repositories
     {
         Task<bool> SupervisorExistsAsync(int supervisorId);
         Task<IEnumerable<SupervisorTbl?>> GetSupervisor();
-        Task<SupervisorTbl?> GetSupervisor(int supervisorId);
+        Task<SupervisorTbl?> GetSupervisorAsync(int supervisorId);
         Task<SupervisorTbl?> InsertSupervisor(SupervisorTbl supervisor);
         Task<SupervisorTbl?> UpdateSupervisorAsync(SupervisorTbl supervisor);
-        Task<AgentTbl?> GetAgentAsync(int agentId);
+        Task RemoveSupervisorAsync(int supervisorId);
+        
        
     }
 }

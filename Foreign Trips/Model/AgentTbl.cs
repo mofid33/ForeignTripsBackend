@@ -25,6 +25,8 @@ public partial class AgentTbl
 
     public string AgentFamily { get; set; } = null!;
 
+    public string AgentFatherName { get; set; } = null!;
+
     public string NationalCode { get; set; } = null!;
 
     public string DateOfBirth { get; set; } = null!;

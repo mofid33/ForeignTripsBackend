@@ -7,8 +7,6 @@ public partial class Report
 {
     public int ReportId { get; set; }
 
-    public int FileId { get; set; }
-
     public int RequestId { get; set; }
 
     public int ReportStatusId { get; set; }
@@ -31,7 +29,7 @@ public partial class Report
 
     public string LatestUpdate { get; set; } = null!;
 
-    public virtual FileDetailsTbl File { get; set; } = null!;
+    public virtual ICollection<FileDetailsTbl> FileDetailsTbls { get; set; } = new List<FileDetailsTbl>();
 
     public virtual ReportStatusTbl ReportStatus { get; set; } = null!;
 

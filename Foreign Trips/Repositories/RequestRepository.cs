@@ -12,36 +12,24 @@ namespace Foreign_Trips.Repositories
     public class RequestRepository : IRequestRepository
     {
         private readonly AgentDbContext _context;
-        private readonly Microsoft.AspNetCore.Hosting.IHostingEnvironment _hostingEnvironment;
 
-        public RequestRepository(AgentDbContext context,Microsoft.AspNetCore.Hosting.IHostingEnvironment hostingEnvironment)
+        public RequestRepository(AgentDbContext context)
 
         {
             _context = context ?? throw new ArgumentException(nameof(context));
-            _hostingEnvironment = hostingEnvironment ?? throw new ArgumentNullException(nameof(hostingEnvironment));
+           
         }
 
         public async Task<IEnumerable<RequestTbl?>> GetRequest()
         {
-            try
-            {
-                return await _context.RequestTbl.ToListAsync();
-            }
-            catch (System.Exception ex)
-            {
-                return null;
-            }
+            return await _context.RequestTbl
+             .Include(c => c.Agent)
+             .ToListAsync();
         }
         public async Task<RequestTbl?> GetRequestAsync(int requestId)
         {
             return await _context.RequestTbl
-             .Include(c => c.Agent.AgentName)
-             .Include(x => x.Agent.AgentFamily)
-             .Include(x => x.TravelTopic)
-             .Include(x => x.ApprovedBy)
-             .Include(c => c.TravelDate)
-             .Include(c => c.TravelTypeId)
-             .Include(c => c.RequestStatusId)
+             .Include(c => c.Agent)
 
              .Where(c => c.RequestId == requestId).FirstOrDefaultAsync();
         }
@@ -90,8 +78,25 @@ namespace Foreign_Trips.Repositories
             try
             {
                 RequestTbl qtbl = new RequestTbl();
-                qtbl.AgentId = request.AgentId;
-                
+                qtbl.Agent.AgentName= request.Agent.AgentName;
+                qtbl.Agent.AgentFamily = request.Agent.AgentFamily;
+                qtbl.Agent.AgentFatherName = request.Agent.AgentFatherName;
+                qtbl.Agent.BirthCertificateNumber = request.Agent.BirthCertificateNumber;
+                qtbl.Agent.NationalCode = request.Agent.NationalCode;
+                qtbl.Agent.DateOfBirth = request.Agent.DateOfBirth;
+                qtbl.Agent.GenderId = request.Agent.GenderId;
+                qtbl.Agent.MaritalStatusId = request.Agent.MaritalStatusId;
+                qtbl.Agent.Degree = request.Agent.Degree;
+                qtbl.Agent.FieldOfStudy= request.Agent.FieldOfStudy;
+                qtbl.Agent.WorkExperience = request.Agent.WorkExperience;
+                qtbl.Agent.LanguageId = request.Agent.LanguageId;
+                qtbl.Agent.Mobile = request.Agent.Mobile;
+                qtbl.Agent.Phone = request.Agent.Phone;
+                qtbl.PassportTypeId = request.PassportTypeId;
+                qtbl.Agent.Joblocation = request.Agent.Joblocation;
+                qtbl.Agent.Position = request.Agent.Position;
+                qtbl.EmployeeStatus = request.EmployeeStatus;
+
 
 
                 await _context.RequestTbl.AddAsync(request);
@@ -139,16 +144,47 @@ namespace Foreign_Trips.Repositories
                 await _context.RequestTbl.AddAsync(request);
                 await _context.SaveChangesAsync();
 
-                PersianDateTime persianDateTime = new PersianDateTime(DateTime.Now);
+                return request;
 
-                string date = persianDateTime.ToString().Substring(0, 10);
-                if (request.RequestStatusId == 1)
-                {
-                   //qtbl.ConfirmDate = date;
 
-                }
-                var Req = await _context.RequestTbl.AddAsync(qtbl);
+            }
+
+            catch (System.Exception ex)
+            {
+                return null;
+
+            }
+
+        }
+
+        public async Task<RequestTbl?> InsertRequest4Async(RequestTbl request)
+        {
+            try
+            {
+                RequestTbl qtbl = new RequestTbl();
+                qtbl.ImportantTravel = request.ImportantTravel;
+                qtbl.MissionAchievementRecords= request.MissionAchievementRecords;
+                qtbl.SummaryInvitation = request.SummaryInvitation;
+                qtbl.ForeignTravelSummary = request.ForeignTravelSummary;
+                qtbl.ReferenceDeviceAgreement = request.ReferenceDeviceAgreement;
+                qtbl.ResistanceEconomyTravel = request.ResistanceEconomyTravel;
+
+
+
+                await _context.RequestTbl.AddAsync(request);
                 await _context.SaveChangesAsync();
+
+
+                //PersianDateTime persianDateTime = new PersianDateTime(DateTime.Now);
+
+                //string date = persianDateTime.ToString().Substring(0, 10);
+                //if (request.RequestStatusId == 1)
+                //{
+                //    qtbl.ConfirmDate = date;
+
+                //}
+                //var Req = await _context.RequestTbl.AddAsync(qtbl);
+                //await _context.SaveChangesAsync();
 
                 //var data = await _agentRepository.GetAgentAsync(request.AgentId);
                 //data.RequestId = qtbl.RequestId;
@@ -164,7 +200,6 @@ namespace Foreign_Trips.Repositories
                 return null;
 
             }
-
         }
 
         public async Task RemoveRequestAsync(int requestId)
@@ -181,31 +216,13 @@ namespace Foreign_Trips.Repositories
         }
 
 
-        public async Task<RequestDto?> RejectRequest(RequestDto request)
-        {
-            try
-            {
-                var data = await GetRequestAsync(request.RequestId);
-               // data.RejectRequest = request.RejectRequest;
-
-                await _context.SaveChangesAsync();
-                return request;
-
-            }
-
-            catch (System.Exception ex)
-            {
-                return null;
-
-            }
-        }
+        
         public async Task<RequestDto?> UpdateRequestAsync(RequestDto request)
         {
             try
             {
-                var req = await GetRequestAsync(request.RequestId);
-                req.TravelDate = request.TravelDate;
-                
+                var req = await _context.RequestTbl.FindAsync(request.RequestId);
+
 
 
 
@@ -241,6 +258,58 @@ namespace Foreign_Trips.Repositories
                 return null;
             }
         }
+
+
+        public async Task<RequestTbl?> GetNewRequest(int requestId)
+        {
+            return await _context.RequestTbl
+            
+            .Include(c => c.Agent)
+            .Include(c => c.RequestStatusId)
+
+
+            .FirstOrDefaultAsync();
+        }
+
+        public async Task<RequestTbl?> AcceptRequest(RequestTbl request)
+        {
+            try
+            {
+                var data = await GetNewRequest(request.RequestId);
+                data.RequestStatusId = 1;
+                await _context.SaveChangesAsync();
+                return request;
+
+
+            }
+
+            catch (System.Exception ex)
+            {
+                return null;
+
+            }
+        }
+
+
+        public async Task<RequestTbl?> RejectRequest(RequestTbl request)
+        {
+            try
+            {
+               var data = await GetNewRequest(request.RequestId);
+               data.RequestStatusId = 2;
+               await _context.SaveChangesAsync();
+               return request;
+
+              
+            }
+
+            catch (System.Exception ex)
+            {
+                return null;
+
+            }
+        }
+
 
         public async Task<bool> SaveChangesAsync()
         {
@@ -302,6 +371,25 @@ namespace Foreign_Trips.Repositories
         {
             return await _context.RightToEducationTbl.ToListAsync();
         }
+
+
+        #endregion
+
+
+        #region Toll Amount
+        public async Task<IEnumerable<TollAmountTypeTbl>> TollAmountTypeAsync()
+        {
+            return await _context.TollAmountTypeTbl.ToListAsync();
+        }
+
+        #endregion
+
+        #region Travel Type
+        public async Task<IEnumerable<TravelTypeTbl>> TravelTypeAsync()
+        {
+            return await _context.TravelTypeTbl.ToListAsync();
+        }
+
         #endregion
 
 
