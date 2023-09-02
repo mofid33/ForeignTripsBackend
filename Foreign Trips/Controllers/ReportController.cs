@@ -32,7 +32,7 @@ namespace Foreign_Trips.Controllers
                 );
         }
 
-        [HttpGet]
+        [HttpPost]
         [Route("GetReport")]
         public async Task<ActionResult<Report>> GetReport(
      [FromBody] Report Model

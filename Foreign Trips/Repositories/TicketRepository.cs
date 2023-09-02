@@ -72,7 +72,9 @@ namespace Foreign_Trips.Repositories
                 ttbl.TicketNumber = ticket.TicketNumber;
                 ttbl.Subject = ticket.Subject;
                 ttbl.LatestUpdate = ticket.LatestUpdate;
-               
+                ttbl.RegisterDate = ticket.RegisterDate;
+                ttbl.RegisterTime = ticket.RegisterTime;
+
 
                 await _context.TicketTbl.AddAsync(ticket);
                 await _context.SaveChangesAsync();

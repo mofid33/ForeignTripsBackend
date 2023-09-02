@@ -38,7 +38,7 @@ namespace Foreign_Trips.Controllers
         }
 
 
-        [HttpGet]
+        [HttpPost]
         [Route("GetRequest")]
         public async Task<ActionResult<RequestTbl>> GetRequest(
      [FromBody] RequestTbl Model
@@ -52,7 +52,7 @@ namespace Foreign_Trips.Controllers
 
         }
 
-        [HttpGet]
+        [HttpPost]
         [Route("GetnewRequest")]
         public async Task<ActionResult<RequestTbl>> GetNewRequest(
     [FromBody] RequestTbl Model

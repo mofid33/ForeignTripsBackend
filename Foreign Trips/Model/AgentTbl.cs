@@ -15,8 +15,6 @@ public partial class AgentTbl
 
     public int? TypeOfMissionId { get; set; }
 
-    public int? MainAdminId { get; set; }
-
     public int SubCategoryId { get; set; }
 
     public int TypeOfEmploymentId { get; set; }
@@ -81,7 +79,7 @@ public partial class AgentTbl
 
     public virtual LanguageType? Language { get; set; }
 
-    public virtual MainAdminTbl? MainAdmin { get; set; }
+    public virtual ICollection<LoginTbl> LoginTbls { get; set; } = new List<LoginTbl>();
 
     public virtual MaritalStatusTbl? MaritalStatus { get; set; }
 

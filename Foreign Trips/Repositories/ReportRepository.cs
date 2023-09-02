@@ -42,8 +42,7 @@ namespace Foreign_Trips.Repositories
             try
             {
                 Report data = new Report();
-                data.Request.Agent.AgentName = report.Request.Agent.AgentName;
-                data.Request.Agent.AgentFamily = report.Request.Agent.AgentFamily;
+                data.RequestId = report.RequestId;
                 data.RequestDateNumber = report.RequestDateNumber;
                 data.LicenseNumber = report.LicenseNumber;
                 data.LicenseDate = report.LicenseDate;
@@ -52,9 +51,7 @@ namespace Foreign_Trips.Repositories
                 data.EmailInternalDevice = report.EmailInternalDevice;
                 data.InternalDevice = report.InternalDevice;
                 data.ExternalDevice = report.ExternalDevice;
-                data.Request.DestinationCountry = report.Request.DestinationCountry;
-                data.Request.DestinationCity = report.Request.DestinationCity;
-                data.Request.MissionAchievementRecords = data.Request.MissionAchievementRecords;
+              
 
 
 

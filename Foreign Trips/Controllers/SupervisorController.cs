@@ -8,7 +8,7 @@ using Microsoft.Extensions.Logging;
 namespace Foreign_Trips.Controllers
 {
     [Route("api/Supervisor")]
-    public class OverseerController : ControllerBase
+    public class SupervisorController : ControllerBase
     {
         private readonly IAgentRepository _agentRepository;
         private readonly ISupervisorRepository _supervisorRepository;
@@ -16,7 +16,7 @@ namespace Foreign_Trips.Controllers
         private readonly IMapper _mapper;
 
 
-        public OverseerController(IAgentRepository agentRepository, ISupervisorRepository supervisorRepository,
+        public SupervisorController(IAgentRepository agentRepository, ISupervisorRepository supervisorRepository,
                                   IReportRepository reportRepository,
                                   IMapper mapper)
         {
@@ -40,7 +40,7 @@ namespace Foreign_Trips.Controllers
                 );
         }
 
-        [HttpGet]
+        [HttpPost]
         [Route("GetSupervisors")]
         public async Task<ActionResult<SupervisorTbl>> GetSupervisors(
              [FromBody] SupervisorTbl Model
@@ -116,9 +116,6 @@ namespace Foreign_Trips.Controllers
 
         }
         #endregion
-
-
-
 
 
         #region Report

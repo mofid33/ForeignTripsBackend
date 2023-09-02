@@ -16,4 +16,22 @@ public partial class LoginTbl
     public string Date { get; set; } = null!;
 
     public string Time { get; set; } = null!;
+
+    public int? SupervisorId { get; set; }
+
+    public int? AdminId { get; set; }
+
+    public int? InternationalExpertId { get; set; }
+
+    public int? MainAdminId { get; set; }
+
+    public virtual InternationalAdminTbl? Agent { get; set; }
+
+    public virtual AgentTbl? AgentNavigation { get; set; }
+
+    public virtual InternationalExpertTbl? InternationalExpert { get; set; }
+
+    public virtual MainAdminTbl? MainAdmin { get; set; }
+
+    public virtual SupervisorTbl? Supervisor { get; set; }
 }
