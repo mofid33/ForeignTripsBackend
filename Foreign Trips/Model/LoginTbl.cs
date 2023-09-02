@@ -25,9 +25,9 @@ public partial class LoginTbl
 
     public int? MainAdminId { get; set; }
 
-    public virtual InternationalAdminTbl? Agent { get; set; }
+    public virtual InternationalAdminTbl? Admin { get; set; }
 
-    public virtual AgentTbl? AgentNavigation { get; set; }
+    public virtual AgentTbl? Agent { get; set; }
 
     public virtual InternationalExpertTbl? InternationalExpert { get; set; }
 
