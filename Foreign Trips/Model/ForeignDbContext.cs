@@ -406,12 +406,12 @@ public partial class ForeignDbContext : DbContext
             entity.Property(e => e.SupervisorId).HasColumnName("SupervisorID");
             entity.Property(e => e.Time).HasMaxLength(10);
 
-            entity.HasOne(d => d.Agent).WithMany(p => p.LoginTbls)
-                .HasForeignKey(d => d.AgentId)
+            entity.HasOne(d => d.Admin).WithMany(p => p.LoginTbls)
+                .HasForeignKey(d => d.AdminId)
                 .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK_LoginTbl_InternationalAdminTbl");
 
-            entity.HasOne(d => d.AgentNavigation).WithMany(p => p.LoginTbls)
+            entity.HasOne(d => d.Agent).WithMany(p => p.LoginTbls)
                 .HasForeignKey(d => d.AgentId)
                 .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK_LoginTbl_AgentTbl");
