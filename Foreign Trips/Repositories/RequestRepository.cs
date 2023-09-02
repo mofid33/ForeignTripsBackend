@@ -34,12 +34,12 @@ namespace Foreign_Trips.Repositories
              .Where(c => c.RequestId == requestId).FirstOrDefaultAsync();
         }
 
-        public async Task<IEnumerable<RequestEmployeeTbl?>> GetRequestEmployee()
+        public async Task<RequestEmployeeTbl?> GetRequestEmployee(int requestId)
         {
             try
             {
 
-                return await _context.RequestEmployeeTbl.ToListAsync();
+                return await _context.RequestEmployeeTbl.Where(x=>x.RequestId==requestId).FirstOrDefaultAsync();
             }
             catch (System.Exception ex)
             {

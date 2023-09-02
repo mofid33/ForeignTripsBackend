@@ -6,8 +6,8 @@ namespace Foreign_Trips.Repositories
     public interface IRequestRepository
     {
         Task<IEnumerable<RequestTbl?>> GetRequest();
-        Task<RequestTbl?> GetRequestAsync(int RequestId);
-        Task<IEnumerable<RequestEmployeeTbl?>> GetRequestEmployee();
+        Task<RequestTbl?> GetRequestAsync(int requestId);
+        Task<RequestEmployeeTbl?> GetRequestEmployeeAsync(int requestId);
         Task<bool> RequestExistsAsync(int RequestId);
         Task<RequestTbl?> InsertRequestAsync(RequestTbl request);
         Task<RequestEmployeeTbl?> InsertRequestEmployeeAsync(RequestEmployeeTbl requestemployee);
