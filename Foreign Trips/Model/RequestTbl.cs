@@ -1,14 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
 
 namespace Foreign_Trips.Model;
 
 public partial class RequestTbl
 {
-    [Key]
-    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int RequestId { get; set; }
 
     public int? AgentId { get; set; }
@@ -129,7 +125,7 @@ public partial class RequestTbl
 
     public virtual MainAdminTbl? MainAdmin { get; set; }
 
-    public virtual PassportType PassportType { get; set; } = null!;
+    public virtual PassportTypeTbl PassportType { get; set; } = null!;
 
     public virtual ICollection<Report> Reports { get; set; } = new List<Report>();
 

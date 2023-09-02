@@ -34,6 +34,19 @@ namespace Foreign_Trips.Repositories
              .Where(c => c.RequestId == requestId).FirstOrDefaultAsync();
         }
 
+        public async Task<IEnumerable<RequestEmployeeTbl?>> GetRequestEmployee()
+        {
+            try
+            {
+
+                return await _context.RequestEmployeeTbl.ToListAsync();
+            }
+            catch (System.Exception ex)
+            {
+                return null;
+            }
+        }
+
         public async Task<RequestTbl?> InsertRequestAsync(RequestTbl request)
         {
             try
@@ -84,7 +97,7 @@ namespace Foreign_Trips.Repositories
 
 
 
-                await _context.RequestTbl.AddAsync(request);
+               
                 await _context.SaveChangesAsync();
 
                 return request;
@@ -126,7 +139,6 @@ namespace Foreign_Trips.Repositories
                 qtbl.PaymentFromBank = request.PaymentFromBank;
 
 
-                await _context.RequestTbl.AddAsync(request);
                 await _context.SaveChangesAsync();
 
                 return request;
@@ -156,7 +168,7 @@ namespace Foreign_Trips.Repositories
 
 
 
-                await _context.RequestTbl.AddAsync(request);
+                
                 await _context.SaveChangesAsync();
 
 
@@ -323,6 +335,7 @@ namespace Foreign_Trips.Repositories
         {
             return await _context.TravelTypeTbl.ToListAsync();
         }
+
 
         #endregion
 

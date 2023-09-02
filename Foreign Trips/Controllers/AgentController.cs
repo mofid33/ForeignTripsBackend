@@ -160,6 +160,18 @@ namespace Foreign_Trips.Controllers
 
         }
 
+        [HttpGet]
+        [Route("GetRequestEmployee")]
+        public async Task<ActionResult<IEnumerable<RequestEmployeeTbl>>> GetRequestEmployee()
+        {
+            var Requests = await _requestRepository.GetRequestEmployee();
+
+            return Ok(
+                Requests
+                );
+        }
+
+
         [HttpPost]
         [Route("InsertRequest")]
         public async Task<ActionResult<RequestTbl>> InsertRequest(
