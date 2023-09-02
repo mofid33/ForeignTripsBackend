@@ -86,30 +86,11 @@ namespace Foreign_Trips.Repositories
         }
 
 
-        public async Task<RequestTbl?> UpdateRequest2Async(RequestTbl request)
+        public async Task<RequestEmployeeTbl?> InsertRequestEmployeeAsync(RequestEmployeeTbl requestemployee)
         {
-            try
-            {
-                RequestTbl qtbl = new RequestTbl();
-               
-                qtbl.AgentId = request.AgentId;
-                qtbl.EmployeeStatus = request.EmployeeStatus;
-
-
-
-               
-                await _context.SaveChangesAsync();
-
-                return request;
-
-
-            }
-
-            catch (System.Exception ex)
-            {
-                return null;
-
-            }
+            await _context.RequestEmployeeTbl.AddAsync(requestemployee);
+            await _context.SaveChangesAsync();
+            return requestemployee; 
         }
 
         public async Task<RequestTbl?> UpdateRequest3Async(RequestTbl request)

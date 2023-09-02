@@ -10,7 +10,7 @@ namespace Foreign_Trips.Repositories
         Task<IEnumerable<RequestEmployeeTbl?>> GetRequestEmployee();
         Task<bool> RequestExistsAsync(int RequestId);
         Task<RequestTbl?> InsertRequestAsync(RequestTbl request);
-        Task<RequestTbl?> UpdateRequest2Async(RequestTbl request);
+        Task<RequestEmployeeTbl?> InsertRequestEmployeeAsync(RequestEmployeeTbl requestemployee);
         Task<RequestTbl?> UpdateRequest3Async(RequestTbl request);
         Task<RequestTbl?> UpdateRequest4Async(RequestTbl request);
         Task<RequestTbl?> GetNewRequest(int requestId);

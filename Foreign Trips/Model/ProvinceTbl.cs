@@ -5,6 +5,8 @@ namespace Foreign_Trips.Model;
 
 public partial class ProvinceTbl
 {
+    [Key]
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int ProvinceId { get; set; }
 
     public string? ProvinceName { get; set; }

@@ -5,6 +5,8 @@ namespace Foreign_Trips.Model;
 
 public partial class RightOfCommutingTypeTbl
 {
+    [Key]
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int RightOfCommutingId { get; set; }
 
     public string RightOfCommutingType { get; set; } = null!;
