@@ -43,6 +43,7 @@ namespace Foreign_Trips.Repositories
             {
                 Report data = new Report();
                 data.RequestId = report.RequestId;
+                data.ReportStatusId = report.ReportStatusId;
                 data.RequestDateNumber = report.RequestDateNumber;
                 data.LicenseNumber = report.LicenseNumber;
                 data.LicenseDate = report.LicenseDate;
@@ -51,7 +52,7 @@ namespace Foreign_Trips.Repositories
                 data.EmailInternalDevice = report.EmailInternalDevice;
                 data.InternalDevice = report.InternalDevice;
                 data.ExternalDevice = report.ExternalDevice;
-              
+                data.LatestUpdate = report.LatestUpdate;
 
 
 
