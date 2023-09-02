@@ -147,6 +147,20 @@ namespace Foreign_Trips.Controllers
 
 
         [HttpPost]
+        [Route("GetRequestEmployee")]
+        public async Task<ActionResult<RequestEmployeeTbl>> GetRequestEmployee(
+     [FromBody] RequestEmployeeTbl Model
+     )
+        {
+
+            var req = await _requestRepository.GetRequestEmployeeAsync(Model.RequestId);
+            return Ok(
+         _mapper.Map<RequestTbl>(req)
+         );
+
+        }
+
+        [HttpPost]
         [Route("GetRequest")]
         public async Task<ActionResult<RequestTbl>> GetRequest(
      [FromBody] RequestTbl Model
@@ -160,16 +174,8 @@ namespace Foreign_Trips.Controllers
 
         }
 
-        [HttpGet]
-        [Route("GetRequestEmployee")]
-        public async Task<ActionResult<IEnumerable<RequestEmployeeTbl>>> GetRequestEmployee()
-        {
-            var Requests = await _requestRepository.GetRequestEmployee();
 
-            return Ok(
-                Requests
-                );
-        }
+
 
 
         [HttpPost]
