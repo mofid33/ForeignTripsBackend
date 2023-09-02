@@ -196,12 +196,12 @@ namespace Foreign_Trips.Controllers
         }
 
         [HttpPost]
-        [Route("UpdateRequest2")]
-        public async Task<ActionResult<RequestTbl>> UpdateRequest2Async(
-[FromBody] RequestTbl Model
+        [Route("InsertRequestEmployee")]
+        public async Task<ActionResult<RequestEmployeeTbl>> InsertRequestEmployeeAsync(
+[FromBody] RequestEmployeeTbl Model
 )
         {
-            var Req = await _requestRepository.UpdateRequest2Async(Model);
+            var Req = await _requestRepository.InsertRequestEmployeeAsync(Model);
             if (Req == null)
             {
                 return BadRequest();
