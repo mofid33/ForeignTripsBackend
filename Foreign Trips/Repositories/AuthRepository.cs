@@ -173,7 +173,7 @@ namespace Foreign_Trips.Repositories
                             else
                             {
                                 var agent = await _context.AgentTbl
-                       .Where(f => f.Mobile == username && f.Password == password).ToListAsync();
+                       .Where(f => f.NationalCode == username && f.Password == password).ToListAsync();
 
                                 if (agent.Count > 0)
                                 {
