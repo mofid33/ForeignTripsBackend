@@ -1,9 +1,20 @@
-﻿namespace Foreign_Trips.Entities
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
+
+namespace Foreign_Trips.Entities
 {
     public class SupervisorDto
     {
-        public int OverseerId { get; set; }
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int SupervisorId { get; set; }
 
-        public string OverseerUserName { get; set; } = null!;
+        public string SupervisorName { get; set; } = null!;
+
+        public string SupervisorFamily { get; set; } = null!;
+
+        public string SupervisorUserName { get; set; } = null!;
+
+        public string Password { get; set; } = null!;
     }
 }

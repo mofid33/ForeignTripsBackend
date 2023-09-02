@@ -82,52 +82,124 @@ namespace Foreign_Trips.Repositories
         {
             try
             {
-                var admin = await _context.InternationalAdminTbl
-                .Where(f => f.AdminUsername == username && f.Password == password).ToListAsync();
+                var mainadmin = await _context.MainAdminTbl
+                .Where(f => f.MainAdminUserName == username && f.Password == password).ToListAsync();
                 DateTime dt = new DateTime();
                 PersianDateTime persianDateTime = new PersianDateTime(DateTime.Now);
 
-         
+
                 string date = persianDateTime.ToString().Substring(0, 10);
 
-                if (admin.Count > 0)
+                if (mainadmin.Count > 0)
                 {
                     return new LoginDto(
                 username,
                 password,
-                "Admin",
-                admin[0].AdminId,
+                "MainAdmin",
+                mainadmin[0].MainAdminId,
                null
                );
                 }
+
+                else
+                {
+                    var supervisor = await _context.SupervisorTbl
+           .Where(f => f.SupervisorUserName == username && f.Password == password).ToListAsync();
+
+                    if (supervisor.Count > 0)
+                    {
+                        LoginTbl log = new LoginTbl();
+                        log.Time = DateTime.Now.ToShortTimeString();
+
+                        log.Date = date;
+                        log.SupervisorId = supervisor[0].SupervisorId;
+                        await _context.LoginTbl.AddAsync(log);
+                        await _context.SaveChangesAsync();
+                        return new LoginDto(
+                    username,
+                    password,
+                    "Supervisor",
+                   supervisor[0].SupervisorId,
+           null);
+                    }
+
+
+
                     else
                     {
-                        var agent = await _context.AgentTbl
-               .Where(f => f.Mobile == username && f.Password == password).ToListAsync();
+                        var intexpert = await _context.InternationalExpertTbl
+               .Where(f => f.InternationalExpertUserName == username && f.Password == password).ToListAsync();
 
-                        if (agent.Count > 0)
+                        if (intexpert.Count > 0)
                         {
                             LoginTbl log = new LoginTbl();
                             log.Time = DateTime.Now.ToShortTimeString();
 
                             log.Date = date;
-                            log.AgentId = agent[0].AgentId;
+                            log.InternationalExpertId = intexpert[0].InternationalExpertId;
                             await _context.LoginTbl.AddAsync(log);
                             await _context.SaveChangesAsync();
                             return new LoginDto(
                         username,
                         password,
-                        "Agent",
-                       agent[0].AgentId,
+                        "InternationalExpert",
+                       intexpert[0].InternationalExpertId,
                null);
                         }
+
                         else
                         {
-                            return null;
+                            var intadmin = await _context.InternationalAdminTbl
+                   .Where(f => f.AdminUsername == username && f.Password == password).ToListAsync();
 
+                            if (intadmin.Count > 0)
+                            {
+                                LoginTbl log = new LoginTbl();
+                                log.Time = DateTime.Now.ToShortTimeString();
+
+                                log.Date = date;
+                                log.AdminId = intadmin[0].AdminId;
+                                await _context.LoginTbl.AddAsync(log);
+                                await _context.SaveChangesAsync();
+                                return new LoginDto(
+                            username,
+                            password,
+                            "InternationalAdmin",
+                           intadmin[0].AdminId,
+                   null);
+                            }
+
+
+                            else
+                            {
+                                var agent = await _context.AgentTbl
+                       .Where(f => f.Mobile == username && f.Password == password).ToListAsync();
+
+                                if (agent.Count > 0)
+                                {
+                                    LoginTbl log = new LoginTbl();
+                                    log.Time = DateTime.Now.ToShortTimeString();
+
+                                    log.Date = date;
+                                    log.AgentId = agent[0].AgentId;
+                                    await _context.LoginTbl.AddAsync(log);
+                                    await _context.SaveChangesAsync();
+                                    return new LoginDto(
+                                username,
+                                password,
+                                "Agent",
+                               agent[0].AgentId,
+                       null);
+                                }
+                                else
+                                {
+                                    return null;
+
+                                }
+                            }
                         }
                     }
-
+                }
             }
 
             catch (System.Exception ex)
@@ -136,21 +208,28 @@ namespace Foreign_Trips.Repositories
 
             }
         }
-        public bool VerifyPasswordHash(string password, byte[] passwordHash, byte[] passwordSalt)
-        {
-            using (var hmac = new System.Security.Cryptography.HMACSHA512(passwordSalt))
-            {
-                var computedHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
-                for (int i = 0; i < computedHash.Length; i++)
-                {
-                    if (computedHash[i] != passwordHash[i]) return false;
-                }
-                return true;
-            }
-        }
-        public async Task<bool> SaveChangesAsync()
-        {
-            return (await _context.SaveChangesAsync() > 0);
-        }
-    }
-}
+
+
+
+            public bool VerifyPasswordHash(string password, byte[] passwordHash, byte[] passwordSalt)
+                                {
+                                    using (var hmac = new System.Security.Cryptography.HMACSHA512(passwordSalt))
+                                    {
+                                        var computedHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
+                                        for (int i = 0; i < computedHash.Length; i++)
+                                        {
+                                            if (computedHash[i] != passwordHash[i]) return false;
+                                        }
+                                        return true;
+                                    }
+                                }
+                                public async Task<bool> SaveChangesAsync()
+                                {
+                                    return (await _context.SaveChangesAsync() > 0);
+                                }
+                            }
+                        }
+            
+            
+                
+

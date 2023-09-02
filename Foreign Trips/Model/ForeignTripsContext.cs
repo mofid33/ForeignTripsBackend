@@ -143,7 +143,7 @@ public partial class ForeignTripsContext : DbContext
             entity.Property(e => e.FieldOfStudy).HasMaxLength(100);
             entity.Property(e => e.Joblocation).HasMaxLength(200);
             entity.Property(e => e.LanguageId).HasColumnName("languageID");
-            entity.Property(e => e.MainAdminId).HasColumnName("MainAdminID");
+            //entity.Property(e => e.MainAdminId).HasColumnName("MainAdminID");
             entity.Property(e => e.MaritalStatusId).HasColumnName("MaritalStatusID");
             entity.Property(e => e.Mobile).HasMaxLength(11);
             entity.Property(e => e.NationalCode).HasMaxLength(10);
@@ -173,10 +173,10 @@ public partial class ForeignTripsContext : DbContext
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_AgentTbl_languageType");
 
-            entity.HasOne(d => d.MainAdmin).WithMany(p => p.AgentTbls)
-                .HasForeignKey(d => d.MainAdminId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_AgentTbl_MainAdminTbl");
+            //entity.HasOne(d => d.MainAdmin).WithMany(p => p.AgentTbls)
+            //    .HasForeignKey(d => d.MainAdminId)
+            //    .OnDelete(DeleteBehavior.ClientSetNull)
+            //    .HasConstraintName("FK_AgentTbl_MainAdminTbl");
 
             entity.HasOne(d => d.MaritalStatus).WithMany(p => p.AgentTbls)
                 .HasForeignKey(d => d.MaritalStatusId)
@@ -414,16 +414,16 @@ public partial class ForeignTripsContext : DbContext
             entity.ToTable("MainAdminTbl");
 
             entity.Property(e => e.MainAdminId).HasColumnName("mainAdminID");
-            entity.Property(e => e.AdminId).HasColumnName("AdminID");
-            entity.Property(e => e.AgentId).HasColumnName("AgentID");
+            //entity.Property(e => e.AdminId).HasColumnName("AdminID");
+            //entity.Property(e => e.AgentId).HasColumnName("AgentID");
             entity.Property(e => e.MainAdminName).HasMaxLength(100);
             entity.Property(e => e.MainAdminUserName).HasMaxLength(100);
             entity.Property(e => e.Password).HasMaxLength(300);
 
-            entity.HasOne(d => d.Admin).WithMany(p => p.MainAdminTbls)
-                .HasForeignKey(d => d.AdminId)
-                .OnDelete(DeleteBehavior.Cascade)
-                .HasConstraintName("FK_SupervisorTbl_AdminTbl");
+            //entity.HasOne(d => d.Admin).WithMany(p => p.MainAdminTbls)
+            //    .HasForeignKey(d => d.AdminId)
+            //    .OnDelete(DeleteBehavior.Cascade)
+            //    .HasConstraintName("FK_SupervisorTbl_AdminTbl");
         });
 
         modelBuilder.Entity<MaritalStatusTbl>(entity =>

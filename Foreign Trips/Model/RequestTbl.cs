@@ -11,9 +11,9 @@ public partial class RequestTbl
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int RequestId { get; set; }
 
-    public int AgentId { get; set; }
+    public int? AgentId { get; set; }
 
-    public int RequestStatusId { get; set; }
+    public int? RequestStatusId { get; set; }
 
     public string ExecutiveDeviceName { get; set; } = null!;
 
@@ -109,19 +109,31 @@ public partial class RequestTbl
 
     public bool? IsFinal { get; set; }
 
-    public virtual AgentTbl Agent { get; set; } = null!;
+    public int? AdminId { get; set; }
+
+    public int? InternationalExpertId { get; set; }
+
+    public int? MainAdminId { get; set; }
+
+    public virtual InternationalAdminTbl? Admin { get; set; }
+
+    public virtual AgentTbl? Agent { get; set; }
 
     public virtual DeviceNameItypeTbl DeviceName { get; set; } = null!;
 
     public virtual ICollection<FileDetailsTbl> FileDetailsTbls { get; set; } = new List<FileDetailsTbl>();
 
+    public virtual InternationalExpertTbl? InternationalExpert { get; set; }
+
     public virtual JobGoalsTypeTbl JobGoal { get; set; } = null!;
+
+    public virtual MainAdminTbl? MainAdmin { get; set; }
 
     public virtual PassportType PassportType { get; set; } = null!;
 
     public virtual ICollection<Report> Reports { get; set; } = new List<Report>();
 
-    public virtual RequestStatusTbl RequestStatus { get; set; } = null!;
+    public virtual RequestStatusTbl? RequestStatus { get; set; }
 
     public virtual RightOfCommutingTypeTbl? RightOfCommuting { get; set; }
 

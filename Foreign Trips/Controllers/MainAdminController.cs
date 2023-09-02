@@ -61,7 +61,7 @@ namespace Foreign_Trips.Controllers
                 );
         }
 
-        [HttpGet]
+        [HttpPost]
         [Route("GetMainAdmins")]
         public async Task<ActionResult<MainAdminTbl>> GetMainAdmins(
     [FromBody] MainAdminTbl Model
@@ -202,7 +202,7 @@ namespace Foreign_Trips.Controllers
                 );
         }
 
-        [HttpGet]
+        [HttpPost]
         [Route("GetReport")]
         public async Task<ActionResult<Report>> GetReport(
       [FromBody] Report Model
@@ -232,7 +232,7 @@ namespace Foreign_Trips.Controllers
                 );
         }
 
-        [HttpGet]
+        [HttpPost]
         [Route("GetSupervisors")]
         public async Task<ActionResult<SupervisorTbl>> GetSupervisors(
              [FromBody] SupervisorTbl Model
@@ -309,7 +309,7 @@ namespace Foreign_Trips.Controllers
                 );
         }
 
-        [HttpGet]
+        [HttpPost]
         [Route("GetInternationalExpertByID")]
         public async Task<ActionResult<InternationalExpertTbl>> GetInternationalExpertByID(
      [FromBody] InternationalExpertTbl Model
@@ -493,7 +493,7 @@ namespace Foreign_Trips.Controllers
         }
 
 
-        [HttpGet]
+        [HttpPost]
         [Route("GetRequest")]
         public async Task<ActionResult<RequestTbl>> GetRequest(
      [FromBody] RequestTbl Model
@@ -507,7 +507,7 @@ namespace Foreign_Trips.Controllers
 
         }
 
-        [HttpGet]
+        [HttpPost]
         [Route("GetnewRequest")]
         public async Task<ActionResult<RequestTbl>> GetNewRequest(
     [FromBody] RequestTbl Model

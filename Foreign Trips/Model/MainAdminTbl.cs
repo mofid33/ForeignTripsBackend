@@ -11,17 +11,13 @@ public partial class MainAdminTbl
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int MainAdminId { get; set; }
 
-    public int? AdminId { get; set; }
-
-    public int? AgentId { get; set; }
-
     public string MainAdminName { get; set; } = null!;
 
     public string MainAdminUserName { get; set; } = null!;
 
     public string Password { get; set; } = null!;
 
-    public virtual InternationalAdminTbl? Admin { get; set; }
+    public virtual ICollection<LoginTbl> LoginTbls { get; set; } = new List<LoginTbl>();
 
-    public virtual ICollection<AgentTbl> AgentTbls { get; set; } = new List<AgentTbl>();
+    public virtual ICollection<RequestTbl> RequestTbls { get; set; } = new List<RequestTbl>();
 }

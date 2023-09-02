@@ -18,4 +18,8 @@ public partial class InternationalExpertTbl
     public string InternationalExpertUserName { get; set; } = null!;
 
     public string Password { get; set; } = null!;
+
+    public virtual ICollection<LoginTbl> LoginTbls { get; set; } = new List<LoginTbl>();
+
+    public virtual ICollection<RequestTbl> RequestTbls { get; set; } = new List<RequestTbl>();
 }

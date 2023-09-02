@@ -78,23 +78,8 @@ namespace Foreign_Trips.Repositories
             try
             {
                 RequestTbl qtbl = new RequestTbl();
-                qtbl.Agent.AgentName= request.Agent.AgentName;
-                qtbl.Agent.AgentFamily = request.Agent.AgentFamily;
-                qtbl.Agent.AgentFatherName = request.Agent.AgentFatherName;
-                qtbl.Agent.BirthCertificateNumber = request.Agent.BirthCertificateNumber;
-                qtbl.Agent.NationalCode = request.Agent.NationalCode;
-                qtbl.Agent.DateOfBirth = request.Agent.DateOfBirth;
-                qtbl.Agent.GenderId = request.Agent.GenderId;
-                qtbl.Agent.MaritalStatusId = request.Agent.MaritalStatusId;
-                qtbl.Agent.Degree = request.Agent.Degree;
-                qtbl.Agent.FieldOfStudy= request.Agent.FieldOfStudy;
-                qtbl.Agent.WorkExperience = request.Agent.WorkExperience;
-                qtbl.Agent.LanguageId = request.Agent.LanguageId;
-                qtbl.Agent.Mobile = request.Agent.Mobile;
-                qtbl.Agent.Phone = request.Agent.Phone;
-                qtbl.PassportTypeId = request.PassportTypeId;
-                qtbl.Agent.Joblocation = request.Agent.Joblocation;
-                qtbl.Agent.Position = request.Agent.Position;
+               
+                qtbl.AgentId = request.AgentId;
                 qtbl.EmployeeStatus = request.EmployeeStatus;
 
 
