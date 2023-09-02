@@ -320,7 +320,6 @@ namespace Foreign_Trips.Controllers
 
         #endregion
 
-
         #region Ticket
 
         [HttpGet]
@@ -346,21 +345,7 @@ namespace Foreign_Trips.Controllers
 
         }
 
-        [HttpPost]
-        [Route("InsertTicket")]
-        public async Task<ActionResult<TicketTbl>> InsertTicket(
-[FromBody] TicketTbl Model
-)
-        {
-
-            var Ticket = await _ticketRepository.InsertTicket(Model);
-            if (Ticket == null)
-            {
-                return BadRequest();
-            }
-            return Ok(Ticket);
-
-        }
+        
         #endregion
 
     }
