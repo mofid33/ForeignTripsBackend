@@ -34,7 +34,7 @@ namespace Foreign_Trips.Repositories
              .Where(c => c.RequestId == requestId).FirstOrDefaultAsync();
         }
 
-        public async Task<RequestEmployeeTbl?> GetRequestEmployee(int requestId)
+        public async Task<RequestEmployeeTbl?> GetRequestEmployeeAsync(int requestId)
         {
             try
             {
