@@ -53,15 +53,19 @@ namespace Foreign_Trips.Controllers
         }
 
 
-        [HttpGet]
-        [Route("GetRequestEmployee")]
-        public async Task<ActionResult<IEnumerable<RequestEmployeeTbl>>> GetRequestEmployee()
-        {
-            var Requests = await _requestRepository.GetRequestEmployee();
 
+        [HttpPost]
+        [Route("GetRequestEmployee")]
+        public async Task<ActionResult<RequestEmployeeTbl>> GetRequestEmployee(
+     [FromBody] RequestEmployeeTbl Model
+     )
+        {
+
+            var req = await _requestRepository.GetRequestEmployeeAsync(Model.RequestId);
             return Ok(
-                Requests
-                );
+         _mapper.Map<RequestTbl>(req)
+         );
+
         }
 
 
@@ -99,12 +103,12 @@ namespace Foreign_Trips.Controllers
         }
 
         [HttpPost]
-        [Route("UpdateRequest2")]
-        public async Task<ActionResult<RequestTbl>> UpdateRequest2Async(
-[FromBody] RequestTbl Model
+        [Route("InsertRequestEmployee")]
+        public async Task<ActionResult<RequestEmployeeTbl>> InsertRequestEmployeeAsync(
+[FromBody] RequestEmployeeTbl Model
 )
         {
-            var Req = await _requestRepository.UpdateRequest2Async(Model);
+            var Req = await _requestRepository.InsertRequestEmployeeAsync(Model);
             if (Req == null)
             {
                 return BadRequest();

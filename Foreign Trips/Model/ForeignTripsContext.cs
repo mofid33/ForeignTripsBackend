@@ -138,13 +138,13 @@ public partial class ForeignTripsContext : DbContext
             entity.Property(e => e.CityId).HasColumnName("CityID");
             entity.Property(e => e.CompanyName).HasMaxLength(300);
             entity.Property(e => e.DateOfBirth).HasMaxLength(10);
-            entity.Property(e => e.Degree).HasMaxLength(50);
+            //entity.Property(e => e.Degree).HasMaxLength(50);
             entity.Property(e => e.Email).HasMaxLength(100);
-            entity.Property(e => e.FieldOfStudy).HasMaxLength(100);
-            entity.Property(e => e.Joblocation).HasMaxLength(200);
-            entity.Property(e => e.LanguageId).HasColumnName("languageID");
+            //entity.Property(e => e.FieldOfStudy).HasMaxLength(100);
+            //entity.Property(e => e.Joblocation).HasMaxLength(200);
+            //entity.Property(e => e.LanguageId).HasColumnName("languageID");
             //entity.Property(e => e.MainAdminId).HasColumnName("MainAdminID");
-            entity.Property(e => e.MaritalStatusId).HasColumnName("MaritalStatusID");
+            //entity.Property(e => e.MaritalStatusId).HasColumnName("MaritalStatusID");
             entity.Property(e => e.Mobile).HasMaxLength(11);
             entity.Property(e => e.NationalCode).HasMaxLength(10);
             entity.Property(e => e.Password).HasMaxLength(300);
@@ -157,7 +157,7 @@ public partial class ForeignTripsContext : DbContext
             entity.Property(e => e.Subset).HasMaxLength(300);
             entity.Property(e => e.TypeOfEmploymentId).HasColumnName("TypeOfEmploymentID");
             entity.Property(e => e.TypeOfMissionId).HasColumnName("TypeOfMissionID");
-            entity.Property(e => e.WorkExperience).HasMaxLength(100);
+            //entity.Property(e => e.WorkExperience).HasMaxLength(100);
 
             entity.HasOne(d => d.AgentStatus).WithMany(p => p.AgentTbls)
                 .HasForeignKey(d => d.AgentStatusId)
@@ -168,20 +168,20 @@ public partial class ForeignTripsContext : DbContext
                 .HasForeignKey(d => d.CityId)
                 .HasConstraintName("FK_AgentTbl_CityTbl");
 
-            entity.HasOne(d => d.Language).WithMany(p => p.AgentTbls)
-                .HasForeignKey(d => d.LanguageId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_AgentTbl_languageType");
+            //entity.HasOne(d => d.Language).WithMany(p => p.AgentTbls)
+            //    .HasForeignKey(d => d.LanguageId)
+            //    .OnDelete(DeleteBehavior.ClientSetNull)
+            //    .HasConstraintName("FK_AgentTbl_languageType");
 
             //entity.HasOne(d => d.MainAdmin).WithMany(p => p.AgentTbls)
             //    .HasForeignKey(d => d.MainAdminId)
             //    .OnDelete(DeleteBehavior.ClientSetNull)
             //    .HasConstraintName("FK_AgentTbl_MainAdminTbl");
 
-            entity.HasOne(d => d.MaritalStatus).WithMany(p => p.AgentTbls)
-                .HasForeignKey(d => d.MaritalStatusId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_AgentTbl_MaritalStatusTbl");
+            //entity.HasOne(d => d.MaritalStatus).WithMany(p => p.AgentTbls)
+            //    .HasForeignKey(d => d.MaritalStatusId)
+            //    .OnDelete(DeleteBehavior.ClientSetNull)
+            //    .HasConstraintName("FK_AgentTbl_MaritalStatusTbl");
 
             //entity.HasOne(d => d.PositionNavigation).WithMany(p => p.AgentTbls)
             //    .HasForeignKey(d => d.PositionId)
