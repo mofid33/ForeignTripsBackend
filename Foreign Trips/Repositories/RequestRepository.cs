@@ -34,6 +34,19 @@ namespace Foreign_Trips.Repositories
              .Where(c => c.RequestId == requestId).FirstOrDefaultAsync();
         }
 
+        public async Task<RequestEmployeeTbl?> GetRequestEmployeeAsync(int requestId)
+        {
+            try
+            {
+
+                return await _context.RequestEmployeeTbl.Where(x=>x.RequestId==requestId).FirstOrDefaultAsync();
+            }
+            catch (System.Exception ex)
+            {
+                return null;
+            }
+        }
+
         public async Task<RequestTbl?> InsertRequestAsync(RequestTbl request)
         {
             try
@@ -73,30 +86,11 @@ namespace Foreign_Trips.Repositories
         }
 
 
-        public async Task<RequestTbl?> UpdateRequest2Async(RequestTbl request)
+        public async Task<RequestEmployeeTbl?> InsertRequestEmployeeAsync(RequestEmployeeTbl requestemployee)
         {
-            try
-            {
-                RequestTbl qtbl = new RequestTbl();
-               
-                qtbl.AgentId = request.AgentId;
-                qtbl.EmployeeStatus = request.EmployeeStatus;
-
-
-
-                await _context.RequestTbl.AddAsync(request);
-                await _context.SaveChangesAsync();
-
-                return request;
-
-
-            }
-
-            catch (System.Exception ex)
-            {
-                return null;
-
-            }
+            await _context.RequestEmployeeTbl.AddAsync(requestemployee);
+            await _context.SaveChangesAsync();
+            return requestemployee; 
         }
 
         public async Task<RequestTbl?> UpdateRequest3Async(RequestTbl request)
@@ -126,7 +120,6 @@ namespace Foreign_Trips.Repositories
                 qtbl.PaymentFromBank = request.PaymentFromBank;
 
 
-                await _context.RequestTbl.AddAsync(request);
                 await _context.SaveChangesAsync();
 
                 return request;
@@ -156,7 +149,7 @@ namespace Foreign_Trips.Repositories
 
 
 
-                await _context.RequestTbl.AddAsync(request);
+                
                 await _context.SaveChangesAsync();
 
 
@@ -323,6 +316,7 @@ namespace Foreign_Trips.Repositories
         {
             return await _context.TravelTypeTbl.ToListAsync();
         }
+
 
         #endregion
 

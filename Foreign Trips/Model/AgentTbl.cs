@@ -61,27 +61,11 @@ public partial class AgentTbl
 
     public int? GenderId { get; set; }
 
-    public int? MaritalStatusId { get; set; }
-
-    public string? Degree { get; set; }
-
-    public string? FieldOfStudy { get; set; }
-
-    public int? LanguageId { get; set; }
-
-    public string? WorkExperience { get; set; }
-
-    public string? Joblocation { get; set; }
-
     public virtual AgentStatusTbl? AgentStatus { get; set; }
 
     public virtual CityTbl? City { get; set; }
 
-    public virtual LanguageType? Language { get; set; }
-
     public virtual ICollection<LoginTbl> LoginTbls { get; set; } = new List<LoginTbl>();
-
-    public virtual MaritalStatusTbl? MaritalStatus { get; set; }
 
     public virtual ICollection<MessageTbl> MessageTbls { get; set; } = new List<MessageTbl>();
 

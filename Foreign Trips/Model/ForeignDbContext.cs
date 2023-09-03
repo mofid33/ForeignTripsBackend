@@ -43,7 +43,7 @@ public partial class ForeignDbContext : DbContext
 
     public virtual DbSet<JobGoalsTypeTbl> JobGoalsTypeTbls { get; set; }
 
-    public virtual DbSet<LanguageType> LanguageTypes { get; set; }
+    public virtual DbSet<LanguageTypeTbl> LanguageTypeTbls { get; set; }
 
     public virtual DbSet<LoginTbl> LoginTbls { get; set; }
 
@@ -57,7 +57,7 @@ public partial class ForeignDbContext : DbContext
 
     public virtual DbSet<PassportTbl> PassportTbls { get; set; }
 
-    public virtual DbSet<PassportType> PassportTypes { get; set; }
+    public virtual DbSet<PassportTypeTbl> PassportTypeTbls { get; set; }
 
     public virtual DbSet<PositionTypeTbl> PositionTypeTbls { get; set; }
 
@@ -68,6 +68,8 @@ public partial class ForeignDbContext : DbContext
     public virtual DbSet<Report> Reports { get; set; }
 
     public virtual DbSet<ReportStatusTbl> ReportStatusTbls { get; set; }
+
+    public virtual DbSet<RequestEmployeeTbl> RequestEmployeeTbls { get; set; }
 
     public virtual DbSet<RequestStatusTbl> RequestStatusTbls { get; set; }
 
@@ -142,12 +144,8 @@ public partial class ForeignDbContext : DbContext
             entity.Property(e => e.CityId).HasColumnName("CityID");
             entity.Property(e => e.CompanyName).HasMaxLength(300);
             entity.Property(e => e.DateOfBirth).HasMaxLength(10);
-            entity.Property(e => e.Degree).HasMaxLength(50);
             entity.Property(e => e.Email).HasMaxLength(100);
-            entity.Property(e => e.FieldOfStudy).HasMaxLength(100);
-            entity.Property(e => e.Joblocation).HasMaxLength(200);
-            entity.Property(e => e.LanguageId).HasColumnName("languageID");
-            entity.Property(e => e.MaritalStatusId).HasColumnName("MaritalStatusID");
+            entity.Property(e => e.GenderId).HasColumnName("GenderID");
             entity.Property(e => e.Mobile).HasMaxLength(11);
             entity.Property(e => e.NationalCode).HasMaxLength(10);
             entity.Property(e => e.Password).HasMaxLength(300);
@@ -156,10 +154,10 @@ public partial class ForeignDbContext : DbContext
             entity.Property(e => e.PostalCode).HasMaxLength(100);
             entity.Property(e => e.RegisterDate).HasMaxLength(10);
             entity.Property(e => e.RegisterTime).HasMaxLength(5);
+            entity.Property(e => e.SubCategoryId).HasColumnName("SubCategoryID");
             entity.Property(e => e.Subset).HasMaxLength(300);
             entity.Property(e => e.TypeOfEmploymentId).HasColumnName("TypeOfEmploymentID");
             entity.Property(e => e.TypeOfMissionId).HasColumnName("TypeOfMissionID");
-            entity.Property(e => e.WorkExperience).HasMaxLength(100);
 
             entity.HasOne(d => d.AgentStatus).WithMany(p => p.AgentTbls)
                 .HasForeignKey(d => d.AgentStatusId)
@@ -169,14 +167,6 @@ public partial class ForeignDbContext : DbContext
                 .HasForeignKey(d => d.CityId)
                 .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK_AgentTbl_CityTbl");
-
-            entity.HasOne(d => d.Language).WithMany(p => p.AgentTbls)
-                .HasForeignKey(d => d.LanguageId)
-                .HasConstraintName("FK_AgentTbl_languageType");
-
-            entity.HasOne(d => d.MaritalStatus).WithMany(p => p.AgentTbls)
-                .HasForeignKey(d => d.MaritalStatusId)
-                .HasConstraintName("FK_AgentTbl_MaritalStatusTbl");
 
             entity.HasOne(d => d.Position).WithMany(p => p.AgentTbls)
                 .HasForeignKey(d => d.PositionId)
@@ -293,6 +283,7 @@ public partial class ForeignDbContext : DbContext
             entity.Property(e => e.ForeignDelegationId)
                 .ValueGeneratedNever()
                 .HasColumnName("ForeignDelegationID");
+            entity.Property(e => e.CityId).HasColumnName("CityID");
             entity.Property(e => e.DateOfBirth).HasMaxLength(10);
             entity.Property(e => e.DateOfIssue).HasMaxLength(10);
             entity.Property(e => e.DurationOfStayInIran).HasMaxLength(300);
@@ -379,14 +370,14 @@ public partial class ForeignDbContext : DbContext
             entity.Property(e => e.JobGoalsType).HasMaxLength(50);
         });
 
-        modelBuilder.Entity<LanguageType>(entity =>
+        modelBuilder.Entity<LanguageTypeTbl>(entity =>
         {
-            entity.HasKey(e => e.LanguageId);
+            entity.HasKey(e => e.LanguageId).HasName("PK_languageType");
 
-            entity.ToTable("languageType", "dbo");
+            entity.ToTable("LanguageTypeTbl", "dbo");
 
             entity.Property(e => e.LanguageId).HasColumnName("languageID");
-            entity.Property(e => e.LanguageType1)
+            entity.Property(e => e.LanguageType)
                 .HasMaxLength(100)
                 .HasColumnName("languageType");
         });
@@ -521,14 +512,14 @@ public partial class ForeignDbContext : DbContext
             entity.Property(e => e.TypeOfMission).HasMaxLength(10);
         });
 
-        modelBuilder.Entity<PassportType>(entity =>
+        modelBuilder.Entity<PassportTypeTbl>(entity =>
         {
-            entity.ToTable("PassportType", "dbo");
+            entity.HasKey(e => e.PassportTypeId).HasName("PK_PassportType");
+
+            entity.ToTable("PassportTypeTbl", "dbo");
 
             entity.Property(e => e.PassportTypeId).HasColumnName("PassportTypeID");
-            entity.Property(e => e.PassportType1)
-                .HasMaxLength(50)
-                .HasColumnName("PassportType");
+            entity.Property(e => e.PassportType).HasMaxLength(50);
         });
 
         modelBuilder.Entity<PositionTypeTbl>(entity =>
@@ -597,6 +588,62 @@ public partial class ForeignDbContext : DbContext
 
             entity.Property(e => e.ReportStatusId).HasColumnName("ReportStatusID");
             entity.Property(e => e.ReportStatusType).HasMaxLength(200);
+        });
+
+        modelBuilder.Entity<RequestEmployeeTbl>(entity =>
+        {
+            entity.HasKey(e => e.RequestEmployeeId).HasName("PK__RequestE__7AD04F11A41FDFF4");
+
+            entity.ToTable("RequestEmployeeTbl", "dbo");
+
+            entity.Property(e => e.RequestEmployeeId).HasColumnName("RequestEmployeeID");
+            entity.Property(e => e.BirthCertificationDate)
+                .HasMaxLength(100)
+                .IsFixedLength();
+            entity.Property(e => e.BirthCertificationNumber).HasMaxLength(100);
+            entity.Property(e => e.Degree).HasMaxLength(50);
+            entity.Property(e => e.EmployeeFamily).HasMaxLength(200);
+            entity.Property(e => e.EmployeeFatherName).HasMaxLength(200);
+            entity.Property(e => e.EmployeeName).HasMaxLength(200);
+            entity.Property(e => e.EmployeeStatus)
+                .HasMaxLength(200)
+                .IsFixedLength();
+            entity.Property(e => e.FieldOfStudy).HasMaxLength(200);
+            entity.Property(e => e.GenderId).HasColumnName("GenderID");
+            entity.Property(e => e.JobLocation)
+                .HasMaxLength(200)
+                .IsFixedLength();
+            entity.Property(e => e.LanguageId).HasColumnName("LanguageID");
+            entity.Property(e => e.MaritalStatusId).HasColumnName("MaritalStatusID");
+            entity.Property(e => e.Mobile).HasMaxLength(15);
+            entity.Property(e => e.NationalCode).HasMaxLength(100);
+            entity.Property(e => e.PassPortTypeId).HasColumnName("PassPortTypeID");
+            entity.Property(e => e.Phone).HasMaxLength(20);
+            entity.Property(e => e.PositionId).HasColumnName("PositionID");
+            entity.Property(e => e.RequestId).HasColumnName("RequestID");
+            entity.Property(e => e.WorkExperience)
+                .HasMaxLength(100)
+                .IsFixedLength();
+
+            entity.HasOne(d => d.Gender).WithMany(p => p.RequestEmployeeTbls)
+                .HasForeignKey(d => d.GenderId)
+                .HasConstraintName("FK_RequestEmployeeTbl_GenderTypeTbl");
+
+            entity.HasOne(d => d.Language).WithMany(p => p.RequestEmployeeTbls)
+                .HasForeignKey(d => d.LanguageId)
+                .HasConstraintName("FK_RequestEmployeeTbl_LanguageTypeTbl");
+
+            entity.HasOne(d => d.MaritalStatus).WithMany(p => p.RequestEmployeeTbls)
+                .HasForeignKey(d => d.MaritalStatusId)
+                .HasConstraintName("FK_RequestEmployeeTbl_MaritalStatusTbl");
+
+            entity.HasOne(d => d.PassPortType).WithMany(p => p.RequestEmployeeTbls)
+                .HasForeignKey(d => d.PassPortTypeId)
+                .HasConstraintName("FK_RequestEmployeeTbl_PassportTypeTbl");
+
+            entity.HasOne(d => d.Position).WithMany(p => p.RequestEmployeeTbls)
+                .HasForeignKey(d => d.PositionId)
+                .HasConstraintName("FK_RequestEmployeeTbl_PositionTypeTbl");
         });
 
         modelBuilder.Entity<RequestStatusTbl>(entity =>

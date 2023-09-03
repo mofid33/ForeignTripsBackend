@@ -13,5 +13,5 @@ public partial class MaritalStatusTbl
 
     public string? MaritalStatusTitle { get; set; }
 
-    public virtual ICollection<AgentTbl> AgentTbls { get; set; } = new List<AgentTbl>();
+    public virtual ICollection<RequestEmployeeTbl> RequestEmployeeTbls { get; set; } = new List<RequestEmployeeTbl>();
 }

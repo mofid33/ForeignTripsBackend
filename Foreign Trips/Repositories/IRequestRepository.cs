@@ -6,10 +6,11 @@ namespace Foreign_Trips.Repositories
     public interface IRequestRepository
     {
         Task<IEnumerable<RequestTbl?>> GetRequest();
-        Task<RequestTbl?> GetRequestAsync(int RequestId);
+        Task<RequestTbl?> GetRequestAsync(int requestId);
+        Task<RequestEmployeeTbl?> GetRequestEmployeeAsync(int requestId);
         Task<bool> RequestExistsAsync(int RequestId);
         Task<RequestTbl?> InsertRequestAsync(RequestTbl request);
-        Task<RequestTbl?> UpdateRequest2Async(RequestTbl request);
+        Task<RequestEmployeeTbl?> InsertRequestEmployeeAsync(RequestEmployeeTbl requestemployee);
         Task<RequestTbl?> UpdateRequest3Async(RequestTbl request);
         Task<RequestTbl?> UpdateRequest4Async(RequestTbl request);
         Task<RequestTbl?> GetNewRequest(int requestId);

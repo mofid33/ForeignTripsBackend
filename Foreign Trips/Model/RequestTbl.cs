@@ -129,7 +129,7 @@ public partial class RequestTbl
 
     public virtual MainAdminTbl? MainAdmin { get; set; }
 
-    public virtual PassportType PassportType { get; set; } = null!;
+    public virtual PassportTypeTbl PassportType { get; set; } = null!;
 
     public virtual ICollection<Report> Reports { get; set; } = new List<Report>();
 

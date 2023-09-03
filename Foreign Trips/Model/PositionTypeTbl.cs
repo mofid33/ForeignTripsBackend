@@ -14,4 +14,6 @@ public partial class PositionTypeTbl
     public string PositionType { get; set; } = null!;
 
     public virtual ICollection<AgentTbl> AgentTbls { get; set; } = new List<AgentTbl>();
+
+    public virtual ICollection<RequestEmployeeTbl> RequestEmployeeTbls { get; set; } = new List<RequestEmployeeTbl>();
 }

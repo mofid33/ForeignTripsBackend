@@ -147,6 +147,20 @@ namespace Foreign_Trips.Controllers
 
 
         [HttpPost]
+        [Route("GetRequestEmployee")]
+        public async Task<ActionResult<RequestEmployeeTbl>> GetRequestEmployee(
+     [FromBody] RequestEmployeeTbl Model
+     )
+        {
+
+            var req = await _requestRepository.GetRequestEmployeeAsync(Model.RequestId);
+            return Ok(
+         _mapper.Map<RequestTbl>(req)
+         );
+
+        }
+
+        [HttpPost]
         [Route("GetRequest")]
         public async Task<ActionResult<RequestTbl>> GetRequest(
      [FromBody] RequestTbl Model
@@ -159,6 +173,10 @@ namespace Foreign_Trips.Controllers
          );
 
         }
+
+
+
+
 
         [HttpPost]
         [Route("InsertRequest")]
@@ -178,12 +196,12 @@ namespace Foreign_Trips.Controllers
         }
 
         [HttpPost]
-        [Route("UpdateRequest2")]
-        public async Task<ActionResult<RequestTbl>> UpdateRequest2Async(
-[FromBody] RequestTbl Model
+        [Route("InsertRequestEmployee")]
+        public async Task<ActionResult<RequestEmployeeTbl>> InsertRequestEmployeeAsync(
+[FromBody] RequestEmployeeTbl Model
 )
         {
-            var Req = await _requestRepository.UpdateRequest2Async(Model);
+            var Req = await _requestRepository.InsertRequestEmployeeAsync(Model);
             if (Req == null)
             {
                 return BadRequest();

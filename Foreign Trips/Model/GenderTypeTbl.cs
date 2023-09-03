@@ -12,4 +12,6 @@ public partial class GenderTypeTbl
     public int GenderId { get; set; }
 
     public string GenderType { get; set; } = null!;
+
+    public virtual ICollection<RequestEmployeeTbl> RequestEmployeeTbls { get; set; } = new List<RequestEmployeeTbl>();
 }
