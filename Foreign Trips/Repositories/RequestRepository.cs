@@ -33,7 +33,14 @@ namespace Foreign_Trips.Repositories
 
              .Where(c => c.RequestId == requestId).FirstOrDefaultAsync();
         }
+        public async Task<IEnumerable<RequestTbl?>> GetRequestsAgent(int agentId)
+        {
+            return await _context.RequestTbl
+             .Include(c => c.Agent)
+             .Include(c=>c.RequestStatus)
 
+             .Where(c => c.AgentId == agentId).ToListAsync();
+        }
         public async Task<RequestEmployeeTbl?> GetRequestEmployeeAsync(int requestId)
         {
             try

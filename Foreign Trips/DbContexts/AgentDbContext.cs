@@ -33,7 +33,7 @@ namespace Foreign_Trips.DbContexts
         public DbSet<SupervisorTbl> SupervisorTbl { get; set; } = null;
         public DbSet<InternationalExpertTbl> InternationalExpertTbl { get; set; } = null;
         public DbSet<MaritalStatusTbl> MaritalStatusTbl { get; set; } = null!;
-        public DbSet<LanguageType> LanguageType { get; set; } = null!;
+        public DbSet<LanguageTypeTbl> LanguageType { get; set; } = null!;
         public DbSet<TravelGoalsTypeTbl> TravelGoalsTypeTbl { get; set; } = null!;
         public DbSet<JobGoalsTypeTbl> JobGoalsTypeTbl { get; set; } = null!;
         public DbSet<DeviceNameItypeTbl> DeviceNameItypeTbl { get; set; } = null!;

@@ -30,7 +30,7 @@ namespace Foreign_Trips.Repositories
 
         public async Task<AgentTbl?> GetAgentAsync(long agentId)
         {
-            return await _context.AgentTbl.Where(f => f.AgentId == agentId).FirstOrDefaultAsync();
+            return await _context.AgentTbl.Where(f => f.AgentId == agentId).Include(t => t.Position).FirstOrDefaultAsync();
         }
 
         public async Task<IEnumerable<AgentTbl>> GetAgent()
@@ -38,7 +38,7 @@ namespace Foreign_Trips.Repositories
             try
             {
 
-                return await _context.AgentTbl.ToListAsync();
+                return await _context.AgentTbl.Include(t=>t.Position).ToListAsync();
             }
             catch (System.Exception ex)
             {
@@ -297,7 +297,7 @@ namespace Foreign_Trips.Repositories
         #endregion
 
         #region Language Type
-        public async Task<IEnumerable<LanguageType>> LanguageTypeAsync()
+        public async Task<IEnumerable<LanguageTypeTbl>> LanguageTypeAsync()
         {
             return await _context.LanguageType.ToListAsync();
         }
