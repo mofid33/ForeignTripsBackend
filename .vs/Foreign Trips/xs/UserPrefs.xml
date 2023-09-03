@@ -4,7 +4,7 @@
     <Files>
       <File FileName="Foreign Trips/appsettings.json" />
       <File FileName="Foreign Trips/appsettings.Development.json" />
-      <File FileName="Foreign Trips/Controllers/AgentController.cs" Line="38" Column="29" />
+      <File FileName="Foreign Trips/Controllers/AgentController.cs" />
       <File FileName="Foreign Trips/Program.cs" />
       <File FileName="Foreign Trips/Controllers/InternationalExpertController.cs" />
       <File FileName="Foreign Trips/Controllers/AuthController.cs" Line="30" Column="1" />
@@ -14,8 +14,9 @@
       <File FileName="Foreign Trips/Repositories/RequestRepository.cs" />
       <File FileName="Foreign Trips/Repositories/IRequestRepository.cs" />
       <File FileName="Foreign Trips/Model/PositionTbl.cs" />
-      <File FileName="Foreign Trips/Repositories/AuthRepository.cs" Line="181" Column="74" />
-      <File FileName="Foreign Trips/Repositories/IAuthRepository.cs" Line="10" Column="24" />
+      <File FileName="Foreign Trips/Repositories/AuthRepository.cs" Line="175" Column="1" />
+      <File FileName="Foreign Trips/Repositories/IAuthRepository.cs" />
+      <File FileName="Foreign Trips/Repositories/ReportRepository.cs" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -38,9 +39,7 @@
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
       <Breakpoint file="/Users/amirhossein/Projects/Foreign Trips/Foreign Trips/Controllers/InternationalExpertController.cs" relfile="Foreign Trips/Controllers/InternationalExpertController.cs" line="31" column="1" />
-      <Breakpoint file="/Users/amirhossein/Projects/Foreign Trips/Foreign Trips/Controllers/AuthController.cs" relfile="Foreign Trips/Controllers/AuthController.cs" line="30" column="1" />
       <Breakpoint file="/Users/amirhossein/Projects/Foreign Trips/Foreign Trips/Repositories/AuthRepository.cs" relfile="Foreign Trips/Repositories/AuthRepository.cs" line="87" column="1" />
-      <Breakpoint file="/Users/amirhossein/Projects/Foreign Trips/Foreign Trips/Repositories/AuthRepository.cs" relfile="Foreign Trips/Repositories/AuthRepository.cs" line="175" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
