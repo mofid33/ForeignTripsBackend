@@ -21,7 +21,7 @@ public partial class RequestTbl
 
     public string DestinationCity { get; set; } = null!;
 
-    public string DestinationCountry { get; set; } = null!;
+    public string? DestinationCountry { get; set; }
 
     public string FlightPath { get; set; } = null!;
 
