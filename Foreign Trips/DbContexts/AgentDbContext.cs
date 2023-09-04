@@ -36,7 +36,7 @@ namespace Foreign_Trips.DbContexts
         public DbSet<LanguageTypeTbl> LanguageType { get; set; } = null!;
         public DbSet<TravelGoalsTypeTbl> TravelGoalsTypeTbl { get; set; } = null!;
         public DbSet<JobGoalsTypeTbl> JobGoalsTypeTbl { get; set; } = null!;
-        public DbSet<DeviceNameItypeTbl> DeviceNameItypeTbl { get; set; } = null!;
+        public DbSet<ParticipantTbl> ParticipantTbl { get; set; } = null!;
         public DbSet<PassportTbl> PassportTbl { get; set; } = null!;
         public DbSet<RightOfMissionTbl> RightOfMissionTbl { get; set; } = null!;
         public DbSet<RightOfCommutingTypeTbl> RightOfCommutingTypeTbl { get; set; } = null!;

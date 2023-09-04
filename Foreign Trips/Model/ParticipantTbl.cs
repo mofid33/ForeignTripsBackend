@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 
 namespace Foreign_Trips.Model;
 
-public partial class DeviceNameItypeTbl
+public partial class ParticipantTbl
 {
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    public int DeviceNameId { get; set; }
+    public int ParticipantId { get; set; }
 
     public string DeviceNameType { get; set; } = null!;
 

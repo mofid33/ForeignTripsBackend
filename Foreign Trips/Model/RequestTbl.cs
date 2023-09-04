@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 
 namespace Foreign_Trips.Model;
 
@@ -25,7 +25,7 @@ public partial class RequestTbl
 
     public string FlightPath { get; set; } = null!;
 
-    public string TravelDate { get; set; } = null!;
+    public string TravelDateStart { get; set; } = null!;
 
     public string TravelTime { get; set; } = null!;
 
@@ -35,7 +35,7 @@ public partial class RequestTbl
 
     public int JobGoalId { get; set; }
 
-    public int DeviceNameId { get; set; }
+    public int ParticipantId { get; set; }
 
     public int PassportTypeId { get; set; }
 
@@ -115,11 +115,13 @@ public partial class RequestTbl
 
     public int? MainAdminId { get; set; }
 
+    public string? TravalEndDate { get; set; }
+
+    public string? DeviceName { get; set; }
+
     public virtual InternationalAdminTbl? Admin { get; set; }
 
     public virtual AgentTbl? Agent { get; set; }
-
-    public virtual DeviceNameItypeTbl DeviceName { get; set; } = null!;
 
     public virtual ICollection<FileDetailsTbl> FileDetailsTbls { get; set; } = new List<FileDetailsTbl>();
 
@@ -128,6 +130,8 @@ public partial class RequestTbl
     public virtual JobGoalsTypeTbl JobGoal { get; set; } = null!;
 
     public virtual MainAdminTbl? MainAdmin { get; set; }
+
+    public virtual ParticipantTbl Participant { get; set; } = null!;
 
     public virtual PassportTypeTbl PassportType { get; set; } = null!;
 

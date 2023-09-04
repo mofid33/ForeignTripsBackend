@@ -21,8 +21,6 @@ public partial class ForeignDbContext : DbContext
 
     public virtual DbSet<CityTbl> CityTbls { get; set; }
 
-    public virtual DbSet<DeviceNameItypeTbl> DeviceNameItypeTbls { get; set; }
-
     public virtual DbSet<DispatcherSelectionTbl> DispatcherSelectionTbls { get; set; }
 
     public virtual DbSet<ExpertSelectionTbl> ExpertSelectionTbls { get; set; }
@@ -54,6 +52,8 @@ public partial class ForeignDbContext : DbContext
     public virtual DbSet<MessageTbl> MessageTbls { get; set; }
 
     public virtual DbSet<OperationTypeTbl> OperationTypeTbls { get; set; }
+
+    public virtual DbSet<ParticipantTbl> ParticipantTbls { get; set; }
 
     public virtual DbSet<PassportTbl> PassportTbls { get; set; }
 
@@ -107,7 +107,7 @@ public partial class ForeignDbContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Server=rogstrix.com;Database=ForeignDB;User=foreign;Password=Aa@1234567891011;TrustServerCertificate=true");
+        => optionsBuilder.UseSqlServer("Data Source=rogstrix.com;Initial Catalog=ForeignDB;User ID=foreign;Password=Aa@1234567891011;TrustServerCertificate=true;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -202,16 +202,6 @@ public partial class ForeignDbContext : DbContext
                 .HasForeignKey(d => d.ProvinceId)
                 .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK_CityTbl_ProvinceTbl1");
-        });
-
-        modelBuilder.Entity<DeviceNameItypeTbl>(entity =>
-        {
-            entity.HasKey(e => e.DeviceNameId).HasName("PK_DeviceNameIType");
-
-            entity.ToTable("DeviceNameITypeTbl", "dbo");
-
-            entity.Property(e => e.DeviceNameId).HasColumnName("DeviceNameID");
-            entity.Property(e => e.DeviceNameType).HasMaxLength(100);
         });
 
         modelBuilder.Entity<DispatcherSelectionTbl>(entity =>
@@ -489,6 +479,16 @@ public partial class ForeignDbContext : DbContext
             entity.Property(e => e.OperationType).HasMaxLength(100);
         });
 
+        modelBuilder.Entity<ParticipantTbl>(entity =>
+        {
+            entity.HasKey(e => e.ParticipantId).HasName("PK_DeviceNameIType");
+
+            entity.ToTable("ParticipantTbl", "dbo");
+
+            entity.Property(e => e.ParticipantId).HasColumnName("ParticipantID");
+            entity.Property(e => e.DeviceNameType).HasMaxLength(100);
+        });
+
         modelBuilder.Entity<PassportTbl>(entity =>
         {
             entity.HasKey(e => e.PassportId);
@@ -673,7 +673,7 @@ public partial class ForeignDbContext : DbContext
             entity.Property(e => e.DateOfLasteChange).HasMaxLength(100);
             entity.Property(e => e.DestinationCity).HasMaxLength(100);
             entity.Property(e => e.DestinationCountry).HasMaxLength(100);
-            entity.Property(e => e.DeviceNameId).HasColumnName("DeviceNameID");
+            entity.Property(e => e.DeviceName).HasMaxLength(100);
             entity.Property(e => e.EmployeeStatus).HasMaxLength(200);
             entity.Property(e => e.ExecutiveDeviceName).HasMaxLength(100);
             entity.Property(e => e.ExpertRightOfMission).HasMaxLength(100);
@@ -687,6 +687,7 @@ public partial class ForeignDbContext : DbContext
             entity.Property(e => e.MainAdminId).HasColumnName("MainAdminID");
             entity.Property(e => e.MissionAchievementRecords).HasMaxLength(100);
             entity.Property(e => e.OperationId).HasMaxLength(100);
+            entity.Property(e => e.ParticipantId).HasColumnName("ParticipantID");
             entity.Property(e => e.PassportTypeId).HasColumnName("PassportTypeID");
             entity.Property(e => e.PayerCitizenShip).HasMaxLength(100);
             entity.Property(e => e.PayerFood).HasMaxLength(100);
@@ -706,7 +707,8 @@ public partial class ForeignDbContext : DbContext
             entity.Property(e => e.TicketCost).HasMaxLength(100);
             entity.Property(e => e.TollAmountCost).HasMaxLength(100);
             entity.Property(e => e.TollAmountId).HasColumnName("TollAmountID");
-            entity.Property(e => e.TravelDate).HasMaxLength(50);
+            entity.Property(e => e.TravalEndDate).HasMaxLength(50);
+            entity.Property(e => e.TravelDateStart).HasMaxLength(50);
             entity.Property(e => e.TravelGoalId).HasColumnName("TravelGoalID");
             entity.Property(e => e.TravelTime).HasMaxLength(5);
             entity.Property(e => e.TravelTopic).HasMaxLength(300);
@@ -722,11 +724,6 @@ public partial class ForeignDbContext : DbContext
                 .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK_RequestTbl_AgentTbl");
 
-            entity.HasOne(d => d.DeviceName).WithMany(p => p.RequestTbls)
-                .HasForeignKey(d => d.DeviceNameId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_RequestTbl_DeviceNameITypeTbl");
-
             entity.HasOne(d => d.InternationalExpert).WithMany(p => p.RequestTbls)
                 .HasForeignKey(d => d.InternationalExpertId)
                 .OnDelete(DeleteBehavior.Cascade)
@@ -740,6 +737,11 @@ public partial class ForeignDbContext : DbContext
                 .HasForeignKey(d => d.MainAdminId)
                 .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK_RequestTbl_MainAdminTbl");
+
+            entity.HasOne(d => d.Participant).WithMany(p => p.RequestTbls)
+                .HasForeignKey(d => d.ParticipantId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_RequestTbl_DeviceNameITypeTbl");
 
             entity.HasOne(d => d.PassportType).WithMany(p => p.RequestTbls)
                 .HasForeignKey(d => d.PassportTypeId)
