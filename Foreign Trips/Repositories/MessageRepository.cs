@@ -35,8 +35,7 @@ namespace Foreign_Trips.Repositories
                 Mtbl.ReciverMessageId = message.ReciverMessageId;
                 Mtbl.SubmitTime = message.SubmitTime;
                 Mtbl.DispatcherSelectionId = message.DispatcherSelectionId;
-                Mtbl.Agent.SubCategoryId = message.Agent.SubCategoryId;
-                Mtbl.Agent.Subset = message.Agent.Subset;
+                Mtbl.AgentId = message.AgentId;
                 Mtbl.ExpertSelectionId = message.ExpertSelectionId;
                 Mtbl.RegisterDate = message.RegisterDate;
                 Mtbl.RegisterTime = message.RegisterTime;

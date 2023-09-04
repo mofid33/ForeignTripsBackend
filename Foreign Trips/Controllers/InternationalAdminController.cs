@@ -329,7 +329,23 @@ namespace Foreign_Trips.Controllers
             {
                 return NotFound();
             }
-            _mainadminRepository.DeleteAgent(Model.AgentId);
+            _agentRepository.DeleteAgent(Model.AgentId);
+
+            return Ok();
+
+        }
+
+        [HttpPost]
+        [Route("SuspendAgent")]
+        public async Task<ActionResult<AgentTbl>> SuspendAgent(
+[FromBody] GetAgent Model
+)
+        {
+            if (!await _agentRepository.AgentExistsAsync(Model.AgentId))
+            {
+                return NotFound();
+            }
+            await _agentRepository.SuspendAgentAsync(Model.AgentId);
 
             return Ok();
 
@@ -406,6 +422,7 @@ namespace Foreign_Trips.Controllers
          );
 
         }
+
 
         [HttpPost]
         [Route("GetnewRequest")]

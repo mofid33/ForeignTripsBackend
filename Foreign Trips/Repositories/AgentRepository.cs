@@ -75,6 +75,8 @@ namespace Foreign_Trips.Repositories
                 data.TypeOfEmploymentId = agent.TypeOfEmploymentId;
                 data.PositionId = agent.PositionId;
                 data.Password = agent.Password;
+                data.RegisterDate = agent.RegisterDate;
+                data.RegisterTime = agent.RegisterTime;
 
 
                 await _context.AgentTbl.AddAsync(agent);
