@@ -335,6 +335,22 @@ namespace Foreign_Trips.Controllers
 
         }
 
+        [HttpPost]
+        [Route("SuspendAgent")]
+        public async Task<ActionResult<AgentTbl>> SuspendAgent(
+[FromBody] GetAgent Model
+)
+        {
+            if (!await _agentRepository.AgentExistsAsync(Model.AgentId))
+            {
+                return NotFound();
+            }
+            await _agentRepository.SuspendAgentAsync(Model.AgentId);
+
+            return Ok();
+
+        }
+
 
         #endregion
 
