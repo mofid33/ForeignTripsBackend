@@ -21,7 +21,7 @@ public partial class ForeignTripsContext : DbContext
 
     public virtual DbSet<CityTbl> CityTbls { get; set; }
 
-    public virtual DbSet<DeviceNameItypeTbl> DeviceNameItypeTbls { get; set; }
+    //public virtual DbSet<DeviceNameItypeTbl> DeviceNameItypeTbls { get; set; }
 
     public virtual DbSet<DispatcherSelectionTbl> DispatcherSelectionTbls { get; set; }
 
@@ -218,15 +218,15 @@ public partial class ForeignTripsContext : DbContext
                 .HasConstraintName("FK_CityTbl_ProvinceTbl1");
         });
 
-        modelBuilder.Entity<DeviceNameItypeTbl>(entity =>
-        {
-            entity.HasKey(e => e.DeviceNameId).HasName("PK_DeviceNameIType");
+        //modelBuilder.Entity<DeviceNameItypeTbl>(entity =>
+        //{
+        //    entity.HasKey(e => e.DeviceNameId).HasName("PK_DeviceNameIType");
 
-            entity.ToTable("DeviceNameITypeTbl");
+        //    entity.ToTable("DeviceNameITypeTbl");
 
-            entity.Property(e => e.DeviceNameId).HasColumnName("DeviceNameID");
-            entity.Property(e => e.DeviceNameType).HasMaxLength(100);
-        });
+        //    entity.Property(e => e.DeviceNameId).HasColumnName("DeviceNameID");
+        //    entity.Property(e => e.DeviceNameType).HasMaxLength(100);
+        //});
 
         modelBuilder.Entity<DispatcherSelectionTbl>(entity =>
         {
@@ -607,7 +607,7 @@ public partial class ForeignTripsContext : DbContext
             entity.Property(e => e.DateOfLasteChange).HasMaxLength(100);
             entity.Property(e => e.DestinationCity).HasMaxLength(100);
             entity.Property(e => e.DestinationCountry).HasMaxLength(100);
-            entity.Property(e => e.DeviceNameId).HasColumnName("DeviceNameID");
+            entity.Property(e => e.ParticipantId).HasColumnName("ParticipantID");
             entity.Property(e => e.EmployeeStatus).HasMaxLength(200);
             entity.Property(e => e.ExecutiveDeviceName).HasMaxLength(100);
             entity.Property(e => e.ExpertRightOfMission).HasMaxLength(100);
@@ -638,7 +638,7 @@ public partial class ForeignTripsContext : DbContext
             entity.Property(e => e.TicketCost).HasMaxLength(100);
             entity.Property(e => e.TollAmountCost).HasMaxLength(100);
             entity.Property(e => e.TollAmountId).HasColumnName("TollAmountID");
-            entity.Property(e => e.TravelDate).HasMaxLength(50);
+            entity.Property(e => e.TravelDateStart).HasMaxLength(50);
             entity.Property(e => e.TravelGoalId).HasColumnName("TravelGoalID");
             entity.Property(e => e.TravelTime).HasMaxLength(5);
             entity.Property(e => e.TravelTopic).HasMaxLength(300);
@@ -648,10 +648,10 @@ public partial class ForeignTripsContext : DbContext
                 .HasForeignKey(d => d.AgentId)
                 .HasConstraintName("FK_RequestTbl_AgentTbl");
 
-            entity.HasOne(d => d.DeviceName).WithMany(p => p.RequestTbls)
-                .HasForeignKey(d => d.DeviceNameId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_RequestTbl_DeviceNameITypeTbl");
+            //entity.HasOne(d => d.DeviceName).WithMany(p => p.RequestTbls)
+            //    .HasForeignKey(d => d.DeviceNameId)
+            //    .OnDelete(DeleteBehavior.ClientSetNull)
+            //    .HasConstraintName("FK_RequestTbl_DeviceNameITypeTbl");
 
             entity.HasOne(d => d.JobGoal).WithMany(p => p.RequestTbls)
                 .HasForeignKey(d => d.JobGoalId)

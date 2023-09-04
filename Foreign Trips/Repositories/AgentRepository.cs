@@ -76,6 +76,8 @@ namespace Foreign_Trips.Repositories
                 data.PositionId = agent.PositionId;
                 data.Password = agent.Password;
 
+
+                await _context.AgentTbl.AddAsync(agent);
                 await _context.SaveChangesAsync();
                 return agent;
 

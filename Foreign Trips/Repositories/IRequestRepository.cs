@@ -22,7 +22,7 @@ namespace Foreign_Trips.Repositories
         Task<IEnumerable<RequestStatusTbl>> RequestStatusAsync();
         Task<IEnumerable<TravelGoalsTypeTbl>> TravelGoalsTypeAsync();
         Task<IEnumerable<JobGoalsTypeTbl>> JobGoalsTypeAsync();
-        Task<IEnumerable<DeviceNameItypeTbl>> DeviceNametypeAsync();
+        //Task<IEnumerable<DeviceNameItypeTbl>> DeviceNametypeAsync();
         Task<IEnumerable<PassportTbl>> PassportTypeAsync();
         Task<IEnumerable<RightOfMissionTbl>> RightOfMissionAsync();
         Task<IEnumerable<RightOfCommutingTypeTbl>> RightOfCommutingTypeAsync();

@@ -64,16 +64,18 @@ namespace Foreign_Trips.Repositories
                 qtbl.DestinationCity = request.DestinationCity;
                 qtbl.DestinationCountry = request.DestinationCountry;
                 qtbl.FlightPath = request.FlightPath;
-                qtbl.TravelDate = request.TravelDate;
+                qtbl.TravelDateStart = request.TravelDateStart;
+                qtbl.TravalEndDate = request.TravalEndDate;
                 qtbl.TravelTime = request.TravelTime;
                 qtbl.TravelTopic = request.TravelTopic;
                 qtbl.TravelGoalId = request.TravelGoalId;
                 qtbl.JobGoalId = request.JobGoalId;
-                qtbl.DeviceNameId = request.DeviceNameId ;
+                qtbl.DeviceName = request.DeviceName ;
                 qtbl.PassportTypeId = request.PassportTypeId;
                 qtbl.GetVisa = request.GetVisa;
                 qtbl.JointTrip = request.JointTrip;
                 qtbl.DateLetter = request.DateLetter;
+                qtbl.ParticipantId = request.ParticipantId;
 
 
                 await _context.RequestTbl.AddAsync(request);
@@ -273,9 +275,9 @@ namespace Foreign_Trips.Repositories
         #endregion
 
         #region Device Name type
-        public async Task<IEnumerable<DeviceNameItypeTbl>> DeviceNametypeAsync()
+        public async Task<IEnumerable<ParticipantTbl>> ParticipantAsync()
         {
-            return await _context.DeviceNameItypeTbl.ToListAsync();
+            return await _context.ParticipantTbl.ToListAsync();
         }
         #endregion
 
