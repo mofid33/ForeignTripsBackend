@@ -329,7 +329,7 @@ namespace Foreign_Trips.Controllers
             {
                 return NotFound();
             }
-            _mainadminRepository.DeleteAgent(Model.AgentId);
+            _agentRepository.DeleteAgent(Model.AgentId);
 
             return Ok();
 
@@ -406,6 +406,7 @@ namespace Foreign_Trips.Controllers
          );
 
         }
+
 
         [HttpPost]
         [Route("GetnewRequest")]
