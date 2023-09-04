@@ -43,7 +43,7 @@ public partial class ForeignTripsContext : DbContext
 
     public virtual DbSet<JobGoalsTypeTbl> JobGoalsTypeTbls { get; set; }
 
-    public virtual DbSet<LanguageType> LanguageTypes { get; set; }
+    public virtual DbSet<LanguageTypeTbl> LanguageTypes { get; set; }
 
     public virtual DbSet<LoginTbl> LoginTbls { get; set; }
 
@@ -383,14 +383,14 @@ public partial class ForeignTripsContext : DbContext
             entity.Property(e => e.JobGoalsType).HasMaxLength(50);
         });
 
-        modelBuilder.Entity<LanguageType>(entity =>
+        modelBuilder.Entity<LanguageTypeTbl>(entity =>
         {
             entity.HasKey(e => e.LanguageId);
 
             entity.ToTable("languageType");
 
             entity.Property(e => e.LanguageId).HasColumnName("languageID");
-            entity.Property(e => e.LanguageType1)
+            entity.Property(e => e.LanguageType)
                 .HasMaxLength(100)
                 .HasColumnName("languageType");
         });

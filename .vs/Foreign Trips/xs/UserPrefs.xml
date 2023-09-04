@@ -1,0 +1,46 @@
+﻿<Properties GitUserInfo="UsingGIT" StartupConfiguration="{8F23E8CC-3E31-49FF-AD10-C6C79B4877E0}|Default">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Foreign Trips/Repositories/AuthRepository.cs">
+    <Files>
+      <File FileName="Foreign Trips/appsettings.json" />
+      <File FileName="Foreign Trips/appsettings.Development.json" />
+      <File FileName="Foreign Trips/Controllers/AgentController.cs" />
+      <File FileName="Foreign Trips/Program.cs" />
+      <File FileName="Foreign Trips/Controllers/InternationalExpertController.cs" />
+      <File FileName="Foreign Trips/Controllers/AuthController.cs" Line="30" Column="1" />
+      <File FileName="Foreign Trips/Repositories/IAgentRepository.cs" />
+      <File FileName="Foreign Trips/Repositories/AgentRepository.cs" />
+      <File FileName="Foreign Trips/Model/AgentTbl.cs" />
+      <File FileName="Foreign Trips/Repositories/RequestRepository.cs" />
+      <File FileName="Foreign Trips/Repositories/IRequestRepository.cs" />
+      <File FileName="Foreign Trips/Model/PositionTbl.cs" />
+      <File FileName="Foreign Trips/Repositories/AuthRepository.cs" Line="175" Column="1" />
+      <File FileName="Foreign Trips/Repositories/IAuthRepository.cs" />
+      <File FileName="Foreign Trips/Repositories/ReportRepository.cs" Line="1" Column="1" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="Foreign Trips" expanded="True">
+            <Node name="Foreign Trips" expanded="True">
+              <Node name="Controllers" expanded="True" />
+              <Node name="Repositories" expanded="True">
+                <Node name="AuthRepository.cs" selected="True" />
+              </Node>
+              <Node name="appsettings.json" expanded="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.ItemProperties.Foreign_220Trips PreferredExecutionTarget="/Applications/Google Chrome.app" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore>
+      <Breakpoint file="/Users/amirhossein/Projects/Foreign Trips/Foreign Trips/Controllers/InternationalExpertController.cs" relfile="Foreign Trips/Controllers/InternationalExpertController.cs" line="31" column="1" />
+      <Breakpoint file="/Users/amirhossein/Projects/Foreign Trips/Foreign Trips/Repositories/AuthRepository.cs" relfile="Foreign Trips/Repositories/AuthRepository.cs" line="87" column="1" />
+    </BreakpointStore>
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>

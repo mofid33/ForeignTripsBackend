@@ -18,7 +18,7 @@ namespace Foreign_Trips.Repositories
         Task<IEnumerable<TypeOfEmploymentTbl>> TypeOfEmploymentTblAsync();
         Task<IEnumerable<PositionTypeTbl>> PositionTypeTblAsync();
         Task<IEnumerable<MaritalStatusTbl>> MaritalStatusTblAsync();
-        Task<IEnumerable<LanguageType>> LanguageTypeAsync();
+        Task<IEnumerable<LanguageTypeTbl>> LanguageTypeAsync();
         Task<string> GetAddress(AgentTbl postCode);
         Task UpdatePassAgentAsync(AgentTbl agent, long agentId);
         Task SuspendAgentAsync(long agentId);

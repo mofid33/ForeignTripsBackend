@@ -36,7 +36,7 @@ namespace Foreign_Trips.Controllers
 
         [HttpGet]
         [Route("GetAgents")]
-        public async Task<ActionResult<IEnumerable<AgentTbl>>> GetAgent()
+        public async Task<ActionResult<IEnumerable<AgentTbl>>> GetAgents()
         {
             var Agents = await _agentRepository.GetAgent();
 
@@ -48,12 +48,12 @@ namespace Foreign_Trips.Controllers
         
         [HttpGet]
         [Route("GetAgent")]
-        public async Task<ActionResult<AgentDto>> GetAgent(long agentId)
+        public async Task<ActionResult<AgentDto>> GetAgent()
         {
             string authHeader = HttpContext.Request.Headers["Authorization"].ToString().Replace("Bearer ", string.Empty);
 
             var AgentID = _authRepository.GetIDFromToken(authHeader);
-            if (!await _agentRepository.AgentExistsAsync(agentId))
+            if (!await _agentRepository.AgentExistsAsync(AgentID))
             {
                 return NotFound();
             }
@@ -144,7 +144,22 @@ namespace Foreign_Trips.Controllers
                 Requests
                 );
         }
+        [HttpGet]
+        [Route("GetRequestsAgent")]
+        public async Task<ActionResult<RequestEmployeeTbl>> GetRequestsAgent()
+        {
 
+            string authHeader = HttpContext.Request.Headers["Authorization"].ToString().Replace("Bearer ", string.Empty);
+
+            var AgentID = _authRepository.GetIDFromToken(authHeader);
+            if (!await _agentRepository.AgentExistsAsync(AgentID))
+            {
+                return NotFound();
+            }
+            var Agent = await _requestRepository.GetRequestsAgent(AgentID);
+            return Ok(Agent);
+
+        }
 
         [HttpPost]
         [Route("GetRequestEmployee")]
