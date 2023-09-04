@@ -274,7 +274,7 @@ namespace Foreign_Trips.Repositories
         }
         #endregion
 
-        #region Device Name type
+        #region Participant
         public async Task<IEnumerable<ParticipantTbl>> ParticipantAsync()
         {
             return await _context.ParticipantTbl.ToListAsync();
@@ -310,7 +310,6 @@ namespace Foreign_Trips.Repositories
 
 
         #endregion
-
 
         #region Toll Amount
         public async Task<IEnumerable<TollAmountTypeTbl>> TollAmountTypeAsync()

@@ -75,15 +75,15 @@ namespace Foreign_Trips.Repositories
             try
             {
 
-                SupervisorTbl supervisorTbl = new SupervisorTbl();
-                supervisorTbl.SupervisorName = supervisor.SupervisorName;
-                supervisorTbl.SupervisorFamily = supervisor.SupervisorFamily;
-                supervisorTbl.SupervisorUserName = supervisor.SupervisorUserName;
-                supervisorTbl.Password = supervisor.Password;
+                var sup = await _context.SupervisorTbl.FindAsync(supervisor.SupervisorId);
+                sup.SupervisorName = supervisor.SupervisorName;
+                sup.SupervisorFamily = supervisor.SupervisorFamily;
+                sup.SupervisorUserName = supervisor.SupervisorUserName;
+                sup.Password = supervisor.Password;
 
                 
                 await _context.SaveChangesAsync();
-                return supervisorTbl;
+                return sup;
 
             }
 

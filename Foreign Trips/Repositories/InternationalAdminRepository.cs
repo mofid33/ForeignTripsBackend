@@ -69,9 +69,8 @@ namespace Foreign_Trips.Repositories
                 adm.AdminName = admin.AdminName;
                 adm.AdminUsername = admin.AdminUsername;
                 adm.Password = admin.Password;
+
                 await _context.SaveChangesAsync();
-
-
                 return admin;
 
             }
