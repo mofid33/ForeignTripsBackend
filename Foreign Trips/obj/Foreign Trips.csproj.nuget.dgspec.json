@@ -1,27 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "F:\\Visual stadio\\Foreign Trips\\Foreign Trips\\Foreign Trips.csproj": {}
+    "/Users/amirhossein/Projects/Foreign Trips/Foreign Trips/Foreign Trips.csproj": {}
   },
   "projects": {
-    "F:\\Visual stadio\\Foreign Trips\\Foreign Trips\\Foreign Trips.csproj": {
+    "/Users/amirhossein/Projects/Foreign Trips/Foreign Trips/Foreign Trips.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "F:\\Visual stadio\\Foreign Trips\\Foreign Trips\\Foreign Trips.csproj",
+        "projectUniqueName": "/Users/amirhossein/Projects/Foreign Trips/Foreign Trips/Foreign Trips.csproj",
         "projectName": "Foreign Trips",
-        "projectPath": "F:\\Visual stadio\\Foreign Trips\\Foreign Trips\\Foreign Trips.csproj",
-        "packagesPath": "C:\\Users\\Sara\\.nuget\\packages\\",
-        "outputPath": "F:\\Visual stadio\\Foreign Trips\\Foreign Trips\\obj\\",
+        "projectPath": "/Users/amirhossein/Projects/Foreign Trips/Foreign Trips/Foreign Trips.csproj",
+        "packagesPath": "/Users/amirhossein/.nuget/packages/",
+        "outputPath": "/Users/amirhossein/Projects/Foreign Trips/Foreign Trips/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Sara\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "/Users/amirhossein/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -110,7 +108,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.202/RuntimeIdentifierGraph.json"
         }
       }
     }
