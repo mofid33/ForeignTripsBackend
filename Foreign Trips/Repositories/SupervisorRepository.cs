@@ -52,7 +52,7 @@ namespace Foreign_Trips.Repositories
                 supervisorTbl.SupervisorUserName = supervisor.SupervisorUserName;
                 supervisorTbl.Password = supervisor.Password;
 
-                
+                await _context.SupervisorTbl.AddAsync(supervisor);
                 await _context.SaveChangesAsync();
                 return supervisorTbl;
 
