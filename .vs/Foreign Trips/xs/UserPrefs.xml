@@ -1,22 +1,79 @@
-﻿<Properties GitUserInfo="UsingGIT" StartupConfiguration="{8F23E8CC-3E31-49FF-AD10-C6C79B4877E0}|Default">
+﻿<Properties StartupConfiguration="{8F23E8CC-3E31-49FF-AD10-C6C79B4877E0}|Default" GitUserInfo="UsingGIT">
+  <MonoDevelop.Ide.ItemProperties.Foreign_220Trips PreferredExecutionTarget="/Applications/Google Chrome.app" />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Foreign Trips/Repositories/AuthRepository.cs">
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Foreign Trips/Repositories/RequestRepository.cs">
     <Files>
       <File FileName="Foreign Trips/appsettings.json" />
-      <File FileName="Foreign Trips/appsettings.Development.json" />
-      <File FileName="Foreign Trips/Controllers/AgentController.cs" />
+      <File FileName="Foreign Trips/appsettings.Development.json" Line="1" Column="1" />
+      <File FileName="Foreign Trips/Controllers/AgentController.cs" Line="148" Column="33" />
       <File FileName="Foreign Trips/Program.cs" />
       <File FileName="Foreign Trips/Controllers/InternationalExpertController.cs" />
       <File FileName="Foreign Trips/Controllers/AuthController.cs" Line="30" Column="1" />
-      <File FileName="Foreign Trips/Repositories/IAgentRepository.cs" />
-      <File FileName="Foreign Trips/Repositories/AgentRepository.cs" />
-      <File FileName="Foreign Trips/Model/AgentTbl.cs" />
-      <File FileName="Foreign Trips/Repositories/RequestRepository.cs" />
-      <File FileName="Foreign Trips/Repositories/IRequestRepository.cs" />
-      <File FileName="Foreign Trips/Model/PositionTbl.cs" />
-      <File FileName="Foreign Trips/Repositories/AuthRepository.cs" Line="175" Column="1" />
+      <File FileName="Foreign Trips/Repositories/IAgentRepository.cs" Line="21" Column="26" />
+      <File FileName="Foreign Trips/Repositories/AgentRepository.cs" Line="33" Column="101" />
+      <File FileName="Foreign Trips/Model/AgentTbl.cs" Line="11" Column="58" />
+      <File FileName="Foreign Trips/Repositories/RequestRepository.cs" Line="40" Column="1" />
+      <File FileName="Foreign Trips/Repositories/IRequestRepository.cs" Line="10" Column="40" />
+      <File FileName="Foreign Trips/Model/PositionTbl.cs" Line="1" Column="1" />
+      <File FileName="Foreign Trips/Repositories/AuthRepository.cs" Line="178" Column="1" />
       <File FileName="Foreign Trips/Repositories/IAuthRepository.cs" />
-      <File FileName="Foreign Trips/Repositories/ReportRepository.cs" Line="1" Column="1" />
+      <File FileName="Foreign Trips/Repositories/ReportRepository.cs" />
+      <File FileName="Foreign Trips/Model/LanguageTypeTbl.cs" Line="11" Column="58" />
+      <File FileName="Foreign Trips/Model/AgentStatusTbl.cs" Line="11" Column="58" />
+      <File FileName="Foreign Trips/Controllers/TicketController.cs" Line="1" Column="1" />
+      <File FileName="Foreign Trips/Entities/PostCodes.cs" Line="1" Column="1" />
+      <File FileName="Foreign Trips/Entities/MainAdmin.cs" Line="1" Column="1" />
+      <File FileName="Foreign Trips/Entities/LoginRegDto.cs" Line="1" Column="1" />
+      <File FileName="Foreign Trips/Entities/FileDetails.cs" Line="8" Column="1" />
+      <File FileName="Foreign Trips/Model/CityTbl.cs" Line="11" Column="58" />
+      <File FileName="Foreign Trips/Model/DeviceNameItypeTbl.cs" Line="11" Column="58" />
+      <File FileName="Foreign Trips/Model/DispatcherSelectionTbl.cs" Line="11" Column="58" />
+      <File FileName="Foreign Trips/Model/ExpertSelectionTbl.cs" Line="11" Column="58" />
+      <File FileName="Foreign Trips/Model/FileDetailsTbl.cs" Line="11" Column="58" />
+      <File FileName="Foreign Trips/Model/FileTypeTbl.cs" Line="11" Column="58" />
+      <File FileName="Foreign Trips/Model/ForeignDbContext.cs" Line="17" Column="1" />
+      <File FileName="Foreign Trips/Model/ForeignDelegrationTbl.cs" Line="11" Column="58" />
+      <File FileName="Foreign Trips/Model/ForeignTripsContext.cs" Line="393" Column="48" />
+      <File FileName="Foreign Trips/Model/GenderTypeTbl.cs" Line="11" Column="58" />
+      <File FileName="Foreign Trips/Model/InfoTbl.cs" Line="11" Column="58" />
+      <File FileName="Foreign Trips/Model/InternationalAdminTbl.cs" Line="11" Column="58" />
+      <File FileName="Foreign Trips/Model/InternationalExpertTbl.cs" Line="11" Column="58" />
+      <File FileName="Foreign Trips/Model/JobGoalsTypeTbl.cs" Line="11" Column="58" />
+      <File FileName="Foreign Trips/Model/LoginTbl.cs" Line="11" Column="58" />
+      <File FileName="Foreign Trips/Model/MaritalStatusTbl.cs" Line="11" Column="58" />
+      <File FileName="Foreign Trips/Model/MainAdminTbl.cs" Line="11" Column="58" />
+      <File FileName="Foreign Trips/Model/MessageTbl.cs" Line="11" Column="58" />
+      <File FileName="Foreign Trips/Model/OperationTypeTbl.cs" Line="11" Column="58" />
+      <File FileName="Foreign Trips/Model/PassportTbl.cs" Line="11" Column="58" />
+      <File FileName="Foreign Trips/Model/PassportType.cs" Line="1" Column="1" />
+      <File FileName="Foreign Trips/Model/PassportTypeTbl.cs" Line="11" Column="58" />
+      <File FileName="Foreign Trips/Model/PositionTypeTbl.cs" Line="11" Column="58" />
+      <File FileName="Foreign Trips/Model/ProvinceTbl.cs" Line="11" Column="58" />
+      <File FileName="Foreign Trips/Model/ReciverMessageTbl.cs" Line="11" Column="58" />
+      <File FileName="Foreign Trips/Model/Report.cs" Line="11" Column="58" />
+      <File FileName="Foreign Trips/Model/ReportStatusTbl.cs" Line="11" Column="58" />
+      <File FileName="Foreign Trips/Model/RequestEmployeeTbl.cs" Line="11" Column="58" />
+      <File FileName="Foreign Trips/Model/RequestStatusTbl.cs" Line="11" Column="58" />
+      <File FileName="Foreign Trips/Model/RequestTbl.cs" Line="22" Column="19" />
+      <File FileName="Foreign Trips/Model/RightOfCommutingTypeTbl.cs" Line="10" Column="1" />
+      <File FileName="Foreign Trips/Model/RightOfMissionTbl.cs" Line="11" Column="58" />
+      <File FileName="Foreign Trips/Model/RightToEducationTbl.cs" Line="11" Column="58" />
+      <File FileName="Foreign Trips/Model/SubCategoryTbl.cs" Line="11" Column="58" />
+      <File FileName="Foreign Trips/Model/SubsidiaryOrganization.cs" Line="1" Column="1" />
+      <File FileName="Foreign Trips/Model/SubsidiaryOrganizationTypeTbl.cs" Line="11" Column="58" />
+      <File FileName="Foreign Trips/Model/SupervisorTbl.cs" Line="11" Column="58" />
+      <File FileName="Foreign Trips/Model/TicketDetailsTbl.cs" Line="11" Column="58" />
+      <File FileName="Foreign Trips/Model/TicketStatusTbl.cs" Line="11" Column="58" />
+      <File FileName="Foreign Trips/Model/TicketTbl.cs" Line="11" Column="58" />
+      <File FileName="Foreign Trips/Model/TicketTypeTbl.cs" Line="11" Column="58" />
+      <File FileName="Foreign Trips/Model/TollAmountTypeTbl.cs" Line="11" Column="58" />
+      <File FileName="Foreign Trips/Model/TravelGoalsTypeTbl.cs" Line="11" Column="58" />
+      <File FileName="Foreign Trips/Model/TravelTypeTbl.cs" Line="11" Column="58" />
+      <File FileName="Foreign Trips/Model/TypeOfEmploymentTbl.cs" Line="11" Column="58" />
+      <File FileName="Foreign Trips/Model/TypeOfMissionTbl.cs" Line="11" Column="58" />
+      <File FileName="Foreign Trips/DbContexts/AgentDbContext.cs" Line="36" Column="37" />
+      <File FileName="Foreign Trips/Controllers/RequestController.cs" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -24,9 +81,10 @@
           <Node name="Foreign Trips" expanded="True">
             <Node name="Foreign Trips" expanded="True">
               <Node name="Controllers" expanded="True" />
-              <Node name="Repositories" expanded="True">
-                <Node name="AuthRepository.cs" selected="True" />
-              </Node>
+              <Node name="DbContexts" expanded="True" />
+              <Node name="Entities" expanded="True" />
+              <Node name="Model" expanded="True" />
+              <Node name="Repositories" expanded="True" />
               <Node name="appsettings.json" expanded="True" />
             </Node>
           </Node>
@@ -35,12 +93,11 @@
     </Pads>
   </MonoDevelop.Ide.Workbench>
   <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.ItemProperties.Foreign_220Trips PreferredExecutionTarget="/Applications/Google Chrome.app" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
       <Breakpoint file="/Users/amirhossein/Projects/Foreign Trips/Foreign Trips/Controllers/InternationalExpertController.cs" relfile="Foreign Trips/Controllers/InternationalExpertController.cs" line="31" column="1" />
-      <Breakpoint file="/Users/amirhossein/Projects/Foreign Trips/Foreign Trips/Repositories/AuthRepository.cs" relfile="Foreign Trips/Repositories/AuthRepository.cs" line="87" column="1" />
+      <Breakpoint file="/Users/amirhossein/Projects/Foreign Trips/Foreign Trips/Repositories/AgentRepository.cs" relfile="Foreign Trips/Repositories/AgentRepository.cs" line="41" column="1" />
+      <Breakpoint file="/Users/amirhossein/Projects/Foreign Trips/Foreign Trips/Repositories/AgentRepository.cs" relfile="Foreign Trips/Repositories/AgentRepository.cs" line="45" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
 </Properties>
