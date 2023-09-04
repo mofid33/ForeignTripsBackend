@@ -46,12 +46,19 @@ namespace Foreign_Trips.Repositories
             try
             {
 
-                return await _context.RequestEmployeeTbl.Where(x=>x.RequestId==requestId).ToListAsync();
+                return await _context.RequestEmployeeTbl.Where(x=>x.RequestId==requestId)
+                    .Include(x=>x.MaritalStatus)
+                    .Include(x => x.PassPortType)
+                    .Include(x => x.Gender)
+                    .Include(x => x.Position)
+
+                    .ToListAsync();
             }
             catch (System.Exception ex)
             {
                 return null;
             }
+
         }
 
         public async Task<RequestTbl?> InsertRequestAsync(RequestTbl request)
