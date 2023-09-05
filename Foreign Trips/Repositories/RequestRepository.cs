@@ -113,8 +113,11 @@ namespace Foreign_Trips.Repositories
         {
             try
             {
-                RequestTbl qtbl = new RequestTbl();
-                qtbl.JobGoalId = request.JobGoalId;
+                //فیلد کم داره
+
+                //RequestTbl qtbl = new RequestTbl();
+                var qtbl = _context.RequestTbl.Where(x => x.RequestId == request.RequestId).FirstOrDefault(); 
+                //qtbl.JobGoalId = request.JobGoalId;
                 qtbl.PayerCitizenShip = request.PayerCitizenShip;
                 qtbl.AmountOfCost = request.AmountOfCost;
                 qtbl.PayerFood = request.PayerFood;
@@ -155,7 +158,7 @@ namespace Foreign_Trips.Repositories
         {
             try
             {
-                RequestTbl qtbl = new RequestTbl();
+                var qtbl = _context.RequestTbl.Where(x => x.RequestId == request.RequestId).FirstOrDefault();
                 qtbl.ImportantTravel = request.ImportantTravel;
                 qtbl.MissionAchievementRecords= request.MissionAchievementRecords;
                 qtbl.SummaryInvitation = request.SummaryInvitation;
@@ -165,7 +168,7 @@ namespace Foreign_Trips.Repositories
 
 
 
-                
+
                 await _context.SaveChangesAsync();
 
 
