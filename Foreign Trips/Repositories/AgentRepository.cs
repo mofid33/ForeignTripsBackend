@@ -30,9 +30,31 @@ namespace Foreign_Trips.Repositories
 
         public async Task<AgentTbl?> GetAgentAsync(long agentId)
         {
-            return await _context.AgentTbl.Where(f => f.AgentId == agentId).Include(t => t.Position).FirstOrDefaultAsync();
-        }
+            return await _context.AgentTbl.Where(f => f.AgentId == agentId)
+                .Include(t => t.Position)
+                .Include(t=>t.AgentStatus)
+                .Include(t => t.SubCategory)
 
+                .FirstOrDefaultAsync();
+        }
+        public async Task<IEnumerable<SubCategoryTbl?>> GetSubCategory()
+        {
+            return await _context.SubCategoryTbl.ToListAsync();
+
+                
+        }
+        public async Task<IEnumerable<PositionTypeTbl?>> GetPosition()
+        {
+            return await _context.PositionTypeTbl.ToListAsync();
+
+
+        }
+        public async Task<IEnumerable<TypeOfEmploymentTbl?>> GetTypeEmployment()
+        {
+            return await _context.TypeOfEmploymentTbl.ToListAsync();
+
+
+        }
         public async Task<IEnumerable<AgentTbl>> GetAgent()
         {
             try
@@ -45,7 +67,7 @@ namespace Foreign_Trips.Repositories
                 return null;
             }
         }
-
+      
         public static void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
         {
             using (var hmac = new System.Security.Cryptography.HMACSHA512())
@@ -77,6 +99,8 @@ namespace Foreign_Trips.Repositories
                 data.Password = agent.Password;
                 data.RegisterDate = agent.RegisterDate;
                 data.RegisterTime = agent.RegisterTime;
+                data.GenderId = agent.GenderId!=0 ? agent.GenderId:2;
+
 
 
                 await _context.AgentTbl.AddAsync(agent);
@@ -97,21 +121,17 @@ namespace Foreign_Trips.Repositories
             try
             {
                 var data = await GetAgentAsync(agent.AgentId);
-                data.CityId = agent.CityId;
-                data.NationalCode = agent.NationalCode;
-                data.DateOfBirth = agent.DateOfBirth;
-                data.AgentName = agent.AgentName;
-                data.AgentFamily = agent.AgentFamily;
-                data.Mobile = agent.Mobile;
+              
+           
                 data.Phone = agent.Phone;
                 data.Email = agent.Email;
                 data.PostalCode = agent.PostalCode;
                 data.Address = agent.Address;
                 data.SubCategoryId = agent.SubCategoryId;
                 data.Subset = agent.Subset;
-                data.TypeOfEmployment = agent.TypeOfEmployment;
+                data.TypeOfEmploymentId = agent.TypeOfEmploymentId;
                 data.PositionId = agent.PositionId;
-                data.Password = agent.Password;
+                //data.Password = agent.Password;
 
 
                 await _context.SaveChangesAsync();

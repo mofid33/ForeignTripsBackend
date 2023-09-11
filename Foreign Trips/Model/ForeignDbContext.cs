@@ -65,9 +65,9 @@ public partial class ForeignDbContext : DbContext
 
     public virtual DbSet<ReciverMessageTbl> ReciverMessageTbls { get; set; }
 
-    public virtual DbSet<Report> Reports { get; set; }
-
     public virtual DbSet<ReportStatusTbl> ReportStatusTbls { get; set; }
+
+    public virtual DbSet<ReportTbl> ReportTbls { get; set; }
 
     public virtual DbSet<RequestEmployeeTbl> RequestEmployeeTbls { get; set; }
 
@@ -107,7 +107,7 @@ public partial class ForeignDbContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Data Source=rogstrix.com;Initial Catalog=ForeignDB;User ID=foreign;Password=Aa@1234567891011;TrustServerCertificate=true;");
+        => optionsBuilder.UseSqlServer("Server=rogstrix.com;Database=ForeignDB;User=foreign;Password=Aa@1234567891011;TrustServerCertificate=true");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -552,9 +552,21 @@ public partial class ForeignDbContext : DbContext
             entity.Property(e => e.ReciverMessageType).HasMaxLength(100);
         });
 
-        modelBuilder.Entity<Report>(entity =>
+        modelBuilder.Entity<ReportStatusTbl>(entity =>
         {
-            entity.ToTable("Report", "dbo");
+            entity.HasKey(e => e.ReportStatusId);
+
+            entity.ToTable("ReportStatusTbl", "dbo");
+
+            entity.Property(e => e.ReportStatusId).HasColumnName("ReportStatusID");
+            entity.Property(e => e.ReportStatusType).HasMaxLength(200);
+        });
+
+        modelBuilder.Entity<ReportTbl>(entity =>
+        {
+            entity.HasKey(e => e.ReportId).HasName("PK_Report");
+
+            entity.ToTable("ReportTbl", "dbo");
 
             entity.Property(e => e.ReportId).HasColumnName("ReportID");
             entity.Property(e => e.EmailExternalDevice).HasMaxLength(100);
@@ -567,27 +579,20 @@ public partial class ForeignDbContext : DbContext
             entity.Property(e => e.LicenseDate).HasMaxLength(100);
             entity.Property(e => e.LicenseNumber).HasMaxLength(100);
             entity.Property(e => e.Period).HasMaxLength(100);
+            entity.Property(e => e.ReportAchievement).HasDefaultValueSql("('NULL')");
             entity.Property(e => e.ReportStatusId).HasColumnName("ReportStatusID");
             entity.Property(e => e.RequestDateNumber).HasMaxLength(100);
             entity.Property(e => e.RequestId).HasColumnName("RequestID");
 
-            entity.HasOne(d => d.ReportStatus).WithMany(p => p.Reports)
+            entity.HasOne(d => d.ReportStatus).WithMany(p => p.ReportTbls)
                 .HasForeignKey(d => d.ReportStatusId)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK_Report_ReportStatusTbl");
 
-            entity.HasOne(d => d.Request).WithMany(p => p.Reports)
+            entity.HasOne(d => d.Request).WithMany(p => p.ReportTbls)
                 .HasForeignKey(d => d.RequestId)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK_Report_RequestTbl");
-        });
-
-        modelBuilder.Entity<ReportStatusTbl>(entity =>
-        {
-            entity.HasKey(e => e.ReportStatusId);
-
-            entity.ToTable("ReportStatusTbl", "dbo");
-
-            entity.Property(e => e.ReportStatusId).HasColumnName("ReportStatusID");
-            entity.Property(e => e.ReportStatusType).HasMaxLength(200);
         });
 
         modelBuilder.Entity<RequestEmployeeTbl>(entity =>
@@ -678,28 +683,28 @@ public partial class ForeignDbContext : DbContext
             entity.Property(e => e.ExecutiveDeviceName).HasMaxLength(100);
             entity.Property(e => e.ExpertRightOfMission).HasMaxLength(100);
             entity.Property(e => e.FlightPath).HasMaxLength(200);
-            entity.Property(e => e.ForeignTravelSummary).HasMaxLength(100);
-            entity.Property(e => e.ImportantTravel).HasMaxLength(100);
+            entity.Property(e => e.ForeignTravelSummary).HasMaxLength(500);
+            entity.Property(e => e.ImportantTravel).HasMaxLength(500);
             entity.Property(e => e.InternationalExpertId).HasColumnName("InternationalExpertID");
             entity.Property(e => e.InternetAddressOfTheExecutiveDevice).HasMaxLength(100);
             entity.Property(e => e.JobGoalId).HasColumnName("JobGoalID");
             entity.Property(e => e.LevelRightOfMission).HasMaxLength(100);
             entity.Property(e => e.MainAdminId).HasColumnName("MainAdminID");
-            entity.Property(e => e.MissionAchievementRecords).HasMaxLength(100);
+            entity.Property(e => e.MissionAchievementRecords).HasMaxLength(500);
             entity.Property(e => e.OperationId).HasMaxLength(100);
             entity.Property(e => e.ParticipantId).HasColumnName("ParticipantID");
             entity.Property(e => e.PassportTypeId).HasColumnName("PassportTypeID");
             entity.Property(e => e.PayerCitizenShip).HasMaxLength(100);
             entity.Property(e => e.PayerFood).HasMaxLength(100);
             entity.Property(e => e.PaymentFromBank).HasMaxLength(100);
-            entity.Property(e => e.RejectRequest).HasMaxLength(300);
+            entity.Property(e => e.RejectRequest).HasMaxLength(500);
             entity.Property(e => e.RequestStatusId).HasColumnName("RequestStatusID");
             entity.Property(e => e.RightOfCommutingCost).HasMaxLength(100);
             entity.Property(e => e.RightOfCommutingId).HasColumnName("RightOfCommutingID");
             entity.Property(e => e.RightOfMissionId).HasColumnName("RightOfMissionID");
             entity.Property(e => e.RightToEducationCost).HasMaxLength(100);
             entity.Property(e => e.RightToEducationId).HasColumnName("RightToEducationID");
-            entity.Property(e => e.SummaryInvitation).HasMaxLength(100);
+            entity.Property(e => e.SummaryInvitation).HasMaxLength(500);
             entity.Property(e => e.TheCostOfTicket).HasMaxLength(100);
             entity.Property(e => e.TickerTypeId)
                 .HasMaxLength(100)

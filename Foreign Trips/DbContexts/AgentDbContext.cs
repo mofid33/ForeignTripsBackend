@@ -26,7 +26,7 @@ namespace Foreign_Trips.DbContexts
         public DbSet<CityTbl> CityTbl { get; set; } = null!;
         public DbSet<TicketTbl> TicketTbl { get; set; } = null!;
         public DbSet<TicketDetailsTbl> TicketDetailsTbl { get; set; } = null!;
-        public DbSet<Report> Report { get; set; } = null!;
+        public DbSet<ReportTbl> ReportTbl { get; set; } = null!;
         public DbSet<FileDetails> FileDetails { get; set; } = null!;
         public DbSet<MainAdminTbl> MainAdminTbl { get; set; } = null!;
         public DbSet<ForeignDelegrationTbl> ForeginDelegrationTbl { get; set; } = null!;
@@ -45,5 +45,7 @@ namespace Foreign_Trips.DbContexts
         public DbSet<TollAmountTypeTbl> TollAmountTypeTbl { get; set; } = null!;
         public DbSet<TravelTypeTbl> TravelTypeTbl { get; set; } = null!;
         public DbSet<RequestEmployeeTbl> RequestEmployeeTbl { get; set; } = null!;
+        public DbSet<SubCategoryTbl> SubCategoryTbl { get; set; } = null!;
+
     }
 }

@@ -65,7 +65,7 @@ public partial class ForeignTripsContext : DbContext
 
     public virtual DbSet<ReciverMessageTbl> ReciverMessageTbls { get; set; }
 
-    public virtual DbSet<Report> Reports { get; set; }
+    public virtual DbSet<ReportTbl> Reports { get; set; }
 
     public virtual DbSet<ReportStatusTbl> ReportStatusTbls { get; set; }
 
@@ -543,9 +543,9 @@ public partial class ForeignTripsContext : DbContext
             entity.Property(e => e.ReciverMessageType).HasMaxLength(100);
         });
 
-        modelBuilder.Entity<Report>(entity =>
+        modelBuilder.Entity<ReportTbl>(entity =>
         {
-            entity.ToTable("Report");
+            entity.ToTable("ReportTbl");
 
             entity.Property(e => e.ReportId).HasColumnName("ReportID");
             entity.Property(e => e.EmailExternalDevice).HasMaxLength(100);
@@ -562,11 +562,11 @@ public partial class ForeignTripsContext : DbContext
             entity.Property(e => e.RequestDateNumber).HasMaxLength(100);
             entity.Property(e => e.RequestId).HasColumnName("RequestID");
 
-            entity.HasOne(d => d.ReportStatus).WithMany(p => p.Reports)
+            entity.HasOne(d => d.ReportStatus).WithMany(p => p.ReportTbls)
                 .HasForeignKey(d => d.ReportStatusId)
                 .HasConstraintName("FK_Report_ReportStatusTbl");
 
-            entity.HasOne(d => d.Request).WithMany(p => p.Reports)
+            entity.HasOne(d => d.Request).WithMany(p => p.ReportTbls)
                 .HasForeignKey(d => d.RequestId)
                 .HasConstraintName("FK_Report_RequestTbl");
         });

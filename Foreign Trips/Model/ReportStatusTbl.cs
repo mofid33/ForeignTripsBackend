@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Foreign_Trips.Model;
 
@@ -13,5 +13,5 @@ public partial class ReportStatusTbl
 
     public string ReportStatusType { get; set; } = null!;
 
-    public virtual ICollection<Report> Reports { get; set; } = new List<Report>();
+    public virtual ICollection<ReportTbl> ReportTbls { get; set; } = new List<ReportTbl>();
 }

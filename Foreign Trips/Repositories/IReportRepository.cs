@@ -6,10 +6,10 @@ namespace Foreign_Trips.Repositories
     public interface IReportRepository
     {
         Task<bool> ReportExistsAsync(int reportId);
-        Task<IEnumerable<Report?>> GetReport();
-        Task<Report?> GetReportAsync(int reportId);
-        Task<Report?> InsertReport(Report report);
-        Task<Report?> UpdateReport(Report report);
+        Task<IEnumerable<ReportTbl?>> GetReport();
+        Task<ReportTbl?> GetReportAsync(int reportId);
+        Task<ReportTbl?> InsertReport(ReportTbl report);
+        Task<ReportTbl?> UpdateReport(ReportTbl report);
         Task RemoveReport(int reportId);
 
 

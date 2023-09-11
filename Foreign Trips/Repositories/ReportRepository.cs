@@ -17,17 +17,17 @@ namespace Foreign_Trips.Repositories
             _context = context ?? throw new ArgumentException(nameof(context));
         }
 
-        public async Task<IEnumerable<Report?>> GetReport()
+        public async Task<IEnumerable<ReportTbl?>> GetReport()
         {
-            return await _context.Report
+            return await _context.ReportTbl
                 .Include(c => c.Request.Agent)
                 .Include(x => x.Request)
                 .ToListAsync();
         }
 
-        public async Task<Report?> GetReportAsync(int reportId)
+        public async Task<ReportTbl?> GetReportAsync(int reportId)
         {
-            return await _context.Report
+            return await _context.ReportTbl
              .Include(c => c.Request.Agent)
              .Include(x => x.Request)
              
@@ -37,26 +37,27 @@ namespace Foreign_Trips.Repositories
 
         }
 
-        public async Task<Report?> InsertReport(Report report)
+        public async Task<ReportTbl?> InsertReport(ReportTbl report)
         {
             try
             {
-                Report data = new Report();
+                ReportTbl data = new ReportTbl();
                 data.RequestId = report.RequestId;
-                data.ReportStatusId = report.ReportStatusId;
-                data.RequestDateNumber = report.RequestDateNumber;
-                data.LicenseNumber = report.LicenseNumber;
-                data.LicenseDate = report.LicenseDate;
-                data.Period = report.Period;    
-                data.EmailExternalDevice = report.EmailExternalDevice;
-                data.EmailInternalDevice = report.EmailInternalDevice;
-                data.InternalDevice = report.InternalDevice;
-                data.ExternalDevice = report.ExternalDevice;
-                data.LatestUpdate = report.LatestUpdate;
+                //data.ReportStatusId = report.ReportStatusId;
+                //data.RequestDateNumber = report.RequestDateNumber;
+                //data.LicenseNumber = report.LicenseNumber;
+                //data.LicenseDate = report.LicenseDate;
+                //data.Period = report.Period;    
+                //data.EmailExternalDevice = report.EmailExternalDevice;
+                //data.EmailInternalDevice = report.EmailInternalDevice;
+                //data.InternalDevice = report.InternalDevice;
+                //data.ExternalDevice = report.ExternalDevice;
+                //data.LatestUpdate = report.LatestUpdate;
+                data.ReportAchievement = report.ReportAchievement;
 
 
 
-                await _context.Report.AddAsync(data);
+                await _context.ReportTbl.AddAsync(data);
 
 
                 await _context.SaveChangesAsync();
@@ -74,8 +75,8 @@ namespace Foreign_Trips.Repositories
 
         public async Task RemoveReport(int reportId)
         {
-            var data = _context.Report.Find(reportId);
-            _context.Report.Remove(data);
+            var data = _context.ReportTbl.Find(reportId);
+            _context.ReportTbl.Remove(data);
 
             await _context.SaveChangesAsync();
         }
@@ -83,15 +84,15 @@ namespace Foreign_Trips.Repositories
 
         public async Task<bool> ReportExistsAsync(int reportId)
         {
-            return await _context.Report.AnyAsync(f => f.ReportId == reportId);
+            return await _context.ReportTbl.AnyAsync(f => f.ReportId == reportId);
         }
 
 
-        public async Task<Report?> UpdateReport(Report report)
+        public async Task<ReportTbl?> UpdateReport(ReportTbl report)
         {
             try
             {
-                var data = await _context.Report.FindAsync(report.ReportId);
+                var data = await _context.ReportTbl.FindAsync(report.ReportId);
                 data.RequestDateNumber = report.RequestDateNumber;
                 data.LicenseNumber = report.LicenseNumber;
                 data.LicenseDate = report.LicenseDate;
