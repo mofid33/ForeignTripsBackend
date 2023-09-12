@@ -41,7 +41,7 @@ namespace Foreign_Trips.Controllers
 
             var rep = await _reportRepository.GetReportAsync(Model.ReportId);
             return Ok(
-         _mapper.Map<ReportTbl>(rep)
+         rep
          );
 
         }

@@ -6,6 +6,10 @@ namespace Foreign_Trips.Repositories
     public interface IAgentRepository
     {
         Task<IEnumerable<AgentTbl>> GetAgent();
+        Task<IEnumerable<SubCategoryTbl>> GetSubCategory();
+        Task<IEnumerable<PositionTypeTbl>> GetPosition();
+        Task<IEnumerable<TypeOfEmploymentTbl>> GetTypeEmployment();
+
         Task<bool> AgentExistsAsync(long agentId);
         Task<AgentTbl?> GetAgentAsync(long agentId);
         Task<AgentTbl?> InsertAgentAsync(AgentTbl agent);

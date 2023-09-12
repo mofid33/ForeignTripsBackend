@@ -63,7 +63,7 @@ namespace Foreign_Trips.Controllers
 
             var req = await _requestRepository.GetRequestEmployeeAsync(Model.RequestId);
             return Ok(
-         _mapper.Map<RequestTbl>(req)
+         req
          );
 
         }

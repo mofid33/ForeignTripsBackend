@@ -65,7 +65,11 @@ public partial class ForeignTripsContext : DbContext
 
     public virtual DbSet<ReciverMessageTbl> ReciverMessageTbls { get; set; }
 
+
     public virtual DbSet<ReportTbl> ReportsTbls { get; set; }
+
+    public virtual DbSet<ReportTbl> Reports { get; set; }
+
 
     public virtual DbSet<ReportStatusTbl> ReportStatusTbls { get; set; }
 
@@ -545,7 +549,7 @@ public partial class ForeignTripsContext : DbContext
 
         modelBuilder.Entity<ReportTbl>(entity =>
         {
-            entity.ToTable("Report");
+            entity.ToTable("ReportTbl");
 
             entity.Property(e => e.ReportId).HasColumnName("ReportID");
             entity.Property(e => e.EmailExternalDevice).HasMaxLength(100);
