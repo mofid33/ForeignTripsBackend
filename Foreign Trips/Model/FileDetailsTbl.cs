@@ -23,7 +23,7 @@ public partial class FileDetailsTbl
 
     public virtual FileTypeTbl? FileType { get; set; }
 
-    public virtual Report? Report { get; set; }
+    public virtual ReportTbl? Report { get; set; }
 
     public virtual RequestTbl? Request { get; set; }
 }

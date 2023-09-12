@@ -261,7 +261,7 @@ namespace Foreign_Trips.Controllers
         #region Report
         [HttpGet]
         [Route("GetReports")]
-        public async Task<ActionResult<IEnumerable<Report>>> GetReport()
+        public async Task<ActionResult<IEnumerable<ReportTbl>>> GetReport()
         {
             var reports = await _reportRepository.GetReport();
 
@@ -272,14 +272,14 @@ namespace Foreign_Trips.Controllers
 
         [HttpPost]
         [Route("GetReport")]
-        public async Task<ActionResult<Report>> GetReport(
-     [FromBody] Report Model
+        public async Task<ActionResult<ReportTbl>> GetReport(
+     [FromBody] ReportTbl Model
      )
         {
 
             var rep = await _reportRepository.GetReportAsync(Model.ReportId);
             return Ok(
-         _mapper.Map<Report>(rep)
+         _mapper.Map<ReportTbl>(rep)
          );
 
         }
@@ -287,8 +287,8 @@ namespace Foreign_Trips.Controllers
 
         [HttpPost]
         [Route("InsertReport")]
-        public async Task<ActionResult<Report>> InsertReport(
-    [FromBody] Report Model
+        public async Task<ActionResult<ReportTbl>> InsertReport(
+    [FromBody] ReportTbl Model
     )
         {
 

@@ -23,7 +23,7 @@ namespace Foreign_Trips.Controllers
 
         [HttpGet]
         [Route("GetReports")]
-        public async Task<ActionResult<IEnumerable<Report>>> GetReport()
+        public async Task<ActionResult<IEnumerable<ReportTbl>>> GetReport()
         {
             var reports = await _reportRepository.GetReport();
 
@@ -34,14 +34,14 @@ namespace Foreign_Trips.Controllers
 
         [HttpPost]
         [Route("GetReport")]
-        public async Task<ActionResult<Report>> GetReport(
-     [FromBody] Report Model
+        public async Task<ActionResult<ReportTbl>> GetReport(
+     [FromBody] ReportTbl Model
      )
         {
 
             var rep = await _reportRepository.GetReportAsync(Model.ReportId);
             return Ok(
-         _mapper.Map<Report>(rep)
+         _mapper.Map<ReportTbl>(rep)
          );
 
         }
@@ -51,8 +51,8 @@ namespace Foreign_Trips.Controllers
 
         [HttpPost]
         [Route("InsertReport")]
-        public async Task<ActionResult<Report>> InsertReport(
-    [FromBody] Report Model
+        public async Task<ActionResult<ReportTbl>> InsertReport(
+    [FromBody] ReportTbl Model
     )
         {
 
@@ -69,8 +69,8 @@ namespace Foreign_Trips.Controllers
 
         [HttpPost]
         [Route("UpdateReport")]
-        public async Task<ActionResult<Report>> UpdateReport(
-[FromBody] Report Model
+        public async Task<ActionResult<ReportTbl>> UpdateReport(
+[FromBody] ReportTbl Model
 )
         {
             if (!await _reportRepository.ReportExistsAsync(Model.ReportId))
@@ -89,8 +89,8 @@ namespace Foreign_Trips.Controllers
 
                 [HttpPost]
                 [Route("RemoveReport")]
-                public async Task<ActionResult<Report>> RemoveReport(
-        [FromBody] Report Model
+                public async Task<ActionResult<ReportTbl>> RemoveReport(
+        [FromBody] ReportTbl Model
         )
                 {
                     try

@@ -135,7 +135,7 @@ public partial class RequestTbl
 
     public virtual PassportTypeTbl PassportType { get; set; } = null!;
 
-    public virtual ICollection<Report> Reports { get; set; } = new List<Report>();
+    public virtual ICollection<ReportTbl> ReportTbls { get; set; } = new List<ReportTbl>();
 
     public virtual RequestStatusTbl? RequestStatus { get; set; }
 
