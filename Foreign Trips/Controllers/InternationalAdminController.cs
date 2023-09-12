@@ -273,6 +273,7 @@ namespace Foreign_Trips.Controllers
         #endregion
 
         #region Agent
+
         [HttpGet]
         [Route("GetAgents")]
         public async Task<ActionResult<IEnumerable<AgentTbl>>> GetAgents()
@@ -353,6 +354,7 @@ namespace Foreign_Trips.Controllers
 
 
         #endregion
+
 
         #region Message
 

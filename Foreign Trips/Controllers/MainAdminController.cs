@@ -172,21 +172,6 @@ namespace Foreign_Trips.Controllers
 
         }
 
-        [HttpPost]
-        [Route("SuspendAgent")]
-        public async Task<ActionResult<AgentTbl>> SuspendAgent(
-[FromBody] GetAgent Model
-)
-        {
-            if (!await _agentRepository.AgentExistsAsync(Model.AgentId))
-            {
-                return NotFound();
-            }
-            await _agentRepository.SuspendAgentAsync(Model.AgentId);
-
-            return Ok();
-
-        }
         #endregion
 
         #region Report
@@ -246,36 +231,36 @@ namespace Foreign_Trips.Controllers
 
         }
 
-        [HttpPost]
-        [Route("InsertSupervisor")]
-        public async Task<ActionResult<SupervisorTbl>> InsertSupervisor(
-[FromBody] SupervisorTbl Model
-)
-        {
+        //        [HttpPost]
+        //        [Route("InsertSupervisor")]
+        //        public async Task<ActionResult<SupervisorTbl>> InsertSupervisor(
+        //[FromBody] SupervisorTbl Model
+        //)
+        //        {
 
-            var sup = await _supervisorRepository.InsertSupervisor(Model);
-            if (sup == null)
-            {
-                return BadRequest();
-            }
-            return Ok(sup);
+        //            var sup = await _supervisorRepository.InsertSupervisor(Model);
+        //            if (sup == null)
+        //            {
+        //                return BadRequest();
+        //            }
+        //            return Ok(sup);
 
-        }
+        //        }
 
-        [HttpPost]
-        [Route("UpdateSupervisor")]
-        public async Task<ActionResult<SupervisorTbl>> UpdateSupervisorAsync(
-[FromBody] SupervisorTbl Model
-)
-        {
-            var sup = await _supervisorRepository.UpdateSupervisorAsync(Model);
-            if (sup == null)
-            {
-                return BadRequest();
-            }
-            return Ok();
+        //        [HttpPost]
+        //        [Route("UpdateSupervisor")]
+        //        public async Task<ActionResult<SupervisorTbl>> UpdateSupervisorAsync(
+        //[FromBody] SupervisorTbl Model
+        //)
+        //        {
+        //            var sup = await _supervisorRepository.UpdateSupervisorAsync(Model);
+        //            if (sup == null)
+        //            {
+        //                return BadRequest();
+        //            }
+        //            return Ok();
 
-        }
+        //        }
 
         [HttpPost]
         [Route("RemoveSupervisor")]
@@ -327,89 +312,73 @@ namespace Foreign_Trips.Controllers
 
 
 
-        [HttpPost]
-        [Route("InsertInternationalExpert")]
-        public async Task<ActionResult<InternationalExpertTbl>> InsertInternationalExpert(
-    [FromBody] InternationalExpertTbl Model
-    )
-        {
+//        [HttpPost]
+//        [Route("InsertInternationalExpert")]
+//        public async Task<ActionResult<InternationalExpertTbl>> InsertInternationalExpert(
+//    [FromBody] InternationalExpertTbl Model
+//    )
+//        {
 
-            var Inter = await _internationalexpertRepository.InsertInternationalExpert(Model);
-            if (Inter == null)
-            {
-                return BadRequest();
-            }
-            return Ok();
+//            var Inter = await _internationalexpertRepository.InsertInternationalExpert(Model);
+//            if (Inter == null)
+//            {
+//                return BadRequest();
+//            }
+//            return Ok();
 
-        }
-
-
-
-
-        [HttpPost]
-        [Route("UpdateInternationalExpert")]
-        public async Task<ActionResult<InternationalExpertTbl>> UpdateInternationalExpert(
-[FromBody] InternationalExpertTbl Model
-)
-        {
-            if (!await _internationalexpertRepository.InternationalExpertExistsAsync(Model.InternationalExpertId))
-            {
-                return NotFound();
-            }
-            var Inter = await _internationalexpertRepository.UpdateInternationalExpert(Model);
-            if (Inter == null)
-            {
-                return BadRequest();
-            }
-            return Ok();
-        }
+//        }
 
 
 
 
-        [HttpPost]
-        [Route("RemoveInternationalExpert")]
-        public async Task<ActionResult<InternationalExpertTbl>> RemoveInternationalExpert(
-[FromBody] InternationalExpertTbl Model
-)
-        {
-            try
-            {
-                if (!await _internationalexpertRepository.InternationalExpertExistsAsync(Model.InternationalExpertId))
-                {
-                    return NoContent();
-                }
-                _internationalexpertRepository.RemoveInternationalExpert(Model.InternationalExpertId);
+//        [HttpPost]
+//        [Route("UpdateInternationalExpert")]
+//        public async Task<ActionResult<InternationalExpertTbl>> UpdateInternationalExpert(
+//[FromBody] InternationalExpertTbl Model
+//)
+//        {
+//            if (!await _internationalexpertRepository.InternationalExpertExistsAsync(Model.InternationalExpertId))
+//            {
+//                return NotFound();
+//            }
+//            var Inter = await _internationalexpertRepository.UpdateInternationalExpert(Model);
+//            if (Inter == null)
+//            {
+//                return BadRequest();
+//            }
+//            return Ok();
+//        }
 
-                return Ok();
-            }
 
-            catch (System.Exception ex)
-            {
-                return null;
 
-            }
-        }
+
+//        [HttpPost]
+//        [Route("RemoveInternationalExpert")]
+//        public async Task<ActionResult<InternationalExpertTbl>> RemoveInternationalExpert(
+//[FromBody] InternationalExpertTbl Model
+//)
+//        {
+//            try
+//            {
+//                if (!await _internationalexpertRepository.InternationalExpertExistsAsync(Model.InternationalExpertId))
+//                {
+//                    return NoContent();
+//                }
+//                _internationalexpertRepository.RemoveInternationalExpert(Model.InternationalExpertId);
+
+//                return Ok();
+//            }
+
+//            catch (System.Exception ex)
+//            {
+//                return null;
+
+//            }
+//        }
 
         #endregion
 
         #region Message
-
-        [HttpPost]
-        [Route("InsertMessage")]
-        public async Task<ActionResult<MessageTbl>> InsertMessage(
-   [FromBody] MessageTbl Model
-   )
-        {
-
-            var message = await _messageRepository.InsertMessage(Model);
-            if (message == null)
-            {
-                return BadRequest();
-            }
-            return Ok(message);
-
-        }
 
         [HttpGet]
         [Route("GetMessages")]
@@ -431,6 +400,22 @@ namespace Foreign_Trips.Controllers
 
             var messages = await _messageRepository.GetMessageAsync(Model.MessageId);
             return Ok(messages);
+
+        }
+
+        [HttpPost]
+        [Route("InsertMessage")]
+        public async Task<ActionResult<MessageTbl>> InsertMessage(
+[FromBody] MessageTbl Model
+)
+        {
+
+            var message = await _messageRepository.InsertMessage(Model);
+            if (message == null)
+            {
+                return BadRequest();
+            }
+            return Ok(message);
 
         }
 
