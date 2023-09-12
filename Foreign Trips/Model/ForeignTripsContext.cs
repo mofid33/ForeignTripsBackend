@@ -65,7 +65,11 @@ public partial class ForeignTripsContext : DbContext
 
     public virtual DbSet<ReciverMessageTbl> ReciverMessageTbls { get; set; }
 
+
+    public virtual DbSet<ReportTbl> ReportsTbls { get; set; }
+
     public virtual DbSet<ReportTbl> Reports { get; set; }
+
 
     public virtual DbSet<ReportStatusTbl> ReportStatusTbls { get; set; }
 
