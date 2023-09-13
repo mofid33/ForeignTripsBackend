@@ -64,8 +64,8 @@ namespace Foreign_Trips.Controllers
 
         [HttpPost]
         [Route("InsertInternationalExpert")]
-        public async Task<ActionResult<InternationalExpertTbl>> InsertInternationalExpert(
-    [FromBody] InternationalExpertTbl Model
+        public async Task<ActionResult<InternationalExpertDto>> InsertInternationalExpert(
+    [FromBody] InternationalExpertDto Model
     )
         {
 
@@ -74,7 +74,7 @@ namespace Foreign_Trips.Controllers
             {
                 return BadRequest();
             }
-            return Ok();
+            return Ok(Inter);
 
         }
 

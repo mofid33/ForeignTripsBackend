@@ -15,6 +15,8 @@ namespace Foreign_Trips.Entities
 
         public string SupervisorUserName { get; set; } = null!;
 
-        public string Password { get; set; } = null!;
+        public string Password { get; set; } 
+
+        public string PasswordSalt { get; set; }
     }
 }

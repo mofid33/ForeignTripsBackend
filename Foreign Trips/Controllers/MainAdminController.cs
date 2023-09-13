@@ -78,8 +78,8 @@ namespace Foreign_Trips.Controllers
 
         [HttpPost]
         [Route("InsertMainAdmin")]
-        public async Task<ActionResult<MainAdminTbl>> InsertMainAdmin(
-[FromBody] MainAdminTbl Model
+        public async Task<ActionResult<MainAdminDto>> InsertMainAdmin(
+[FromBody] MainAdminDto Model
 )
         {
 
@@ -124,8 +124,8 @@ namespace Foreign_Trips.Controllers
 
         [HttpPost]
         [Route("InsertAgent")]
-        public async Task<ActionResult<AgentTbl>> InsertAgnet(
-        [FromBody] AgentTbl Model
+        public async Task<ActionResult<AgentDto>> InsertAgnet(
+        [FromBody] AgentDto Model
         )
         {
 

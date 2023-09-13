@@ -37,19 +37,31 @@ namespace Foreign_Trips.Repositories
             return await _context.MainAdminTbl.Where(c => c.MainAdminId == mainadminId).FirstOrDefaultAsync();
         }
 
+        public static void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
+        {
+            using (var hmac = new System.Security.Cryptography.HMACSHA512())
+            {
+                passwordSalt = hmac.Key;
+                passwordHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
+            }
+        }
 
-        public async Task<MainAdminTbl?> InsertMainAdmin(MainAdminTbl mainadmin)
+
+        public async Task<MainAdminDto> InsertMainAdmin(MainAdminDto mainadmin)
         {
             try
             {
-
+                byte[] passwordHash, passwordSalt;
+                CreatePasswordHash(mainadmin.Password.ToString(), out passwordHash, out passwordSalt);
                 MainAdminTbl mainadminTbl = new MainAdminTbl();
                 mainadminTbl.MainAdminName = mainadmin.MainAdminName;
                 mainadminTbl.MainAdminUserName = mainadmin.MainAdminUserName;
-                mainadminTbl.Password = mainadmin.Password;
-                var exp = await _context.MainAdminTbl.AddAsync(mainadminTbl);
+                mainadminTbl.Password = passwordHash;
+                mainadminTbl.PasswordSalt = passwordSalt;
+
+                await _context.MainAdminTbl.AddAsync(mainadminTbl);
                 await _context.SaveChangesAsync();
-                return mainadminTbl;
+                return mainadmin;
 
             }
 

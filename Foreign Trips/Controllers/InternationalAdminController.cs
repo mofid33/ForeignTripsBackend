@@ -67,8 +67,8 @@ namespace Foreign_Trips.Controllers
 
         [HttpPost]
         [Route("InsertInternationalAdmin")]
-        public async Task<ActionResult<InternationalAdminTbl>> InsertAdmin(
-    [FromBody] InternationalAdminTbl Model
+        public async Task<ActionResult<InternationalAdminDto>> InsertAdmin(
+    [FromBody] InternationalAdminDto Model
     )
         {
 
@@ -77,7 +77,7 @@ namespace Foreign_Trips.Controllers
             {
                 return BadRequest();
             }
-            return Ok();
+            return Ok(EAgent);
 
         }
 
@@ -144,8 +144,8 @@ namespace Foreign_Trips.Controllers
 
         [HttpPost]
         [Route("InsertSupervisor")]
-        public async Task<ActionResult<SupervisorTbl>> InsertSupervisor(
-[FromBody] SupervisorTbl Model
+        public async Task<ActionResult<SupervisorDto>> InsertSupervisor(
+[FromBody] SupervisorDto Model
 )
         {
 
@@ -208,8 +208,8 @@ namespace Foreign_Trips.Controllers
 
         [HttpPost]
         [Route("InsertInternationalExpert")]
-        public async Task<ActionResult<InternationalExpertTbl>> InsertInternationalExpert(
-    [FromBody] InternationalExpertTbl Model
+        public async Task<ActionResult<InternationalExpertDto>> InsertInternationalExpert(
+    [FromBody] InternationalExpertDto Model
     )
         {
 
@@ -218,7 +218,7 @@ namespace Foreign_Trips.Controllers
             {
                 return BadRequest();
             }
-            return Ok();
+            return Ok(Inter);
 
         }
 
@@ -287,8 +287,8 @@ namespace Foreign_Trips.Controllers
 
         [HttpPost]
         [Route("InsertAgent")]
-        public async Task<ActionResult<AgentTbl>> InsertAgnet(
-       [FromBody] AgentTbl Model
+        public async Task<ActionResult<AgentDto>> InsertAgnet(
+       [FromBody] AgentDto Model
        )
         {
 

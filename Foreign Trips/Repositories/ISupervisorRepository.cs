@@ -1,4 +1,5 @@
-﻿using Foreign_Trips.Model;
+﻿using Foreign_Trips.Entities;
+using Foreign_Trips.Model;
 
 namespace Foreign_Trips.Repositories
 {
@@ -7,7 +8,7 @@ namespace Foreign_Trips.Repositories
         Task<bool> SupervisorExistsAsync(int supervisorId);
         Task<IEnumerable<SupervisorTbl?>> GetSupervisor();
         Task<SupervisorTbl?> GetSupervisorAsync(int supervisorId);
-        Task<SupervisorTbl?> InsertSupervisor(SupervisorTbl supervisor);
+        Task<SupervisorDto> InsertSupervisor(SupervisorDto supervisor);
         Task<SupervisorTbl?> UpdateSupervisorAsync(SupervisorTbl supervisor);
         Task RemoveSupervisorAsync(int supervisorId);
         

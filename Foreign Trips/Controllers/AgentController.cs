@@ -109,8 +109,8 @@ namespace Foreign_Trips.Controllers
 
         [HttpPost]
         [Route("InsertAgent")]
-        public async Task<ActionResult<AgentTbl>> InsertAgnet(
-        [FromBody] AgentTbl Model
+        public async Task<ActionResult<AgentDto>> InsertAgnet(
+        [FromBody] AgentDto Model
         )
         {
 
@@ -120,7 +120,7 @@ namespace Foreign_Trips.Controllers
                 return BadRequest();
             }
 
-            return Ok();
+            return Ok(Eagent);
 
         }
 

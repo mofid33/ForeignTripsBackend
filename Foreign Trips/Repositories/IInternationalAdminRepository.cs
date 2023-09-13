@@ -7,7 +7,7 @@ namespace Foreign_Trips.Repositories
     {
         Task<bool> AdminExistsAsync(int adminId);
         Task<IEnumerable<InternationalAdminTbl?>> GetAdmins();
-        Task<InternationalAdminTbl?> InsertAdmin(InternationalAdminTbl admin);
+        Task<InternationalAdminDto> InsertAdmin(InternationalAdminDto admin);
         Task<InternationalAdminTbl?> UpdateAdmin(InternationalAdminTbl admin);
         Task RemoveAdmin(int adminId);
 

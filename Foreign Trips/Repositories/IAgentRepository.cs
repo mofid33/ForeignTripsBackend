@@ -12,7 +12,7 @@ namespace Foreign_Trips.Repositories
 
         Task<bool> AgentExistsAsync(long agentId);
         Task<AgentTbl?> GetAgentAsync(long agentId);
-        Task<AgentTbl?> InsertAgentAsync(AgentTbl agent);
+        Task<AgentDto> InsertAgentAsync(AgentDto agent);
         Task<AgentTbl?> UpdateAgentAsync(AgentTbl agentId);
         Task DeleteAgent(int agentId);
         Task<IEnumerable<ProvinceTbl>> GetProvincesAcync();

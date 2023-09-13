@@ -29,21 +29,35 @@ namespace Foreign_Trips.Repositories
             }
         }
 
+
+
         public async Task<InternationalExpertTbl?> GetInternationalExpertAsync(int internationalExpertId)
         {
             return await _context.InternationalExpertTbl.Where(c => c.InternationalExpertId == internationalExpertId).FirstOrDefaultAsync();
         }
 
-        public async Task<InternationalExpertTbl?> InsertInternationalExpert(InternationalExpertTbl internationalexpert)
+
+        public static void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
+        {
+            using (var hmac = new System.Security.Cryptography.HMACSHA512())
+            {
+                passwordSalt = hmac.Key;
+                passwordHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
+            }
+        }
+
+        public async Task<InternationalExpertDto> InsertInternationalExpert(InternationalExpertDto internationalexpert)
         {
             try
             {
-
+                byte[] passwordHash, passwordSalt;
+                CreatePasswordHash(internationalexpert.Password.ToString(), out passwordHash, out passwordSalt);
                 InternationalExpertTbl Intexpert = new InternationalExpertTbl();
                 Intexpert.InternationalExpertName = internationalexpert.InternationalExpertName;
                 Intexpert.InternationalExpertFamily = internationalexpert.InternationalExpertFamily;
                 Intexpert.InternationalExpertUserName = internationalexpert.InternationalExpertUserName;
-                Intexpert.Password = internationalexpert.Password;
+                Intexpert.Password = passwordHash;
+                Intexpert.PasswordSalt = passwordSalt;
 
 
 

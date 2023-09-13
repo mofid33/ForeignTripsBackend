@@ -13,39 +13,43 @@ namespace Foreign_Trips.Entities
 
         public int? TypeOfMissionId { get; set; }
 
-        public int? SupervisorId { get; set; }
+        public int SubCategoryId { get; set; }
 
-        public int? TypeOfEmploymentId { get; set; }
-
-        public int? PositionId { get; set; }
+        public int TypeOfEmploymentId { get; set; }
 
         public int? AgentStatusId { get; set; }
 
-        public string? AgentName { get; set; }
+        public int PositionId { get; set; }
 
-        public string? AgentFamily { get; set; }
+        public string AgentName { get; set; } = null!;
 
-        public string? NationalCode { get; set; }
+        public string AgentFamily { get; set; } = null!;
 
-        public string? Mobile { get; set; }
+        public string? AgentFatherName { get; set; }
 
-        public string? Phone { get; set; }
+        public string NationalCode { get; set; } = null!;
 
-        public string? Address { get; set; }
+        public string DateOfBirth { get; set; } = null!;
+
+        public string Mobile { get; set; } = null!;
+
+        public string Phone { get; set; } = null!;
+
+        public string Address { get; set; } = null!;
 
         public string? CompanyName { get; set; }
 
-        public string? Password { get; set; }
+        public string Email { get; set; } = null!;
 
-        public string? Email { get; set; }
+        public string Subset { get; set; } = null!;
 
         public byte[]? Photo { get; set; }
 
-        public string? RegisterDate { get; set; }
+        public string RegisterDate { get; set; } = null!;
 
-        public string? RegisterTime { get; set; }
+        public string RegisterTime { get; set; } = null!;
 
-        public string? PostalCode { get; set; }
+        public string PostalCode { get; set; } = null!;
 
         public string? BirthCertificateNumber { get; set; }
 
@@ -53,15 +57,9 @@ namespace Foreign_Trips.Entities
 
         public int? GenderId { get; set; }
 
-        public int? MaritalStatusId { get; set; }
+        public string PasswordSalt { get; set; }
 
-        public string? Degree { get; set; }
-
-        public string? FieldOfStudy { get; set; }
-
-        public string? LanguageId { get; set; }
-
-        public string? Servicelocation { get; set; }
+        public string Password { get; set; }
 
     }
 }

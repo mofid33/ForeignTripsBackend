@@ -4,6 +4,7 @@ using Foreign_Trips.Model;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Serilog;
+using System.Runtime.Intrinsics.Arm;
 
 namespace Foreign_Trips.Repositories
 {
@@ -30,27 +31,43 @@ namespace Foreign_Trips.Repositories
         {
             return await _context.InternationalAdminTbl.ToListAsync();
         }
-    
 
-        public async Task<InternationalAdminTbl?> InsertAdmin(InternationalAdminTbl admin)
+        public static void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
+        {
+            using (var hmac = new System.Security.Cryptography.HMACSHA512())
+            {
+                passwordSalt = hmac.Key;
+                passwordHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
+            }
+        }
+
+
+        public async Task<InternationalAdminDto> InsertAdmin(InternationalAdminDto admin)
         {
             try
             {
+                    byte[] passwordHash, passwordSalt;
+                    CreatePasswordHash(admin.Password.ToString(), out passwordHash, out passwordSalt);
+                    InternationalAdminTbl adm = new InternationalAdminTbl();
+                    adm.AdminName = admin.AdminName;
+                    adm.AdminUsername = admin.AdminUsername;
+                    adm.Password = passwordHash;
+                    adm.PasswordSalt = passwordSalt;
 
-                var foreigntrip = await _context.InternationalAdminTbl.AddAsync(admin);
-                await _context.SaveChangesAsync();
 
 
-                return admin;
+                    await _context.InternationalAdminTbl.AddAsync(adm);
+                    await _context.SaveChangesAsync();
 
+                    return admin;
+                }
+
+                catch (System.Exception ex)
+                {
+                    return null;
+
+                }
             }
-
-            catch (System.Exception ex)
-            {
-                return null;
-
-            }
-        }
 
         public async Task RemoveAdmin(int adminId)
         {

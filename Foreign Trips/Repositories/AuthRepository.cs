@@ -83,7 +83,7 @@ namespace Foreign_Trips.Repositories
             try
             {
                 var mainadmin = await _context.MainAdminTbl
-                .Where(f => f.MainAdminUserName == username && f.Password == password).ToListAsync();
+                .Where(f => f.MainAdminUserName == username ).ToListAsync();
                 DateTime dt = new DateTime();
                 PersianDateTime persianDateTime = new PersianDateTime(DateTime.Now);
 
@@ -92,6 +92,11 @@ namespace Foreign_Trips.Repositories
 
                 if (mainadmin.Count > 0)
                 {
+                    if (!VerifyPasswordHash(password, mainadmin[0].Password, mainadmin[0].PasswordSalt))
+                    {
+                        return null;
+
+                    }
                     return new LoginDto(
                 username,
                 password,
@@ -104,10 +109,15 @@ namespace Foreign_Trips.Repositories
                 else
                 {
                     var supervisor = await _context.SupervisorTbl
-           .Where(f => f.SupervisorUserName == username && f.Password == password).ToListAsync();
+           .Where(f => f.SupervisorUserName == username).ToListAsync();
 
                     if (supervisor.Count > 0)
                     {
+                        if (!VerifyPasswordHash(password, supervisor[0].Password, supervisor[0].PasswordSalt))
+                        {
+                            return null;
+
+                        }
                         LoginTbl log = new LoginTbl();
                         log.Time = DateTime.Now.ToShortTimeString();
 
@@ -128,10 +138,15 @@ namespace Foreign_Trips.Repositories
                     else
                     {
                         var intexpert = await _context.InternationalExpertTbl
-               .Where(f => f.InternationalExpertUserName == username && f.Password == password).ToListAsync();
+               .Where(f => f.InternationalExpertUserName == username).ToListAsync();
 
                         if (intexpert.Count > 0)
                         {
+                            if (!VerifyPasswordHash(password, intexpert[0].Password, intexpert[0].PasswordSalt))
+                            {
+                                return null;
+
+                            }
                             LoginTbl log = new LoginTbl();
                             log.Time = DateTime.Now.ToShortTimeString();
 
@@ -150,10 +165,15 @@ namespace Foreign_Trips.Repositories
                         else
                         {
                             var intadmin = await _context.InternationalAdminTbl
-                   .Where(f => f.AdminUsername == username && f.Password == password).ToListAsync();
+                   .Where(f => f.AdminUsername == username).ToListAsync();
 
                             if (intadmin.Count > 0)
                             {
+                                if (!VerifyPasswordHash(password, intadmin[0].Password, intadmin[0].PasswordSalt))
+                                {
+                                    return null;
+
+                                }
                                 LoginTbl log = new LoginTbl();
                                 log.Time = DateTime.Now.ToShortTimeString();
 
@@ -173,10 +193,15 @@ namespace Foreign_Trips.Repositories
                             else
                             {
                                 var agent = await _context.AgentTbl
-                       .Where(f => f.NationalCode == username && f.Password == password).ToListAsync();
+                       .Where(f => f.NationalCode == username).ToListAsync();
 
                                 if (agent.Count > 0)
                                 {
+                                    if (!VerifyPasswordHash(password, agent[0].Password, agent[0].PasswordSalt))
+                                    {
+                                        return null;
+
+                                    }
                                     LoginTbl log = new LoginTbl();
                                     log.Time = DateTime.Now.ToShortTimeString();
 
@@ -212,23 +237,23 @@ namespace Foreign_Trips.Repositories
 
 
             public bool VerifyPasswordHash(string password, byte[] passwordHash, byte[] passwordSalt)
-                                {
-                                    using (var hmac = new System.Security.Cryptography.HMACSHA512(passwordSalt))
-                                    {
-                                        var computedHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
-                                        for (int i = 0; i < computedHash.Length; i++)
-                                        {
-                                            if (computedHash[i] != passwordHash[i]) return false;
-                                        }
-                                        return true;
-                                    }
-                                }
-                                public async Task<bool> SaveChangesAsync()
-                                {
-                                    return (await _context.SaveChangesAsync() > 0);
-                                }
-                            }
-                        }
+            {
+               using (var hmac = new System.Security.Cryptography.HMACSHA512(passwordSalt))
+                   {
+                      var computedHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
+                      for (int i = 0; i < computedHash.Length; i++)
+                      {
+                           if (computedHash[i] != passwordHash[i]) return false;
+                      }
+                      return true;
+                      }
+                   }
+            public async Task<bool> SaveChangesAsync()
+            {
+               return (await _context.SaveChangesAsync() > 0);
+            }
+    }
+}
             
             
                 
