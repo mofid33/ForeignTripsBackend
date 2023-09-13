@@ -57,7 +57,7 @@ public partial class ForeignTripsContext : DbContext
 
     public virtual DbSet<PassportTbl> PassportTbls { get; set; }
 
-    public virtual DbSet<PassportType> PassportTypes { get; set; }
+    public virtual DbSet<PassportTypeTbl> PassportTypeTbls { get; set; }
 
     public virtual DbSet<PositionTypeTbl> PositionTypeTbls { get; set; }
 
@@ -507,12 +507,12 @@ public partial class ForeignTripsContext : DbContext
             entity.Property(e => e.TypeOfMission).HasMaxLength(10);
         });
 
-        modelBuilder.Entity<PassportType>(entity =>
+        modelBuilder.Entity<PassportTypeTbl>(entity =>
         {
             entity.ToTable("PassportType");
 
             entity.Property(e => e.PassportTypeId).HasColumnName("PassportTypeID");
-            entity.Property(e => e.PassportType1)
+            entity.Property(e => e.PassportType)
                 .HasMaxLength(50)
                 .HasColumnName("PassportType");
         });

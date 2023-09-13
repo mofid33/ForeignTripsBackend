@@ -8,7 +8,7 @@ namespace Foreign_Trips.Repositories
         Task<bool> InternationalExpertExistsAsync(int internationalexpertId);
         Task<IEnumerable<InternationalExpertTbl?>> GetInternationalExpert();
         Task<InternationalExpertTbl?> GetInternationalExpertAsync(int internationalExpertId);
-        Task<InternationalExpertTbl?> InsertInternationalExpert(InternationalExpertTbl internationalexpert);
+        Task<InternationalExpertDto> InsertInternationalExpert(InternationalExpertDto internationalexpert);
         Task<InternationalExpertTbl?> UpdateInternationalExpert(InternationalExpertTbl internationalexpert);
         Task RemoveInternationalExpert(int internationalexpertId);
         Task PostFileAsync(FileUploadModel fileData);

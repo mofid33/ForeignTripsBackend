@@ -41,20 +41,31 @@ namespace Foreign_Trips.Repositories
             return await _context.SupervisorTbl.Where(c => c.SupervisorId == supervisorId).FirstOrDefaultAsync();
         }
 
-        public async Task<SupervisorTbl?> InsertSupervisor(SupervisorTbl supervisor)
+        public static void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
+        {
+            using (var hmac = new System.Security.Cryptography.HMACSHA512())
+            {
+                passwordSalt = hmac.Key;
+                passwordHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
+            }
+        }
+
+        public async Task<SupervisorDto> InsertSupervisor(SupervisorDto supervisor)
         {
             try
             {
-
+                byte[] passwordHash, passwordSalt;
+                CreatePasswordHash(supervisor.Password.ToString(), out passwordHash, out passwordSalt);
                 SupervisorTbl supervisorTbl = new SupervisorTbl();
                 supervisorTbl.SupervisorName = supervisor.SupervisorName;
                 supervisorTbl.SupervisorFamily= supervisor.SupervisorFamily;
                 supervisorTbl.SupervisorUserName = supervisor.SupervisorUserName;
-                supervisorTbl.Password = supervisor.Password;
+                supervisorTbl.Password = passwordHash;
+                supervisorTbl.PasswordSalt = passwordSalt;
 
-                await _context.SupervisorTbl.AddAsync(supervisor);
+                await _context.SupervisorTbl.AddAsync(supervisorTbl);
                 await _context.SaveChangesAsync();
-                return supervisorTbl;
+                return supervisor;
 
             }
 

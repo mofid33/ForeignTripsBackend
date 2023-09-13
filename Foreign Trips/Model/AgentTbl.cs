@@ -41,8 +41,6 @@ public partial class AgentTbl
 
     public string? CompanyName { get; set; }
 
-    public string Password { get; set; } = null!;
-
     public string Email { get; set; } = null!;
 
     public string Subset { get; set; } = null!;
@@ -60,6 +58,10 @@ public partial class AgentTbl
     public string? BirthCertificateDate { get; set; }
 
     public int? GenderId { get; set; }
+
+    public byte[]? PasswordSalt { get; set; }
+
+    public byte[]? Password { get; set; }
 
     public virtual AgentStatusTbl? AgentStatus { get; set; }
 

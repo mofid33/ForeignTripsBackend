@@ -15,7 +15,9 @@ public partial class MainAdminTbl
 
     public string MainAdminUserName { get; set; } = null!;
 
-    public string Password { get; set; } = null!;
+    public byte[]? Password { get; set; }
+
+    public byte[]? PasswordSalt { get; set; }
 
     public virtual ICollection<LoginTbl> LoginTbls { get; set; } = new List<LoginTbl>();
 

@@ -77,10 +77,12 @@ namespace Foreign_Trips.Repositories
             }
         }
 
-        public async Task<AgentTbl?> InsertAgentAsync(AgentTbl agent)
+        public async Task<AgentDto> InsertAgentAsync(AgentDto agent)
         {
             try
             {
+                byte[] passwordHash, passwordSalt;
+                CreatePasswordHash(agent.Password.ToString(), out passwordHash, out passwordSalt);
                 AgentTbl data = new AgentTbl();
                 data.CityId = agent.CityId;
                 data.NationalCode = agent.NationalCode;
@@ -96,14 +98,15 @@ namespace Foreign_Trips.Repositories
                 data.Subset = agent.Subset;
                 data.TypeOfEmploymentId = agent.TypeOfEmploymentId;
                 data.PositionId = agent.PositionId;
-                data.Password = agent.Password;
+                data.Password = passwordHash;
+                data.PasswordSalt = passwordSalt;
                 data.RegisterDate = agent.RegisterDate;
                 data.RegisterTime = agent.RegisterTime;
                 data.GenderId = agent.GenderId!=0 ? agent.GenderId:2;
 
 
 
-                await _context.AgentTbl.AddAsync(agent);
+                await _context.AgentTbl.AddAsync(data);
                 await _context.SaveChangesAsync();
                 return agent;
 

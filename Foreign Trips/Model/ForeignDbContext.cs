@@ -148,7 +148,6 @@ public partial class ForeignDbContext : DbContext
             entity.Property(e => e.GenderId).HasColumnName("GenderID");
             entity.Property(e => e.Mobile).HasMaxLength(11);
             entity.Property(e => e.NationalCode).HasMaxLength(10);
-            entity.Property(e => e.Password).HasMaxLength(300);
             entity.Property(e => e.Phone).HasMaxLength(11);
             entity.Property(e => e.Photo).HasColumnType("image");
             entity.Property(e => e.PostalCode).HasMaxLength(100);
@@ -334,7 +333,6 @@ public partial class ForeignDbContext : DbContext
             entity.Property(e => e.AdminId).HasColumnName("AdminID");
             entity.Property(e => e.AdminName).HasMaxLength(100);
             entity.Property(e => e.AdminUsername).HasMaxLength(100);
-            entity.Property(e => e.Password).HasMaxLength(300);
         });
 
         modelBuilder.Entity<InternationalExpertTbl>(entity =>
@@ -347,7 +345,6 @@ public partial class ForeignDbContext : DbContext
             entity.Property(e => e.InternationalExpertFamily).HasMaxLength(300);
             entity.Property(e => e.InternationalExpertName).HasMaxLength(300);
             entity.Property(e => e.InternationalExpertUserName).HasMaxLength(300);
-            entity.Property(e => e.Password).HasMaxLength(300);
         });
 
         modelBuilder.Entity<JobGoalsTypeTbl>(entity =>
@@ -422,7 +419,6 @@ public partial class ForeignDbContext : DbContext
             entity.Property(e => e.MainAdminId).HasColumnName("MainAdminID");
             entity.Property(e => e.MainAdminName).HasMaxLength(100);
             entity.Property(e => e.MainAdminUserName).HasMaxLength(100);
-            entity.Property(e => e.Password).HasMaxLength(300);
         });
 
         modelBuilder.Entity<MaritalStatusTbl>(entity =>
@@ -844,9 +840,6 @@ public partial class ForeignDbContext : DbContext
             entity.ToTable("SupervisorTbl", "dbo");
 
             entity.Property(e => e.SupervisorId).HasColumnName("SupervisorID");
-            entity.Property(e => e.Password)
-                .HasMaxLength(50)
-                .IsFixedLength();
             entity.Property(e => e.SupervisorFamily).HasMaxLength(100);
             entity.Property(e => e.SupervisorName).HasMaxLength(100);
             entity.Property(e => e.SupervisorUserName)

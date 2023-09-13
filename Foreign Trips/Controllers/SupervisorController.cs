@@ -59,8 +59,8 @@ namespace Foreign_Trips.Controllers
 
         [HttpPost]
         [Route("InsertSupervisor")]
-        public async Task<ActionResult<SupervisorTbl>> InsertSupervisor(
-[FromBody] SupervisorTbl Model
+        public async Task<ActionResult<SupervisorDto>> InsertSupervisor(
+[FromBody] SupervisorDto Model
 )
         {
 
