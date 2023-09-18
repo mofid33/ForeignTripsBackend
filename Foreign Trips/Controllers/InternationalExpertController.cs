@@ -18,13 +18,15 @@ namespace Foreign_Trips.Controllers
 
 
         public InternationalExpertController(IInternationalExpertRepository internationalexpertRepository, IMessageRepository messageRepository ,
-                                             ITicketRepository ticketRepository, IReportRepository reportRepository, IMapper mapper)
+                                             IRequestRepository requestRepository, ITicketRepository ticketRepository, IReportRepository reportRepository, IMapper mapper)
 
         {
             _internationalexpertRepository = internationalexpertRepository ??
                 throw new ArgumentNullException(nameof(internationalexpertRepository));
             _messageRepository = messageRepository ??
                 throw new ArgumentNullException(nameof(messageRepository));
+            _requestRepository = requestRepository ??
+                throw new ArgumentNullException(nameof(requestRepository));
             _ticketRepository =ticketRepository ??
                 throw new ArgumentNullException(nameof(ticketRepository));
             _reportRepository = reportRepository ??
