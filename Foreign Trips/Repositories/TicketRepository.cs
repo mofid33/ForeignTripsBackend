@@ -47,11 +47,16 @@ namespace Foreign_Trips.Repositories
                 TicketDetailsTbl ttbl = new TicketDetailsTbl();
                 ttbl.Message = ticket.Message;
                 ttbl.IsAdmin = ticket.IsAdmin;
-                ttbl.RegisterDate = ticket.RegisterDate;
-                ttbl.RegisterTime = ticket.RegisterTime;
+                DateTime dt = new DateTime();
+                PersianDateTime persianDateTime = new PersianDateTime(DateTime.Now);
+
+
+                string date = persianDateTime.ToString().Substring(0, 10);
+                ttbl.RegisterDate = date;
+                ttbl.RegisterTime = DateTime.Now.ToShortTimeString();
                 ttbl.TicketId = ticket.TicketId;
 
-                await _context.TicketDetailsTbl.AddAsync(ticket);
+                await _context.TicketDetailsTbl.AddAsync(ttbl);
                 await _context.SaveChangesAsync();
                 var tt=     await _context.TicketTbl.Where(t => t.TicketId == ticket.TicketId).FirstOrDefaultAsync();
                 tt.TicketStatusId = ttbl.IsAdmin? 2:1;
@@ -88,7 +93,7 @@ namespace Foreign_Trips.Repositories
 
                 string date = persianDateTime.ToString().Substring(0, 10);
                 ttbl.RegisterDate = date;
-                ttbl.RegisterTime = DateTime.Now.ToShortTimeString(); ;
+                ttbl.RegisterTime = DateTime.Now.ToShortTimeString(); 
                 ttbl.LatestUpdate = date;
                 await _context.TicketTbl.AddAsync(ttbl);
                 await _context.SaveChangesAsync();

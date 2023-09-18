@@ -83,9 +83,9 @@ namespace Foreign_Trips.Repositories
                 qtbl.JointTrip = request.JointTrip;
                 qtbl.DateLetter = request.DateLetter;
                 qtbl.ParticipantId = request.ParticipantId;
+                qtbl.RequestStatusId = 1;
 
-
-                await _context.RequestTbl.AddAsync(request);
+                await _context.RequestTbl.AddAsync(qtbl);
                 await _context.SaveChangesAsync();
 
                 return request;
