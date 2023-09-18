@@ -9,8 +9,6 @@ public partial class TicketDetailsTbl
 {
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    public int TicketDetailId { get; set; }
-
     public int TicketId { get; set; }
 
     public bool IsAdmin { get; set; }
@@ -20,6 +18,8 @@ public partial class TicketDetailsTbl
     public string RegisterDate { get; set; } = null!;
 
     public string RegisterTime { get; set; } = null!;
+
+    public int TicketDetailId { get; set; }
 
     public virtual TicketTbl Ticket { get; set; } = null!;
 }

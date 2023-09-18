@@ -30,5 +30,9 @@ namespace Foreign_Trips.Entities
         public string? InternalDevice { get; set; }
 
         public string? ExternalDevice { get; set; }
+
+        public string? RegisterDate { get; set; }
+
+        public string? RegisterTime { get; set; }
     }
 }

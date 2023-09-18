@@ -515,7 +515,7 @@ namespace Foreign_Trips.Controllers
             {
                 return NotFound();
             }
-            var req = await _requestRepository.AcceptRequest(Model);
+            var req = await _requestRepository.AcceptRequestMainAdmin(Convert.ToInt32(Model.MainAdminId));
             if (req == null)
             {
                 return BadRequest();
@@ -536,7 +536,7 @@ namespace Foreign_Trips.Controllers
             {
                 return NotFound();
             }
-            var req = await _requestRepository.RejectRequest(Model);
+            var req = await _requestRepository.RejectRequestMainAdmin(Model);
             if (req == null)
             {
                 return BadRequest();

@@ -54,9 +54,9 @@ namespace Foreign_Trips.Controllers
      )
         {
 
-            var req = await _internationalexpertRepository.GetInternationalExpertAsync(Model.InternationalExpertId);
+            var intexpert = await _internationalexpertRepository.GetInternationalExpertAsync(Model.InternationalExpertId);
             return Ok(
-         _mapper.Map<RequestTbl>(req)
+         _mapper.Map<InternationalExpertTbl>(intexpert)
          );
 
         }
@@ -222,7 +222,7 @@ namespace Foreign_Trips.Controllers
             {
                 return NotFound();
             }
-            var req = await _requestRepository.AcceptRequest(Model);
+            var req = await _requestRepository.AcceptRequestExpert(Convert.ToInt32(Model.InternationalExpertId));
             if (req == null)
             {
                 return BadRequest();
@@ -243,7 +243,7 @@ namespace Foreign_Trips.Controllers
             {
                 return NotFound();
             }
-            var req = await _requestRepository.RejectRequest(Model);
+            var req = await _requestRepository.RejectRequestExpert(Model);
             if (req == null)
             {
                 return BadRequest();

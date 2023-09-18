@@ -95,6 +95,12 @@ namespace Foreign_Trips.Entities
 
         public bool IsFinal { get; set; }
 
+        public string? RegisterTime { get; set; }
+
+        public string? RegisterDate { get; set; }
+
+
+
     }
     
 }

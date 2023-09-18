@@ -12,6 +12,9 @@ namespace Foreign_Trips.Entities
         public string MainAdminName { get; set; } = null!;
 
         public string MainAdminUserName { get; set; } = null!;
+        public string? RegisterTime { get; set; }
+
+        public string? RegisterDate { get; set; }
 
         public string Password { get; set; }
 

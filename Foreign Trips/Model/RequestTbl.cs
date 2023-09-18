@@ -119,6 +119,10 @@ public partial class RequestTbl
 
     public string? DeviceName { get; set; }
 
+    public string? RegisterTime { get; set; }
+
+    public string? RegisterDate { get; set; }
+
     public virtual InternationalAdminTbl? Admin { get; set; }
 
     public virtual AgentTbl? Agent { get; set; }

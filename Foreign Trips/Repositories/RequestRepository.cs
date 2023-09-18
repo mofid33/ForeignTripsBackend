@@ -26,6 +26,28 @@ namespace Foreign_Trips.Repositories
              .Include(c => c.Agent)
              .ToListAsync();
         }
+
+        public async Task<IEnumerable<RequestTbl?>> GetRequestsExpert(int ExpertId)
+        {
+            return await _context.RequestTbl
+             .Include(c => c.Agent).Where(t => t.InternationalExpertId == ExpertId || t.InternationalExpertId==null)
+             .ToListAsync();
+        }
+
+        public async Task<IEnumerable<RequestTbl?>> GetRequestsAdmin(int AdminId)
+        {
+            return await _context.RequestTbl
+             .Include(c => c.Agent).Where(t => t.AdminId == AdminId || t.AdminId == null)
+             .ToListAsync();
+        }
+
+        public async Task<IEnumerable<RequestTbl?>> GetRequestsMainAdmin(int MainAdminId)
+        {
+            return await _context.RequestTbl
+             .Include(c => c.Agent).Where(t => t.MainAdminId == MainAdminId || t.MainAdminId == null)
+             .ToListAsync();
+        }
+
         public async Task<RequestTbl?> GetRequestAsync(int requestId)
         {
             return await _context.RequestTbl
@@ -83,6 +105,9 @@ namespace Foreign_Trips.Repositories
                 qtbl.JointTrip = request.JointTrip;
                 qtbl.DateLetter = request.DateLetter;
                 qtbl.ParticipantId = request.ParticipantId;
+                qtbl.RegisterDate = request.RegisterDate;
+                qtbl.RegisterTime = request.RegisterTime;
+
 
 
                 await _context.RequestTbl.AddAsync(request);
@@ -217,12 +242,72 @@ namespace Foreign_Trips.Repositories
             .FirstOrDefaultAsync();
         }
 
-        public async Task<RequestTbl?> AcceptRequest(RequestTbl request)
+        public async Task<RequestTbl?> AcceptRequestExpert(int Id)
+        {
+            try
+            {
+                var data = await GetNewRequest(Id);
+                data.RequestStatusId = 2;
+                await _context.SaveChangesAsync();
+                return data;
+
+
+            }
+
+            catch (System.Exception ex)
+            {
+                return null;
+
+            }
+        }
+
+
+        public async Task<RequestTbl?> RejectRequestExpert(RequestTbl request)
+        {
+            try
+            {
+               var data = await GetNewRequest(request.RequestId);
+               data.RequestStatusId = 3;
+               await _context.SaveChangesAsync();
+               return request;
+
+              
+            }
+
+            catch (System.Exception ex)
+            {
+                return null;
+
+            }
+        }
+
+
+        public async Task<RequestTbl?> AcceptRequestAdmin(int Id)
+        {
+            try
+            {
+                var data = await GetNewRequest(Id);
+                data.RequestStatusId = 4;
+                await _context.SaveChangesAsync();
+                return data;
+
+
+            }
+
+            catch (System.Exception ex)
+            {
+                return null;
+
+            }
+        }
+
+
+        public async Task<RequestTbl?> RejectRequestAdmin(RequestTbl request)
         {
             try
             {
                 var data = await GetNewRequest(request.RequestId);
-                data.RequestStatusId = 1;
+                data.RequestStatusId = 5;
                 await _context.SaveChangesAsync();
                 return request;
 
@@ -236,17 +321,36 @@ namespace Foreign_Trips.Repositories
             }
         }
 
-
-        public async Task<RequestTbl?> RejectRequest(RequestTbl request)
+        public async Task<RequestTbl?> AcceptRequestMainAdmin(int Id)
         {
             try
             {
-               var data = await GetNewRequest(request.RequestId);
-               data.RequestStatusId = 2;
-               await _context.SaveChangesAsync();
-               return request;
+                var data = await GetNewRequest(Id);
+                data.RequestStatusId = 4;
+                await _context.SaveChangesAsync();
+                return data;
 
-              
+
+            }
+
+            catch (System.Exception ex)
+            {
+                return null;
+
+            }
+        }
+
+
+        public async Task<RequestTbl?> RejectRequestMainAdmin(RequestTbl request)
+        {
+            try
+            {
+                var data = await GetNewRequest(request.RequestId);
+                data.RequestStatusId = 5;
+                await _context.SaveChangesAsync();
+                return request;
+
+
             }
 
             catch (System.Exception ex)

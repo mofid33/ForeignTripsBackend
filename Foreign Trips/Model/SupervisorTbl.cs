@@ -21,5 +21,9 @@ public partial class SupervisorTbl
 
     public byte[]? PasswordSalt { get; set; }
 
+    public string? RegisterDate { get; set; }
+
+    public string? RegisterTime { get; set; }
+
     public virtual ICollection<LoginTbl> LoginTbls { get; set; } = new List<LoginTbl>();
 }

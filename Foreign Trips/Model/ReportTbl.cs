@@ -35,6 +35,10 @@ public partial class ReportTbl
 
     public string ReportAchievement { get; set; } = null!;
 
+    public string? RegisterDate { get; set; }
+
+    public string? RegisterTime { get; set; }
+
     public virtual ICollection<FileDetailsTbl> FileDetailsTbls { get; set; } = new List<FileDetailsTbl>();
 
     public virtual ReportStatusTbl? ReportStatus { get; set; }
