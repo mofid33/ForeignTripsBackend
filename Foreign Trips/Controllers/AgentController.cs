@@ -333,12 +333,13 @@ namespace Foreign_Trips.Controllers
 
         #region Ticket
 
-        [HttpGet]
+        [HttpPost]
         [Route("GetTickets")]
-        public async Task<ActionResult<TicketTbl>> GetTickets()
+        public async Task<ActionResult<TicketTbl>> GetTickets([FromBody] GetTicket Model
+)
         {
 
-            var Tickets = await _ticketRepository.GetTickets();
+            var Tickets = await _ticketRepository.GetTickets(Model.AgentID);
 
             return Ok(_mapper.Map<IEnumerable<TicketTbl>>(Tickets));
 

@@ -38,31 +38,31 @@ namespace Foreign_Trips.Controllers
 
         }
 
-        //        [HttpPost]
-        //        [Route("InsertSubTicket")]
-        //        public async Task<ActionResult<TicketDetailsTbl>> InsertSubTicket(
-        //[FromBody] TicketDetailsTbl Model
-        //)
-        //        {
-        //            if (!await _ticketRepository.TicketExistsAsync(Model.TicketId))
-        //            {
-        //                return NotFound();
-        //            }
+        [HttpPost]
+        [Route("InsertSubTicket")]
+        public async Task<ActionResult<TicketDetailsTbl>> InsertSubTicket(
+[FromBody] TicketDetailsTbl Model
+)
+        {
+            if (!await _ticketRepository.TicketExistsAsync(Model.TicketId))
+            {
+                return NotFound();
+            }
 
-        //            var Tickets = await _ticketRepository.InsertSubTicket(Model);
-        //            if (Tickets == null)
-        //            {
-        //                return BadRequest();
-        //            }
-        //            return Ok(_mapper.Map<TicketDetailsTbl>(Tickets));
-        //        }
+            var Tickets = await _ticketRepository.InsertSubTicket(Model);
+            if (Tickets == null)
+            {
+                return BadRequest();
+            }
+            return Ok(_mapper.Map<TicketDetailsTbl>(Tickets));
+        }
 
-        [HttpGet]
+        [HttpPost]
         [Route("GetTickets")]
-        public async Task<ActionResult<TicketTbl>> GetTickets()
+        public async Task<ActionResult<TicketTbl>> GetTickets([FromBody] GetTicket Model)
         {
 
-            var Tickets = await _ticketRepository.GetTickets();
+            var Tickets = await _ticketRepository.GetTickets(Model.AgentID);
 
             return Ok(_mapper.Map<IEnumerable<TicketTbl>>(Tickets));
 
@@ -81,18 +81,18 @@ namespace Foreign_Trips.Controllers
         }
 
 
-        //[HttpPost]
-        //[Route("GetSubTickets")]
-        //public async Task<ActionResult<TicketDetailsTbl>> GetSubTickets(
-        //    [FromBody] TicketDetailsTbl Model
-        //    )
-        //{
+        [HttpPost]
+        [Route("GetSubTickets")]
+        public async Task<ActionResult<TicketDetailsTbl>> GetSubTickets(
+            [FromBody] TicketDetailsTbl Model
+            )
+        {
 
-        //    var Tickets = await _ticketRepository.GetSubTickets(Model.TicketId);
-        //    return Ok(
-        // _mapper.Map<IEnumerable<TicketDetailsTbl>>(Tickets)
-        // );
+            var Tickets = await _ticketRepository.GetSubTickets(Model.TicketId);
+            return Ok(
+         _mapper.Map<IEnumerable<TicketDetailsTbl>>(Tickets)
+         );
 
-        //}
+        }
     }
 }

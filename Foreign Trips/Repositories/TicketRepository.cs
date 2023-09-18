@@ -16,13 +16,13 @@ namespace Foreign_Trips.Repositories
 
         }
 
-        //public async Task<IEnumerable<TicketDetailsTbl?>> GetSubTickets(int ticketId)
-        //{
-        //    return await _context.TicketDetailsTbl.Include(t => t.Ticket)
-        //        .Include(t => t.Ticket.TicketStatus)
-        //        .Include(t => t.Ticket.Agent)
-        //        .Where(t => t.TicketId == ticketId).ToListAsync();
-        //}
+        public async Task<IEnumerable<TicketDetailsTbl?>> GetSubTickets(int ticketId)
+        {
+            return await _context.TicketDetailsTbl.Include(t => t.Ticket)
+                .Include(t => t.Ticket.TicketStatus)
+                .Include(t => t.Ticket.Agent)
+                .Where(t => t.TicketId == ticketId).ToListAsync();
+        }
 
         public async Task<TicketTbl?> GetTicketAsync(int ticketId)
         {
@@ -31,34 +31,42 @@ namespace Foreign_Trips.Repositories
                 .Where(t => t.TicketId == ticketId).FirstOrDefaultAsync();
         }
 
-        public async Task<IEnumerable<TicketTbl?>> GetTickets()
+        public async Task<IEnumerable<TicketTbl?>> GetTickets(long agentId)
         {
             return await _context.TicketTbl
                .Include(t => t.TicketStatus)
+               .Where(t=>t.AgentId== agentId)
                .ToListAsync();
         }
 
-        //public async Task<TicketDetailsTbl?> InsertSubTicket(TicketDetailsTbl ticket)
-        //{
-        //    try
-        //    {
+        public async Task<TicketDetailsTbl?> InsertSubTicket(TicketDetailsTbl ticket)
+        {
+            try
+            {
 
-        //        var exp = await _context.TicketDetailsTbl.AddAsync(ticket);
-        //        await _context.SaveChangesAsync();
-        //        var ticketPar = await GetTicket(ticket.TicketId);
-        //        ticketPar.TicketStatusId = 2;
-        //        await _context.SaveChangesAsync();
+                TicketDetailsTbl ttbl = new TicketDetailsTbl();
+                ttbl.Message = ticket.Message;
+                ttbl.IsAdmin = ticket.IsAdmin;
+                ttbl.RegisterDate = ticket.RegisterDate;
+                ttbl.RegisterTime = ticket.RegisterTime;
+                ttbl.TicketId = ticket.TicketId;
 
-        //        return ticket;
+                await _context.TicketDetailsTbl.AddAsync(ticket);
+                await _context.SaveChangesAsync();
+                var tt=     await _context.TicketTbl.Where(t => t.TicketId == ticket.TicketId).FirstOrDefaultAsync();
+                tt.TicketStatusId = ttbl.IsAdmin? 2:1;
+                await _context.SaveChangesAsync();
 
-        //    }
+                return ticket;
 
-        //    catch (System.Exception ex)
-        //    {
-        //        return null;
+            }
 
-        //    }
-        //}
+            catch (System.Exception ex)
+            {
+                return null;
+
+            }
+        }
 
 
         public async Task<TicketTbl?> InsertTicket(TicketTbl ticket)
@@ -68,20 +76,26 @@ namespace Foreign_Trips.Repositories
 
                 TicketTbl ttbl = new TicketTbl();
                 ttbl.AgentId = ticket.AgentId;
-                ttbl.TicketStatusId = ticket.TicketStatusId;
-                ttbl.TicketNumber = ticket.TicketNumber;
+                ttbl.TicketStatusId = 1;
+                byte[] bytes2;
+                Random rnd = new Random();
+                int num = rnd.Next(10000, 100000);
+                ttbl.TicketNumber = num.ToString();
                 ttbl.Subject = ticket.Subject;
-                ttbl.LatestUpdate = ticket.LatestUpdate;
-                ttbl.RegisterDate = ticket.RegisterDate;
-                ttbl.RegisterTime = ticket.RegisterTime;
+                DateTime dt = new DateTime();
+                PersianDateTime persianDateTime = new PersianDateTime(DateTime.Now);
 
 
-                await _context.TicketTbl.AddAsync(ticket);
+                string date = persianDateTime.ToString().Substring(0, 10);
+                ttbl.RegisterDate = date;
+                ttbl.RegisterTime = DateTime.Now.ToShortTimeString(); ;
+                ttbl.LatestUpdate = date;
+                await _context.TicketTbl.AddAsync(ttbl);
                 await _context.SaveChangesAsync();
 
 
 
-                return ticket;
+                return ttbl;
 
             }
 
