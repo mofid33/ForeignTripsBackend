@@ -108,18 +108,16 @@ namespace Foreign_Trips.Controllers
         }
 
         #region Agent
+
         [HttpGet]
-        [Route("GetAgent")]
-        public async Task<ActionResult<AgentTbl>> GetAgent(
-[FromBody] AgentTbl Model
-)
+        [Route("GetAgents")]
+        public async Task<ActionResult<IEnumerable<AgentTbl>>> GetAgents()
         {
+            var Agents = await _agentRepository.GetAgent();
 
-            var agent = await _mainadminRepository.GetAgent(Model.AgentId);
             return Ok(
-         _mapper.Map<RequestTbl>(agent)
-         );
-
+                Agents
+                );
         }
 
         [HttpPost]
@@ -135,7 +133,7 @@ namespace Foreign_Trips.Controllers
                 return BadRequest();
             }
 
-            return Ok();
+            return Ok(Sup);
 
         }
 
@@ -466,6 +464,7 @@ namespace Foreign_Trips.Controllers
         #endregion
 
         #region Request
+
         [HttpGet]
         [Route("GetRequests")]
         public async Task<ActionResult<IEnumerable<RequestTbl>>> GetRequest()

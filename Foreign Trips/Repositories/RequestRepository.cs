@@ -211,7 +211,7 @@ namespace Foreign_Trips.Repositories
             return await _context.RequestTbl
             
             .Include(c => c.Agent)
-            .Include(c => c.RequestStatusId)
+            .Include(c => c.RequestStatus)
 
 
             .FirstOrDefaultAsync();
