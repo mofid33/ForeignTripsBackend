@@ -21,6 +21,10 @@ public partial class InternationalExpertTbl
 
     public byte[]? PasswordSalt { get; set; }
 
+    public string? RegisterDate { get; set; }
+
+    public string? RegisterTime { get; set; }
+
     public virtual ICollection<LoginTbl> LoginTbls { get; set; } = new List<LoginTbl>();
 
     public virtual ICollection<RequestTbl> RequestTbls { get; set; } = new List<RequestTbl>();

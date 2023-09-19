@@ -60,8 +60,12 @@ namespace Foreign_Trips.Repositories
                 supervisorTbl.SupervisorName = supervisor.SupervisorName;
                 supervisorTbl.SupervisorFamily= supervisor.SupervisorFamily;
                 supervisorTbl.SupervisorUserName = supervisor.SupervisorUserName;
+                supervisorTbl.RegisterDate = supervisor.RegisterDate;
+                supervisorTbl.RegisterTime = supervisor.RegisterTime;
                 supervisorTbl.Password = passwordHash;
                 supervisorTbl.PasswordSalt = passwordSalt;
+                
+
 
                 await _context.SupervisorTbl.AddAsync(supervisorTbl);
                 await _context.SaveChangesAsync();

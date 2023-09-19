@@ -333,6 +333,8 @@ public partial class ForeignDbContext : DbContext
             entity.Property(e => e.AdminId).HasColumnName("AdminID");
             entity.Property(e => e.AdminName).HasMaxLength(100);
             entity.Property(e => e.AdminUsername).HasMaxLength(100);
+            entity.Property(e => e.RegisterDate).HasMaxLength(10);
+            entity.Property(e => e.RegisterTime).HasMaxLength(5);
         });
 
         modelBuilder.Entity<InternationalExpertTbl>(entity =>
@@ -345,6 +347,8 @@ public partial class ForeignDbContext : DbContext
             entity.Property(e => e.InternationalExpertFamily).HasMaxLength(300);
             entity.Property(e => e.InternationalExpertName).HasMaxLength(300);
             entity.Property(e => e.InternationalExpertUserName).HasMaxLength(300);
+            entity.Property(e => e.RegisterDate).HasMaxLength(10);
+            entity.Property(e => e.RegisterTime).HasMaxLength(5);
         });
 
         modelBuilder.Entity<JobGoalsTypeTbl>(entity =>
@@ -419,6 +423,8 @@ public partial class ForeignDbContext : DbContext
             entity.Property(e => e.MainAdminId).HasColumnName("MainAdminID");
             entity.Property(e => e.MainAdminName).HasMaxLength(100);
             entity.Property(e => e.MainAdminUserName).HasMaxLength(100);
+            entity.Property(e => e.RegisterDate).HasMaxLength(10);
+            entity.Property(e => e.RegisterTime).HasMaxLength(5);
         });
 
         modelBuilder.Entity<MaritalStatusTbl>(entity =>
@@ -575,6 +581,8 @@ public partial class ForeignDbContext : DbContext
             entity.Property(e => e.LicenseDate).HasMaxLength(100);
             entity.Property(e => e.LicenseNumber).HasMaxLength(100);
             entity.Property(e => e.Period).HasMaxLength(100);
+            entity.Property(e => e.RegisterDate).HasMaxLength(10);
+            entity.Property(e => e.RegisterTime).HasMaxLength(5);
             entity.Property(e => e.ReportAchievement).HasDefaultValueSql("('NULL')");
             entity.Property(e => e.ReportStatusId).HasColumnName("ReportStatusID");
             entity.Property(e => e.RequestDateNumber).HasMaxLength(100);
@@ -693,6 +701,8 @@ public partial class ForeignDbContext : DbContext
             entity.Property(e => e.PayerCitizenShip).HasMaxLength(100);
             entity.Property(e => e.PayerFood).HasMaxLength(100);
             entity.Property(e => e.PaymentFromBank).HasMaxLength(100);
+            entity.Property(e => e.RegisterDate).HasMaxLength(10);
+            entity.Property(e => e.RegisterTime).HasMaxLength(5);
             entity.Property(e => e.RejectRequest).HasMaxLength(500);
             entity.Property(e => e.RequestStatusId).HasColumnName("RequestStatusID");
             entity.Property(e => e.RightOfCommutingCost).HasMaxLength(100);
@@ -840,6 +850,8 @@ public partial class ForeignDbContext : DbContext
             entity.ToTable("SupervisorTbl", "dbo");
 
             entity.Property(e => e.SupervisorId).HasColumnName("SupervisorID");
+            entity.Property(e => e.RegisterDate).HasMaxLength(10);
+            entity.Property(e => e.RegisterTime).HasMaxLength(5);
             entity.Property(e => e.SupervisorFamily).HasMaxLength(100);
             entity.Property(e => e.SupervisorName).HasMaxLength(100);
             entity.Property(e => e.SupervisorUserName)
@@ -849,13 +861,11 @@ public partial class ForeignDbContext : DbContext
 
         modelBuilder.Entity<TicketDetailsTbl>(entity =>
         {
-            entity.HasKey(e => e.TicketDetailId);
+            entity.HasKey(e => e.TicketDetailId).HasName("PK__TicketDe__39BFBDC6395FE87E");
 
             entity.ToTable("TicketDetailsTbl", "dbo");
 
-            entity.Property(e => e.TicketDetailId)
-                .ValueGeneratedNever()
-                .HasColumnName("TicketDetailID");
+            entity.Property(e => e.TicketDetailId).HasColumnName("TicketDetailID");
             entity.Property(e => e.RegisterDate).HasMaxLength(10);
             entity.Property(e => e.RegisterTime).HasMaxLength(10);
             entity.Property(e => e.TicketId).HasColumnName("TicketID");

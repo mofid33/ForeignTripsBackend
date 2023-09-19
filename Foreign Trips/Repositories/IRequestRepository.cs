@@ -6,6 +6,9 @@ namespace Foreign_Trips.Repositories
     public interface IRequestRepository
     {
         Task<IEnumerable<RequestTbl?>> GetRequest();
+        Task<IEnumerable<RequestTbl?>> GetRequestsExpert(int ExpertId);
+        Task<IEnumerable<RequestTbl?>> GetRequestsAdmin(int AdminId);
+        Task<IEnumerable<RequestTbl?>> GetRequestsMainAdmin(int MainAdminId);
         Task<RequestTbl?> GetRequestAsync(int requestId);
         Task<IEnumerable<RequestTbl?>> GetRequestsAgent(int agentId);
         Task<IEnumerable<RequestEmployeeTbl?>> GetRequestEmployeeAsync(int requestId);
@@ -15,8 +18,12 @@ namespace Foreign_Trips.Repositories
         Task<RequestTbl?> UpdateRequest3Async(RequestTbl request);
         Task<RequestTbl?> UpdateRequest4Async(RequestTbl request);
         Task<RequestTbl?> GetNewRequest(int requestId);
-        Task<RequestTbl?> AcceptRequest(RequestTbl request);
-        Task<RequestTbl?> RejectRequest(RequestTbl request);
+        Task<RequestTbl?> AcceptRequestExpert(int Id);
+        Task<RequestTbl?> RejectRequestExpert(RequestTbl request);
+        Task<RequestTbl?> AcceptRequestAdmin(int id);
+        Task<RequestTbl?> RejectRequestAdmin(RequestTbl request);
+        Task<RequestTbl?> AcceptRequestMainAdmin(int id);
+        Task<RequestTbl?> RejectRequestMainAdmin(RequestTbl request);
         Task RemoveRequestAsync(int requestId);
         Task<IEnumerable<RequestStatusTbl>> RequestStatusAsync();
         Task<IEnumerable<TravelGoalsTypeTbl>> TravelGoalsTypeAsync();

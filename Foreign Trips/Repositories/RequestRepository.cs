@@ -17,7 +17,7 @@ namespace Foreign_Trips.Repositories
 
         {
             _context = context ?? throw new ArgumentException(nameof(context));
-           
+
         }
 
         public async Task<IEnumerable<RequestTbl?>> GetRequest()
@@ -26,6 +26,28 @@ namespace Foreign_Trips.Repositories
              .Include(c => c.Agent)
              .ToListAsync();
         }
+
+        public async Task<IEnumerable<RequestTbl?>> GetRequestsExpert(int ExpertId)
+        {
+            return await _context.RequestTbl
+             .Include(c => c.Agent).Where(t => t.InternationalExpertId == ExpertId || t.InternationalExpertId == null)
+             .ToListAsync();
+        }
+
+        public async Task<IEnumerable<RequestTbl?>> GetRequestsAdmin(int AdminId)
+        {
+            return await _context.RequestTbl
+             .Include(c => c.Agent).Where(t => t.AdminId == AdminId || t.AdminId == null)
+             .ToListAsync();
+        }
+
+        public async Task<IEnumerable<RequestTbl?>> GetRequestsMainAdmin(int MainAdminId)
+        {
+            return await _context.RequestTbl
+             .Include(c => c.Agent).Where(t => t.MainAdminId == MainAdminId || t.MainAdminId == null)
+             .ToListAsync();
+        }
+
         public async Task<RequestTbl?> GetRequestAsync(int requestId)
         {
             return await _context.RequestTbl
@@ -37,7 +59,7 @@ namespace Foreign_Trips.Repositories
         {
             return await _context.RequestTbl
              .Include(c => c.Agent)
-             .Include(c=>c.RequestStatus)
+             .Include(c => c.RequestStatus)
 
              .Where(c => c.AgentId == agentId).ToListAsync();
         }
@@ -46,8 +68,8 @@ namespace Foreign_Trips.Repositories
             try
             {
 
-                return await _context.RequestEmployeeTbl.Where(x=>x.RequestId==requestId)
-                    .Include(x=>x.MaritalStatus)
+                return await _context.RequestEmployeeTbl.Where(x => x.RequestId == requestId)
+                    .Include(x => x.MaritalStatus)
                     .Include(x => x.PassPortType)
                     .Include(x => x.Gender)
                     .Include(x => x.Position)
@@ -77,13 +99,16 @@ namespace Foreign_Trips.Repositories
                 qtbl.TravelTopic = request.TravelTopic;
                 qtbl.TravelGoalId = request.TravelGoalId;
                 qtbl.JobGoalId = request.JobGoalId;
-                qtbl.DeviceName = request.DeviceName ;
+                qtbl.DeviceName = request.DeviceName;
                 qtbl.PassportTypeId = request.PassportTypeId;
                 qtbl.GetVisa = request.GetVisa;
                 qtbl.JointTrip = request.JointTrip;
                 qtbl.DateLetter = request.DateLetter;
                 qtbl.ParticipantId = request.ParticipantId;
                 qtbl.RequestStatusId = 1;
+                //qtbl.RegisterDate = request.RegisterDate;
+                //qtbl.RegisterTime = request.RegisterTime;
+
 
                 await _context.RequestTbl.AddAsync(qtbl);
                 await _context.SaveChangesAsync();
@@ -106,7 +131,7 @@ namespace Foreign_Trips.Repositories
         {
             await _context.RequestEmployeeTbl.AddAsync(requestemployee);
             await _context.SaveChangesAsync();
-            return requestemployee; 
+            return requestemployee;
         }
 
         public async Task<RequestTbl?> UpdateRequest3Async(RequestTbl request)
@@ -116,7 +141,7 @@ namespace Foreign_Trips.Repositories
                 //فیلد کم داره
 
                 //RequestTbl qtbl = new RequestTbl();
-                var qtbl = _context.RequestTbl.Where(x => x.RequestId == request.RequestId).FirstOrDefault(); 
+                var qtbl = _context.RequestTbl.Where(x => x.RequestId == request.RequestId).FirstOrDefault();
                 //qtbl.JobGoalId = request.JobGoalId;
                 qtbl.PayerCitizenShip = request.PayerCitizenShip;
                 qtbl.AmountOfCost = request.AmountOfCost;
@@ -160,7 +185,7 @@ namespace Foreign_Trips.Repositories
             {
                 var qtbl = _context.RequestTbl.Where(x => x.RequestId == request.RequestId).FirstOrDefault();
                 qtbl.ImportantTravel = request.ImportantTravel;
-                qtbl.MissionAchievementRecords= request.MissionAchievementRecords;
+                qtbl.MissionAchievementRecords = request.MissionAchievementRecords;
                 qtbl.SummaryInvitation = request.SummaryInvitation;
                 qtbl.ForeignTravelSummary = request.ForeignTravelSummary;
                 qtbl.ReferenceDeviceAgreement = request.ReferenceDeviceAgreement;
@@ -198,7 +223,7 @@ namespace Foreign_Trips.Repositories
         }
 
 
-      
+
 
         //public async Task<RuleTbl?> GetRuleAsync(int RuleId)
         //{
@@ -209,7 +234,7 @@ namespace Foreign_Trips.Repositories
         public async Task<RequestTbl?> GetNewRequest(int requestId)
         {
             return await _context.RequestTbl
-            
+
             .Include(c => c.Agent)
             .Include(c => c.RequestStatus)
 
@@ -217,12 +242,32 @@ namespace Foreign_Trips.Repositories
             .FirstOrDefaultAsync();
         }
 
-        public async Task<RequestTbl?> AcceptRequest(RequestTbl request)
+        public async Task<RequestTbl?> AcceptRequestExpert(int Id)
+        {
+            try
+            {
+                var data = await GetNewRequest(Id);
+                data.RequestStatusId = 2;
+                await _context.SaveChangesAsync();
+                return data;
+
+
+            }
+
+            catch (System.Exception ex)
+            {
+                return null;
+
+            }
+        }
+
+
+        public async Task<RequestTbl?> RejectRequestExpert(RequestTbl request)
         {
             try
             {
                 var data = await GetNewRequest(request.RequestId);
-                data.RequestStatusId = 1;
+                data.RequestStatusId = 3;
                 await _context.SaveChangesAsync();
                 return request;
 
@@ -237,16 +282,75 @@ namespace Foreign_Trips.Repositories
         }
 
 
-        public async Task<RequestTbl?> RejectRequest(RequestTbl request)
+        public async Task<RequestTbl?> AcceptRequestAdmin(int Id)
         {
             try
             {
-               var data = await GetNewRequest(request.RequestId);
-               data.RequestStatusId = 2;
-               await _context.SaveChangesAsync();
-               return request;
+                var data = await GetNewRequest(Id);
+                data.RequestStatusId = 4;
+                await _context.SaveChangesAsync();
+                return data;
 
-              
+
+            }
+
+            catch (System.Exception ex)
+            {
+                return null;
+
+            }
+        }
+
+
+        public async Task<RequestTbl?> RejectRequestAdmin(RequestTbl request)
+        {
+            try
+            {
+                var data = await GetNewRequest(request.RequestId);
+                data.RequestStatusId = 5;
+                await _context.SaveChangesAsync();
+                return request;
+
+
+            }
+
+            catch (System.Exception ex)
+            {
+                return null;
+
+            }
+        }
+
+        public async Task<RequestTbl?> AcceptRequestMainAdmin(int Id)
+        {
+            try
+            {
+                var data = await GetNewRequest(Id);
+                data.RequestStatusId = 4;
+                await _context.SaveChangesAsync();
+                return data;
+
+
+            }
+
+            catch (System.Exception ex)
+            {
+                return null;
+
+            }
+        }
+
+
+        public async Task<RequestTbl?> RejectRequestMainAdmin(RequestTbl request)
+        {
+            try
+            {
+                var data = await GetNewRequest(request.RequestId);
+                data.RequestStatusId = 5;
+                await _context.SaveChangesAsync();
+                return request;
+
+
             }
 
             catch (System.Exception ex)
