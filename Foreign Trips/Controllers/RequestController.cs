@@ -51,7 +51,19 @@ namespace Foreign_Trips.Controllers
          );
 
         }
+        [HttpPost]
+        [Route("GetRequestsExpert")]
+        public async Task<ActionResult<RequestTbl>> GetRequestExpert(
+   [FromBody] RequestTbl Model
+   )
+        {
 
+            var req = await _requestRepository.GetRequestsExpert(Convert.ToInt32(Model.InternationalExpertId));
+            return Ok(
+       req
+         );
+
+        }
 
 
         [HttpPost]
