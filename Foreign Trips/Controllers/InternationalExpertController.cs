@@ -222,7 +222,7 @@ namespace Foreign_Trips.Controllers
             {
                 return NotFound();
             }
-            var req = await _requestRepository.AcceptRequestExpert(Convert.ToInt32(Model.InternationalExpertId));
+            var req = await _requestRepository.AcceptRequestExpert(Model);
             if (req == null)
             {
                 return BadRequest();

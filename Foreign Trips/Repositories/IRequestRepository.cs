@@ -18,11 +18,11 @@ namespace Foreign_Trips.Repositories
         Task<RequestTbl?> UpdateRequest3Async(RequestTbl request);
         Task<RequestTbl?> UpdateRequest4Async(RequestTbl request);
         Task<RequestTbl?> GetNewRequest(int requestId);
-        Task<RequestTbl?> AcceptRequestExpert(int Id);
+        Task<RequestTbl?> AcceptRequestExpert(RequestTbl request);
         Task<RequestTbl?> RejectRequestExpert(RequestTbl request);
-        Task<RequestTbl?> AcceptRequestAdmin(int id);
+        Task<RequestTbl?> AcceptRequestAdmin(RequestTbl request);
         Task<RequestTbl?> RejectRequestAdmin(RequestTbl request);
-        Task<RequestTbl?> AcceptRequestMainAdmin(int id);
+        Task<RequestTbl?> AcceptRequestMainAdmin(RequestTbl request);
         Task<RequestTbl?> RejectRequestMainAdmin(RequestTbl request);
         Task RemoveRequestAsync(int requestId);
         Task<IEnumerable<RequestStatusTbl>> RequestStatusAsync();

@@ -36,6 +36,18 @@ namespace Foreign_Trips.Repositories
              .Where(c => c.ReportId == reportId).FirstOrDefaultAsync();
 
         }
+        public async Task<ReportTbl?> GetReportByRequest(int requestId)
+        {
+            return await _context.ReportTbl
+             .Include(c => c.Request.Agent)
+             .Include(x => x.Request)
+
+
+
+             .Where(c => c.RequestId == requestId).OrderBy(t=>t.ReportId).LastOrDefaultAsync();
+
+        }
+
 
         public async Task<ReportTbl?> InsertReport(ReportTbl report)
         {

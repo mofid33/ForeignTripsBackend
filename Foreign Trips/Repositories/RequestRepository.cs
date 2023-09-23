@@ -47,7 +47,7 @@ namespace Foreign_Trips.Repositories
              .Include(c=>c.RightOfMission)
              .Include(c => c.RightToEducation)
              .Include(c => c.RightOfCommuting)
-             .Include(c=>c.LevelRightOfMission)
+             //.Include(c=>c.LevelRightOfMission)
              .Include(c=>c.TollAmount)
 
              .Where(t => t.InternationalExpertId == ExpertId || t.InternationalExpertId == null)
@@ -268,17 +268,17 @@ namespace Foreign_Trips.Repositories
 
             .Include(c => c.Agent)
             .Include(c => c.RequestStatus)
-
-
+            .Where(c=>c.RequestId==requestId)
             .FirstOrDefaultAsync();
         }
 
-        public async Task<RequestTbl?> AcceptRequestExpert(int Id)
+        public async Task<RequestTbl?> AcceptRequestExpert(RequestTbl request)
         {
             try
             {
-                var data = await GetNewRequest(Id);
+                var data = await GetNewRequest(request.RequestId);
                 data.RequestStatusId = 2;
+                data.InternationalExpertId = request.InternationalExpertId;
                 await _context.SaveChangesAsync();
                 return data;
 
@@ -299,6 +299,7 @@ namespace Foreign_Trips.Repositories
             {
                 var data = await GetNewRequest(request.RequestId);
                 data.RequestStatusId = 3;
+                data.RejectRequest = request.RejectRequest;
                 await _context.SaveChangesAsync();
                 return request;
 
@@ -313,12 +314,13 @@ namespace Foreign_Trips.Repositories
         }
 
 
-        public async Task<RequestTbl?> AcceptRequestAdmin(int Id)
+        public async Task<RequestTbl?> AcceptRequestAdmin(RequestTbl request)
         {
             try
             {
-                var data = await GetNewRequest(Id);
+                var data = await GetNewRequest(request.RequestId);
                 data.RequestStatusId = 4;
+                data.AdminId = request.AdminId;
                 await _context.SaveChangesAsync();
                 return data;
 
@@ -339,6 +341,8 @@ namespace Foreign_Trips.Repositories
             {
                 var data = await GetNewRequest(request.RequestId);
                 data.RequestStatusId = 5;
+                data.RejectRequest = request.RejectRequest;
+                data.AdminId = request.AdminId;
                 await _context.SaveChangesAsync();
                 return request;
 
@@ -352,12 +356,13 @@ namespace Foreign_Trips.Repositories
             }
         }
 
-        public async Task<RequestTbl?> AcceptRequestMainAdmin(int Id)
+        public async Task<RequestTbl?> AcceptRequestMainAdmin(RequestTbl request)
         {
             try
             {
-                var data = await GetNewRequest(Id);
+                var data = await GetNewRequest(request.RequestId);
                 data.RequestStatusId = 4;
+                data.MainAdminId = request.MainAdminId;
                 await _context.SaveChangesAsync();
                 return data;
 
@@ -378,6 +383,8 @@ namespace Foreign_Trips.Repositories
             {
                 var data = await GetNewRequest(request.RequestId);
                 data.RequestStatusId = 5;
+                data.MainAdminId = request.MainAdminId;
+                data.RejectRequest = request.RejectRequest;
                 await _context.SaveChangesAsync();
                 return request;
 

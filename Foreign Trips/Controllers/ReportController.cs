@@ -31,7 +31,19 @@ namespace Foreign_Trips.Controllers
                 reports
                 );
         }
+        [HttpPost]
+        [Route("GetReportByRequest")]
+        public async Task<ActionResult<ReportTbl>> GetReportsExpert(
+[FromBody] ReportTbl Model
+)
+        {
 
+            var req = await _reportRepository.GetReportByRequest(Convert.ToInt32(Model.RequestId));
+            return Ok(
+       req
+         );
+
+        }
         [HttpPost]
         [Route("GetReport")]
         public async Task<ActionResult<ReportTbl>> GetReport(

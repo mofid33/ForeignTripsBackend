@@ -7,6 +7,7 @@ namespace Foreign_Trips.Repositories
     {
         Task<bool> ReportExistsAsync(int reportId);
         Task<IEnumerable<ReportTbl?>> GetReport();
+        Task<ReportTbl?> GetReportByRequest(int requestId);
         Task<ReportTbl?> GetReportAsync(int reportId);
         Task<ReportTbl?> InsertReport(ReportTbl report);
         Task<ReportTbl?> UpdateReport(ReportTbl report);
