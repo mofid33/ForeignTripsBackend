@@ -14,10 +14,9 @@ namespace Foreign_Trips.Controllers
         private readonly IAuthRepository _authRepository;
         private readonly IRequestRepository _requestRepository;
         private readonly IReportRepository _reportRepository;
-        private readonly ITicketRepository _ticketRepository;
         private readonly IMapper _mapper;
 
-        public AgentController(IAgentRepository agentRepository, IAuthRepository authRepository, IReportRepository reportRepository, ITicketRepository ticketRepository, IRequestRepository requestRepository, IMapper mapper)
+        public AgentController(IAgentRepository agentRepository, IAuthRepository authRepository, IReportRepository reportRepository,  IRequestRepository requestRepository, IMapper mapper)
         {
             _agentRepository = agentRepository ??
                 throw new ArgumentNullException(nameof(agentRepository));
@@ -27,8 +26,6 @@ namespace Foreign_Trips.Controllers
                 throw new ArgumentNullException(nameof(requestRepository));
             _reportRepository = reportRepository ??
                 throw new ArgumentNullException(nameof(reportRepository));
-            _ticketRepository = ticketRepository ??
-                throw new ArgumentNullException(nameof(ticketRepository));
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
 
@@ -331,48 +328,6 @@ namespace Foreign_Trips.Controllers
         }
         #endregion
 
-        #region Ticket
-
-        [HttpPost]
-        [Route("GetTickets")]
-        public async Task<ActionResult<TicketTbl>> GetTickets([FromBody] GetTicket Model
-)
-        {
-
-            var Tickets = await _ticketRepository.GetTickets(Model.AgentID);
-
-            return Ok(_mapper.Map<IEnumerable<TicketTbl>>(Tickets));
-
-        }
-
-        [HttpPost]
-        [Route("GetTicket")]
-        public async Task<ActionResult<TicketTbl>> GetTicket(
-       [FromBody] GetTicket Model
-       )
-        {
-
-            var Tickets = await _ticketRepository.GetTicketAsync(Model.TicketID);
-            return Ok(Tickets);
-
-        }
-
-        [HttpPost]
-        [Route("InsertTicket")]
-        public async Task<ActionResult<TicketTbl>> InsertTicket(
-[FromBody] TicketTbl Model
-)
-        {
-
-            var Ticket = await _ticketRepository.InsertTicket(Model);
-            if (Ticket == null)
-            {
-                return BadRequest();
-            }
-            return Ok(Ticket);
-
-        }
-        #endregion
 
         #region province
         [HttpGet]

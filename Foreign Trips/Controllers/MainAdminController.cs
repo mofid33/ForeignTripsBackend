@@ -16,14 +16,13 @@ namespace Foreign_Trips.Controllers
         private readonly IInternationalAdminRepository _internatinaladminRepository;
         private readonly IReportRepository _reportRepository;
         private readonly ISupervisorRepository _supervisorRepository;
-        private readonly ITicketRepository _ticketRepository;
         private readonly IMessageRepository _messageRepository;
         private readonly IRequestRepository _requestRepository;
         private readonly IInternationalExpertRepository _internationalexpertRepository;
         private readonly IMapper _mapper;
         public MainAdminController(IAgentRepository agentRepository, IMainAdminRepository mainadminRepository, IAuthRepository authRepository,
                                    IInternationalAdminRepository internatinaladminRepository, IReportRepository reportRepository,
-                                   ISupervisorRepository supervisorRepository, ITicketRepository ticketRepository, IMessageRepository messageRepository,
+                                   ISupervisorRepository supervisorRepository, IMessageRepository messageRepository,
                                    IRequestRepository requestRepository, IInternationalExpertRepository internationalexpertRepository,
                                    IMapper mapper)
         {
@@ -39,8 +38,6 @@ namespace Foreign_Trips.Controllers
                throw new ArgumentNullException(nameof(reportRepository));
             _supervisorRepository = supervisorRepository ??
                throw new ArgumentNullException(nameof(supervisorRepository));
-            _ticketRepository = ticketRepository ??
-               throw new ArgumentNullException(nameof(ticketRepository));
             _messageRepository = messageRepository ??
                throw new ArgumentNullException(nameof(messageRepository));
             _requestRepository = requestRepository ??
@@ -418,20 +415,6 @@ namespace Foreign_Trips.Controllers
         }
 
 
-        #endregion
-
-        #region Ticket
-
-        [HttpGet]
-        [Route("GetMainAdmin")]
-        public async Task<ActionResult<IEnumerable<TicketTbl>>> GetTicketMainAdmin()
-        {
-            var MainAdmin = await _ticketRepository.GetTicketMainAdmin();
-
-            return Ok(
-                MainAdmin
-                );
-        }
         #endregion
 
         #region Request
