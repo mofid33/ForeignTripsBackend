@@ -101,6 +101,8 @@ public partial class ForeignDbContext : DbContext
 
     public virtual DbSet<TravelTypeTbl> TravelTypeTbls { get; set; }
 
+    public virtual DbSet<TypeAccommodationTbl> TypeAccommodationTbls { get; set; }
+
     public virtual DbSet<TypeOfEmploymentTbl> TypeOfEmploymentTbls { get; set; }
 
     public virtual DbSet<TypeOfMissionTbl> TypeOfMissionTbls { get; set; }
@@ -688,12 +690,13 @@ public partial class ForeignDbContext : DbContext
             entity.Property(e => e.ExpertRightOfMission).HasMaxLength(100);
             entity.Property(e => e.FlightPath).HasMaxLength(200);
             entity.Property(e => e.ForeignTravelSummary).HasMaxLength(500);
+            entity.Property(e => e.GeneralManagerRightOfMission).HasMaxLength(100);
             entity.Property(e => e.ImportantTravel).HasMaxLength(500);
             entity.Property(e => e.InternationalExpertId).HasColumnName("InternationalExpertID");
             entity.Property(e => e.InternetAddressOfTheExecutiveDevice).HasMaxLength(100);
             entity.Property(e => e.JobGoalId).HasColumnName("JobGoalID");
-            entity.Property(e => e.LevelRightOfMission).HasMaxLength(100);
             entity.Property(e => e.MainAdminId).HasColumnName("MainAdminID");
+            entity.Property(e => e.ManagerRightOfMission).HasMaxLength(100);
             entity.Property(e => e.MissionAchievementRecords).HasMaxLength(500);
             entity.Property(e => e.OperationId).HasMaxLength(100);
             entity.Property(e => e.ParticipantId).HasColumnName("ParticipantID");
@@ -723,6 +726,7 @@ public partial class ForeignDbContext : DbContext
             entity.Property(e => e.TravelGoalId).HasColumnName("TravelGoalID");
             entity.Property(e => e.TravelTime).HasMaxLength(5);
             entity.Property(e => e.TravelTopic).HasMaxLength(300);
+            entity.Property(e => e.TypeAccommodationId).HasColumnName("TypeAccommodationID");
             entity.Property(e => e.VisaCost).HasMaxLength(100);
 
             entity.HasOne(d => d.Admin).WithMany(p => p.RequestTbls)
@@ -791,6 +795,11 @@ public partial class ForeignDbContext : DbContext
                 .HasForeignKey(d => d.TravelTypeId)
                 .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK_RequestTbl_TravelTypeTbl");
+
+            entity.HasOne(d => d.TypeAccommodation).WithMany(p => p.RequestTbls)
+                .HasForeignKey(d => d.TypeAccommodationId)
+                .OnDelete(DeleteBehavior.Cascade)
+                .HasConstraintName("FK_RequestTbl_TypeAccommodationID");
         });
 
         modelBuilder.Entity<RightOfCommutingTypeTbl>(entity =>
@@ -947,6 +956,16 @@ public partial class ForeignDbContext : DbContext
             entity.ToTable("TravelTypeTbl", "dbo");
 
             entity.Property(e => e.TravelType).HasMaxLength(50);
+        });
+
+        modelBuilder.Entity<TypeAccommodationTbl>(entity =>
+        {
+            entity.HasKey(e => e.TypeAccommodationId).HasName("PK__TypeAcco__06295C7CFFC2D802");
+
+            entity.ToTable("TypeAccommodationTbl", "dbo");
+
+            entity.Property(e => e.TypeAccommodationId).HasColumnName("TypeAccommodationID");
+            entity.Property(e => e.TypeAccommodationType).HasMaxLength(100);
         });
 
         modelBuilder.Entity<TypeOfEmploymentTbl>(entity =>
