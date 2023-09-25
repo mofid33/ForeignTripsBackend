@@ -901,18 +901,36 @@ public partial class ForeignDbContext : DbContext
             entity.ToTable("TicketTbl", "dbo");
 
             entity.Property(e => e.TicketId).HasColumnName("TicketID");
+            entity.Property(e => e.AdminId).HasColumnName("AdminID");
             entity.Property(e => e.AgentId).HasColumnName("AgentID");
+            entity.Property(e => e.InternationalExpertId).HasColumnName("InternationalExpertID");
             entity.Property(e => e.LatestUpdate)
                 .HasMaxLength(100)
                 .HasColumnName("latestUpdate");
+            entity.Property(e => e.MainAdminId).HasColumnName("MainAdminID");
             entity.Property(e => e.RegisterDate).HasMaxLength(10);
             entity.Property(e => e.RegisterTime).HasMaxLength(8);
             entity.Property(e => e.TicketNumber).HasMaxLength(100);
             entity.Property(e => e.TicketStatusId).HasColumnName("TicketStatusID");
 
+            entity.HasOne(d => d.Admin).WithMany(p => p.TicketTbls)
+                .HasForeignKey(d => d.AdminId)
+                .OnDelete(DeleteBehavior.Cascade)
+                .HasConstraintName("FK_TicketTbl_InternationalAdminTbl");
+
             entity.HasOne(d => d.Agent).WithMany(p => p.TicketTbls)
                 .HasForeignKey(d => d.AgentId)
                 .HasConstraintName("FK_TicketTbl_AgentTbl");
+
+            entity.HasOne(d => d.InternationalExpert).WithMany(p => p.TicketTbls)
+                .HasForeignKey(d => d.InternationalExpertId)
+                .OnDelete(DeleteBehavior.Cascade)
+                .HasConstraintName("FK_TicketTbl_InternationalExpertTbl");
+
+            entity.HasOne(d => d.MainAdmin).WithMany(p => p.TicketTbls)
+                .HasForeignKey(d => d.MainAdminId)
+                .OnDelete(DeleteBehavior.Cascade)
+                .HasConstraintName("FK_TicketTbl_MainAdminTbl");
 
             entity.HasOne(d => d.TicketStatus).WithMany(p => p.TicketTbls)
                 .HasForeignKey(d => d.TicketStatusId)
