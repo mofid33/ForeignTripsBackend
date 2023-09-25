@@ -30,7 +30,7 @@ namespace Foreign_Trips.Repositories
              .Include(c => c.RightOfMission)
              .Include(c => c.RightToEducation)
              .Include(c => c.RightOfCommuting)
-             .Include(c => c.LevelRightOfMission)
+             .Include(c => c.TypeAccommodation)
              .Include(c => c.TollAmount)
              .ToListAsync();
         }
@@ -47,7 +47,7 @@ namespace Foreign_Trips.Repositories
              .Include(c=>c.RightOfMission)
              .Include(c => c.RightToEducation)
              .Include(c => c.RightOfCommuting)
-             //.Include(c=>c.LevelRightOfMission)
+             .Include(c=>c.TypeAccommodation)
              .Include(c=>c.TollAmount)
 
              .Where(t => t.InternationalExpertId == ExpertId || t.InternationalExpertId == null)
@@ -82,7 +82,7 @@ namespace Foreign_Trips.Repositories
              .Include(c => c.RightOfMission)
              .Include(c => c.RightToEducation)
              .Include(c => c.RightOfCommuting)
-             //.Include(c => c.LevelRightOfMission)
+             .Include(c => c.TypeAccommodation)
              .Include(c => c.TollAmount)
              .Where(c => c.RequestId == requestId).FirstOrDefaultAsync();
         }
@@ -183,12 +183,14 @@ namespace Foreign_Trips.Repositories
                 qtbl.TicketCost = request.TicketCost;
                 qtbl.TheCostOfTicket = request.TheCostOfTicket;
                 qtbl.RightOfMissionId = request.RightOfMissionId;
-                qtbl.LevelRightOfMission = request.LevelRightOfMission;
+                qtbl.ManagerRightOfMission = request.ManagerRightOfMission;
                 qtbl.ExpertRightOfMission = request.ExpertRightOfMission;
+                qtbl.GeneralManagerRightOfMission = request.ManagerRightOfMission;
                 qtbl.RightToEducationCost = request.RightToEducationCost;
                 qtbl.RightToEducationId = request.RightToEducationId;
                 qtbl.RightOfCommutingCost = request.RightOfCommutingCost;
                 qtbl.RightOfCommutingId = request.RightOfCommutingId;
+                qtbl.TypeAccommodationId = request.TypeAccommodationId;
                 qtbl.VisaCost = request.VisaCost;
                 qtbl.TollAmountCost = request.TollAmountCost;
                 qtbl.TollAmountId = request.TollAmountId;

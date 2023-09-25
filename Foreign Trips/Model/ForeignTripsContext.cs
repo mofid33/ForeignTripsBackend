@@ -620,7 +620,7 @@ public partial class ForeignTripsContext : DbContext
             entity.Property(e => e.ImportantTravel).HasMaxLength(100);
             entity.Property(e => e.InternetAddressOfTheExecutiveDevice).HasMaxLength(100);
             entity.Property(e => e.JobGoalId).HasColumnName("JobGoalID");
-            entity.Property(e => e.LevelRightOfMission).HasMaxLength(100);
+            entity.Property(e => e.ManagerRightOfMission).HasMaxLength(100);
             entity.Property(e => e.MissionAchievementRecords).HasMaxLength(100);
             entity.Property(e => e.OperationId).HasMaxLength(100);
             entity.Property(e => e.PassportTypeId).HasColumnName("PassportTypeID");

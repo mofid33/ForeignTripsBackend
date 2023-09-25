@@ -63,7 +63,7 @@ public partial class RequestTbl
 
     public int? RightOfMissionId { get; set; }
 
-    public string? LevelRightOfMission { get; set; }
+    public string? ManagerRightOfMission { get; set; }
 
     public string? ExpertRightOfMission { get; set; }
 
@@ -123,6 +123,10 @@ public partial class RequestTbl
 
     public string? RegisterDate { get; set; }
 
+    public string? GeneralManagerRightOfMission { get; set; }
+
+    public int? TypeAccommodationId { get; set; }
+
     public virtual InternationalAdminTbl? Admin { get; set; }
 
     public virtual AgentTbl? Agent { get; set; }
@@ -154,4 +158,6 @@ public partial class RequestTbl
     public virtual TravelGoalsTypeTbl TravelGoal { get; set; } = null!;
 
     public virtual TravelTypeTbl? TravelType { get; set; }
+
+    public virtual TypeAccommodationTbl? TypeAccommodation { get; set; }
 }
