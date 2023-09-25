@@ -25,7 +25,19 @@ public partial class TicketTbl
 
     public string LatestUpdate { get; set; } = null!;
 
+    public int? InternationalExpertId { get; set; }
+
+    public int? AdminId { get; set; }
+
+    public int? MainAdminId { get; set; }
+
+    public virtual InternationalAdminTbl? Admin { get; set; }
+
     public virtual AgentTbl Agent { get; set; } = null!;
+
+    public virtual InternationalExpertTbl? InternationalExpert { get; set; }
+
+    public virtual MainAdminTbl? MainAdmin { get; set; }
 
     public virtual ICollection<TicketDetailsTbl> TicketDetailsTbls { get; set; } = new List<TicketDetailsTbl>();
 

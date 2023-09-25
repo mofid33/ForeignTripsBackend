@@ -26,4 +26,6 @@ public partial class InternationalAdminTbl
     public virtual ICollection<LoginTbl> LoginTbls { get; set; } = new List<LoginTbl>();
 
     public virtual ICollection<RequestTbl> RequestTbls { get; set; } = new List<RequestTbl>();
+
+    public virtual ICollection<TicketTbl> TicketTbls { get; set; } = new List<TicketTbl>();
 }
