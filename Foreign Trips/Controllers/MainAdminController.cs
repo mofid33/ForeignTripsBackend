@@ -422,45 +422,15 @@ namespace Foreign_Trips.Controllers
 
         #region Ticket
 
-        [HttpPost]
-        [Route("GetTickets")]
-        public async Task<ActionResult<TicketTbl>> GetTickets([FromBody] GetTicket Model
-)
+        [HttpGet]
+        [Route("GetMainAdmin")]
+        public async Task<ActionResult<IEnumerable<TicketTbl>>> GetTicketMainAdmin()
         {
+            var MainAdmin = await _ticketRepository.GetTicketMainAdmin();
 
-            var Tickets = await _ticketRepository.GetTickets(Model.AgentID);
-
-            return Ok(_mapper.Map<IEnumerable<TicketTbl>>(Tickets));
-
-        }
-
-        [HttpPost]
-        [Route("GetTicket")]
-        public async Task<ActionResult<TicketTbl>> GetTicket(
-       [FromBody] GetTicket Model
-       )
-        {
-
-            var Tickets = await _ticketRepository.GetTicketAsync(Model.TicketID);
-            return Ok(Tickets);
-
-        }
-
-
-        [HttpPost]
-        [Route("InsertTicket")]
-        public async Task<ActionResult<TicketTbl>> InsertTicket(
-[FromBody] TicketTbl Model
-)
-        {
-
-            var Ticket = await _ticketRepository.InsertTicket(Model);
-            if (Ticket == null)
-            {
-                return BadRequest();
-            }
-            return Ok(Ticket);
-
+            return Ok(
+                MainAdmin
+                );
         }
         #endregion
 
