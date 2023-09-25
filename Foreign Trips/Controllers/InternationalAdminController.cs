@@ -14,7 +14,6 @@ namespace Foreign_Trips.Controllers
         private readonly IReportRepository _reportRepository;
         private readonly IAuthRepository _authRepository;
         private readonly IAgentRepository _agentRepository;
-        private readonly ITicketRepository _ticketRepository;
         private readonly ISupervisorRepository _supervisorRepository;
         private readonly IMainAdminRepository _mainadminRepository;
         private readonly IMessageRepository _messageRepository;
@@ -23,7 +22,7 @@ namespace Foreign_Trips.Controllers
 
 
         public InternationalAdminController(IInternationalAdminRepository internationaladminRepository, IRequestRepository requestRepository,
-                                            IReportRepository reportRepository, IAgentRepository agentRepository, ITicketRepository ticketRepository,
+                                            IReportRepository reportRepository, IAgentRepository agentRepository,
                                             ISupervisorRepository supervisorRepository, IAuthRepository authRepository, IMainAdminRepository mainadminRepository,
                                             IMessageRepository messageRepository, IInternationalExpertRepository internationalexpertRepository,
                                             IMapper mapper)
@@ -38,8 +37,6 @@ namespace Foreign_Trips.Controllers
                     throw new ArgumentNullException(nameof(authRepository));
             _agentRepository = agentRepository ??
                     throw new ArgumentNullException(nameof(agentRepository));
-            _ticketRepository = ticketRepository ??
-                    throw new ArgumentNullException(nameof(ticketRepository));
             _supervisorRepository = supervisorRepository ??
                     throw new ArgumentNullException(nameof(supervisorRepository));
             _mainadminRepository = mainadminRepository ??
@@ -507,34 +504,6 @@ namespace Foreign_Trips.Controllers
          );
 
         }
-
-        #endregion
-
-        #region Ticket
-
-        [HttpPost]
-        [Route("GetTickets")]
-        public async Task<ActionResult<TicketTbl>> GetTickets([FromBody] GetTicket Model)
-        {
-
-            var Tickets = await _ticketRepository.GetTickets(Model.AgentID);
-
-            return Ok(_mapper.Map<IEnumerable<TicketTbl>>(Tickets));
-
-        }
-
-        [HttpPost]
-        [Route("GetTicket")]
-        public async Task<ActionResult<TicketTbl>> GetTicket(
-       [FromBody] GetTicket Model
-       )
-        {
-
-            var Tickets = await _ticketRepository.GetTicketAsync(Model.TicketID);
-            return Ok(Tickets);
-
-        }
-
 
         #endregion
 

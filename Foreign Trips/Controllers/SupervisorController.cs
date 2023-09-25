@@ -13,13 +13,11 @@ namespace Foreign_Trips.Controllers
         private readonly IAgentRepository _agentRepository;
         private readonly ISupervisorRepository _supervisorRepository;
         private readonly IReportRepository _reportRepository;
-        private readonly ITicketRepository _ticketRepository;
         private readonly IMapper _mapper;
 
 
         public SupervisorController(IAgentRepository agentRepository, ISupervisorRepository supervisorRepository,
-                                  IReportRepository reportRepository, ITicketRepository ticketRepository,
-                                  IMapper mapper)
+                                  IReportRepository reportRepository, IMapper mapper)
         {
             _agentRepository = agentRepository ??
                 throw new ArgumentNullException(nameof(agentRepository));
@@ -27,8 +25,7 @@ namespace Foreign_Trips.Controllers
                throw new ArgumentNullException(nameof(supervisorRepository));
             _reportRepository = reportRepository ??
             throw new ArgumentNullException(nameof(reportRepository));
-            _ticketRepository = ticketRepository ??
-            throw new ArgumentNullException(nameof(ticketRepository));
+
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
 
@@ -151,33 +148,7 @@ namespace Foreign_Trips.Controllers
         #endregion
 
 
-        #region Ticket
-
-        [HttpPost]
-        [Route("GetTickets")]
-        public async Task<ActionResult<TicketTbl>> GetTickets([FromBody] GetTicket Model
-)
-        {
-
-            var Tickets = await _ticketRepository.GetTickets(Model.AgentID);
-
-            return Ok(_mapper.Map<IEnumerable<TicketTbl>>(Tickets));
-
-        }
-
-        [HttpPost]
-        [Route("GetTicket")]
-        public async Task<ActionResult<TicketTbl>> GetTicket(
-       [FromBody] GetTicket Model
-       )
-        {
-
-            var Tickets = await _ticketRepository.GetTicketAsync(Model.TicketID);
-            return Ok(Tickets);
-
-        }
-
-        #endregion
+       
 
     }
 }
