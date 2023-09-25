@@ -10,6 +10,7 @@ namespace Foreign_Trips.Controllers
     public class InternationalExpertController : ControllerBase
     {
         private readonly IInternationalExpertRepository _internationalexpertRepository;
+        private readonly IInternationalAdminRepository _internationaladminRepository;
         private readonly IMessageRepository _messageRepository;
         private readonly IRequestRepository _requestRepository;
         private readonly ITicketRepository _ticketRepository;
@@ -17,12 +18,14 @@ namespace Foreign_Trips.Controllers
         private readonly IMapper _mapper;
 
 
-        public InternationalExpertController(IInternationalExpertRepository internationalexpertRepository, IMessageRepository messageRepository ,
+        public InternationalExpertController(IInternationalExpertRepository internationalexpertRepository, IMessageRepository messageRepository , IInternationalAdminRepository internationaladminRepository,
                                              IRequestRepository requestRepository, ITicketRepository ticketRepository, IReportRepository reportRepository, IMapper mapper)
 
         {
             _internationalexpertRepository = internationalexpertRepository ??
                 throw new ArgumentNullException(nameof(internationalexpertRepository));
+            _internationaladminRepository = internationaladminRepository ??
+                throw new ArgumentNullException(nameof(internationaladminRepository));
             _messageRepository = messageRepository ??
                 throw new ArgumentNullException(nameof(messageRepository));
             _requestRepository = requestRepository ??
@@ -348,7 +351,22 @@ namespace Foreign_Trips.Controllers
 
         }
 
-        
+
+        #endregion
+
+        #region Admin
+
+        [HttpGet]
+        [Route("GetInternationalAdmin")]
+        public async Task<ActionResult<IEnumerable<InternationalAdminTbl>>> GetAdmin()
+        {
+            var Int = await _internationaladminRepository.GetAdmins();
+
+            return Ok(
+                _mapper.Map<IEnumerable<InternationalAdminTbl>>(Int)
+                );
+        }
+
         #endregion
 
     }
