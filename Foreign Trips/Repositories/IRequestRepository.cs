@@ -20,6 +20,8 @@ namespace Foreign_Trips.Repositories
         Task<RequestTbl?> GetNewRequest(int requestId);
         Task<RequestTbl?> AcceptRequestExpert(RequestTbl request);
         Task<RequestTbl?> RejectRequestExpert(RequestTbl request);
+        Task<RequestTbl?> AcceptReportExpert(RequestTbl request);
+        Task<RequestTbl?> RejectReportExpert(RequestTbl request);
         Task<RequestTbl?> AcceptRequestAdmin(RequestTbl request);
         Task<RequestTbl?> RejectRequestAdmin(RequestTbl request);
         Task<RequestTbl?> AcceptRequestMainAdmin(RequestTbl request);

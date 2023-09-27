@@ -319,7 +319,45 @@ namespace Foreign_Trips.Controllers
 
         }
 
+        [HttpPost]
+        [Route("AcceptReportExpert")]
+        public async Task<ActionResult<RequestTbl>> AcceptReportExpert(
+[FromBody] RequestTbl Model
+)
+        {
+            if (!await _requestRepository.RequestExistsAsync(Model.RequestId))
+            {
+                return NotFound();
+            }
+            var req = await _requestRepository.AcceptReportExpert(Model);
+            if (req == null)
+            {
+                return BadRequest();
+            }
+            return Ok();
 
+        }
+
+
+
+        [HttpPost]
+        [Route("RejectReportExpert")]
+        public async Task<ActionResult<RequestTbl>> RejectReportExpert(
+[FromBody] RequestTbl Model
+)
+        {
+            if (!await _requestRepository.RequestExistsAsync(Model.RequestId))
+            {
+                return NotFound();
+            }
+            var req = await _requestRepository.RejectReportExpert(Model);
+            if (req == null)
+            {
+                return BadRequest();
+            }
+            return Ok();
+
+        }
         #endregion
 
 

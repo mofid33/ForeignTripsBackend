@@ -60,7 +60,13 @@ namespace Foreign_Trips.Repositories
             try
             {
 
-                return await _context.AgentTbl.Include(t=>t.Position).ToListAsync();
+                return await _context.AgentTbl
+                    .Include(t=>t.Position)
+                    .Include(t=>t.AgentStatus)
+                    .Include(t=>t.LoginTbls)
+                    .Include(t=>t.City)
+
+                    .ToListAsync();
             }
             catch (System.Exception ex)
             {

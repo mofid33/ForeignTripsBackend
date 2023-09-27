@@ -314,7 +314,44 @@ namespace Foreign_Trips.Repositories
 
             }
         }
+        public async Task<RequestTbl?> AcceptReportExpert(RequestTbl request)
+        {
+            try
+            {
+                var data = await GetNewRequest(request.RequestId);
+                data.RequestStatusId = 7;
+                await _context.SaveChangesAsync();
+                return data;
 
+
+            }
+
+            catch (System.Exception ex)
+            {
+                return null;
+
+            }
+        }
+
+
+        public async Task<RequestTbl?> RejectReportExpert(RequestTbl request)
+        {
+            try
+            {
+                var data = await GetNewRequest(request.RequestId);
+                data.RequestStatusId = 8;
+                await _context.SaveChangesAsync();
+                return request;
+
+
+            }
+
+            catch (System.Exception ex)
+            {
+                return null;
+
+            }
+        }
 
         public async Task<RequestTbl?> AcceptRequestAdmin(RequestTbl request)
         {
