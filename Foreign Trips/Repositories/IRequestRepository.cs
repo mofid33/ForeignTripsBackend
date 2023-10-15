@@ -6,6 +6,7 @@ namespace Foreign_Trips.Repositories
     public interface IRequestRepository
     {
         Task<IEnumerable<RequestTbl?>> GetRequest();
+        Task<IEnumerable<AllListDto?>> GetAllList();
         Task<IEnumerable<RequestTbl?>> GetRequestsExpert(int ExpertId);
         Task<IEnumerable<RequestTbl?>> GetRequestsAdmin(int AdminId);
         Task<IEnumerable<RequestTbl?>> GetRequestsMainAdmin(int MainAdminId);
@@ -17,6 +18,7 @@ namespace Foreign_Trips.Repositories
         Task<RequestEmployeeTbl?> InsertRequestEmployeeAsync(RequestEmployeeTbl requestemployee);
         Task<RequestTbl?> UpdateRequest3Async(RequestTbl request);
         Task<RequestTbl?> UpdateRequest4Async(RequestTbl request);
+        Task<RequestTbl?> UpdateRequest5Async(RequestTbl request);
         Task<RequestTbl?> GetNewRequest(int requestId);
         Task<RequestTbl?> AcceptRequestExpert(RequestTbl request);
         Task<RequestTbl?> RejectRequestExpert(RequestTbl request);

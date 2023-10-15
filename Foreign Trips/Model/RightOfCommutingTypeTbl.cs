@@ -12,6 +12,9 @@ public partial class RightOfCommutingTypeTbl
     public int RightOfCommutingId { get; set; }
 
     public string RightOfCommutingType { get; set; } = null!;
+<<<<<<< HEAD
 
     public virtual ICollection<RequestTbl> RequestTbls { get; set; } = new List<RequestTbl>();
+=======
+>>>>>>> 32077c253bedb6fdb201b174a194390bf5cac703
 }

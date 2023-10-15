@@ -673,6 +673,7 @@ public partial class ForeignDbContext : DbContext
 
             entity.ToTable("RequestTbl", "dbo");
 
+<<<<<<< HEAD
             entity.Property(e => e.RequestId).HasColumnName("RequestID");
             entity.Property(e => e.AdminId).HasColumnName("AdminID");
             entity.Property(e => e.AgentId).HasColumnName("AgentID");
@@ -715,6 +716,56 @@ public partial class ForeignDbContext : DbContext
             entity.Property(e => e.RightToEducationId).HasColumnName("RightToEducationID");
             entity.Property(e => e.SummaryInvitation).HasMaxLength(500);
             entity.Property(e => e.TheCostOfTicket).HasMaxLength(100);
+=======
+            entity.Property(e => e.RequestId).HasColumnName("RequestID");
+            entity.Property(e => e.AdminId).HasColumnName("AdminID");
+            entity.Property(e => e.AgentId).HasColumnName("AgentID");
+            entity.Property(e => e.AirlineCompany).HasMaxLength(100);
+            entity.Property(e => e.AmountOfCost).HasMaxLength(100);
+            entity.Property(e => e.ApprovedBy).HasMaxLength(300);
+            entity.Property(e => e.CostOfFood).HasMaxLength(100);
+            entity.Property(e => e.DateLetter).HasMaxLength(200);
+            entity.Property(e => e.DateOfLasteChange).HasMaxLength(100);
+            entity.Property(e => e.DestinationCity).HasMaxLength(100);
+            entity.Property(e => e.DestinationCountry).HasMaxLength(100);
+            entity.Property(e => e.DeviceName).HasMaxLength(100);
+            entity.Property(e => e.EmployeeStatus).HasMaxLength(200);
+            entity.Property(e => e.ExecutiveDeviceName).HasMaxLength(100);
+            entity.Property(e => e.ExpertRightOfMission).HasMaxLength(100);
+            entity.Property(e => e.FlightPath).HasMaxLength(200);
+            entity.Property(e => e.ForeignTravelSummary).HasMaxLength(500);
+            entity.Property(e => e.GeneralManagerRightOfMission).HasMaxLength(100);
+            entity.Property(e => e.ImportantTravel).HasMaxLength(500);
+            entity.Property(e => e.InternationalExpertId).HasColumnName("InternationalExpertID");
+            entity.Property(e => e.InternetAddressOfTheExecutiveDevice).HasMaxLength(100);
+            entity.Property(e => e.JobGoalId).HasColumnName("JobGoalID");
+            entity.Property(e => e.MainAdminId).HasColumnName("MainAdminID");
+            entity.Property(e => e.ManagerRightOfMission).HasMaxLength(100);
+            entity.Property(e => e.MissionAchievementRecords).HasMaxLength(500);
+            entity.Property(e => e.OperationId).HasMaxLength(100);
+            entity.Property(e => e.ParticipantId).HasColumnName("ParticipantID");
+            entity.Property(e => e.PassportTypeId).HasColumnName("PassportTypeID");
+            entity.Property(e => e.PayerCitizenShip).HasMaxLength(100);
+            entity.Property(e => e.PayerFood).HasMaxLength(100);
+            entity.Property(e => e.PaymentFromBank).HasMaxLength(100);
+            entity.Property(e => e.RegisterDate).HasMaxLength(10);
+            entity.Property(e => e.RegisterTime).HasMaxLength(5);
+            entity.Property(e => e.RejectRequest).HasMaxLength(500);
+            entity.Property(e => e.RequestStatusId).HasColumnName("RequestStatusID");
+            entity.Property(e => e.RightOfCommutingCost).HasMaxLength(100);
+            entity.Property(e => e.RightOfCommutingId)
+                .HasMaxLength(50)
+                .HasColumnName("RightOfCommutingID");
+            entity.Property(e => e.RightOfMissionId)
+                .HasMaxLength(50)
+                .HasColumnName("RightOfMissionID");
+            entity.Property(e => e.RightToEducationCost).HasMaxLength(100);
+            entity.Property(e => e.RightToEducationId)
+                .HasMaxLength(50)
+                .HasColumnName("RightToEducationID");
+            entity.Property(e => e.SummaryInvitation).HasMaxLength(500);
+            entity.Property(e => e.TheCostOfTicket).HasMaxLength(100);
+>>>>>>> 32077c253bedb6fdb201b174a194390bf5cac703
             entity.Property(e => e.TickerTypeId)
                 .HasMaxLength(100)
                 .HasColumnName("TickerTypeID");
@@ -767,6 +818,7 @@ public partial class ForeignDbContext : DbContext
                 .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK_RequestTbl_RequestStatusTbl");
 
+<<<<<<< HEAD
             entity.HasOne(d => d.RightOfCommuting).WithMany(p => p.RequestTbls)
                 .HasForeignKey(d => d.RightOfCommutingId)
                 .OnDelete(DeleteBehavior.Cascade)
@@ -782,6 +834,8 @@ public partial class ForeignDbContext : DbContext
                 .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK_RequestTbl_RightToEducationTbl");
 
+=======
+>>>>>>> 32077c253bedb6fdb201b174a194390bf5cac703
             entity.HasOne(d => d.TollAmount).WithMany(p => p.RequestTbls)
                 .HasForeignKey(d => d.TollAmountId)
                 .OnDelete(DeleteBehavior.Cascade)
