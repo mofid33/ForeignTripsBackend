@@ -709,10 +709,16 @@ public partial class ForeignDbContext : DbContext
             entity.Property(e => e.RejectRequest).HasMaxLength(500);
             entity.Property(e => e.RequestStatusId).HasColumnName("RequestStatusID");
             entity.Property(e => e.RightOfCommutingCost).HasMaxLength(100);
-            entity.Property(e => e.RightOfCommutingId).HasColumnName("RightOfCommutingID");
-            entity.Property(e => e.RightOfMissionId).HasColumnName("RightOfMissionID");
+            entity.Property(e => e.RightOfCommutingId)
+                .HasMaxLength(50)
+                .HasColumnName("RightOfCommutingID");
+            entity.Property(e => e.RightOfMissionId)
+                .HasMaxLength(50)
+                .HasColumnName("RightOfMissionID");
             entity.Property(e => e.RightToEducationCost).HasMaxLength(100);
-            entity.Property(e => e.RightToEducationId).HasColumnName("RightToEducationID");
+            entity.Property(e => e.RightToEducationId)
+                .HasMaxLength(50)
+                .HasColumnName("RightToEducationID");
             entity.Property(e => e.SummaryInvitation).HasMaxLength(500);
             entity.Property(e => e.TheCostOfTicket).HasMaxLength(100);
             entity.Property(e => e.TickerTypeId)
@@ -766,21 +772,6 @@ public partial class ForeignDbContext : DbContext
                 .HasForeignKey(d => d.RequestStatusId)
                 .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK_RequestTbl_RequestStatusTbl");
-
-            entity.HasOne(d => d.RightOfCommuting).WithMany(p => p.RequestTbls)
-                .HasForeignKey(d => d.RightOfCommutingId)
-                .OnDelete(DeleteBehavior.Cascade)
-                .HasConstraintName("FK_RequestTbl_RightOfCommutingTypeTbl");
-
-            entity.HasOne(d => d.RightOfMission).WithMany(p => p.RequestTbls)
-                .HasForeignKey(d => d.RightOfMissionId)
-                .OnDelete(DeleteBehavior.Cascade)
-                .HasConstraintName("FK_RequestTbl_RightOfMissionTbl");
-
-            entity.HasOne(d => d.RightToEducation).WithMany(p => p.RequestTbls)
-                .HasForeignKey(d => d.RightToEducationId)
-                .OnDelete(DeleteBehavior.Cascade)
-                .HasConstraintName("FK_RequestTbl_RightToEducationTbl");
 
             entity.HasOne(d => d.TollAmount).WithMany(p => p.RequestTbls)
                 .HasForeignKey(d => d.TollAmountId)

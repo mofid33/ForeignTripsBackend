@@ -106,11 +106,13 @@ namespace Foreign_Trips.Repositories
                 data.PositionId = agent.PositionId;
                 data.Password = passwordHash;
                 data.PasswordSalt = passwordSalt;
-                data.RegisterDate = agent.RegisterDate;
-                data.RegisterTime = agent.RegisterTime;
                 data.GenderId = agent.GenderId!=0 ? agent.GenderId:2;
+                DateTime dt = new DateTime();
+                PersianDateTime persianDateTime = new PersianDateTime(DateTime.Now);
+                string date = persianDateTime.ToString().Substring(0, 10);
 
-
+                data.RegisterTime = DateTime.Now.ToShortTimeString();
+                data.RegisterDate = date;
 
                 await _context.AgentTbl.AddAsync(data);
                 await _context.SaveChangesAsync();
@@ -124,6 +126,7 @@ namespace Foreign_Trips.Repositories
 
             }
         }
+
 
         public async Task<AgentTbl?> UpdateAgentAsync(AgentTbl agent)
         {
@@ -142,6 +145,11 @@ namespace Foreign_Trips.Repositories
                 data.PositionId = agent.PositionId;
                 //data.Password = agent.Password;
 
+                if (agent.Password != null)
+                {
+                    byte[] passwordHash, passwordSalt;
+                    CreatePasswordHash(agent.Password.ToString(), out passwordHash, out passwordSalt);
+                } 
 
                 await _context.SaveChangesAsync();
                 return agent;

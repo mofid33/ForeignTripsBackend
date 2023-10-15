@@ -61,7 +61,7 @@ public partial class RequestTbl
 
     public string? TheCostOfTicket { get; set; }
 
-    public int? RightOfMissionId { get; set; }
+    public string? RightOfMissionId { get; set; }
 
     public string? ManagerRightOfMission { get; set; }
 
@@ -69,11 +69,11 @@ public partial class RequestTbl
 
     public string? RightToEducationCost { get; set; }
 
-    public int? RightToEducationId { get; set; }
+    public string? RightToEducationId { get; set; }
 
     public string? RightOfCommutingCost { get; set; }
 
-    public int? RightOfCommutingId { get; set; }
+    public string? RightOfCommutingId { get; set; }
 
     public string? VisaCost { get; set; }
 
@@ -127,6 +127,16 @@ public partial class RequestTbl
 
     public int? TypeAccommodationId { get; set; }
 
+    public string? ActivityRecords { get; set; }
+
+    public string? Results { get; set; }
+
+    public string? Discription { get; set; }
+
+    public string? ExternalDeviceNameAndEmail { get; set; }
+
+    public string? DelayReason { get; set; }
+
     public virtual InternationalAdminTbl? Admin { get; set; }
 
     public virtual AgentTbl? Agent { get; set; }
@@ -146,12 +156,6 @@ public partial class RequestTbl
     public virtual ICollection<ReportTbl> ReportTbls { get; set; } = new List<ReportTbl>();
 
     public virtual RequestStatusTbl? RequestStatus { get; set; }
-
-    public virtual RightOfCommutingTypeTbl? RightOfCommuting { get; set; }
-
-    public virtual RightOfMissionTbl? RightOfMission { get; set; }
-
-    public virtual RightToEducationTbl? RightToEducation { get; set; }
 
     public virtual TollAmountTypeTbl? TollAmount { get; set; }
 

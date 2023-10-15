@@ -27,9 +27,6 @@ namespace Foreign_Trips.Repositories
              .Include(c => c.RequestStatus)
              .Include(c => c.InternationalExpert)
              .Include(c => c.TravelType)
-             .Include(c => c.RightOfMission)
-             .Include(c => c.RightToEducation)
-             .Include(c => c.RightOfCommuting)
              .Include(c => c.TypeAccommodation)
              .Include(c => c.TollAmount)
              .ToListAsync();
@@ -44,15 +41,59 @@ namespace Foreign_Trips.Repositories
              .Include(c=>c.RequestStatus)
              .Include(c=>c.InternationalExpert)
              .Include(c=>c.TravelType)
-             .Include(c=>c.RightOfMission)
-             .Include(c => c.RightToEducation)
-             .Include(c => c.RightOfCommuting)
              .Include(c=>c.TypeAccommodation)
              .Include(c=>c.TollAmount)
 
              .Where(t => t.InternationalExpertId == ExpertId || t.InternationalExpertId == null)
              .ToListAsync();
         }
+
+
+        public async Task<IEnumerable<AllListDto?>> GetAllList()
+        {
+            try
+            {
+                var req = await GetRequest();
+                AllListDto list = new AllListDto();
+                foreach (var allList in req)
+                {
+                    list.ExecutiveDeviceName = allList.ExecutiveDeviceName;
+                    list.InternetAddressOfTheExecutiveDevice = allList.InternetAddressOfTheExecutiveDevice;
+                    list.DestinationCity = allList.DestinationCity;
+                    list.DestinationCountry = allList.DestinationCountry;
+                    list.FlightPath = allList.FlightPath;
+                    list.TravelDateStart = allList.TravelDateStart;
+                    list.TravalEndDate = allList.TravalEndDate;
+                    list.TravelTime = allList.TravelTime;
+                    list.TravelTopic = allList.TravelTopic;
+                    list.TravelGoalId = allList.TravelGoalId;
+                    list.JobGoalId = allList.JobGoalId;
+                    list.DeviceName = allList.DeviceName;
+                    list.PassportTypeId = allList.PassportTypeId;
+                    list.GetVisa = allList.GetVisa;
+                    list.JointTrip = allList.JointTrip;
+                    list.DateLetter = allList.DateLetter;
+                    list.ParticipantId = allList.ParticipantId;
+                    //RightOfMissionTbl miss = new RightOfMissionTbl();
+
+                    //foreach (var item in allList.RightOfMissionId.split(','))
+                    //{
+                    //    miss.RightOfMissionId=
+                    //}
+                    //list.RightOfMissionId =
+
+                }
+
+
+                return (IEnumerable<AllListDto?>)list;
+            }
+            catch (System.Exception ex)
+            {
+                return null;
+            }
+
+        }
+
 
         public async Task<IEnumerable<RequestTbl?>> GetRequestsAdmin(int AdminId)
         {
@@ -79,9 +120,6 @@ namespace Foreign_Trips.Repositories
              .Include(c=>c.JobGoal)
              .Include(c=>c.Participant)
              .Include(c=>c.PassportType)
-             .Include(c => c.RightOfMission)
-             .Include(c => c.RightToEducation)
-             .Include(c => c.RightOfCommuting)
              .Include(c => c.TypeAccommodation)
              .Include(c => c.TollAmount)
              .Where(c => c.RequestId == requestId).FirstOrDefaultAsync();
@@ -213,6 +251,35 @@ namespace Foreign_Trips.Repositories
         }
 
         public async Task<RequestTbl?> UpdateRequest4Async(RequestTbl request)
+        {
+            try
+            {
+                var qtbl = _context.RequestTbl.Where(x => x.RequestId == request.RequestId).FirstOrDefault();
+                qtbl.ActivityRecords = request.ActivityRecords;
+                qtbl.Results = request.Results;
+                qtbl.Discription = request.Discription;
+                qtbl.ExternalDeviceNameAndEmail = request.ExternalDeviceNameAndEmail;
+                qtbl.DelayReason = request.DelayReason;
+
+
+
+
+                await _context.SaveChangesAsync();
+
+
+                return request;
+
+
+            }
+
+            catch (System.Exception ex)
+            {
+                return null;
+
+            }
+        }
+
+        public async Task<RequestTbl?> UpdateRequest5Async(RequestTbl request)
         {
             try
             {
@@ -515,7 +582,6 @@ namespace Foreign_Trips.Repositories
         {
             return await _context.TravelTypeTbl.ToListAsync();
         }
-
 
         #endregion
 

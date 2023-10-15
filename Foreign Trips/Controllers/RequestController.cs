@@ -159,6 +159,21 @@ namespace Foreign_Trips.Controllers
 
         }
 
+        [HttpPost]
+        [Route("UpdateRequest5")]
+        public async Task<ActionResult<RequestTbl>> UpdateRequest5Async(
+[FromBody] RequestTbl Model
+)
+        {
+            var Req = await _requestRepository.UpdateRequest5Async(Model);
+            if (Req == null)
+            {
+                return BadRequest();
+            }
+            return Ok();
+
+        }
+
 
 
 

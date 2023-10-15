@@ -352,7 +352,6 @@ namespace Foreign_Trips.Controllers
 
         #endregion
 
-
         #region Message
 
         [HttpPost]
