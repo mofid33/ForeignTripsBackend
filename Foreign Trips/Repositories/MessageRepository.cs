@@ -37,8 +37,12 @@ namespace Foreign_Trips.Repositories
                 Mtbl.DispatcherSelectionId = message.DispatcherSelectionId;
                 Mtbl.AgentId = message.AgentId;
                 Mtbl.ExpertSelectionId = message.ExpertSelectionId;
-                Mtbl.RegisterDate = message.RegisterDate;
-                Mtbl.RegisterTime = message.RegisterTime;
+                DateTime dt = new DateTime();
+                PersianDateTime persianDateTime = new PersianDateTime(DateTime.Now);
+                string date = persianDateTime.ToString().Substring(0, 10);
+
+                Mtbl.RegisterTime = DateTime.Now.ToShortTimeString();
+                Mtbl.RegisterDate = date;
 
 
 

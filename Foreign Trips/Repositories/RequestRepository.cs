@@ -175,9 +175,12 @@ namespace Foreign_Trips.Repositories
                 qtbl.DateLetter = request.DateLetter;
                 qtbl.ParticipantId = request.ParticipantId;
                 qtbl.RequestStatusId = 1;
-                //qtbl.RegisterDate = request.RegisterDate;
-                //qtbl.RegisterTime = request.RegisterTime;
+                DateTime dt = new DateTime();
+                PersianDateTime persianDateTime = new PersianDateTime(DateTime.Now);
+                string date = persianDateTime.ToString().Substring(0, 10);
 
+                qtbl.RegisterTime = DateTime.Now.ToShortTimeString();
+                qtbl.RegisterDate = date;
 
                 await _context.RequestTbl.AddAsync(qtbl);
                 await _context.SaveChangesAsync();
