@@ -22,4 +22,6 @@ public partial class CityTbl
     public virtual ICollection<ForeignDelegrationTbl> ForeignDelegrationTbls { get; set; } = new List<ForeignDelegrationTbl>();
 
     public virtual ProvinceTbl? Province { get; set; }
+
+    public virtual ICollection<RequestTbl> RequestTbls { get; set; } = new List<RequestTbl>();
 }

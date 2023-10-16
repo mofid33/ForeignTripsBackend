@@ -12,9 +12,4 @@ public partial class RightOfMissionTbl
     public int RightOfMissionId { get; set; }
 
     public string RightOfMissionType { get; set; } = null!;
-<<<<<<< HEAD
-
-    public virtual ICollection<RequestTbl> RequestTbls { get; set; } = new List<RequestTbl>();
-=======
->>>>>>> 32077c253bedb6fdb201b174a194390bf5cac703
 }

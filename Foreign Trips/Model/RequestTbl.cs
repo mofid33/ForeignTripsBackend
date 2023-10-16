@@ -19,10 +19,6 @@ public partial class RequestTbl
 
     public string InternetAddressOfTheExecutiveDevice { get; set; } = null!;
 
-    public string DestinationCity { get; set; } = null!;
-
-    public string? DestinationCountry { get; set; }
-
     public string FlightPath { get; set; } = null!;
 
     public string TravelDateStart { get; set; } = null!;
@@ -61,11 +57,7 @@ public partial class RequestTbl
 
     public string? TheCostOfTicket { get; set; }
 
-<<<<<<< HEAD
-    public int? RightOfMissionId { get; set; }
-=======
     public string? RightOfMissionId { get; set; }
->>>>>>> 32077c253bedb6fdb201b174a194390bf5cac703
 
     public string? ManagerRightOfMission { get; set; }
 
@@ -73,19 +65,11 @@ public partial class RequestTbl
 
     public string? RightToEducationCost { get; set; }
 
-<<<<<<< HEAD
-    public int? RightToEducationId { get; set; }
-=======
     public string? RightToEducationId { get; set; }
->>>>>>> 32077c253bedb6fdb201b174a194390bf5cac703
 
     public string? RightOfCommutingCost { get; set; }
 
-<<<<<<< HEAD
-    public int? RightOfCommutingId { get; set; }
-=======
     public string? RightOfCommutingId { get; set; }
->>>>>>> 32077c253bedb6fdb201b174a194390bf5cac703
 
     public string? VisaCost { get; set; }
 
@@ -139,9 +123,6 @@ public partial class RequestTbl
 
     public int? TypeAccommodationId { get; set; }
 
-<<<<<<< HEAD
-    public virtual InternationalAdminTbl? Admin { get; set; }
-=======
     public string? ActivityRecords { get; set; }
 
     public string? Results { get; set; }
@@ -152,10 +133,13 @@ public partial class RequestTbl
 
     public string? DelayReason { get; set; }
 
+    public int? CityId { get; set; }
+
     public virtual InternationalAdminTbl? Admin { get; set; }
->>>>>>> 32077c253bedb6fdb201b174a194390bf5cac703
 
     public virtual AgentTbl? Agent { get; set; }
+
+    public virtual CityTbl? City { get; set; }
 
     public virtual ICollection<FileDetailsTbl> FileDetailsTbls { get; set; } = new List<FileDetailsTbl>();
 
@@ -173,17 +157,7 @@ public partial class RequestTbl
 
     public virtual RequestStatusTbl? RequestStatus { get; set; }
 
-<<<<<<< HEAD
-    public virtual RightOfCommutingTypeTbl? RightOfCommuting { get; set; }
-
-    public virtual RightOfMissionTbl? RightOfMission { get; set; }
-
-    public virtual RightToEducationTbl? RightToEducation { get; set; }
-
     public virtual TollAmountTypeTbl? TollAmount { get; set; }
-=======
-    public virtual TollAmountTypeTbl? TollAmount { get; set; }
->>>>>>> 32077c253bedb6fdb201b174a194390bf5cac703
 
     public virtual TravelGoalsTypeTbl TravelGoal { get; set; } = null!;
 
