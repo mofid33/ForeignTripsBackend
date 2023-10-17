@@ -329,10 +329,10 @@ namespace Foreign_Trips.Controllers
         #endregion
 
 
-        #region province
+        #region Country
         [HttpGet]
-        [Route("GetProvinces")]
-        public async Task<ActionResult<IEnumerable<CountryTbl>>> GetProvinces()
+        [Route("GetCountries")]
+        public async Task<ActionResult<IEnumerable<CountryTbl>>> GetCountry()
         {
             var Organs = await _agentRepository.GetCountriesAcync();
 
