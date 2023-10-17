@@ -176,11 +176,11 @@ namespace Foreign_Trips.Repositories
             return await _context.CountryTbl.AsNoTracking().ToListAsync();
         }
 
-        public async Task<IEnumerable<CityTbl>> GetCitiesAcync(int? provinceId)
+        public async Task<IEnumerable<CityTbl>> GetCitiesAcync(int? countryId)
         {
             return await _context.CityTbl
              .AsNoTracking()
-             .Where(c => c.CountryId == provinceId).ToListAsync();
+             .Where(c => c.CountryId == countryId).ToListAsync();
         }
 
 

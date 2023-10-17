@@ -92,12 +92,13 @@ namespace Foreign_Trips.Repositories
         {
             try
             {
-
+                byte[] passwordHash, passwordSalt;
+                CreatePasswordHash(supervisor.Password.ToString(), out passwordHash, out passwordSalt);
                 var sup = await _context.SupervisorTbl.FindAsync(supervisor.SupervisorId);
                 sup.SupervisorName = supervisor.SupervisorName;
                 sup.SupervisorFamily = supervisor.SupervisorFamily;
                 sup.SupervisorUserName = supervisor.SupervisorUserName;
-                sup.Password = supervisor.Password;
+                
 
                 
                 await _context.SaveChangesAsync();
