@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Foreign_Trips.Model;
 
@@ -18,10 +18,6 @@ public partial class RequestTbl
     public string ExecutiveDeviceName { get; set; } = null!;
 
     public string InternetAddressOfTheExecutiveDevice { get; set; } = null!;
-
-    public string DestinationCity { get; set; } = null!;
-
-    public string? DestinationCountry { get; set; }
 
     public string FlightPath { get; set; } = null!;
 
@@ -137,9 +133,13 @@ public partial class RequestTbl
 
     public string? DelayReason { get; set; }
 
+    public int? CityId { get; set; }
+
     public virtual InternationalAdminTbl? Admin { get; set; }
 
     public virtual AgentTbl? Agent { get; set; }
+
+    public virtual CityTbl? City { get; set; }
 
     public virtual ICollection<FileDetailsTbl> FileDetailsTbls { get; set; } = new List<FileDetailsTbl>();
 

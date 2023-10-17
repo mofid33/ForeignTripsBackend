@@ -113,8 +113,7 @@ namespace Foreign_Trips.Repositories
                 data.EmailInternalDevice = report.EmailInternalDevice;
                 data.InternalDevice = report.InternalDevice;
                 data.ExternalDevice = report.ExternalDevice;
-                data.Request.DestinationCountry = report.Request.DestinationCountry;
-                data.Request.DestinationCity = report.Request.DestinationCity;
+                data.Request.CityId = report.Request.CityId;
                 data.Request.MissionAchievementRecords = data.Request.MissionAchievementRecords;
 
 

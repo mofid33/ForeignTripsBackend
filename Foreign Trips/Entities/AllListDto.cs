@@ -15,9 +15,8 @@ namespace Foreign_Trips.Entities
 
         public string InternetAddressOfTheExecutiveDevice { get; set; } = null!;
 
-        public string DestinationCity { get; set; } = null!;
+        public int? CityId { get; set; } 
 
-        public string? DestinationCountry { get; set; }
 
         public string FlightPath { get; set; } = null!;
 

@@ -59,8 +59,7 @@ namespace Foreign_Trips.Repositories
                 {
                     list.ExecutiveDeviceName = allList.ExecutiveDeviceName;
                     list.InternetAddressOfTheExecutiveDevice = allList.InternetAddressOfTheExecutiveDevice;
-                    list.DestinationCity = allList.DestinationCity;
-                    list.DestinationCountry = allList.DestinationCountry;
+                    list.CityId = allList.CityId;
                     list.FlightPath = allList.FlightPath;
                     list.TravelDateStart = allList.TravelDateStart;
                     list.TravalEndDate = allList.TravalEndDate;
@@ -159,8 +158,7 @@ namespace Foreign_Trips.Repositories
                 RequestTbl qtbl = new RequestTbl();
                 qtbl.ExecutiveDeviceName = request.ExecutiveDeviceName;
                 qtbl.InternetAddressOfTheExecutiveDevice = request.InternetAddressOfTheExecutiveDevice;
-                qtbl.DestinationCity = request.DestinationCity;
-                qtbl.DestinationCountry = request.DestinationCountry;
+                qtbl.CityId = request.CityId;
                 qtbl.FlightPath = request.FlightPath;
                 qtbl.TravelDateStart = request.TravelDateStart;
                 qtbl.TravalEndDate = request.TravalEndDate;

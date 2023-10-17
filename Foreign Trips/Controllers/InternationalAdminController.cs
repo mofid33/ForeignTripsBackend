@@ -281,7 +281,22 @@ namespace Foreign_Trips.Controllers
                 Agents
                 );
         }
+        [HttpPost]
+        [Route("GetAgentById")]
+        public async Task<ActionResult<AgentDto>> GetAgentById(
+    [FromBody] AgentDto Model
+    )
+        {
 
+            var Eagent = await _agentRepository.GetAgentAsync(Model.AgentId);
+            if (Eagent == null)
+            {
+                return BadRequest();
+            }
+
+            return Ok(Eagent);
+
+        }
         [HttpPost]
         [Route("InsertAgent")]
         public async Task<ActionResult<AgentDto>> InsertAgnet(

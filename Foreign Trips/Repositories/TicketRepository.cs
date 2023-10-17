@@ -15,10 +15,11 @@ namespace Foreign_Trips.Repositories
             _context = context ?? throw new ArgumentException(nameof(context));
 
         }
-
+        //کار نمیکنه
         public async Task<IEnumerable<TicketDetailsTbl?>> GetSubTickets(int ticketId)
         {
-            return await _context.TicketDetailsTbl.Include(t => t.Ticket)
+            return await _context.TicketDetailsTbl
+                .Include(t => t.Ticket)
                 .Include(t => t.Ticket.TicketStatus)
                 .Include(t => t.Ticket.Agent)
                 .Where(t => t.TicketId == ticketId).ToListAsync();
