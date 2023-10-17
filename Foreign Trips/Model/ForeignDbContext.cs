@@ -21,6 +21,8 @@ public partial class ForeignDbContext : DbContext
 
     public virtual DbSet<CityTbl> CityTbls { get; set; }
 
+    public virtual DbSet<CountryTbl> CountryTbls { get; set; }
+
     public virtual DbSet<DispatcherSelectionTbl> DispatcherSelectionTbls { get; set; }
 
     public virtual DbSet<ExpertSelectionTbl> ExpertSelectionTbls { get; set; }
@@ -60,8 +62,6 @@ public partial class ForeignDbContext : DbContext
     public virtual DbSet<PassportTypeTbl> PassportTypeTbls { get; set; }
 
     public virtual DbSet<PositionTypeTbl> PositionTypeTbls { get; set; }
-
-    public virtual DbSet<ProvinceTbl> ProvinceTbls { get; set; }
 
     public virtual DbSet<ReciverMessageTbl> ReciverMessageTbls { get; set; }
 
@@ -109,7 +109,7 @@ public partial class ForeignDbContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Server=rogstrix.com;Database=ForeignDB;User=foreign;Password=Aa@1234567891011;TrustServerCertificate=true");
+        => optionsBuilder.UseSqlServer("Data Source=rogstrix.com;Initial Catalog=ForeignDB;User ID=foreign;Password=Aa@1234567891011;TrustServerCertificate=true;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -196,13 +196,23 @@ public partial class ForeignDbContext : DbContext
 
             entity.Property(e => e.CityId).HasColumnName("CityID");
             entity.Property(e => e.CityName).HasMaxLength(250);
-            entity.Property(e => e.ProvinceId).HasColumnName("ProvinceID");
-            entity.Property(e => e.ProvinceName).HasMaxLength(250);
+            entity.Property(e => e.CountryId).HasColumnName("CountryID");
 
-            entity.HasOne(d => d.Province).WithMany(p => p.CityTbls)
-                .HasForeignKey(d => d.ProvinceId)
+            entity.HasOne(d => d.Country).WithMany(p => p.CityTbls)
+                .HasForeignKey(d => d.CountryId)
                 .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK_CityTbl_ProvinceTbl1");
+        });
+
+        modelBuilder.Entity<CountryTbl>(entity =>
+        {
+            entity.HasKey(e => e.CountryId).HasName("PK_ProvinceTbl");
+
+            entity.ToTable("CountryTbl", "dbo");
+
+            entity.Property(e => e.CountryId).HasColumnName("CountryID");
+            entity.Property(e => e.CountryCode).HasMaxLength(10);
+            entity.Property(e => e.CountryName).HasMaxLength(250);
         });
 
         modelBuilder.Entity<DispatcherSelectionTbl>(entity =>
@@ -534,16 +544,6 @@ public partial class ForeignDbContext : DbContext
 
             entity.Property(e => e.PositionId).HasColumnName("PositionID");
             entity.Property(e => e.PositionType).HasMaxLength(100);
-        });
-
-        modelBuilder.Entity<ProvinceTbl>(entity =>
-        {
-            entity.HasKey(e => e.ProvinceId);
-
-            entity.ToTable("ProvinceTbl", "dbo");
-
-            entity.Property(e => e.ProvinceId).HasColumnName("ProvinceID");
-            entity.Property(e => e.ProvinceName).HasMaxLength(250);
         });
 
         modelBuilder.Entity<ReciverMessageTbl>(entity =>
