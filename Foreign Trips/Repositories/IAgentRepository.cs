@@ -15,8 +15,8 @@ namespace Foreign_Trips.Repositories
         Task<AgentDto> InsertAgentAsync(AgentDto agent);
         Task<AgentTbl?> UpdateAgentAsync(AgentTbl agentId);
         Task DeleteAgent(int agentId);
-        Task<IEnumerable<ProvinceTbl>> GetProvincesAcync();
-        Task<IEnumerable<CityTbl>> GetCitiesAcync(int? provinceId);
+        Task<IEnumerable<CountryTbl>> GetCountriesAcync();
+        Task<IEnumerable<CityTbl>> GetCitiesAcync(int? countryId);
         Task<IEnumerable<AgentStatusTbl>> GetAgentStatusAsync();
         Task<IEnumerable<TypeOfMissionTbl>> GetTypeOfMissionTblAsync();
         Task<IEnumerable<TypeOfEmploymentTbl>> TypeOfEmploymentTblAsync();

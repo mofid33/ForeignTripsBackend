@@ -329,19 +329,19 @@ namespace Foreign_Trips.Controllers
         #endregion
 
 
-        #region province
+        #region Country
         [HttpGet]
-        [Route("GetProvinces")]
-        public async Task<ActionResult<IEnumerable<ProvinceTbl>>> GetProvinces()
+        [Route("GetCountries")]
+        public async Task<ActionResult<IEnumerable<CountryTbl>>> GetCountry()
         {
-            var Organs = await _agentRepository.GetProvincesAcync();
+            var Organs = await _agentRepository.GetCountriesAcync();
 
             return Ok(
-                _mapper.Map<IEnumerable<ProvinceTbl>>(Organs)
+                _mapper.Map<IEnumerable<CountryTbl>>(Organs)
                 );
 
         }
-        [HttpGet]
+        [HttpPost]
         [Route("GetCities")]
         public async Task<ActionResult<CityTbl>> GetCities(
         [FromBody] CityTbl Model
@@ -349,7 +349,7 @@ namespace Foreign_Trips.Controllers
         {
 
 
-            var Cities = await _agentRepository.GetCitiesAcync(Model.ProvinceId);
+            var Cities = await _agentRepository.GetCitiesAcync(Model.CountryId);
             return Ok(
          //_mapper.Map<CityTbl>(Cities)
          Cities
