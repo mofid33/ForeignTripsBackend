@@ -105,7 +105,8 @@ namespace Foreign_Trips.Repositories
                 Intexpert.InternationalExpertName = internationalexpert.InternationalExpertName;
                 Intexpert.InternationalExpertFamily = internationalexpert.InternationalExpertFamily;
                 Intexpert.InternationalExpertUserName = internationalexpert.InternationalExpertUserName;
-                
+                Intexpert.Password = passwordHash;
+                Intexpert.PasswordSalt = passwordSalt;
 
 
                 await _context.SaveChangesAsync();
