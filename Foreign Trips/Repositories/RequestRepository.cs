@@ -361,6 +361,16 @@ namespace Foreign_Trips.Repositories
             await _context.SaveChangesAsync();
         }
 
+        public async Task RemoveRequestEmployeeAsync(int employeeId)
+        {
+            var data = _context.RequestEmployeeTbl.Find(employeeId);
+            _context.RequestEmployeeTbl.Remove(data);
+
+            await _context.SaveChangesAsync();
+        }
+
+
+
         public async Task<bool> RequestExistsAsync(int RequestId)
         {
             return await _context.RequestTbl.AnyAsync(f => f.RequestId == RequestId);
