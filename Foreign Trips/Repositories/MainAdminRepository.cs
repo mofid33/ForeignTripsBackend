@@ -1,8 +1,10 @@
 ﻿using Foreign_Trips.DbContexts;
 using Foreign_Trips.Entities;
 using Foreign_Trips.Model;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using System.Xml.Linq;
 
 namespace Foreign_Trips.Repositories
 {
@@ -83,11 +85,13 @@ namespace Foreign_Trips.Repositories
         {
             try
             {
-
+                byte[] passwordHash, passwordSalt;
+                CreatePasswordHash(mainadmin.Password.ToString(), out passwordHash, out passwordSalt);
                 var main = await _context.MainAdminTbl.FindAsync(mainadmin.MainAdminId);
                 main.MainAdminName = mainadmin.MainAdminName;
                 main.MainAdminUserName = mainadmin.MainAdminUserName;
-                main.Password = mainadmin.Password;
+                main.Password = passwordHash;
+                main.PasswordSalt = passwordSalt;
                 await _context.SaveChangesAsync();
 
 
@@ -135,6 +139,8 @@ namespace Foreign_Trips.Repositories
         {
             try
             {
+                byte[] passwordHash, passwordSalt;
+                CreatePasswordHash(agent.Password.ToString(), out passwordHash, out passwordSalt);
                 AgentTbl data = new AgentTbl();
                 data.NationalCode = agent.NationalCode;
                 data.DateOfBirth = agent.DateOfBirth;
@@ -153,7 +159,14 @@ namespace Foreign_Trips.Repositories
                 data.Subset = agent.Subset;
                 data.TypeOfEmploymentId = agent.TypeOfEmploymentId;
                 data.Position = agent.Position;
-                data.Password = agent.Password;
+                data.Password = passwordHash;
+                data.PasswordSalt = passwordSalt;
+                DateTime dt = new DateTime();
+                PersianDateTime persianDateTime = new PersianDateTime(DateTime.Now);
+                string date = persianDateTime.ToString().Substring(0, 10);
+
+                data.RegisterTime = DateTime.Now.ToShortTimeString();
+                data.RegisterDate = date;
 
 
 
@@ -195,6 +208,8 @@ namespace Foreign_Trips.Repositories
         {
             try
             {
+                byte[] passwordHash, passwordSalt;
+                CreatePasswordHash(agent.Password.ToString(), out passwordHash, out passwordSalt);
                 AgentTbl data = new AgentTbl();
                 data.NationalCode = agent.NationalCode;
                 data.DateOfBirth = agent.DateOfBirth;
@@ -213,7 +228,8 @@ namespace Foreign_Trips.Repositories
                 data.Subset = agent.Subset;
                 data.TypeOfEmploymentId = agent.TypeOfEmploymentId;
                 data.Position = agent.Position;
-                data.Password = agent.Password;
+                data.Password = passwordHash;
+                data.PasswordSalt = passwordSalt;
 
 
 
