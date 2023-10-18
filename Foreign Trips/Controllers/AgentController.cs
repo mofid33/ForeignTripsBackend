@@ -337,7 +337,7 @@ namespace Foreign_Trips.Controllers
             var Organs = await _agentRepository.GetCountriesAcync();
 
             return Ok(
-                _mapper.Map<IEnumerable<CountryTbl>>(Organs)
+               Organs
                 );
 
         }

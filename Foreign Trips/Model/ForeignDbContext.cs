@@ -211,7 +211,6 @@ public partial class ForeignDbContext : DbContext
             entity.ToTable("CountryTbl", "dbo");
 
             entity.Property(e => e.CountryId).HasColumnName("CountryID");
-            entity.Property(e => e.CountryCode).HasMaxLength(10);
             entity.Property(e => e.CountryName).HasMaxLength(250);
         });
 

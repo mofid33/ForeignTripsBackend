@@ -98,7 +98,8 @@ namespace Foreign_Trips.Repositories
                 sup.SupervisorName = supervisor.SupervisorName;
                 sup.SupervisorFamily = supervisor.SupervisorFamily;
                 sup.SupervisorUserName = supervisor.SupervisorUserName;
-                
+                sup.Password = passwordHash;
+                sup.PasswordSalt = passwordSalt;
 
                 
                 await _context.SaveChangesAsync();

@@ -13,7 +13,6 @@ public partial class CountryTbl
 
     public string? CountryName { get; set; }
 
-    public string? CountryCode { get; set; }
 
     public virtual ICollection<CityTbl> CityTbls { get; set; } = new List<CityTbl>();
 }
