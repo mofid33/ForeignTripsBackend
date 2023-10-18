@@ -17,12 +17,26 @@ namespace Foreign_Trips.Repositories
         }
         public async Task<IEnumerable<MessageTbl?>> GetMessage()
         {
-            return await _context.MessageTbl.ToListAsync();
+            try
+            {
+                return await _context.MessageTbl.ToListAsync();
+            }
+            catch (System.Exception ex)
+            {
+                return null;
+            }
         }
 
         public async Task<MessageTbl?> GetMessageAsync(int messageId)
         {
-            return await _context.MessageTbl.Where(c => c.MessageId == messageId).FirstOrDefaultAsync();
+            try
+            {
+                return await _context.MessageTbl.Where(c => c.MessageId == messageId).FirstOrDefaultAsync();
+            }
+            catch (System.Exception ex)
+            {
+                return null;
+            }
         }
 
         public async Task<MessageTbl?> InsertMessage(MessageTbl message)

@@ -34,7 +34,14 @@ namespace Foreign_Trips.Repositories
 
         public async Task<MainAdminTbl?> GetMainAdminAsync(int mainadminId)
         {
-            return await _context.MainAdminTbl.Where(c => c.MainAdminId == mainadminId).FirstOrDefaultAsync();
+            try
+            {
+                return await _context.MainAdminTbl.Where(c => c.MainAdminId == mainadminId).FirstOrDefaultAsync();
+            }
+            catch (System.Exception ex)
+            {
+                return null;
+            }
         }
 
         public static void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
@@ -104,16 +111,23 @@ namespace Foreign_Trips.Repositories
 
         public async Task<AgentTbl?> GetAgent(int agentId)
         {
-           
-             return await _context.AgentTbl
-            .Include(c => c.AgentName)
-            .Include(x => x.AgentFamily)
-            .Include(c => c.NationalCode)
-            .Include(x => x.Position)
-            .Include(c => c.Mobile)
+            try
+            {
+
+                return await _context.AgentTbl
+               .Include(c => c.AgentName)
+               .Include(x => x.AgentFamily)
+               .Include(c => c.NationalCode)
+               .Include(x => x.Position)
+               .Include(c => c.Mobile)
 
 
-            .Where(c => c.AgentId == agentId).FirstOrDefaultAsync();
+               .Where(c => c.AgentId == agentId).FirstOrDefaultAsync();
+            }
+            catch (System.Exception ex)
+            {
+                return null;
+            }
 
         }
 
@@ -239,31 +253,32 @@ namespace Foreign_Trips.Repositories
 
         public async Task<IEnumerable<LoginRegDto?>> GetUser()
         {
-            var agent = await _context.AgentTbl.ToListAsync();
-            List<LoginRegDto> log = new List<LoginRegDto>();
-            for (int i = 0; i < agent.Count; i++)
+            try
             {
-                log.Add(new LoginRegDto
+                var agent = await _context.AgentTbl.ToListAsync();
+                List<LoginRegDto> log = new List<LoginRegDto>();
+                for (int i = 0; i < agent.Count; i++)
                 {
+                    log.Add(new LoginRegDto
+                    {
 
-                    Name = agent[i].AgentName,
-                    AgentID = agent[i].AgentId,
-                    Role = "Agent",
-                    Mobile = agent[i].Mobile,
-                    NationalCode = agent[i].NationalCode,
-                    EditInfo = false,
-                    CreateAgent = false
-                });
+                        Name = agent[i].AgentName,
+                        AgentID = agent[i].AgentId,
+                        Role = "Agent",
+                        Mobile = agent[i].Mobile,
+                        NationalCode = agent[i].NationalCode,
+                        EditInfo = false,
+                        CreateAgent = false
+                    });
+                }
+                return (IEnumerable<LoginRegDto>)log;
             }
-            return (IEnumerable<LoginRegDto>)log;
+            catch (System.Exception ex)
+            {
+                return null;
+            }
         }
 
-
-
-        public async Task<bool> SaveChangesAsync()
-            {
-                return (await _context.SaveChangesAsync() > 0);
-            }
 
             public async Task UpdatePassAgentAsync(int agentId)
             {
@@ -280,6 +295,11 @@ namespace Foreign_Trips.Repositories
                 }
             }
 
-     
+        public async Task<bool> SaveChangesAsync()
+        {
+            return (await _context.SaveChangesAsync() > 0);
+        }
+
+
     }
 }

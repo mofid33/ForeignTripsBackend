@@ -38,8 +38,16 @@ namespace Foreign_Trips.Repositories
 
         public async Task<SupervisorTbl?> GetSupervisorAsync(int supervisorId)
         {
-            return await _context.SupervisorTbl.Where(c => c.SupervisorId == supervisorId).FirstOrDefaultAsync();
+            try
+            {
+                return await _context.SupervisorTbl.Where(c => c.SupervisorId == supervisorId).FirstOrDefaultAsync();
+            }
+            catch (System.Exception ex)
+            {
+                return null;
+            }
         }
+            
 
         public static void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
         {

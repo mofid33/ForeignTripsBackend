@@ -341,6 +341,7 @@ namespace Foreign_Trips.Controllers
                 );
 
         }
+
         [HttpPost]
         [Route("GetCities")]
         public async Task<ActionResult<CityTbl>> GetCities(

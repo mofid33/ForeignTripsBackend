@@ -25,34 +25,62 @@ namespace Foreign_Trips.Repositories
 
         public async Task<bool> AgentExistsAsync(long agentId)
         {
-            return await _context.AgentTbl.AnyAsync(f => f.AgentId == agentId);
+            
+                return await _context.AgentTbl.AnyAsync(f => f.AgentId == agentId);
+            
         }
 
-        public async Task<AgentTbl?> GetAgentAsync(long agentId)
+            public async Task<AgentTbl?> GetAgentAsync(long agentId)
         {
-            return await _context.AgentTbl.Where(f => f.AgentId == agentId)
-                .Include(t => t.Position)
-                .Include(t=>t.AgentStatus)
-                .Include(t => t.SubCategory)
+            try
+            {
+                return await _context.AgentTbl.Where(f => f.AgentId == agentId)
+                    .Include(t => t.Position)
+                    .Include(t => t.AgentStatus)
+                    .Include(t => t.SubCategory)
 
-                .FirstOrDefaultAsync();
+                    .FirstOrDefaultAsync();
+            }
+            catch (System.Exception ex)
+            {
+                return null;
+            }
+
         }
         public async Task<IEnumerable<SubCategoryTbl?>> GetSubCategory()
         {
-            return await _context.SubCategoryTbl.ToListAsync();
+            try
+            {
+                return await _context.SubCategoryTbl.ToListAsync();
+            }
+            catch (System.Exception ex)
+            {
+                return null;
+            }
 
-                
         }
         public async Task<IEnumerable<PositionTypeTbl?>> GetPosition()
         {
-            return await _context.PositionTypeTbl.ToListAsync();
-
+            try
+            {
+                return await _context.PositionTypeTbl.ToListAsync();
+            }
+            catch (System.Exception ex)
+            {
+                return null;
+            }
 
         }
         public async Task<IEnumerable<TypeOfEmploymentTbl?>> GetTypeEmployment()
         {
-            return await _context.TypeOfEmploymentTbl.ToListAsync();
-
+            try
+            {
+                return await _context.TypeOfEmploymentTbl.ToListAsync();
+            }
+            catch (System.Exception ex)
+            {
+                return null;
+            }
 
         }
         public async Task<IEnumerable<AgentTbl>> GetAgent()
@@ -165,22 +193,37 @@ namespace Foreign_Trips.Repositories
 
         public async Task DeleteAgent(int agentId)
         {
-            var data = _context.AgentTbl.Find(agentId);
-            _context.AgentTbl.Remove(data);
+           
+                var data = _context.AgentTbl.Find(agentId);
+                _context.AgentTbl.Remove(data);
 
-            await _context.SaveChangesAsync();
+                await _context.SaveChangesAsync();
         }
 
         public async Task<IEnumerable<CountryTbl>> GetCountriesAcync()
         {
-            return await _context.CountryTbl.AsNoTracking().ToListAsync();
+            try
+            {
+                return await _context.CountryTbl.AsNoTracking().ToListAsync();
+            }
+            catch (System.Exception ex)
+            {
+                return null;
+            }
         }
 
         public async Task<IEnumerable<CityTbl>> GetCitiesAcync(int? countryId)
         {
-            return await _context.CityTbl
-             .AsNoTracking()
-             .Where(c => c.CountryId == countryId).ToListAsync();
+            try
+            {
+                return await _context.CityTbl
+                 .AsNoTracking()
+                 .Where(c => c.CountryId == countryId).ToListAsync();
+            }
+            catch (System.Exception ex)
+            {
+                return null;
+            }
         }
 
 

@@ -22,30 +22,44 @@ namespace Foreign_Trips.Repositories
 
         public async Task<IEnumerable<RequestTbl?>> GetRequest()
         {
-            return await _context.RequestTbl
-             .Include(c => c.Agent)
-             .Include(c => c.RequestStatus)
-             .Include(c => c.InternationalExpert)
-             .Include(c => c.TravelType)
-             .Include(c => c.TypeAccommodation)
-             .Include(c => c.TollAmount)
-             .ToListAsync();
+            try
+            {
+                return await _context.RequestTbl
+                 .Include(c => c.Agent)
+                 .Include(c => c.RequestStatus)
+                 .Include(c => c.InternationalExpert)
+                 .Include(c => c.TravelType)
+                 .Include(c => c.TypeAccommodation)
+                 .Include(c => c.TollAmount)
+                 .ToListAsync();
+            }
+            catch (System.Exception ex)
+            {
+                return null;
+            }
         }
 
         //LevelRightOfMission  table nadare
         //نوع اقامت کدومه
         public async Task<IEnumerable<RequestTbl?>> GetRequestsExpert(int ExpertId)
         {
-            return await _context.RequestTbl
-             .Include(c => c.Agent)
-             .Include(c=>c.RequestStatus)
-             .Include(c=>c.InternationalExpert)
-             .Include(c=>c.TravelType)
-             .Include(c=>c.TypeAccommodation)
-             .Include(c=>c.TollAmount)
+            try
+            {
+                return await _context.RequestTbl
+                 .Include(c => c.Agent)
+                 .Include(c => c.RequestStatus)
+                 .Include(c => c.InternationalExpert)
+                 .Include(c => c.TravelType)
+                 .Include(c => c.TypeAccommodation)
+                 .Include(c => c.TollAmount)
 
-             .Where(t => t.InternationalExpertId == ExpertId || t.InternationalExpertId == null)
-             .ToListAsync();
+                 .Where(t => t.InternationalExpertId == ExpertId || t.InternationalExpertId == null)
+                 .ToListAsync();
+            }
+            catch (System.Exception ex)
+            {
+                return null;
+            }
         }
 
 
@@ -96,40 +110,69 @@ namespace Foreign_Trips.Repositories
 
         public async Task<IEnumerable<RequestTbl?>> GetRequestsAdmin(int AdminId)
         {
-            return await _context.RequestTbl
-             .Include(c => c.Agent).Where(t => t.AdminId == AdminId || t.AdminId == null)
-             .ToListAsync();
+            try
+            {
+                return await _context.RequestTbl
+                 .Include(c => c.Agent).Where(t => t.AdminId == AdminId || t.AdminId == null)
+                 .ToListAsync();
+            }
+            catch (System.Exception ex)
+            {
+                return null;
+            }
         }
 
         public async Task<IEnumerable<RequestTbl?>> GetRequestsMainAdmin(int MainAdminId)
         {
-            return await _context.RequestTbl
-             .Include(c => c.Agent).Where(t => t.MainAdminId == MainAdminId || t.MainAdminId == null)
-             .ToListAsync();
+            try
+            {
+
+                return await _context.RequestTbl
+                 .Include(c => c.Agent).Where(t => t.MainAdminId == MainAdminId || t.MainAdminId == null)
+                 .ToListAsync();
+            }
+            catch (System.Exception ex)
+            {
+                return null;
+            }
         }
 
         public async Task<RequestTbl?> GetRequestAsync(int requestId)
         {
-            return await _context.RequestTbl
-             .Include(c => c.Agent)
-             .Include(c => c.RequestStatus)
-             .Include(c => c.InternationalExpert)
-             .Include(c => c.TravelType)
-             .Include(c=>c.TravelGoal)
-             .Include(c=>c.JobGoal)
-             .Include(c=>c.Participant)
-             .Include(c=>c.PassportType)
-             .Include(c => c.TypeAccommodation)
-             .Include(c => c.TollAmount)
-             .Where(c => c.RequestId == requestId).FirstOrDefaultAsync();
+            try
+            {
+                return await _context.RequestTbl
+                 .Include(c => c.Agent)
+                 .Include(c => c.RequestStatus)
+                 .Include(c => c.InternationalExpert)
+                 .Include(c => c.TravelType)
+                 .Include(c => c.TravelGoal)
+                 .Include(c => c.JobGoal)
+                 .Include(c => c.Participant)
+                 .Include(c => c.PassportType)
+                 .Include(c => c.TypeAccommodation)
+                 .Include(c => c.TollAmount)
+                 .Where(c => c.RequestId == requestId).FirstOrDefaultAsync();
+            }
+            catch (System.Exception ex)
+            {
+                return null;
+            }
         }
         public async Task<IEnumerable<RequestTbl?>> GetRequestsAgent(int agentId)
         {
-            return await _context.RequestTbl
-             .Include(c => c.Agent)
-             .Include(c => c.RequestStatus)
+            try
+            {
+                return await _context.RequestTbl
+                 .Include(c => c.Agent)
+                 .Include(c => c.RequestStatus)
 
-             .Where(c => c.AgentId == agentId).ToListAsync();
+                 .Where(c => c.AgentId == agentId).ToListAsync();
+            }
+            catch (System.Exception ex)
+            {
+                return null;
+            }
         }
         public async Task<IEnumerable<RequestEmployeeTbl?>> GetRequestEmployeeAsync(int requestId)
         {
@@ -334,12 +377,19 @@ namespace Foreign_Trips.Repositories
 
         public async Task<RequestTbl?> GetNewRequest(int requestId)
         {
-            return await _context.RequestTbl
+            try
+            {
+                return await _context.RequestTbl
 
-            .Include(c => c.Agent)
-            .Include(c => c.RequestStatus)
-            .Where(c=>c.RequestId==requestId)
-            .FirstOrDefaultAsync();
+                .Include(c => c.Agent)
+                .Include(c => c.RequestStatus)
+                .Where(c => c.RequestId == requestId)
+                .FirstOrDefaultAsync();
+            }
+            catch (System.Exception ex)
+            {
+                return null;
+            }
         }
 
         public async Task<RequestTbl?> AcceptRequestExpert(RequestTbl request)
