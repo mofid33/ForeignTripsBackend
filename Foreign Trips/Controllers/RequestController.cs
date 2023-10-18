@@ -199,7 +199,7 @@ namespace Foreign_Trips.Controllers
 
 
         [HttpPost]
-        [Route("RemoveRequest")]
+        [Route("RemoveEmployeeRequest")]
         public async Task<ActionResult<RequestEmployeeTbl>> RemoveRequestEmployeeAsync(
         [FromBody] RequestEmployeeTbl Model
         )
