@@ -146,10 +146,7 @@ namespace Foreign_Trips.Repositories
                  .Include(c => c.RequestStatus)
                  .Include(c => c.InternationalExpert)
                  .Include(c => c.TravelType)
-                 .Include(c => c.TravelGoal)
-                 .Include(c => c.JobGoal)
                  .Include(c => c.Participant)
-                 .Include(c => c.PassportType)
                  .Include(c => c.TypeAccommodation)
                  .Include(c => c.TollAmount)
                  .Where(c => c.RequestId == requestId).FirstOrDefaultAsync();
@@ -194,6 +191,7 @@ namespace Foreign_Trips.Repositories
 
         }
 
+      
         public async Task<RequestTbl?> InsertRequestAsync(RequestTbl request)
         {
             try
@@ -239,13 +237,14 @@ namespace Foreign_Trips.Repositories
 
         }
 
-
         public async Task<RequestEmployeeTbl?> InsertRequestEmployeeAsync(RequestEmployeeTbl requestemployee)
         {
             await _context.RequestEmployeeTbl.AddAsync(requestemployee);
             await _context.SaveChangesAsync();
             return requestemployee;
         }
+
+
 
         public async Task<RequestTbl?> UpdateRequest3Async(RequestTbl request)
         {

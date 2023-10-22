@@ -1,10 +1,14 @@
 ﻿using Foreign_Trips.Model;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
 
 namespace Foreign_Trips.Entities
 {
     public class AllListDto
     {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int RequestId { get; set; }
 
         public int? AgentId { get; set; }
@@ -15,9 +19,6 @@ namespace Foreign_Trips.Entities
 
         public string InternetAddressOfTheExecutiveDevice { get; set; } = null!;
 
-        public int? CityId { get; set; } 
-
-
         public string FlightPath { get; set; } = null!;
 
         public string TravelDateStart { get; set; } = null!;
@@ -26,13 +27,13 @@ namespace Foreign_Trips.Entities
 
         public string TravelTopic { get; set; } = null!;
 
-        public int TravelGoalId { get; set; }
+        public string TravelGoalId { get; set; } = null!;
 
-        public int JobGoalId { get; set; }
+        public string JobGoalId { get; set; } = null!;
 
         public int ParticipantId { get; set; }
 
-        public int PassportTypeId { get; set; }
+        public string PassportTypeId { get; set; } = null!;
 
         public bool GetVisa { get; set; }
 
@@ -56,23 +57,23 @@ namespace Foreign_Trips.Entities
 
         public string? TheCostOfTicket { get; set; }
 
-        public List<RightOfMissionTbl> RightOfMissionId { get; set; }
+        public string? RightOfMissionId { get; set; }
 
         public string? ManagerRightOfMission { get; set; }
 
         public string? ExpertRightOfMission { get; set; }
 
-        public string? RightToEducationCost { get; set; }
+        public string? RightToEducationApplicantCost { get; set; }
 
-        public List<RightToEducationTbl> RightToEducationId { get; set; }
+        public string? RightToEducationId { get; set; }
 
-        public string? RightOfCommutingCost { get; set; }
+        public string? RightOfCommutingInternalDeviceCost { get; set; }
 
-        public List<RightOfCommutingTypeTbl> RightOfCommutingId { get; set; }
+        public string? RightOfCommutingId { get; set; }
 
         public string? VisaCost { get; set; }
 
-        public string? TollAmountCost { get; set; }
+        public string? TollAmountPersonCost { get; set; }
 
         public int? TollAmountId { get; set; }
 
@@ -132,6 +133,16 @@ namespace Foreign_Trips.Entities
 
         public string? DelayReason { get; set; }
 
-        
+        public int? CityId { get; set; }
+
+        public string? RightToEducationInternalDeviceCost { get; set; }
+
+        public string? RightOfCommutingPersonCost { get; set; }
+
+        public string? RightOfCommutingExternalCost { get; set; }
+
+        public string? TollAmountDeviceCost { get; set; }
+
+
     }
 }

@@ -27,13 +27,13 @@ public partial class RequestTbl
 
     public string TravelTopic { get; set; } = null!;
 
-    public int TravelGoalId { get; set; }
+    public string TravelGoalId { get; set; } = null!;
 
-    public int JobGoalId { get; set; }
+    public string JobGoalId { get; set; } = null!;
 
     public int ParticipantId { get; set; }
 
-    public int PassportTypeId { get; set; }
+    public string PassportTypeId { get; set; } = null!;
 
     public bool GetVisa { get; set; }
 
@@ -153,21 +153,15 @@ public partial class RequestTbl
 
     public virtual InternationalExpertTbl? InternationalExpert { get; set; }
 
-    public virtual JobGoalsTypeTbl JobGoal { get; set; } = null!;
-
     public virtual MainAdminTbl? MainAdmin { get; set; }
 
     public virtual ParticipantTbl Participant { get; set; } = null!;
-
-    public virtual PassportTypeTbl PassportType { get; set; } = null!;
 
     public virtual ICollection<ReportTbl> ReportTbls { get; set; } = new List<ReportTbl>();
 
     public virtual RequestStatusTbl? RequestStatus { get; set; }
 
     public virtual TollAmountTypeTbl? TollAmount { get; set; }
-
-    public virtual TravelGoalsTypeTbl TravelGoal { get; set; } = null!;
 
     public virtual TravelTypeTbl? TravelType { get; set; }
 

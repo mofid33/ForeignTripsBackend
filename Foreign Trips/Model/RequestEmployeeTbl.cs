@@ -51,8 +51,6 @@ public partial class RequestEmployeeTbl
 
     public virtual GenderTypeTbl Gender { get; set; } = null!;
 
-    public virtual LanguageTypeTbl Language { get; set; } = null!;
-
     public virtual MaritalStatusTbl MaritalStatus { get; set; } = null!;
 
     public virtual PassportTypeTbl PassPortType { get; set; } = null!;
