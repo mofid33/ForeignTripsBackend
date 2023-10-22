@@ -63,17 +63,17 @@ public partial class RequestTbl
 
     public string? ExpertRightOfMission { get; set; }
 
-    public string? RightToEducationCost { get; set; }
+    public string? RightToEducationApplicantCost { get; set; }
 
     public string? RightToEducationId { get; set; }
 
-    public string? RightOfCommutingCost { get; set; }
+    public string? RightOfCommutingInternalDeviceCost { get; set; }
 
     public string? RightOfCommutingId { get; set; }
 
     public string? VisaCost { get; set; }
 
-    public string? TollAmountCost { get; set; }
+    public string? TollAmountPersonCost { get; set; }
 
     public int? TollAmountId { get; set; }
 
@@ -134,6 +134,14 @@ public partial class RequestTbl
     public string? DelayReason { get; set; }
 
     public int? CityId { get; set; }
+
+    public string? RightToEducationInternalDeviceCost { get; set; }
+
+    public string? RightOfCommutingPersonCost { get; set; }
+
+    public string? RightOfCommutingExternalCost { get; set; }
+
+    public string? TollAmountDeviceCost { get; set; }
 
     public virtual InternationalAdminTbl? Admin { get; set; }
 

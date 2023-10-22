@@ -703,25 +703,29 @@ public partial class ForeignDbContext : DbContext
             entity.Property(e => e.RegisterTime).HasMaxLength(10);
             entity.Property(e => e.RejectRequest).HasMaxLength(500);
             entity.Property(e => e.RequestStatusId).HasColumnName("RequestStatusID");
-            entity.Property(e => e.RightOfCommutingCost).HasMaxLength(100);
+            entity.Property(e => e.RightOfCommutingExternalCost).HasMaxLength(100);
             entity.Property(e => e.RightOfCommutingId)
                 .HasMaxLength(50)
                 .HasColumnName("RightOfCommutingID");
+            entity.Property(e => e.RightOfCommutingInternalDeviceCost).HasMaxLength(100);
+            entity.Property(e => e.RightOfCommutingPersonCost).HasMaxLength(100);
             entity.Property(e => e.RightOfMissionId)
                 .HasMaxLength(50)
                 .HasColumnName("RightOfMissionID");
-            entity.Property(e => e.RightToEducationCost).HasMaxLength(100);
+            entity.Property(e => e.RightToEducationApplicantCost).HasMaxLength(100);
             entity.Property(e => e.RightToEducationId)
                 .HasMaxLength(50)
                 .HasColumnName("RightToEducationID");
+            entity.Property(e => e.RightToEducationInternalDeviceCost).HasMaxLength(100);
             entity.Property(e => e.SummaryInvitation).HasMaxLength(500);
             entity.Property(e => e.TheCostOfTicket).HasMaxLength(100);
             entity.Property(e => e.TickerTypeId)
                 .HasMaxLength(100)
                 .HasColumnName("TickerTypeID");
             entity.Property(e => e.TicketCost).HasMaxLength(100);
-            entity.Property(e => e.TollAmountCost).HasMaxLength(100);
+            entity.Property(e => e.TollAmountDeviceCost).HasMaxLength(100);
             entity.Property(e => e.TollAmountId).HasColumnName("TollAmountID");
+            entity.Property(e => e.TollAmountPersonCost).HasMaxLength(100);
             entity.Property(e => e.TravalEndDate).HasMaxLength(50);
             entity.Property(e => e.TravelDateStart).HasMaxLength(50);
             entity.Property(e => e.TravelGoalId).HasColumnName("TravelGoalID");

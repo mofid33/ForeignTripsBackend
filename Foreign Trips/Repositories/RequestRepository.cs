@@ -268,13 +268,17 @@ namespace Foreign_Trips.Repositories
                 qtbl.ManagerRightOfMission = request.ManagerRightOfMission;
                 qtbl.ExpertRightOfMission = request.ExpertRightOfMission;
                 qtbl.GeneralManagerRightOfMission = request.ManagerRightOfMission;
-                qtbl.RightToEducationCost = request.RightToEducationCost;
+                qtbl.RightToEducationApplicantCost = request.RightToEducationApplicantCost;
+                qtbl.RightToEducationInternalDeviceCost = request.RightToEducationInternalDeviceCost;
                 qtbl.RightToEducationId = request.RightToEducationId;
-                qtbl.RightOfCommutingCost = request.RightOfCommutingCost;
+                qtbl.RightOfCommutingPersonCost = request.RightOfCommutingPersonCost;
+                qtbl.RightOfCommutingInternalDeviceCost = request.RightOfCommutingInternalDeviceCost;
+                qtbl.RightOfCommutingExternalCost = request.RightOfCommutingExternalCost;
                 qtbl.RightOfCommutingId = request.RightOfCommutingId;
                 qtbl.TypeAccommodationId = request.TypeAccommodationId;
                 qtbl.VisaCost = request.VisaCost;
-                qtbl.TollAmountCost = request.TollAmountCost;
+                qtbl.TollAmountPersonCost = request.TollAmountPersonCost;
+                qtbl.TollAmountDeviceCost = request.TollAmountDeviceCost;
                 qtbl.TollAmountId = request.TollAmountId;
                 qtbl.PaymentFromBank = request.PaymentFromBank;
 
