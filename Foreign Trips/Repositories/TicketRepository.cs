@@ -18,48 +18,91 @@ namespace Foreign_Trips.Repositories
         //کار نمیکنه
         public async Task<IEnumerable<TicketDetailsTbl?>> GetSubTickets(int ticketId)
         {
-            return await _context.TicketDetailsTbl
-                .Include(t => t.Ticket)
-                .Include(t => t.Ticket.TicketStatus)
-                .Include(t => t.Ticket.Agent)
-                .Where(t => t.TicketId == ticketId).ToListAsync();
+            try
+            {
+                return await _context.TicketDetailsTbl
+                    .Include(t => t.Ticket)
+                    .Include(t => t.Ticket.TicketStatus)
+                    .Include(t => t.Ticket.Agent)
+                    .Where(t => t.TicketId == ticketId).ToListAsync();
+            }
+            catch (System.Exception ex)
+            {
+                return null;
+            }
         }
 
         public async Task<TicketTbl?> GetTicketAsync(int ticketId)
         {
-            return await _context.TicketTbl
-                .Include(t => t.TicketStatus)
-                .Where(t => t.TicketId == ticketId).FirstOrDefaultAsync();
+            try
+            {
+                return await _context.TicketTbl
+                    .Include(t => t.TicketStatus)
+                    .Where(t => t.TicketId == ticketId).FirstOrDefaultAsync();
+            }
+            catch (System.Exception ex)
+            {
+                return null;
+            }
         }
 
         public async Task<IEnumerable<TicketTbl?>> GetTickets(long agentId)
         {
-            return await _context.TicketTbl
-               .Include(t => t.TicketStatus)
-               .Where(t=>t.AgentId== agentId)
-               .ToListAsync();
+            try
+            {
+
+                return await _context.TicketTbl
+                   .Include(t => t.TicketStatus)
+                   .Where(t => t.AgentId == agentId)
+                   .ToListAsync();
+            }
+            catch (System.Exception ex)
+            {
+                return null;
+            }
         }
         public async Task<IEnumerable<TicketTbl?>> GetTicketExpert(int ExpertId)
         {
-            return await _context.TicketTbl
-               .Include(t => t.TicketStatus)
-               .Where(t => t.InternationalExpertId == ExpertId || t.InternationalExpertId == null)
-               .ToListAsync();
+            try
+            {
+                return await _context.TicketTbl
+                   .Include(t => t.TicketStatus)
+                   .Where(t => t.InternationalExpertId == ExpertId || t.InternationalExpertId == null)
+                   .ToListAsync();
+            }
+            catch (System.Exception ex)
+            {
+                return null;
+            }
         }
 
         public async Task<IEnumerable<TicketTbl?>> GetTicketAdmi(int AdminId)
         {
-            return await _context.TicketTbl
-               .Include(t => t.TicketStatus)
-               .Where(t => t.AdminId == AdminId)
-               .ToListAsync();
+            try
+            {
+                return await _context.TicketTbl
+                   .Include(t => t.TicketStatus)
+                   .Where(t => t.AdminId == AdminId)
+                   .ToListAsync();
+            }
+            catch (System.Exception ex)
+            {
+                return null;
+            }
         }
 
         public async Task<IEnumerable<TicketTbl?>> GetTicketMainAdmin()
         {
-            return await _context.TicketTbl
-               .Include(t => t.TicketStatus)
-               .ToListAsync();
+            try
+            {
+                return await _context.TicketTbl
+                   .Include(t => t.TicketStatus)
+                   .ToListAsync();
+            }
+            catch (System.Exception ex)
+            {
+                return null;
+            }
         }
 
         public async Task<TicketDetailsTbl?> InsertSubTicket(TicketDetailsTbl ticket)

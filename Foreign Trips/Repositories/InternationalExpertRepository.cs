@@ -58,7 +58,12 @@ namespace Foreign_Trips.Repositories
                 Intexpert.InternationalExpertUserName = internationalexpert.InternationalExpertUserName;
                 Intexpert.Password = passwordHash;
                 Intexpert.PasswordSalt = passwordSalt;
+                DateTime dt = new DateTime();
+                PersianDateTime persianDateTime = new PersianDateTime(DateTime.Now);
+                string date = persianDateTime.ToString().Substring(0, 10);
 
+                Intexpert.RegisterTime = DateTime.Now.ToShortTimeString();
+                Intexpert.RegisterDate = date;
 
 
                 await _context.InternationalExpertTbl.AddAsync(Intexpert);
@@ -93,11 +98,15 @@ namespace Foreign_Trips.Repositories
         {
             try
             {
+
+                byte[] passwordHash, passwordSalt;
+                CreatePasswordHash(internationalexpert.Password.ToString(), out passwordHash, out passwordSalt);
                 var Intexpert = await GetInternationalExpertAsync(internationalexpert.InternationalExpertId);
                 Intexpert.InternationalExpertName = internationalexpert.InternationalExpertName;
                 Intexpert.InternationalExpertFamily = internationalexpert.InternationalExpertFamily;
                 Intexpert.InternationalExpertUserName = internationalexpert.InternationalExpertUserName;
-                Intexpert.Password = internationalexpert.Password;
+                Intexpert.Password = passwordHash;
+                Intexpert.PasswordSalt = passwordSalt;
 
 
                 await _context.SaveChangesAsync();

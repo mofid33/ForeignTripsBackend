@@ -19,32 +19,53 @@ namespace Foreign_Trips.Repositories
 
         public async Task<IEnumerable<ReportTbl?>> GetReport()
         {
-            return await _context.ReportTbl
-                .Include(c => c.Request.Agent)
-                .Include(x => x.Request)
-                .ToListAsync();
+            try
+            {
+                return await _context.ReportTbl
+                    .Include(c => c.Request.Agent)
+                    .Include(x => x.Request)
+                    .ToListAsync();
+            }
+            catch (System.Exception ex)
+            {
+                return null;
+            }
         }
 
         public async Task<ReportTbl?> GetReportAsync(int reportId)
         {
-            return await _context.ReportTbl
-             .Include(c => c.Request.Agent)
-             .Include(x => x.Request)
-             
+            try
+            {
+                return await _context.ReportTbl
+                 .Include(c => c.Request.Agent)
+                 .Include(x => x.Request)
 
 
-             .Where(c => c.ReportId == reportId).FirstOrDefaultAsync();
+
+                 .Where(c => c.ReportId == reportId).FirstOrDefaultAsync();
+            }
+            catch (System.Exception ex)
+            {
+                return null;
+            }
 
         }
         public async Task<ReportTbl?> GetReportByRequest(int requestId)
         {
-            return await _context.ReportTbl
-             .Include(c => c.Request.Agent)
-             .Include(x => x.Request)
+            try
+            {
+                return await _context.ReportTbl
+                 .Include(c => c.Request.Agent)
+                 .Include(x => x.Request)
 
 
 
-             .Where(c => c.RequestId == requestId).OrderBy(t=>t.ReportId).LastOrDefaultAsync();
+                 .Where(c => c.RequestId == requestId).OrderBy(t => t.ReportId).LastOrDefaultAsync();
+            }
+            catch (System.Exception ex)
+            {
+                return null;
+            }
 
         }
 
@@ -96,6 +117,7 @@ namespace Foreign_Trips.Repositories
 
         public async Task<bool> ReportExistsAsync(int reportId)
         {
+
             return await _context.ReportTbl.AnyAsync(f => f.ReportId == reportId);
         }
 

@@ -197,44 +197,57 @@ namespace Foreign_Trips.Controllers
 
         }
 
-//        [HttpPost]
-//        [Route("AcceptRequest")]
-//        public async Task<ActionResult<RequestTbl>> AcceptRequest(
-//[FromBody] RequestTbl Model
-//)
-//        {
-//            if (!await _requestRepository.RequestExistsAsync(Model.RequestId))
-//            {
-//                return NotFound();
-//            }
-//            var req = await _requestRepository.AcceptRequest(Model);
-//            if (req == null)
-//            {
-//                return BadRequest();
-//            }
-//            return Ok();
 
-//        }
+        [HttpPost]
+        [Route("RemoveEmployeeRequest")]
+        public async Task<ActionResult<RequestEmployeeTbl>> RemoveRequestEmployeeAsync(
+        [FromBody] RequestEmployeeTbl Model
+        )
+        {
+            _requestRepository.RemoveRequestEmployeeAsync(Model.RequestEmployeeId);
+
+            return Ok();
+
+        }
+
+        //        [HttpPost]
+        //        [Route("AcceptRequest")]
+        //        public async Task<ActionResult<RequestTbl>> AcceptRequest(
+        //[FromBody] RequestTbl Model
+        //)
+        //        {
+        //            if (!await _requestRepository.RequestExistsAsync(Model.RequestId))
+        //            {
+        //                return NotFound();
+        //            }
+        //            var req = await _requestRepository.AcceptRequest(Model);
+        //            if (req == null)
+        //            {
+        //                return BadRequest();
+        //            }
+        //            return Ok();
+
+        //        }
 
 
-//        [HttpPost]
-//        [Route("RejectRequest")]
-//        public async Task<ActionResult<RequestTbl>> RejectRequest(
-//[FromBody] RequestTbl Model
-//)
-//        {
-//            if (!await _requestRepository.RequestExistsAsync(Model.RequestId))
-//            {
-//                return NotFound();
-//            }
-//            var req = await _requestRepository.RejectRequest(Model);
-//            if (req == null)
-//            {
-//                return BadRequest();
-//            }
-//            return Ok();
+        //        [HttpPost]
+        //        [Route("RejectRequest")]
+        //        public async Task<ActionResult<RequestTbl>> RejectRequest(
+        //[FromBody] RequestTbl Model
+        //)
+        //        {
+        //            if (!await _requestRepository.RequestExistsAsync(Model.RequestId))
+        //            {
+        //                return NotFound();
+        //            }
+        //            var req = await _requestRepository.RejectRequest(Model);
+        //            if (req == null)
+        //            {
+        //                return BadRequest();
+        //            }
+        //            return Ok();
 
-//        }
+        //        }
 
 
 

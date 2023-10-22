@@ -81,11 +81,19 @@ namespace Foreign_Trips.Repositories
         {
             try
             {
-
+                byte[] passwordHash, passwordSalt;
+                CreatePasswordHash(admin.Password.ToString(), out passwordHash, out passwordSalt);
                 var adm = await _context.InternationalAdminTbl.FindAsync(admin.AdminId);
                 adm.AdminName = admin.AdminName;
                 adm.AdminUsername = admin.AdminUsername;
-                adm.Password = admin.Password;
+                adm.Password = passwordHash;
+                adm.PasswordSalt = passwordSalt;
+                DateTime dt = new DateTime();
+                PersianDateTime persianDateTime = new PersianDateTime(DateTime.Now);
+                string date = persianDateTime.ToString().Substring(0, 10);
+
+                adm.RegisterTime = DateTime.Now.ToShortTimeString();
+                adm.RegisterDate = date;
 
                 await _context.SaveChangesAsync();
                 return admin;

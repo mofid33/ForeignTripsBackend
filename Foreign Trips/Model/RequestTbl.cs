@@ -27,13 +27,13 @@ public partial class RequestTbl
 
     public string TravelTopic { get; set; } = null!;
 
-    public int TravelGoalId { get; set; }
+    public string TravelGoalId { get; set; } = null!;
 
-    public int JobGoalId { get; set; }
+    public string JobGoalId { get; set; } = null!;
 
     public int ParticipantId { get; set; }
 
-    public int PassportTypeId { get; set; }
+    public string PassportTypeId { get; set; } = null!;
 
     public bool GetVisa { get; set; }
 
@@ -63,17 +63,17 @@ public partial class RequestTbl
 
     public string? ExpertRightOfMission { get; set; }
 
-    public string? RightToEducationCost { get; set; }
+    public string? RightToEducationApplicantCost { get; set; }
 
     public string? RightToEducationId { get; set; }
 
-    public string? RightOfCommutingCost { get; set; }
+    public string? RightOfCommutingInternalDeviceCost { get; set; }
 
     public string? RightOfCommutingId { get; set; }
 
     public string? VisaCost { get; set; }
 
-    public string? TollAmountCost { get; set; }
+    public string? TollAmountPersonCost { get; set; }
 
     public int? TollAmountId { get; set; }
 
@@ -135,6 +135,14 @@ public partial class RequestTbl
 
     public int? CityId { get; set; }
 
+    public string? RightToEducationInternalDeviceCost { get; set; }
+
+    public string? RightOfCommutingPersonCost { get; set; }
+
+    public string? RightOfCommutingExternalCost { get; set; }
+
+    public string? TollAmountDeviceCost { get; set; }
+
     public virtual InternationalAdminTbl? Admin { get; set; }
 
     public virtual AgentTbl? Agent { get; set; }
@@ -145,21 +153,15 @@ public partial class RequestTbl
 
     public virtual InternationalExpertTbl? InternationalExpert { get; set; }
 
-    public virtual JobGoalsTypeTbl JobGoal { get; set; } = null!;
-
     public virtual MainAdminTbl? MainAdmin { get; set; }
 
     public virtual ParticipantTbl Participant { get; set; } = null!;
-
-    public virtual PassportTypeTbl PassportType { get; set; } = null!;
 
     public virtual ICollection<ReportTbl> ReportTbls { get; set; } = new List<ReportTbl>();
 
     public virtual RequestStatusTbl? RequestStatus { get; set; }
 
     public virtual TollAmountTypeTbl? TollAmount { get; set; }
-
-    public virtual TravelGoalsTypeTbl TravelGoal { get; set; } = null!;
 
     public virtual TravelTypeTbl? TravelType { get; set; }
 

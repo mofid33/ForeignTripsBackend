@@ -636,10 +636,6 @@ public partial class ForeignDbContext : DbContext
                 .HasForeignKey(d => d.GenderId)
                 .HasConstraintName("FK_RequestEmployeeTbl_GenderTypeTbl");
 
-            entity.HasOne(d => d.Language).WithMany(p => p.RequestEmployeeTbls)
-                .HasForeignKey(d => d.LanguageId)
-                .HasConstraintName("FK_RequestEmployeeTbl_LanguageTypeTbl");
-
             entity.HasOne(d => d.MaritalStatus).WithMany(p => p.RequestEmployeeTbls)
                 .HasForeignKey(d => d.MaritalStatusId)
                 .HasConstraintName("FK_RequestEmployeeTbl_MaritalStatusTbl");
@@ -689,13 +685,17 @@ public partial class ForeignDbContext : DbContext
             entity.Property(e => e.ImportantTravel).HasMaxLength(500);
             entity.Property(e => e.InternationalExpertId).HasColumnName("InternationalExpertID");
             entity.Property(e => e.InternetAddressOfTheExecutiveDevice).HasMaxLength(100);
-            entity.Property(e => e.JobGoalId).HasColumnName("JobGoalID");
+            entity.Property(e => e.JobGoalId)
+                .HasMaxLength(50)
+                .HasColumnName("JobGoalID");
             entity.Property(e => e.MainAdminId).HasColumnName("MainAdminID");
             entity.Property(e => e.ManagerRightOfMission).HasMaxLength(100);
             entity.Property(e => e.MissionAchievementRecords).HasMaxLength(500);
             entity.Property(e => e.OperationId).HasMaxLength(100);
             entity.Property(e => e.ParticipantId).HasColumnName("ParticipantID");
-            entity.Property(e => e.PassportTypeId).HasColumnName("PassportTypeID");
+            entity.Property(e => e.PassportTypeId)
+                .HasMaxLength(50)
+                .HasColumnName("PassportTypeID");
             entity.Property(e => e.PayerCitizenShip).HasMaxLength(100);
             entity.Property(e => e.PayerFood).HasMaxLength(100);
             entity.Property(e => e.PaymentFromBank).HasMaxLength(100);
@@ -703,28 +703,34 @@ public partial class ForeignDbContext : DbContext
             entity.Property(e => e.RegisterTime).HasMaxLength(10);
             entity.Property(e => e.RejectRequest).HasMaxLength(500);
             entity.Property(e => e.RequestStatusId).HasColumnName("RequestStatusID");
-            entity.Property(e => e.RightOfCommutingCost).HasMaxLength(100);
+            entity.Property(e => e.RightOfCommutingExternalCost).HasMaxLength(100);
             entity.Property(e => e.RightOfCommutingId)
                 .HasMaxLength(50)
                 .HasColumnName("RightOfCommutingID");
+            entity.Property(e => e.RightOfCommutingInternalDeviceCost).HasMaxLength(100);
+            entity.Property(e => e.RightOfCommutingPersonCost).HasMaxLength(100);
             entity.Property(e => e.RightOfMissionId)
                 .HasMaxLength(50)
                 .HasColumnName("RightOfMissionID");
-            entity.Property(e => e.RightToEducationCost).HasMaxLength(100);
+            entity.Property(e => e.RightToEducationApplicantCost).HasMaxLength(100);
             entity.Property(e => e.RightToEducationId)
                 .HasMaxLength(50)
                 .HasColumnName("RightToEducationID");
+            entity.Property(e => e.RightToEducationInternalDeviceCost).HasMaxLength(100);
             entity.Property(e => e.SummaryInvitation).HasMaxLength(500);
             entity.Property(e => e.TheCostOfTicket).HasMaxLength(100);
             entity.Property(e => e.TickerTypeId)
                 .HasMaxLength(100)
                 .HasColumnName("TickerTypeID");
             entity.Property(e => e.TicketCost).HasMaxLength(100);
-            entity.Property(e => e.TollAmountCost).HasMaxLength(100);
+            entity.Property(e => e.TollAmountDeviceCost).HasMaxLength(100);
             entity.Property(e => e.TollAmountId).HasColumnName("TollAmountID");
+            entity.Property(e => e.TollAmountPersonCost).HasMaxLength(100);
             entity.Property(e => e.TravalEndDate).HasMaxLength(50);
             entity.Property(e => e.TravelDateStart).HasMaxLength(50);
-            entity.Property(e => e.TravelGoalId).HasColumnName("TravelGoalID");
+            entity.Property(e => e.TravelGoalId)
+                .HasMaxLength(50)
+                .HasColumnName("TravelGoalID");
             entity.Property(e => e.TravelTime).HasMaxLength(5);
             entity.Property(e => e.TravelTopic).HasMaxLength(300);
             entity.Property(e => e.TypeAccommodationId).HasColumnName("TypeAccommodationID");
@@ -749,10 +755,6 @@ public partial class ForeignDbContext : DbContext
                 .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK_RequestTbl_InternationalExpertTbl");
 
-            entity.HasOne(d => d.JobGoal).WithMany(p => p.RequestTbls)
-                .HasForeignKey(d => d.JobGoalId)
-                .HasConstraintName("FK_RequestTbl_JobGoalsTypeTbl");
-
             entity.HasOne(d => d.MainAdmin).WithMany(p => p.RequestTbls)
                 .HasForeignKey(d => d.MainAdminId)
                 .OnDelete(DeleteBehavior.Cascade)
@@ -763,10 +765,6 @@ public partial class ForeignDbContext : DbContext
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_RequestTbl_DeviceNameITypeTbl");
 
-            entity.HasOne(d => d.PassportType).WithMany(p => p.RequestTbls)
-                .HasForeignKey(d => d.PassportTypeId)
-                .HasConstraintName("FK_RequestTbl_PassportType");
-
             entity.HasOne(d => d.RequestStatus).WithMany(p => p.RequestTbls)
                 .HasForeignKey(d => d.RequestStatusId)
                 .OnDelete(DeleteBehavior.Cascade)
@@ -776,10 +774,6 @@ public partial class ForeignDbContext : DbContext
                 .HasForeignKey(d => d.TollAmountId)
                 .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK_RequestTbl_TollAmountTypeTbl");
-
-            entity.HasOne(d => d.TravelGoal).WithMany(p => p.RequestTbls)
-                .HasForeignKey(d => d.TravelGoalId)
-                .HasConstraintName("FK_RequestTbl_TravelGoalsTypeTbl");
 
             entity.HasOne(d => d.TravelType).WithMany(p => p.RequestTbls)
                 .HasForeignKey(d => d.TravelTypeId)

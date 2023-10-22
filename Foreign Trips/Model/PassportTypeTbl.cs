@@ -14,6 +14,4 @@ public partial class PassportTypeTbl
     public string PassportType { get; set; } = null!;
 
     public virtual ICollection<RequestEmployeeTbl> RequestEmployeeTbls { get; set; } = new List<RequestEmployeeTbl>();
-
-    public virtual ICollection<RequestTbl> RequestTbls { get; set; } = new List<RequestTbl>();
 }
