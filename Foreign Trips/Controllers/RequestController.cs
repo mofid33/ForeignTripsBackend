@@ -204,10 +204,6 @@ namespace Foreign_Trips.Controllers
         [FromBody] RequestEmployeeTbl Model
         )
         {
-            if (!await _requestRepository.RequestExistsAsync(Model.RequestEmployeeId))
-            {
-                return NotFound();
-            }
             _requestRepository.RemoveRequestEmployeeAsync(Model.RequestEmployeeId);
 
             return Ok();
