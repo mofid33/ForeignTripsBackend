@@ -120,11 +120,13 @@ namespace Foreign_Trips.Controllers
 [FromBody] RequestEmployeeTbl Model
 )
         {
-            var Req = await _requestRepository.InsertRequestEmployeeAsync(Model);
-            if (Req == null)
+
+            if (!await _requestRepository.RequestExistsAsync(Model.RequestId))
             {
-                return BadRequest();
+                return NotFound();
             }
+            _requestRepository.InsertRequestEmployeeAsync(Model);
+
             return Ok();
 
         }
@@ -135,11 +137,12 @@ namespace Foreign_Trips.Controllers
 [FromBody] RequestTbl Model
 )
         {
-            var Req = await _requestRepository.UpdateRequest3Async(Model);
-            if (Req == null)
+            if (!await _requestRepository.RequestExistsAsync(Model.RequestId))
             {
-                return BadRequest();
+                return NotFound();
             }
+            _requestRepository.UpdateRequest3Async(Model);
+
             return Ok();
 
         }
@@ -150,11 +153,12 @@ namespace Foreign_Trips.Controllers
 [FromBody] RequestTbl Model
 )
         {
-            var Req = await _requestRepository.UpdateRequest4Async(Model);
-            if (Req == null)
+            if (!await _requestRepository.RequestExistsAsync(Model.RequestId))
             {
-                return BadRequest();
+                return NotFound();
             }
+            _requestRepository.UpdateRequest4Async(Model);
+
             return Ok();
 
         }
@@ -165,14 +169,21 @@ namespace Foreign_Trips.Controllers
 [FromBody] RequestTbl Model
 )
         {
-            var Req = await _requestRepository.UpdateRequest5Async(Model);
-            if (Req == null)
-            {
-                return BadRequest();
-            }
-            return Ok();
+
+                if (!await _requestRepository.RequestExistsAsync(Model.RequestId))
+                {
+                    return NotFound();
+                }
+                _requestRepository.UpdateRequest5Async(Model);
+
+                return Ok();
 
         }
+
+  
+
+        
+    
 
 
 
