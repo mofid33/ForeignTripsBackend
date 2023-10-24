@@ -131,7 +131,7 @@ namespace Foreign_Trips.Controllers
         {
             if (!await _agentRepository.AgentExistsAsync(Model.AgentId))
             {
-                return NotFound();
+                return NoContent();
             }
             _agentRepository.UpdateAgentAsync(Model);
 
@@ -262,7 +262,7 @@ namespace Foreign_Trips.Controllers
         {
             if (!await _requestRepository.RequestExistsAsync(Model.RequestId))
             {
-                return NotFound();
+                return NoContent();
             }
             _requestRepository.UpdateRequest3Async(Model);
 
@@ -278,7 +278,7 @@ namespace Foreign_Trips.Controllers
         {
             if (!await _requestRepository.RequestExistsAsync(Model.RequestId))
             {
-                return NotFound();
+                return NoContent();
             }
             _requestRepository.UpdateRequest4Async(Model);
 
@@ -295,7 +295,7 @@ namespace Foreign_Trips.Controllers
 
             if (!await _requestRepository.RequestExistsAsync(Model.RequestId))
             {
-                return NotFound();
+                return NoContent();
             }
             _requestRepository.UpdateRequest5Async(Model);
 

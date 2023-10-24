@@ -91,7 +91,7 @@ namespace Foreign_Trips.Controllers
         {
             if (!await _internationalexpertRepository.InternationalExpertExistsAsync(Model.InternationalExpertId))
             {
-                return NotFound();
+                return NoContent();
             }
             var Inter = await _internationalexpertRepository.UpdateInternationalExpert(Model);
             if (Inter == null)

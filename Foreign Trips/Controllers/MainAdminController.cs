@@ -97,7 +97,7 @@ namespace Foreign_Trips.Controllers
         {
             if (!await _mainadminRepository.MainAdminExistsAsync(Model.MainAdminId))
             {
-                return NotFound();
+                return NoContent();
             }
             _mainadminRepository.UpdateMainAdminAsync(Model);
 
@@ -144,7 +144,7 @@ namespace Foreign_Trips.Controllers
         {
             if (!await _agentRepository.AgentExistsAsync(Model.AgentId))
             {
-                return NotFound();
+                return NoContent();
             }
             _agentRepository.UpdateAgentAsync(Model);
 

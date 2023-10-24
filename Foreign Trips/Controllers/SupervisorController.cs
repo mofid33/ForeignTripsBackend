@@ -78,7 +78,7 @@ namespace Foreign_Trips.Controllers
         {
             if (!await _supervisorRepository.SupervisorExistsAsync(Model.SupervisorId))
             {
-                return NotFound();
+                return NoContent();
             }
             _supervisorRepository.UpdateSupervisorAsync(Model);
 

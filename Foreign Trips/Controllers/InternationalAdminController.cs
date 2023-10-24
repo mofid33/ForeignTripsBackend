@@ -89,7 +89,7 @@ namespace Foreign_Trips.Controllers
         {
             if (!await _internationaladminRepository.AdminExistsAsync(Model.AdminId))
             {
-                return NotFound();
+                return NoContent();
             }
             _internationaladminRepository.UpdateAdmin(Model);
 
@@ -227,7 +227,7 @@ namespace Foreign_Trips.Controllers
         {
             if (!await _internationalexpertRepository.InternationalExpertExistsAsync(Model.InternationalExpertId))
             {
-                return NotFound();
+                return NoContent();
             }
             var Inter = await _internationalexpertRepository.UpdateInternationalExpert(Model);
             if (Inter == null)
