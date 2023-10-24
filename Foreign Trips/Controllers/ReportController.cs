@@ -87,7 +87,7 @@ namespace Foreign_Trips.Controllers
         {
             if (!await _reportRepository.ReportExistsAsync(Model.ReportId))
             {
-                return NotFound();
+                return NoContent();
             }
             var Rep = await _reportRepository.UpdateReport(Model);
             if (Rep == null)

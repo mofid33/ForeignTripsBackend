@@ -89,13 +89,10 @@ namespace Foreign_Trips.Controllers
         {
             if (!await _internationaladminRepository.AdminExistsAsync(Model.AdminId))
             {
-                return NotFound();
+                return NoContent();
             }
-            var EAgent = await _internationaladminRepository.UpdateAdmin(Model);
-            if (EAgent == null)
-            {
-                return BadRequest();
-            }
+            _internationaladminRepository.UpdateAdmin(Model);
+
             return Ok();
         }
 
@@ -230,7 +227,7 @@ namespace Foreign_Trips.Controllers
         {
             if (!await _internationalexpertRepository.InternationalExpertExistsAsync(Model.InternationalExpertId))
             {
-                return NotFound();
+                return NoContent();
             }
             var Inter = await _internationalexpertRepository.UpdateInternationalExpert(Model);
             if (Inter == null)
@@ -322,11 +319,12 @@ namespace Foreign_Trips.Controllers
 [FromBody] AgentTbl Model
 )
         {
-            var agent = await _agentRepository.UpdateAgentAsync(Model);
-            if (agent == null)
+            if (!await _agentRepository.AgentExistsAsync(Model.AgentId))
             {
-                return BadRequest();
+                return NotFound();
             }
+            _agentRepository.UpdateAgentAsync(Model);
+
             return Ok();
 
         }
