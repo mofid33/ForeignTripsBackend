@@ -129,13 +129,14 @@ namespace Foreign_Trips.Controllers
 [FromBody] AgentTbl Model
 )
         {
-            var agent = await _agentRepository.UpdateAgentAsync(Model);
-            if (agent == null)
+            if (!await _agentRepository.AgentExistsAsync(Model.AgentId))
             {
-                return BadRequest();
+                return NotFound();
             }
-            return Ok();
+            _agentRepository.UpdateAgentAsync(Model);
 
+            return Ok();
+        
         }
 
 
@@ -242,11 +243,13 @@ namespace Foreign_Trips.Controllers
 [FromBody] RequestEmployeeTbl Model
 )
         {
-            var Req = await _requestRepository.InsertRequestEmployeeAsync(Model);
-            if (Req == null)
+
+            if (!await _requestRepository.RequestExistsAsync(Model.RequestId))
             {
-                return BadRequest();
+                return NotFound();
             }
+            _requestRepository.InsertRequestEmployeeAsync(Model);
+
             return Ok();
 
         }
@@ -257,11 +260,12 @@ namespace Foreign_Trips.Controllers
 [FromBody] RequestTbl Model
 )
         {
-            var Req = await _requestRepository.UpdateRequest3Async(Model);
-            if (Req == null)
+            if (!await _requestRepository.RequestExistsAsync(Model.RequestId))
             {
-                return BadRequest();
+                return NotFound();
             }
+            _requestRepository.UpdateRequest3Async(Model);
+
             return Ok();
 
         }
@@ -272,11 +276,29 @@ namespace Foreign_Trips.Controllers
 [FromBody] RequestTbl Model
 )
         {
-            var Req = await _requestRepository.UpdateRequest4Async(Model);
-            if (Req == null)
+            if (!await _requestRepository.RequestExistsAsync(Model.RequestId))
             {
-                return BadRequest();
+                return NotFound();
             }
+            _requestRepository.UpdateRequest4Async(Model);
+
+            return Ok();
+
+        }
+
+        [HttpPost]
+        [Route("UpdateRequest5")]
+        public async Task<ActionResult<RequestTbl>> UpdateRequest5Async(
+[FromBody] RequestTbl Model
+)
+        {
+
+            if (!await _requestRepository.RequestExistsAsync(Model.RequestId))
+            {
+                return NotFound();
+            }
+            _requestRepository.UpdateRequest5Async(Model);
+
             return Ok();
 
         }

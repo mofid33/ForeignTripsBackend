@@ -91,11 +91,8 @@ namespace Foreign_Trips.Controllers
             {
                 return NotFound();
             }
-            var EAgent = await _internationaladminRepository.UpdateAdmin(Model);
-            if (EAgent == null)
-            {
-                return BadRequest();
-            }
+            _internationaladminRepository.UpdateAdmin(Model);
+
             return Ok();
         }
 
@@ -322,11 +319,12 @@ namespace Foreign_Trips.Controllers
 [FromBody] AgentTbl Model
 )
         {
-            var agent = await _agentRepository.UpdateAgentAsync(Model);
-            if (agent == null)
+            if (!await _agentRepository.AgentExistsAsync(Model.AgentId))
             {
-                return BadRequest();
+                return NotFound();
             }
+            _agentRepository.UpdateAgentAsync(Model);
+
             return Ok();
 
         }

@@ -76,12 +76,13 @@ namespace Foreign_Trips.Controllers
 [FromBody] SupervisorTbl Model
 )
         {
-            var sup = await _supervisorRepository.UpdateSupervisorAsync(Model);
-            if (sup == null)
+            if (!await _supervisorRepository.SupervisorExistsAsync(Model.SupervisorId))
             {
-                return BadRequest();
+                return NotFound();
             }
-            return Ok();
+            _supervisorRepository.UpdateSupervisorAsync(Model);
+
+            return Ok(); ;
 
         }
 

@@ -95,11 +95,12 @@ namespace Foreign_Trips.Controllers
 [FromBody] MainAdminTbl Model
 )
         {
-            var mainadmin = await _mainadminRepository.UpdateMainAdminAsync(Model);
-            if (mainadmin == null)
+            if (!await _mainadminRepository.MainAdminExistsAsync(Model.MainAdminId))
             {
-                return BadRequest();
+                return NotFound();
             }
+            _mainadminRepository.UpdateMainAdminAsync(Model);
+
             return Ok();
 
         }
@@ -141,11 +142,12 @@ namespace Foreign_Trips.Controllers
 [FromBody] AgentTbl Model
 )
         {
-            var agent = await _agentRepository.UpdateAgentAsync(Model);
-            if (agent == null)
+            if (!await _agentRepository.AgentExistsAsync(Model.AgentId))
             {
-                return BadRequest();
+                return NotFound();
             }
+            _agentRepository.UpdateAgentAsync(Model);
+
             return Ok();
 
         }

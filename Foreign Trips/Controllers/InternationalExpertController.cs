@@ -360,7 +360,6 @@ namespace Foreign_Trips.Controllers
         }
         #endregion
 
-
         #region Admin
 
         [HttpGet]
