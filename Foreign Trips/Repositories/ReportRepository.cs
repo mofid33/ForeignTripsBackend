@@ -57,6 +57,8 @@ namespace Foreign_Trips.Repositories
                 return await _context.ReportTbl
                  .Include(c => c.Request.Agent)
                  .Include(x => x.Request)
+                 .Include(x => x.Request.City)
+                 .Include(x => x.Request.City.Country)
 
 
 
