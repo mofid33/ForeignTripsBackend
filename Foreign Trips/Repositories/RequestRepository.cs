@@ -31,6 +31,8 @@ namespace Foreign_Trips.Repositories
                  .Include(c => c.TravelType)
                  .Include(c => c.TypeAccommodation)
                  .Include(c => c.TollAmount)
+                 .Include(c => c.City)
+                 .Include(c => c.City.Country)
                  .ToListAsync();
             }
             catch (System.Exception ex)

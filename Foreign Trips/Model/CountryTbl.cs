@@ -12,4 +12,6 @@ public partial class CountryTbl
     public int CountryId { get; set; }
 
     public string? CountryName { get; set; }
+
+    public virtual ICollection<CityTbl> CityTbls { get; set; } = new List<CityTbl>();
 }
