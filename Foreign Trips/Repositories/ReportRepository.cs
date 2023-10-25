@@ -78,8 +78,8 @@ namespace Foreign_Trips.Repositories
                 data.RequestId = report.RequestId;
                 //data.ReportStatusId = report.ReportStatusId;
                 //data.RequestDateNumber = report.RequestDateNumber;
-                //data.LicenseNumber = report.LicenseNumber;
-                //data.LicenseDate = report.LicenseDate;
+                data.LicenseNumber = report.LicenseNumber;
+                data.LicenseDate = report.LicenseDate;
                 //data.Period = report.Period;    
                 //data.EmailExternalDevice = report.EmailExternalDevice;
                 //data.EmailInternalDevice = report.EmailInternalDevice;
