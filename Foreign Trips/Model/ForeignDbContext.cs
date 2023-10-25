@@ -197,6 +197,11 @@ public partial class ForeignDbContext : DbContext
             entity.Property(e => e.CityId).HasColumnName("CityID");
             entity.Property(e => e.CityName).HasMaxLength(250);
             entity.Property(e => e.CountryId).HasColumnName("CountryID");
+
+            entity.HasOne(d => d.Country).WithMany(p => p.CityTbls)
+                .HasForeignKey(d => d.CountryId)
+                .OnDelete(DeleteBehavior.Cascade)
+                .HasConstraintName("FK_CityTbl_CountryTbl");
         });
 
         modelBuilder.Entity<CountryTbl>(entity =>
