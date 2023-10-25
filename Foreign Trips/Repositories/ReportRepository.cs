@@ -94,6 +94,12 @@ namespace Foreign_Trips.Repositories
 
 
                 await _context.SaveChangesAsync();
+
+                var req = await _context.RequestTbl.Where(c => c.RequestId == report.RequestId).FirstOrDefaultAsync();
+                req.RequestStatusId = 6;
+                await _context.SaveChangesAsync();
+
+
                 return report;
 
             }
