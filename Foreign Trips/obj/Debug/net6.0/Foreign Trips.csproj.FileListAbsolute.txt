@@ -206,3 +206,10 @@ F:\Visual stadio\Foreign Trips\Foreign Trips\obj\Debug\net6.0\refint\Foreign Tri
 F:\Visual stadio\Foreign Trips\Foreign Trips\obj\Debug\net6.0\Foreign Trips.pdb
 F:\Visual stadio\Foreign Trips\Foreign Trips\obj\Debug\net6.0\Foreign Trips.genruntimeconfig.cache
 F:\Visual stadio\Foreign Trips\Foreign Trips\obj\Debug\net6.0\ref\Foreign Trips.dll
+F:\Visual stadio\Foreign Trips\Foreign Trips\bin\Debug\net6.0\NOTICE.TXT
+F:\Visual stadio\Foreign Trips\Foreign Trips\bin\Debug\net6.0\Foreign Trips.staticwebassets.runtime.json
+F:\Visual stadio\Foreign Trips\Foreign Trips\bin\Debug\net6.0\NPOI.OOXML.dll
+F:\Visual stadio\Foreign Trips\Foreign Trips\bin\Debug\net6.0\NPOI.dll
+F:\Visual stadio\Foreign Trips\Foreign Trips\bin\Debug\net6.0\NPOI.OpenXml4Net.dll
+F:\Visual stadio\Foreign Trips\Foreign Trips\bin\Debug\net6.0\NPOI.OpenXmlFormats.dll
+F:\Visual stadio\Foreign Trips\Foreign Trips\bin\Debug\net6.0\ICSharpCode.SharpZipLib.dll

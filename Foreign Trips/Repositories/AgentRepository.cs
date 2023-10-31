@@ -10,6 +10,11 @@ using System.Text;
 using System;
 using System.Reflection.Metadata.Ecma335;
 using Azure.Core;
+using Foreign_Trips.Utility;
+using ShenaseMeliBac.Profiles;
+using AutoMapper;
+using NPOI.SS.Formula.Functions;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace Foreign_Trips.Repositories
 {
@@ -17,10 +22,13 @@ namespace Foreign_Trips.Repositories
     {
         private readonly AgentDbContext _context;
         private readonly Microsoft.AspNetCore.Hosting.IHostingEnvironment _hostingEnvironment;
-        public AgentRepository(AgentDbContext context, Microsoft.AspNetCore.Hosting.IHostingEnvironment hostingEnvironment)
+        private readonly IMapper _mapper;
+
+        public AgentRepository(AgentDbContext context, Microsoft.AspNetCore.Hosting.IHostingEnvironment hostingEnvironment, IMapper mapper)
         {
             _context = context ?? throw new ArgumentException(nameof(context));
             _hostingEnvironment = hostingEnvironment ?? throw new ArgumentNullException(nameof(hostingEnvironment));
+            _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
 
         public async Task<bool> AgentExistsAsync(long agentId)
@@ -83,18 +91,25 @@ namespace Foreign_Trips.Repositories
             }
 
         }
-        public async Task<IEnumerable<AgentTbl>> GetAgent()
+        public async Task<AgentPageDto> GetAgent(int page)
         {
             try
             {
+                var agents= await _context.AgentTbl
+                .Include(t => t.Position)
+                .Include(t => t.AgentStatus)
+                .Include(t => t.LoginTbls)
+                .Include(t => t.City)
 
-                return await _context.AgentTbl
-                    .Include(t=>t.Position)
-                    .Include(t=>t.AgentStatus)
-                    .Include(t=>t.LoginTbls)
-                    .Include(t=>t.City)
 
                     .ToListAsync();
+                var ss= await PaginatedList<AgentTbl>.CreateAsync(agents, page);
+                return new AgentPageDto
+                {
+                    Count = agents.Count(),
+                    Data = ss
+
+                };
             }
             catch (System.Exception ex)
             {

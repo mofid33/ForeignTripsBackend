@@ -8,6 +8,7 @@ namespace Foreign_Trips.Entities
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int AgentId { get; set; }
+        public int TotalPages { get; set; }
 
         public int? CityId { get; set; }
 
