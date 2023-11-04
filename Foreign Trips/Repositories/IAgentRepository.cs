@@ -1,11 +1,12 @@
 ﻿using Foreign_Trips.Entities;
 using Foreign_Trips.Model;
+using Foreign_Trips.Utility;
 
 namespace Foreign_Trips.Repositories
 {
     public interface IAgentRepository
     {
-        Task<IEnumerable<AgentTbl>> GetAgent();
+        Task<AgentPageDto> GetAgent(int page);
         Task<IEnumerable<SubCategoryTbl>> GetSubCategory();
         Task<IEnumerable<PositionTypeTbl>> GetPosition();
         Task<IEnumerable<TypeOfEmploymentTbl>> GetTypeEmployment();

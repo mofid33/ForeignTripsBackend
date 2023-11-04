@@ -272,7 +272,7 @@ namespace Foreign_Trips.Controllers
         [Route("GetAgents")]
         public async Task<ActionResult<IEnumerable<AgentTbl>>> GetAgents()
         {
-            var Agents = await _agentRepository.GetAgent();
+            var Agents = await _agentRepository.GetAgent(1);
 
             return Ok(
                 Agents
@@ -557,6 +557,37 @@ namespace Foreign_Trips.Controllers
                 throw;
             }
         }
+        #endregion
+
+        #region Excel
+        [HttpGet]
+        [Route("GetExcel")]
+        public async Task<ActionResult<LoginTbl>> GetExcel()
+        {
+
+            var path = await _internationaladminRepository.GetExcelAgent();
+            if (path == null)
+            {
+                return BadRequest();
+            }
+
+            return Ok(path);
+        }
+
+        //[HttpPost]
+        //[Route("GetExcelLogin")]
+        //public async Task<ActionResult<LoginTbl>> GetExcelLogin([FromBody] LoginTbl Model)
+        //{
+
+        //    var path = await _internationaladminRepository.GetExcelLogin(Model);
+        //    if (path == null)
+        //    {
+        //        return BadRequest();
+        //    }
+
+        //    return Ok(path);
+        //}
+
         #endregion
 
 
