@@ -107,13 +107,15 @@ namespace Foreign_Trips.Controllers
 
         #region Agent
 
+
         [HttpGet]
         [Route("GetAgents")]
-        public async Task<ActionResult<IEnumerable<AgentTbl>>> GetAgents()
+        public async Task<ActionResult<IEnumerable<AgentTbl>>> GetAgents([FromQuery(Name = "page")] int page)
         {
-            var Agents = await _agentRepository.GetAgent(1);
+            var Agents = await _agentRepository.GetAgent(page == 0 ? 1 : page);
 
             return Ok(
+                //_mapper.Map<IEnumerable<AgentTbl>>(Agents)
                 Agents
                 );
         }
