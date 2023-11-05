@@ -31,9 +31,9 @@ namespace Foreign_Trips.Controllers
 
         [HttpGet]
         [Route("GetSupervisor")]
-        public async Task<ActionResult<IEnumerable<SupervisorTbl>>> GetSupervisor()
+        public async Task<ActionResult<IEnumerable<SupervisorTbl>>> GetSupervisor([FromQuery(Name = "page")] int page, [FromQuery(Name = "pageSize")] int pageSize, string search)
         {
-            var sup = await _supervisorRepository.GetSupervisor();
+            var sup = await _supervisorRepository.GetSupervisor(page == 0 ? 1 : page, pageSize == 0 ? 10 : pageSize, search);
 
             return Ok(
                 sup

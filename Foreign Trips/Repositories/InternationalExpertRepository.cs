@@ -1,7 +1,9 @@
 ﻿using Foreign_Trips.DbContexts;
 using Foreign_Trips.Entities;
 using Foreign_Trips.Model;
+using Foreign_Trips.Utility;
 using Microsoft.EntityFrameworkCore;
+using ShenaseMeliBac.Profiles;
 
 namespace Foreign_Trips.Repositories
 {
@@ -17,11 +19,20 @@ namespace Foreign_Trips.Repositories
             _hostingEnvironment = hostingEnvironment ??
              throw new ArgumentNullException(nameof(hostingEnvironment));
         }
-        public async Task<IEnumerable<InternationalExpertTbl?>> GetInternationalExpert()
+        public async Task<InternationalExpertPageDto> GetInternationalExpert(int page, int pageSize, string search)
         {
             try
             {
-                return await _context.InternationalExpertTbl.ToListAsync();
+                var Intexp = await _context.InternationalExpertTbl
+                .Where(t => (search != "" && search != null) ? (t.InternationalExpertName == search || t.InternationalExpertFamily == search) : t.InternationalExpertName != null).ToListAsync();
+
+                 var ss = await PaginatedList<InternationalExpertTbl>.CreateAsync(Intexp, page, pageSize);
+                return new AgentPageDto
+                {
+                    Count = Intexp.Count(),
+                    Data = ss
+
+                };
             }
             catch (System.Exception ex)
             {

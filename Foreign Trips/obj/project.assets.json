@@ -4755,6 +4755,15 @@
   },
   "logs": [
     {
+<<<<<<< HEAD
+=======
+      "code": "Undefined",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Problem reading the cache file F:\\Visual stadio\\Foreign Trips\\Foreign Trips\\obj\\project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
+    },
+    {
+>>>>>>> dc3bab74f48365c66be53b1765d369dd32450907
       "code": "NU1701",
       "level": "Warning",
       "warningLevel": 1,

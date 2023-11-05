@@ -2,10 +2,12 @@
 using Foreign_Trips.DbContexts;
 using Foreign_Trips.Entities;
 using Foreign_Trips.Model;
+using Foreign_Trips.Utility;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting.Internal;
 using Microsoft.Extensions.Logging;
+using ShenaseMeliBac.Profiles;
 
 namespace Foreign_Trips.Repositories
 {
@@ -20,11 +22,11 @@ namespace Foreign_Trips.Repositories
 
         }
 
-        public async Task<IEnumerable<RequestTbl?>> GetRequest()
+        public async Task<RequestPageDto> GetRequest(int page, int pageSize, string search)
         {
             try
             {
-                return await _context.RequestTbl
+                  var request = await _context.RequestTbl
                  .Include(c => c.Agent)
                  .Include(c => c.RequestStatus)
                  .Include(c => c.InternationalExpert)
@@ -33,7 +35,16 @@ namespace Foreign_Trips.Repositories
                  .Include(c => c.TollAmount)
                  .Include(c => c.City)
                  .Include(c => c.City.Country)
+                 .Where(t => (search != "" && search != null) ? (t.Agent.AgentName == search || t.Agent.AgentFamily == search) : t.Agent.AgentName != null)
                  .ToListAsync();
+
+                var ss = await PaginatedList<RequestTbl>.CreateAsync(request, page, pageSize);
+                return new RequestPageDto
+                {
+                    Count = request.Count(),
+                    Data = ss
+
+                };
             }
             catch (System.Exception ex)
             {
@@ -244,9 +255,18 @@ namespace Foreign_Trips.Repositories
 
         public async Task<RequestEmployeeTbl?> InsertRequestEmployeeAsync(RequestEmployeeTbl requestemployee)
         {
-            await _context.RequestEmployeeTbl.AddAsync(requestemployee);
-            await _context.SaveChangesAsync();
-            return requestemployee;
+            try
+            {
+                await _context.RequestEmployeeTbl.AddAsync(requestemployee);
+                await _context.SaveChangesAsync();
+                return requestemployee;
+            }
+            catch (System.Exception ex)
+            {
+                return null;
+
+            }
+
         }
 
 
@@ -349,7 +369,7 @@ namespace Foreign_Trips.Repositories
                 await _context.SaveChangesAsync();
 
 
-                return qtbl;
+                return request;
 
 
             }
@@ -439,7 +459,7 @@ namespace Foreign_Trips.Repositories
                 data.RequestStatusId = 3;
                 data.RejectRequest = request.RejectRequest;
                 await _context.SaveChangesAsync();
-                return data;
+                return request;
 
 
             }
@@ -477,7 +497,7 @@ namespace Foreign_Trips.Repositories
                 var data = await GetNewRequest(request.RequestId);
                 data.RequestStatusId = 8;
                 await _context.SaveChangesAsync();
-                return data;
+                return request;
 
 
             }
@@ -519,7 +539,7 @@ namespace Foreign_Trips.Repositories
                 data.RejectRequest = request.RejectRequest;
                 data.AdminId = request.AdminId;
                 await _context.SaveChangesAsync();
-                return data;
+                return request;
 
 
             }
@@ -561,7 +581,7 @@ namespace Foreign_Trips.Repositories
                 data.MainAdminId = request.MainAdminId;
                 data.RejectRequest = request.RejectRequest;
                 await _context.SaveChangesAsync();
-                return data;
+                return request;
 
 
             }

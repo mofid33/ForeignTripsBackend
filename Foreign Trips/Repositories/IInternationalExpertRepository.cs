@@ -6,7 +6,7 @@ namespace Foreign_Trips.Repositories
     public interface IInternationalExpertRepository
     {
         Task<bool> InternationalExpertExistsAsync(int internationalexpertId);
-        Task<IEnumerable<InternationalExpertTbl?>> GetInternationalExpert();
+        Task<InternationalExpertPageDto> GetInternationalExpert(int page, int pageSize, string search);
         Task<InternationalExpertTbl?> GetInternationalExpertAsync(int internationalExpertId);
         Task<InternationalExpertDto> InsertInternationalExpert(InternationalExpertDto internationalexpert);
         Task<InternationalExpertTbl?> UpdateInternationalExpert(InternationalExpertTbl internationalexpert);

@@ -34,6 +34,7 @@ namespace Foreign_Trips.Controllers
         [Route("GetAgents")]
 
         public async Task<ActionResult<IEnumerable<AgentTbl>>> GetAgents([FromQuery(Name = "page")] int page, [FromQuery(Name = "pageSize")]int pageSize, String search)
+
         {
             var Agents = await _agentRepository.GetAgent(page==0?1:page , pageSize == 0 ? 10 : pageSize , search);
 
@@ -157,16 +158,18 @@ namespace Foreign_Trips.Controllers
 
         #region Request
 
+
         [HttpGet]
         [Route("GetRequests")]
-        public async Task<ActionResult<IEnumerable<RequestTbl>>> GetRequest()
+        public async Task<ActionResult<IEnumerable<RequestTbl>>> GetRequest([FromQuery(Name = "page")] int page, [FromQuery(Name = "pageSize")] int pageSize, string search)
         {
-            var Requests = await _requestRepository.GetRequest();
+            var Requests = await _requestRepository.GetRequest(page == 0 ? 1 : page, pageSize == 0 ? 10 : pageSize, search);
 
             return Ok(
                 Requests
                 );
         }
+
         [HttpGet]
         [Route("GetRequestsAgent")]
         public async Task<ActionResult<RequestEmployeeTbl>> GetRequestsAgent()
