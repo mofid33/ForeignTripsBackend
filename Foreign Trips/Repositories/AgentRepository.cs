@@ -91,7 +91,7 @@ namespace Foreign_Trips.Repositories
             }
 
         }
-        public async Task<AgentPageDto> GetAgent(int page, int pagesize, String search)
+        public async Task<AgentPageDto> GetAgent(int page, int pagesize, string search)
         {
             try
             {

@@ -6,7 +6,7 @@ namespace Foreign_Trips.Repositories
 {
     public interface IAgentRepository
     {
-        Task<AgentPageDto> GetAgent(int page,int pageSize,String search);
+        Task<AgentPageDto> GetAgent(int page,int pageSize,string search);
         Task<IEnumerable<SubCategoryTbl>> GetSubCategory();
         Task<IEnumerable<PositionTypeTbl>> GetPosition();
         Task<IEnumerable<TypeOfEmploymentTbl>> GetTypeEmployment();
