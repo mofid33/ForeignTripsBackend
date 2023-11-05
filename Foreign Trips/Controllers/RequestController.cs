@@ -28,9 +28,9 @@ namespace Foreign_Trips.Controllers
 
         [HttpGet]
         [Route("GetRequests")]
-        public async Task<ActionResult<IEnumerable<RequestTbl>>> GetRequest()
+        public async Task<ActionResult<IEnumerable<RequestTbl>>> GetRequest([FromQuery(Name = "page")] int page, [FromQuery(Name = "pageSize")] int pageSize, string search)
         {
-            var Requests = await _requestRepository.GetRequest();
+            var Requests = await _requestRepository.GetRequest(page == 0 ? 1 : page, pageSize == 0 ? 10 : pageSize, search);
 
             return Ok(
                 Requests

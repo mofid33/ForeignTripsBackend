@@ -6,7 +6,7 @@ namespace Foreign_Trips.Repositories
     public interface ISupervisorRepository
     {
         Task<bool> SupervisorExistsAsync(int supervisorId);
-        Task<IEnumerable<SupervisorTbl?>> GetSupervisor();
+        Task<SupervisorPageDto> GetSupervisor(int page, int pageSize, string search);
         Task<SupervisorTbl?> GetSupervisorAsync(int supervisorId);
         Task<SupervisorDto> InsertSupervisor(SupervisorDto supervisor);
         Task<SupervisorTbl?> UpdateSupervisorAsync(SupervisorTbl supervisor);

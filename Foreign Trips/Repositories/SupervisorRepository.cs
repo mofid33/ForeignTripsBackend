@@ -2,9 +2,11 @@
 using Foreign_Trips.DbContexts;
 using Foreign_Trips.Entities;
 using Foreign_Trips.Model;
+using Foreign_Trips.Utility;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using ShenaseMeliBac.Profiles;
 
 namespace Foreign_Trips.Repositories
 {
@@ -24,11 +26,21 @@ namespace Foreign_Trips.Repositories
         }
        
 
-        public async Task<IEnumerable<SupervisorTbl?>> GetSupervisor()
+        public async Task<SupervisorPageDto> GetSupervisor(int page, int pageSize, string search)
         {
             try
             {
-                return await _context.SupervisorTbl.ToListAsync();
+                    var sup = await _context.SupervisorTbl
+                    .Where(t => (search != "" && search != null) ? (t.SupervisorName == search || t.SupervisorFamily == search) : t.SupervisorName != null)
+                    .ToListAsync();
+
+                var ss = await PaginatedList<SupervisorTbl>.CreateAsync(sup, page, pageSize);
+                return new SupervisorPageDto
+                {
+                    Count = sup.Count(),
+                    Data = ss
+
+                };
             }
             catch (System.Exception ex)
             {

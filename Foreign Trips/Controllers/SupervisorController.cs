@@ -31,9 +31,9 @@ namespace Foreign_Trips.Controllers
 
         [HttpGet]
         [Route("GetSupervisor")]
-        public async Task<ActionResult<IEnumerable<SupervisorTbl>>> GetSupervisor()
+        public async Task<ActionResult<IEnumerable<SupervisorTbl>>> GetSupervisor([FromQuery(Name = "page")] int page, [FromQuery(Name = "pageSize")] int pageSize, string search)
         {
-            var sup = await _supervisorRepository.GetSupervisor();
+            var sup = await _supervisorRepository.GetSupervisor(page == 0 ? 1 : page, pageSize == 0 ? 10 : pageSize, search);
 
             return Ok(
                 sup
@@ -107,15 +107,9 @@ namespace Foreign_Trips.Controllers
 
         [HttpGet]
         [Route("GetAgents")]
-<<<<<<< HEAD
-        public async Task<ActionResult<IEnumerable<AgentTbl>>> GetAgents([FromQuery(Name = "page")] int page, [FromQuery(Name = "pageSize")] int pageSize)
-        {
-            var Agents = await _agentRepository.GetAgent(page == 0 ? 1 : page, pageSize == 0 ? 10 : pageSize);
-=======
         public async Task<ActionResult<IEnumerable<AgentTbl>>> GetAgents([FromQuery(Name = "page")] int page, [FromQuery(Name = "pageSize")] int pageSize, String search)
         {
             var Agents = await _agentRepository.GetAgent(page == 0 ? 1 : page, pageSize == 0 ? 10 : pageSize, search);
->>>>>>> 52a58f6295f6e8d3bf78cb21e0117d2231ae27ed
 
             return Ok(
                 //_mapper.Map<IEnumerable<AgentTbl>>(Agents)

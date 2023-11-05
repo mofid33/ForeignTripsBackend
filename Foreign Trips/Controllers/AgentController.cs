@@ -32,15 +32,10 @@ namespace Foreign_Trips.Controllers
 
         [HttpGet]
         [Route("GetAgents")]
-<<<<<<< HEAD
-        public async Task<ActionResult<IEnumerable<AgentTbl>>> GetAgents([FromQuery(Name = "page")] int page, [FromQuery(Name = "pageSize")] int pageSize)
-        {
-            var Agents = await _agentRepository.GetAgent(page == 0 ? 1 : page, pageSize == 0 ? 10 : pageSize);
-=======
-        public async Task<ActionResult<IEnumerable<AgentTbl>>> GetAgents([FromQuery(Name = "page")] int page, [FromQuery(Name = "pageSize")]int pageSize, String search)
+
+        public async Task<ActionResult<IEnumerable<AgentTbl>>> GetAgents([FromQuery(Name = "page")] int page, [FromQuery(Name = "pageSize")]int pageSize, string search)
         {
             var Agents = await _agentRepository.GetAgent(page==0?1:page , pageSize == 0 ? 10 : pageSize , search);
->>>>>>> 52a58f6295f6e8d3bf78cb21e0117d2231ae27ed
 
             return Ok(
                 //_mapper.Map<IEnumerable<AgentTbl>>(Agents)
@@ -162,16 +157,18 @@ namespace Foreign_Trips.Controllers
 
         #region Request
 
+
         [HttpGet]
         [Route("GetRequests")]
-        public async Task<ActionResult<IEnumerable<RequestTbl>>> GetRequest()
+        public async Task<ActionResult<IEnumerable<RequestTbl>>> GetRequest([FromQuery(Name = "page")] int page, [FromQuery(Name = "pageSize")] int pageSize, string search)
         {
-            var Requests = await _requestRepository.GetRequest();
+            var Requests = await _requestRepository.GetRequest(page == 0 ? 1 : page, pageSize == 0 ? 10 : pageSize, search);
 
             return Ok(
                 Requests
                 );
         }
+
         [HttpGet]
         [Route("GetRequestsAgent")]
         public async Task<ActionResult<RequestEmployeeTbl>> GetRequestsAgent()

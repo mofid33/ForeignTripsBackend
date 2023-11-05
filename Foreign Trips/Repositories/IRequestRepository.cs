@@ -5,7 +5,7 @@ namespace Foreign_Trips.Repositories
 {
     public interface IRequestRepository
     {
-        Task<IEnumerable<RequestTbl?>> GetRequest();
+        Task<RequestPageDto> GetRequest(int page, int pageSize, string search);
         Task<IEnumerable<AllListDto?>> GetAllList();
         Task<IEnumerable<RequestTbl?>> GetRequestsExpert(int ExpertId);
         Task<IEnumerable<RequestTbl?>> GetRequestsAdmin(int AdminId);
