@@ -319,7 +319,7 @@ namespace Foreign_Trips.Repositories
                 await _context.SaveChangesAsync();
 
 
-                return request;
+                return qtbl;
 
 
             }
@@ -349,7 +349,7 @@ namespace Foreign_Trips.Repositories
                 await _context.SaveChangesAsync();
 
 
-                return request;
+                return qtbl;
 
 
             }
@@ -439,7 +439,7 @@ namespace Foreign_Trips.Repositories
                 data.RequestStatusId = 3;
                 data.RejectRequest = request.RejectRequest;
                 await _context.SaveChangesAsync();
-                return request;
+                return data;
 
 
             }
@@ -477,7 +477,7 @@ namespace Foreign_Trips.Repositories
                 var data = await GetNewRequest(request.RequestId);
                 data.RequestStatusId = 8;
                 await _context.SaveChangesAsync();
-                return request;
+                return data;
 
 
             }
@@ -519,7 +519,7 @@ namespace Foreign_Trips.Repositories
                 data.RejectRequest = request.RejectRequest;
                 data.AdminId = request.AdminId;
                 await _context.SaveChangesAsync();
-                return request;
+                return data;
 
 
             }
@@ -561,7 +561,7 @@ namespace Foreign_Trips.Repositories
                 data.MainAdminId = request.MainAdminId;
                 data.RejectRequest = request.RejectRequest;
                 await _context.SaveChangesAsync();
-                return request;
+                return data;
 
 
             }
