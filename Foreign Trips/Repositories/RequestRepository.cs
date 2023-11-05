@@ -229,7 +229,7 @@ namespace Foreign_Trips.Repositories
                 await _context.RequestTbl.AddAsync(qtbl);
                 await _context.SaveChangesAsync();
 
-                return request;
+                return qtbl;
 
 
             }
@@ -289,7 +289,7 @@ namespace Foreign_Trips.Repositories
 
                 await _context.SaveChangesAsync();
 
-                return request;
+                return qtbl;
 
 
             }
