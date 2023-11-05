@@ -91,7 +91,7 @@ namespace Foreign_Trips.Repositories
             }
 
         }
-        public async Task<AgentPageDto> GetAgent(int page)
+        public async Task<AgentPageDto> GetAgent(int page,int pageSize)
         {
             try
             {
@@ -103,7 +103,7 @@ namespace Foreign_Trips.Repositories
 
 
                     .ToListAsync();
-                var ss= await PaginatedList<AgentTbl>.CreateAsync(agents, page);
+                var ss= await PaginatedList<AgentTbl>.CreateAsync(agents, page,pageSize);
                 return new AgentPageDto
                 {
                     Count = agents.Count(),
