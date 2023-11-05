@@ -4639,24 +4639,26 @@
     ]
   },
   "packageFolders": {
-    "/Users/amirhossein/.nuget/packages/": {}
+    "C:\\Users\\Sara\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/amirhossein/Projects/Foreign Trips/Foreign Trips/Foreign Trips.csproj",
+      "projectUniqueName": "F:\\Visual stadio\\Foreign Trips\\Foreign Trips\\Foreign Trips.csproj",
       "projectName": "Foreign Trips",
-      "projectPath": "/Users/amirhossein/Projects/Foreign Trips/Foreign Trips/Foreign Trips.csproj",
-      "packagesPath": "/Users/amirhossein/.nuget/packages/",
-      "outputPath": "/Users/amirhossein/Projects/Foreign Trips/Foreign Trips/obj/",
+      "projectPath": "F:\\Visual stadio\\Foreign Trips\\Foreign Trips\\Foreign Trips.csproj",
+      "packagesPath": "C:\\Users\\Sara\\.nuget\\packages\\",
+      "outputPath": "F:\\Visual stadio\\Foreign Trips\\Foreign Trips\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/Users/amirhossein/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\Sara\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net6.0"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -4749,11 +4751,17 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.202/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.201\\RuntimeIdentifierGraph.json"
       }
     }
   },
   "logs": [
+    {
+      "code": "Undefined",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Problem reading the cache file F:\\Visual stadio\\Foreign Trips\\Foreign Trips\\obj\\project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
+    },
     {
       "code": "NU1701",
       "level": "Warning",

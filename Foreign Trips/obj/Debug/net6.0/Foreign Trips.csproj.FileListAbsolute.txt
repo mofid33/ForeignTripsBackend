@@ -223,3 +223,13 @@ F:/Visual stadio/Foreign Trips/Foreign Trips/bin/Debug/net6.0/ICSharpCode.SharpZ
 /Users/amirhossein/Projects/Foreign Trips/Foreign Trips/bin/Debug/net6.0/NPOI.OpenXml4Net.dll
 /Users/amirhossein/Projects/Foreign Trips/Foreign Trips/bin/Debug/net6.0/NPOI.OpenXmlFormats.dll
 /Users/amirhossein/Projects/Foreign Trips/Foreign Trips/bin/Debug/net6.0/ICSharpCode.SharpZipLib.dll
+F:\Visual stadio\Foreign Trips\Foreign Trips\obj\Debug\net6.0\Foreign Trips.csproj.AssemblyReference.cache
+F:\Visual stadio\Foreign Trips\Foreign Trips\obj\Debug\net6.0\Foreign Trips.GeneratedMSBuildEditorConfig.editorconfig
+F:\Visual stadio\Foreign Trips\Foreign Trips\obj\Debug\net6.0\Foreign Trips.AssemblyInfoInputs.cache
+F:\Visual stadio\Foreign Trips\Foreign Trips\obj\Debug\net6.0\Foreign Trips.AssemblyInfo.cs
+F:\Visual stadio\Foreign Trips\Foreign Trips\obj\Debug\net6.0\Foreign Trips.csproj.CoreCompileInputs.cache
+F:\Visual stadio\Foreign Trips\Foreign Trips\obj\Debug\net6.0\Foreign Trips.MvcApplicationPartsAssemblyInfo.cs
+F:\Visual stadio\Foreign Trips\Foreign Trips\obj\Debug\net6.0\Foreign Trips.MvcApplicationPartsAssemblyInfo.cache
+F:\Visual stadio\Foreign Trips\Foreign Trips\obj\Debug\net6.0\Foreign Trips.dll
+F:\Visual stadio\Foreign Trips\Foreign Trips\obj\Debug\net6.0\refint\Foreign Trips.dll
+F:\Visual stadio\Foreign Trips\Foreign Trips\obj\Debug\net6.0\Foreign Trips.pdb
