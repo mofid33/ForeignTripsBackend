@@ -24,7 +24,7 @@ namespace Foreign_Trips.Repositories
             try
             {
                 var Intexp = await _context.InternationalExpertTbl
-                .Where(t => (search != "" && search != null) ? (t.InternationalExpertName == search || t.InternationalExpertFamily == search) : t.InternationalExpertName != null)
+                .Where(t => (search != "" && search != null) ? (t.InternationalExpertName == search || t.InternationalExpertFamily == search) : t.InternationalExpertName != null).ToListAsync();
 
                  var ss = await PaginatedList<InternationalExpertTbl>.CreateAsync(Intexp, page, pageSize);
                 return new AgentPageDto
