@@ -20,11 +20,11 @@ namespace Foreign_Trips.Utility
 
         public bool HasNextPage => PageIndex < TotalPages;
 
-        public static async Task<PaginatedList<T>> CreateAsync(IEnumerable<T> source, int pageIndex)
+        public static async Task<PaginatedList<T>> CreateAsync(IEnumerable<T> source, int pageIndex , int pagesize)
         {
             //var count = await source.CountAsync();
-            var items =  source.Skip((pageIndex - 1) * 10).Take(10).ToList();
-            return new PaginatedList<T>(items, source.Count(), pageIndex, 10);
+            var items =  source.Skip((pageIndex - 1) * pagesize).Take(pagesize).ToList();
+            return new PaginatedList<T>(items, source.Count(), pageIndex, pagesize);
         }
     }
 
