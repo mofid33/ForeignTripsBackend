@@ -33,9 +33,9 @@ namespace Foreign_Trips.Controllers
 
         [HttpGet]
         [Route("GetAgents")]
-        public async Task<ActionResult<IEnumerable<AgentTbl>>> GetAgents([FromQuery(Name = "page")] int page)
+        public async Task<ActionResult<IEnumerable<AgentTbl>>> GetAgents([FromQuery(Name = "page")] int page, [FromQuery(Name = "Search")]string search)
         {
-            var Agents = await _agentRepository.GetAgent(page==0?1:page);
+            var Agents = await _agentRepository.GetAgent(page==0?1:page ,search);
 
             return Ok(
                 //_mapper.Map<IEnumerable<AgentTbl>>(Agents)
@@ -121,8 +121,6 @@ namespace Foreign_Trips.Controllers
 
         }
 
-
-
         [HttpPost]
         [Route("UpdateAgnet")]
         public async Task<ActionResult<AgentTbl>> UpdateAgentAsync(
@@ -138,9 +136,6 @@ namespace Foreign_Trips.Controllers
             return Ok();
         
         }
-
-
-
 
         //[HttpPost]
         //[Route("DeleteAgent")]

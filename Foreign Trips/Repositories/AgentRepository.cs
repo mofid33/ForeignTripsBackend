@@ -91,7 +91,7 @@ namespace Foreign_Trips.Repositories
             }
 
         }
-        public async Task<AgentPageDto> GetAgent(int page)
+        public async Task<AgentPageDto> GetAgent(int page, string search)
         {
             try
             {
@@ -100,6 +100,7 @@ namespace Foreign_Trips.Repositories
                 .Include(t => t.AgentStatus)
                 .Include(t => t.LoginTbls)
                 .Include(t => t.City)
+                .Where(t=>(search!="")&&(t.AgentName==search||t.AgentFamily==search))
 
 
                     .ToListAsync();

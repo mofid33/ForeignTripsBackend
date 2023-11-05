@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "Vaq2cUC2QNkJR7yVO0OOUjD3CkptPjpTbpU0aVBeHUQ=",
+  "Hash": "LRk5191WwUKvk/nMOKGD5E7u/qeicfTQnqU1Ve3Bvnk=",
   "Source": "Foreign Trips",
   "BasePath": "_content/Foreign Trips",
   "Mode": "Default",
@@ -16,23 +16,6 @@
     }
   ],
   "Assets": [
-    {
-      "Identity": "F:\\Visual stadio\\Foreign Trips\\Foreign Trips\\wwwroot\\uploads\\~$Agents.xlsx",
-      "SourceId": "Foreign Trips",
-      "SourceType": "Discovered",
-      "ContentRoot": "F:\\Visual stadio\\Foreign Trips\\Foreign Trips\\wwwroot\\",
-      "BasePath": "_content/Foreign Trips",
-      "RelativePath": "uploads/~$Agents.xlsx",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\uploads\\~$Agents.xlsx"
-    },
     {
       "Identity": "F:\\Visual stadio\\Foreign Trips\\Foreign Trips\\wwwroot\\uploads\\Agents.xlsx",
       "SourceId": "Foreign Trips",

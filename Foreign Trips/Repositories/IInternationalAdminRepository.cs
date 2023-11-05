@@ -11,8 +11,9 @@ namespace Foreign_Trips.Repositories
         Task<InternationalAdminTbl?> UpdateAdmin(InternationalAdminTbl admin);
         Task RemoveAdmin(int adminId);
         Task<string> GetExcelAgent();
+        //Task<string> GetExcelLogin(LoginTbl id);
         //Task<string> GetExcelRequest();
-        /*Task<string> GetExcelLogin(LoginTbl id)*/
+    
 
     }
 

@@ -111,7 +111,7 @@ namespace Foreign_Trips.Controllers
         [Route("GetAgents")]
         public async Task<ActionResult<IEnumerable<AgentTbl>>> GetAgents()
         {
-            var Agents = await _agentRepository.GetAgent(1);
+            var Agents = await _agentRepository.GetAgent(1, "gdg");
 
             return Ok(
                 Agents
