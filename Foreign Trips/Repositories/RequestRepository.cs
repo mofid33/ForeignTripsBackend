@@ -184,7 +184,7 @@ namespace Foreign_Trips.Repositories
                 return await _context.RequestEmployeeTbl.Where(x => x.RequestId == requestId)
                     .Include(x => x.MaritalStatus)
                     .Include(x => x.PassPortType)
-                    .Include(x => x.Gender)
+                    //.Include(x => x.Gender)
                     .Include(x => x.Position)
 
                     .ToListAsync();
