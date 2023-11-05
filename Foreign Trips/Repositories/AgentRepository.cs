@@ -91,7 +91,8 @@ namespace Foreign_Trips.Repositories
             }
 
         }
-        public async Task<AgentPageDto> GetAgent(int page,int pageSize)
+
+        public async Task<AgentPageDto> GetAgent(int page, int pagesize, String search)
         {
             try
             {
@@ -100,10 +101,12 @@ namespace Foreign_Trips.Repositories
                 .Include(t => t.AgentStatus)
                 .Include(t => t.LoginTbls)
                 .Include(t => t.City)
+                .Where(t => (search != "" && search!=null) ? (t.AgentName == search || t.AgentFamily == search):t.AgentName!=null)
 
 
                     .ToListAsync();
-                var ss= await PaginatedList<AgentTbl>.CreateAsync(agents, page,pageSize);
+        
+                var ss= await PaginatedList<AgentTbl>.CreateAsync(agents, page , pagesize);
                 return new AgentPageDto
                 {
                     Count = agents.Count(),
