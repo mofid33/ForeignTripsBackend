@@ -244,9 +244,18 @@ namespace Foreign_Trips.Repositories
 
         public async Task<RequestEmployeeTbl?> InsertRequestEmployeeAsync(RequestEmployeeTbl requestemployee)
         {
-            await _context.RequestEmployeeTbl.AddAsync(requestemployee);
-            await _context.SaveChangesAsync();
-            return requestemployee;
+            try
+            {
+                await _context.RequestEmployeeTbl.AddAsync(requestemployee);
+                await _context.SaveChangesAsync();
+                return requestemployee;
+            }
+            catch (System.Exception ex)
+            {
+                return null;
+
+            }
+
         }
 
 
@@ -349,7 +358,7 @@ namespace Foreign_Trips.Repositories
                 await _context.SaveChangesAsync();
 
 
-                return qtbl;
+                return request;
 
 
             }
@@ -439,7 +448,7 @@ namespace Foreign_Trips.Repositories
                 data.RequestStatusId = 3;
                 data.RejectRequest = request.RejectRequest;
                 await _context.SaveChangesAsync();
-                return data;
+                return request;
 
 
             }
@@ -477,7 +486,7 @@ namespace Foreign_Trips.Repositories
                 var data = await GetNewRequest(request.RequestId);
                 data.RequestStatusId = 8;
                 await _context.SaveChangesAsync();
-                return data;
+                return request;
 
 
             }
@@ -519,7 +528,7 @@ namespace Foreign_Trips.Repositories
                 data.RejectRequest = request.RejectRequest;
                 data.AdminId = request.AdminId;
                 await _context.SaveChangesAsync();
-                return data;
+                return request;
 
 
             }
@@ -561,7 +570,7 @@ namespace Foreign_Trips.Repositories
                 data.MainAdminId = request.MainAdminId;
                 data.RejectRequest = request.RejectRequest;
                 await _context.SaveChangesAsync();
-                return data;
+                return request;
 
 
             }
