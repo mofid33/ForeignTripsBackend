@@ -101,7 +101,7 @@ namespace Foreign_Trips.Repositories
                 .Include(t => t.AgentStatus)
                 .Include(t => t.LoginTbls)
                 .Include(t => t.City)
-                .Where(t => (search != "" && search!=null) ? (t.AgentName == search || t.AgentFamily == search):t.AgentName!=null)
+                .Where(t => (search != "" && search!=null) ? (t.AgentName.Contains(search) || t.AgentFamily.Contains(search)) :t.AgentName!=null)
 
 
                     .ToListAsync();

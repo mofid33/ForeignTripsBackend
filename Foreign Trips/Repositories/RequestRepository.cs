@@ -1,9 +1,12 @@
-﻿using Azure.Core;
+﻿using System.Xml.Linq;
+using Azure.Core;
 using Foreign_Trips.DbContexts;
 using Foreign_Trips.Entities;
 using Foreign_Trips.Model;
 using Foreign_Trips.Utility;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting.Internal;
 using Microsoft.Extensions.Logging;
@@ -77,39 +80,39 @@ namespace Foreign_Trips.Repositories
         }
 
 
-        public async Task<IEnumerable<AllListDto?>> GetAllList()
+        public async Task<IEnumerable<AllListDto?>> GetAllList([FromQuery(Name = "page")] int page, [FromQuery(Name = "pageSize")] int pageSize, string search)
         {
             try
             {
-                var req = await GetRequest();
+                var req = await GetRequest(page == 0 ? 1 : page, pageSize == 0 ? 10 : pageSize, search); 
                 AllListDto list = new AllListDto();
-                foreach (var allList in req)
-                {
-                    list.ExecutiveDeviceName = allList.ExecutiveDeviceName;
-                    list.InternetAddressOfTheExecutiveDevice = allList.InternetAddressOfTheExecutiveDevice;
-                    list.CityId = allList.CityId;
-                    list.FlightPath = allList.FlightPath;
-                    list.TravelDateStart = allList.TravelDateStart;
-                    list.TravalEndDate = allList.TravalEndDate;
-                    list.TravelTime = allList.TravelTime;
-                    list.TravelTopic = allList.TravelTopic;
-                    list.TravelGoalId = allList.TravelGoalId;
-                    list.JobGoalId = allList.JobGoalId;
-                    list.DeviceName = allList.DeviceName;
-                    list.PassportTypeId = allList.PassportTypeId;
-                    list.GetVisa = allList.GetVisa;
-                    list.JointTrip = allList.JointTrip;
-                    list.DateLetter = allList.DateLetter;
-                    list.ParticipantId = allList.ParticipantId;
-                    //RightOfMissionTbl miss = new RightOfMissionTbl();
+                //foreach (var allList in req)
+                //{
+                //    list.ExecutiveDeviceName = allList.ExecutiveDeviceName;
+                //    list.InternetAddressOfTheExecutiveDevice = allList.InternetAddressOfTheExecutiveDevice;
+                //    list.CityId = allList.CityId;
+                //    list.FlightPath = allList.FlightPath;
+                //    list.TravelDateStart = allList.TravelDateStart;
+                //    list.TravalEndDate = allList.TravalEndDate;
+                //    list.TravelTime = allList.TravelTime;
+                //    list.TravelTopic = allList.TravelTopic;
+                //    list.TravelGoalId = allList.TravelGoalId;
+                //    list.JobGoalId = allList.JobGoalId;
+                //    list.DeviceName = allList.DeviceName;
+                //    list.PassportTypeId = allList.PassportTypeId;
+                //    list.GetVisa = allList.GetVisa;
+                //    list.JointTrip = allList.JointTrip;
+                //    list.DateLetter = allList.DateLetter;
+                //    list.ParticipantId = allList.ParticipantId;
+                //    //RightOfMissionTbl miss = new RightOfMissionTbl();
 
-                    //foreach (var item in allList.RightOfMissionId.split(','))
-                    //{
-                    //    miss.RightOfMissionId=
-                    //}
-                    //list.RightOfMissionId =
+                //    //foreach (var item in allList.RightOfMissionId.split(','))
+                //    //{
+                //    //    miss.RightOfMissionId=
+                //    //}
+                //    //list.RightOfMissionId =
 
-                }
+                //}
 
 
                 return (IEnumerable<AllListDto?>)list;

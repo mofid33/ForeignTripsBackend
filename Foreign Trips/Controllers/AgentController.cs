@@ -33,7 +33,7 @@ namespace Foreign_Trips.Controllers
         [HttpGet]
         [Route("GetAgents")]
 
-        public async Task<ActionResult<IEnumerable<AgentTbl>>> GetAgents([FromQuery(Name = "page")] int page, [FromQuery(Name = "pageSize")]int pageSize, String search)
+        public async Task<ActionResult<IEnumerable<AgentTbl>>> GetAgents([FromQuery(Name = "page")] int page, [FromQuery(Name = "pageSize")]int pageSize,string search)
 
         {
             var Agents = await _agentRepository.GetAgent(page==0?1:page , pageSize == 0 ? 10 : pageSize , search);
