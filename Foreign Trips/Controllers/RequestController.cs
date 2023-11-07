@@ -51,6 +51,7 @@ namespace Foreign_Trips.Controllers
          );
 
         }
+
         [HttpPost]
         [Route("GetRequestsExpert")]
         public async Task<ActionResult<RequestTbl>> GetRequestExpert(
@@ -125,9 +126,14 @@ namespace Foreign_Trips.Controllers
             {
                 return NotFound();
             }
-            _requestRepository.InsertRequestEmployeeAsync(Model);
 
-            return Ok();
+            var request = await _requestRepository.InsertRequestEmployeeAsync(Model);
+            if (request == null)
+            {
+                return BadRequest();
+            }
+
+            return Ok(request);
 
         }
 
@@ -141,9 +147,14 @@ namespace Foreign_Trips.Controllers
             {
                 return NoContent();
             }
-            _requestRepository.UpdateRequest3Async(Model);
 
-            return Ok();
+            var request = await _requestRepository.UpdateRequest3Async(Model);
+            if (request == null)
+            {
+                return BadRequest();
+            }
+
+            return Ok(request);
 
         }
 
@@ -157,11 +168,18 @@ namespace Foreign_Trips.Controllers
             {
                 return NoContent();
             }
-            _requestRepository.UpdateRequest4Async(Model);
 
-            return Ok();
+            var request = await _requestRepository.UpdateRequest4Async(Model);
+            if (request == null)
+            {
+                return BadRequest();
+            }
+
+            return Ok(request);
 
         }
+
+       
 
         [HttpPost]
         [Route("UpdateRequest5")]
@@ -174,13 +192,18 @@ namespace Foreign_Trips.Controllers
                 {
                    return NoContent();
                 }
-                _requestRepository.UpdateRequest5Async(Model);
 
-                return Ok();
+
+            var request = await _requestRepository.UpdateRequest5Async(Model);
+            if (request == null)
+            {
+                return BadRequest();
+            }
+
+            return Ok(request);
 
         }
-
-  
+      
 
 
         [HttpPost]
@@ -189,15 +212,17 @@ namespace Foreign_Trips.Controllers
         [FromBody] RequestTbl Model
         )
         {
-            if (!await _requestRepository.RequestExistsAsync(Model.RequestId))
-            {
-                return NotFound();
-            }
-            _requestRepository.RemoveRequestAsync(Model.RequestId);
 
-            return Ok();
+            var request = await _requestRepository.RemoveRequestAsync(Model.RequestId) ;
+            if (request == null)
+            {
+                return BadRequest();
+            }
+
+            return Ok(request);
 
         }
+      
 
 
         [HttpPost]
@@ -205,13 +230,20 @@ namespace Foreign_Trips.Controllers
         public async Task<ActionResult<RequestEmployeeTbl>> RemoveRequestEmployeeAsync(
         [FromBody] RequestEmployeeTbl Model
         )
-        {
-            _requestRepository.RemoveRequestEmployeeAsync(Model.RequestEmployeeId);
 
-            return Ok();
+        {
+         
+
+            var request = await _requestRepository.RemoveRequestEmployeeAsync(Model.RequestEmployeeId);
+            if (request == null)
+            {
+                return BadRequest();
+            }
+
+            return Ok(request);
 
         }
-
+       
         //        [HttpPost]
         //        [Route("AcceptRequest")]
         //        public async Task<ActionResult<RequestTbl>> AcceptRequest(

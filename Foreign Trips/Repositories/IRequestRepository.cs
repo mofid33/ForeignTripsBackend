@@ -28,8 +28,8 @@ namespace Foreign_Trips.Repositories
         Task<RequestTbl?> RejectRequestAdmin(RequestTbl request);
         Task<RequestTbl?> AcceptRequestMainAdmin(RequestTbl request);
         Task<RequestTbl?> RejectRequestMainAdmin(RequestTbl request);
-        Task RemoveRequestAsync(int requestId);
-        Task RemoveRequestEmployeeAsync(int employeeId);
+        Task<string> RemoveRequestAsync(int requestId);
+        Task<string> RemoveRequestEmployeeAsync(int employeeId);
         Task<IEnumerable<RequestStatusTbl>> RequestStatusAsync();
         Task<IEnumerable<TravelGoalsTypeTbl>> TravelGoalsTypeAsync();
         Task<IEnumerable<JobGoalsTypeTbl>> JobGoalsTypeAsync();

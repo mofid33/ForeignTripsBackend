@@ -313,69 +313,69 @@ namespace Foreign_Trips.Controllers
 
 
 
-//        [HttpPost]
-//        [Route("InsertInternationalExpert")]
-//        public async Task<ActionResult<InternationalExpertTbl>> InsertInternationalExpert(
-//    [FromBody] InternationalExpertTbl Model
-//    )
-//        {
+        //        [HttpPost]
+        //        [Route("InsertInternationalExpert")]
+        //        public async Task<ActionResult<InternationalExpertTbl>> InsertInternationalExpert(
+        //    [FromBody] InternationalExpertTbl Model
+        //    )
+        //        {
 
-//            var Inter = await _internationalexpertRepository.InsertInternationalExpert(Model);
-//            if (Inter == null)
-//            {
-//                return BadRequest();
-//            }
-//            return Ok();
+        //            var Inter = await _internationalexpertRepository.InsertInternationalExpert(Model);
+        //            if (Inter == null)
+        //            {
+        //                return BadRequest();
+        //            }
+        //            return Ok();
 
-//        }
-
-
-
-
-//        [HttpPost]
-//        [Route("UpdateInternationalExpert")]
-//        public async Task<ActionResult<InternationalExpertTbl>> UpdateInternationalExpert(
-//[FromBody] InternationalExpertTbl Model
-//)
-//        {
-//            if (!await _internationalexpertRepository.InternationalExpertExistsAsync(Model.InternationalExpertId))
-//            {
-//                return NotFound();
-//            }
-//            var Inter = await _internationalexpertRepository.UpdateInternationalExpert(Model);
-//            if (Inter == null)
-//            {
-//                return BadRequest();
-//            }
-//            return Ok();
-//        }
+        //        }
 
 
 
 
-//        [HttpPost]
-//        [Route("RemoveInternationalExpert")]
-//        public async Task<ActionResult<InternationalExpertTbl>> RemoveInternationalExpert(
-//[FromBody] InternationalExpertTbl Model
-//)
-//        {
-//            try
-//            {
-//                if (!await _internationalexpertRepository.InternationalExpertExistsAsync(Model.InternationalExpertId))
-//                {
-//                    return NoContent();
-//                }
-//                _internationalexpertRepository.RemoveInternationalExpert(Model.InternationalExpertId);
+        //        [HttpPost]
+        //        [Route("UpdateInternationalExpert")]
+        //        public async Task<ActionResult<InternationalExpertTbl>> UpdateInternationalExpert(
+        //[FromBody] InternationalExpertTbl Model
+        //)
+        //        {
+        //            if (!await _internationalexpertRepository.InternationalExpertExistsAsync(Model.InternationalExpertId))
+        //            {
+        //                return NotFound();
+        //            }
+        //            var Inter = await _internationalexpertRepository.UpdateInternationalExpert(Model);
+        //            if (Inter == null)
+        //            {
+        //                return BadRequest();
+        //            }
+        //            return Ok();
+        //        }
 
-//                return Ok();
-//            }
 
-//            catch (System.Exception ex)
-//            {
-//                return null;
 
-//            }
-//        }
+
+        //        [HttpPost]
+        //        [Route("RemoveInternationalExpert")]
+        //        public async Task<ActionResult<InternationalExpertTbl>> RemoveInternationalExpert(
+        //[FromBody] InternationalExpertTbl Model
+        //)
+        //        {
+        //            try
+        //            {
+        //                if (!await _internationalexpertRepository.InternationalExpertExistsAsync(Model.InternationalExpertId))
+        //                {
+        //                    return NoContent();
+        //                }
+        //                _internationalexpertRepository.RemoveInternationalExpert(Model.InternationalExpertId);
+
+        //                return Ok();
+        //            }
+
+        //            catch (System.Exception ex)
+        //            {
+        //                return null;
+
+        //            }
+        //        }
 
         #endregion
 
@@ -383,10 +383,10 @@ namespace Foreign_Trips.Controllers
 
         [HttpGet]
         [Route("GetMessages")]
-        public async Task<ActionResult<MessageTbl>> GetMessage()
+        public async Task<ActionResult<MessageTbl>> GetMessage([FromQuery(Name = "page")] int page, [FromQuery(Name = "pageSize")] int pageSize, string search)
         {
 
-            var messages = await _messageRepository.GetMessage();
+            var messages = await _messageRepository.GetMessage(page == 0 ? 1 : page, pageSize == 0 ? 10 : pageSize, search);
 
             return Ok(_mapper.Map<IEnumerable<MessageTbl>>(messages));
 

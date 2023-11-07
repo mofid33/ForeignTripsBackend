@@ -132,10 +132,10 @@ namespace Foreign_Trips.Controllers
 
         [HttpGet]
         [Route("GetMessages")]
-        public async Task<ActionResult<MessageTbl>> GetMessage()
+        public async Task<ActionResult<MessageTbl>> GetMessage([FromQuery(Name = "page")] int page, [FromQuery(Name = "pageSize")] int pageSize, string search)
         {
 
-            var messages = await _messageRepository.GetMessage();
+            var messages = await _messageRepository.GetMessage(page == 0 ? 1 : page, pageSize == 0 ? 10 : pageSize, search);
 
             return Ok(_mapper.Map<IEnumerable<MessageTbl>>(messages));
 

@@ -1,6 +1,8 @@
 ﻿using Azure.Core;
 using Foreign_Trips.DbContexts;
+using Foreign_Trips.Entities;
 using Foreign_Trips.Model;
+using Foreign_Trips.Utility;
 using Microsoft.EntityFrameworkCore;
 using System.Net.Sockets;
 
@@ -15,11 +17,27 @@ namespace Foreign_Trips.Repositories
             _context = context ?? throw new ArgumentException(nameof(context));
 
         }
-        public async Task<IEnumerable<MessageTbl?>> GetMessage()
+        public async Task<MessagePageDto> GetMessage(int page, int pageSize, string search)
         {
             try
             {
-                return await _context.MessageTbl.ToListAsync();
+                var messages = await _context.MessageTbl
+                .Include(t => t.Agent)
+                .Include(t => t.ReciverMessage)
+                .Include(t => t.DispatcherSelection)
+                .Include(t => t.ExpertSelection)
+                .Where(t => (search != "" && search != null) ? (t.Agent.AgentName.Contains(search) || t.Agent.AgentFamily.Contains(search)) : t.Agent.AgentName != null)
+
+
+                    .ToListAsync();
+
+                var ss = await PaginatedList<MessageTbl>.CreateAsync(messages, page, pageSize);
+                return new MessagePageDto
+                {
+                    Count = messages.Count(),
+                    Data = ss
+
+                };
             }
             catch (System.Exception ex)
             {

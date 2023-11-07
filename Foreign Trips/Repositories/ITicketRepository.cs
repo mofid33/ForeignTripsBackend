@@ -6,7 +6,7 @@ namespace Foreign_Trips.Repositories
     public interface ITicketRepository
     {
         Task<bool> TicketExistsAsync(int ticketId);
-        Task<IEnumerable<TicketTbl?>> GetTickets(long agentId);
+        Task<TicketPageDto> GetTickets(int page, int pageSize, string search);
         Task<IEnumerable<TicketTbl?>> GetTicketExpert(int ExpertId);
         Task<IEnumerable<TicketTbl?>> GetTicketAdmi(int AdminId);
         Task<IEnumerable<TicketTbl?>> GetTicketMainAdmin();
