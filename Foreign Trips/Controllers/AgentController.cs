@@ -223,7 +223,7 @@ namespace Foreign_Trips.Controllers
         [Route("InsertRequest")]
         public async Task<ActionResult<RequestTbl>> InsertRequest(
 [FromBody] RequestTbl Model
-            )
+           )
 
         {
 
@@ -247,9 +247,14 @@ namespace Foreign_Trips.Controllers
             {
                 return NotFound();
             }
-            _requestRepository.InsertRequestEmployeeAsync(Model);
 
-            return Ok();
+            var request = await _requestRepository.InsertRequestEmployeeAsync(Model);
+            if (request == null)
+            {
+                return BadRequest();
+            }
+
+            return Ok(request);
 
         }
 
@@ -263,9 +268,14 @@ namespace Foreign_Trips.Controllers
             {
                 return NoContent();
             }
-            _requestRepository.UpdateRequest3Async(Model);
 
-            return Ok();
+            var request = await _requestRepository.UpdateRequest3Async(Model);
+            if (request == null)
+            {
+                return BadRequest();
+            }
+
+            return Ok(request);
 
         }
 
@@ -279,11 +289,18 @@ namespace Foreign_Trips.Controllers
             {
                 return NoContent();
             }
-            _requestRepository.UpdateRequest4Async(Model);
 
-            return Ok();
+            var request = await _requestRepository.UpdateRequest4Async(Model);
+            if (request == null)
+            {
+                return BadRequest();
+            }
+
+            return Ok(request);
 
         }
+
+
 
         [HttpPost]
         [Route("UpdateRequest5")]
@@ -296,9 +313,15 @@ namespace Foreign_Trips.Controllers
             {
                 return NoContent();
             }
-            _requestRepository.UpdateRequest5Async(Model);
 
-            return Ok();
+
+            var request = await _requestRepository.UpdateRequest5Async(Model);
+            if (request == null)
+            {
+                return BadRequest();
+            }
+
+            return Ok(request);
 
         }
 

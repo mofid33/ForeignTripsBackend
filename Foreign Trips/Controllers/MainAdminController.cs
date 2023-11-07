@@ -379,6 +379,84 @@ namespace Foreign_Trips.Controllers
 
         #endregion
 
+        #region InternationalAdmin
+
+        [HttpGet]
+        [Route("GetInternationalAdmin")]
+        public async Task<ActionResult<IEnumerable<InternationalAdminTbl>>> GetAdmin()
+        {
+            var Int = await _internatinaladminRepository.GetAdmins();
+
+            return Ok(
+                _mapper.Map<IEnumerable<InternationalAdminTbl>>(Int)
+                );
+        }
+
+
+
+        [HttpPost]
+        [Route("InsertInternationalAdmin")]
+        public async Task<ActionResult<InternationalAdminDto>> InsertAdmin(
+    [FromBody] InternationalAdminDto Model
+    )
+        {
+
+            var EAgent = await _internatinaladminRepository.InsertAdmin(Model);
+            if (EAgent == null)
+            {
+                return BadRequest();
+            }
+            return Ok(EAgent);
+
+        }
+
+
+
+
+        [HttpPost]
+        [Route("UpdateInternationalAdmin")]
+        public async Task<ActionResult<InternationalAdminTbl>> UpdateAdmin(
+[FromBody] InternationalAdminTbl Model
+)
+        {
+            if (!await _internatinaladminRepository.AdminExistsAsync(Model.AdminId))
+            {
+                return NoContent();
+            }
+            _internatinaladminRepository.UpdateAdmin(Model);
+
+            return Ok();
+        }
+
+
+
+
+        [HttpPost]
+        [Route("RemoveInternationalAdmin")]
+        public async Task<ActionResult<InternationalAdminTbl>> RemoveAdmin(
+[FromBody] InternationalAdminTbl Model
+)
+        {
+            try
+            {
+                if (!await _internatinaladminRepository.AdminExistsAsync(Model.AdminId))
+                {
+                    return NoContent();
+                }
+                _internatinaladminRepository.RemoveAdmin(Model.AdminId);
+
+                return Ok();
+            }
+
+            catch (System.Exception ex)
+            {
+                return null;
+
+            }
+        }
+
+        #endregion
+
         #region Message
 
         [HttpGet]
