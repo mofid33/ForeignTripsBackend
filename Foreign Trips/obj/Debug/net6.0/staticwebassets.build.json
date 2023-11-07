@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "LRk5191WwUKvk/nMOKGD5E7u/qeicfTQnqU1Ve3Bvnk=",
+  "Hash": "B9YPUju7L/n+1D9xADh85ggEIMIeVldtMZNbmUOQwLM=",
   "Source": "Foreign Trips",
   "BasePath": "_content/Foreign Trips",
   "Mode": "Default",
@@ -8,19 +8,19 @@
   "ReferencedProjectsConfiguration": [],
   "DiscoveryPatterns": [
     {
-      "Name": "Foreign Trips\\wwwroot",
+      "Name": "Foreign Trips/wwwroot",
       "Source": "Foreign Trips",
-      "ContentRoot": "F:\\Visual stadio\\Foreign Trips\\Foreign Trips\\wwwroot\\",
+      "ContentRoot": "/Users/amirhossein/Projects/Foreign Trips/Foreign Trips/wwwroot/",
       "BasePath": "_content/Foreign Trips",
       "Pattern": "**"
     }
   ],
   "Assets": [
     {
-      "Identity": "F:\\Visual stadio\\Foreign Trips\\Foreign Trips\\wwwroot\\uploads\\Agents.xlsx",
+      "Identity": "/Users/amirhossein/Projects/Foreign Trips/Foreign Trips/wwwroot/uploads/Agents.xlsx",
       "SourceId": "Foreign Trips",
       "SourceType": "Discovered",
-      "ContentRoot": "F:\\Visual stadio\\Foreign Trips\\Foreign Trips\\wwwroot\\",
+      "ContentRoot": "/Users/amirhossein/Projects/Foreign Trips/Foreign Trips/wwwroot/",
       "BasePath": "_content/Foreign Trips",
       "RelativePath": "uploads/Agents.xlsx",
       "AssetKind": "All",
@@ -31,7 +31,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\uploads\\Agents.xlsx"
+      "OriginalItemSpec": "wwwroot/uploads/Agents.xlsx"
     }
   ]
 }
