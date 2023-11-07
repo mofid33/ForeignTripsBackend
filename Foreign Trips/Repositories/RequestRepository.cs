@@ -384,20 +384,40 @@ namespace Foreign_Trips.Repositories
             }
         }
 
-        public async Task RemoveRequestAsync(int requestId)
+        public async Task<string> RemoveRequestAsync(int requestId)
         {
-            var data = _context.RequestTbl.Find(requestId);
-            _context.RequestTbl.Remove(data);
+            try
+            {
+                var data = _context.RequestTbl.Find(requestId);
+                _context.RequestTbl.Remove(data);
 
-            await _context.SaveChangesAsync();
+                await _context.SaveChangesAsync();
+                return "ok";
+                
+            }
+            catch (System.Exception ex)
+            {
+                return null;
+            }
+
         }
 
-        public async Task RemoveRequestEmployeeAsync(int employeeId)
+        public async Task<string> RemoveRequestEmployeeAsync(int employeeId)
         {
-            var data = _context.RequestEmployeeTbl.Find(employeeId);
-            _context.RequestEmployeeTbl.Remove(data);
+            try
+            {
+                var data = _context.RequestEmployeeTbl.Find(employeeId);
+                _context.RequestEmployeeTbl.Remove(data);
 
-            await _context.SaveChangesAsync();
+                await _context.SaveChangesAsync();
+                return "ok";
+
+            }
+            catch (System.Exception ex)
+            {
+                return null;
+            }
+
         }
 
 
