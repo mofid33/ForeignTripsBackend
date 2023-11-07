@@ -10,7 +10,7 @@ namespace Foreign_Trips.Repositories
         Task<SupervisorTbl?> GetSupervisorAsync(int supervisorId);
         Task<SupervisorDto> InsertSupervisor(SupervisorDto supervisor);
         Task<SupervisorTbl?> UpdateSupervisorAsync(SupervisorTbl supervisor);
-        Task RemoveSupervisorAsync(int supervisorId);
+        Task<string> RemoveSupervisorAsync(int supervisorId);
         
        
     }

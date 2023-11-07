@@ -114,13 +114,26 @@ namespace Foreign_Trips.Repositories
         }
 
 
-        public async Task RemoveReport(int reportId)
+        public async Task<string> RemoveReport(int reportId)
         {
-            var data = _context.ReportTbl.Find(reportId);
-            _context.ReportTbl.Remove(data);
+            try
+            {
+                var data = _context.ReportTbl.Find(reportId);
+                _context.ReportTbl.Remove(data);
 
-            await _context.SaveChangesAsync();
+                await _context.SaveChangesAsync();
+
+                return "Ok";
+
+            }
+            catch (System.Exception ex)
+            {
+                return null;
+
+            }
         }
+
+  
 
 
         public async Task<bool> ReportExistsAsync(int reportId)

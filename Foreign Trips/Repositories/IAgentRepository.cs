@@ -15,7 +15,7 @@ namespace Foreign_Trips.Repositories
         Task<AgentTbl?> GetAgentAsync(long agentId);
         Task<AgentDto> InsertAgentAsync(AgentDto agent);
         Task<AgentTbl?> UpdateAgentAsync(AgentTbl agentId);
-        Task DeleteAgent(int agentId);
+        Task<string> DeleteAgent(int agentId);
         Task<IEnumerable<CountryTbl>> GetCountriesAcync();
         Task<IEnumerable<CityTbl>> GetCitiesAcync(int? countryId);
         Task<IEnumerable<AgentStatusTbl>> GetAgentStatusAsync();
@@ -26,7 +26,7 @@ namespace Foreign_Trips.Repositories
         Task<IEnumerable<LanguageTypeTbl>> LanguageTypeAsync();
         Task<string> GetAddress(AgentTbl postCode);
         Task UpdatePassAgentAsync(AgentTbl agent, long agentId);
-        Task SuspendAgentAsync(long agentId);
+        Task<string> SuspendAgentAsync(long agentId);
         Task<bool> SaveChangesAsync();
     }
 }

@@ -6,6 +6,7 @@ using Foreign_Trips.Utility;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using NPOI.SS.Formula.Functions;
 using ShenaseMeliBac.Profiles;
 
 namespace Foreign_Trips.Repositories
@@ -135,14 +136,27 @@ namespace Foreign_Trips.Repositories
         }
 
     
-        public async Task RemoveSupervisorAsync(int supervisorId)
+        public async Task<string> RemoveSupervisorAsync(int supervisorId)
         {
-            var data = _context.SupervisorTbl.Find(supervisorId);
-            _context.SupervisorTbl.Remove(data);
+            try
+            {
+                var data = _context.SupervisorTbl.Find(supervisorId);
+                _context.SupervisorTbl.Remove(data);
 
-            await _context.SaveChangesAsync();
+                await _context.SaveChangesAsync();
+           
+                   return "Ok";
 
-            
+            }
+
+            catch (System.Exception ex)
+            {
+                return null;
+
+            }
+
+
+
         }
     }
 }

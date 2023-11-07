@@ -3,6 +3,7 @@ using Foreign_Trips.Entities;
 using Foreign_Trips.Model;
 using Foreign_Trips.Repositories;
 using Microsoft.AspNetCore.Mvc;
+using System.Net.Sockets;
 
 namespace Foreign_Trips.Controllers
 {
@@ -137,6 +138,10 @@ namespace Foreign_Trips.Controllers
         {
 
             var Tickets = await _ticketRepository.GetTicketExpert(Convert.ToInt32(Model.InternationalExpertId));
+            if (Tickets == null)
+            {
+                return BadRequest();
+            }
 
             return Ok(_mapper.Map<IEnumerable<TicketTbl>>(Tickets));
 
@@ -149,7 +154,10 @@ namespace Foreign_Trips.Controllers
         {
 
             var Tickets = await _ticketRepository.GetTicketExpert(Convert.ToInt32(Model.AdminId));
-
+            if (Tickets == null)
+            {
+                return BadRequest();
+            }
             return Ok(_mapper.Map<IEnumerable<TicketTbl>>(Tickets));
 
         }
@@ -174,6 +182,10 @@ namespace Foreign_Trips.Controllers
         {
 
             var Tickets = await _ticketRepository.GetTicketAsync(Model.TicketID);
+            if (Tickets == null)
+            {
+                return BadRequest();
+            }
             return Ok(Tickets);
 
         }
@@ -187,6 +199,10 @@ namespace Foreign_Trips.Controllers
         {
 
             var Tickets = await _ticketRepository.GetSubTickets(Model.TicketId);
+            if (Tickets == null)
+            {
+                return BadRequest();
+            }
             return Ok(
          _mapper.Map<IEnumerable<TicketDetailsTbl>>(Tickets)
          );

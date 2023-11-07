@@ -104,18 +104,18 @@ namespace Foreign_Trips.Repositories
                 //    list.JointTrip = allList.JointTrip;
                 //    list.DateLetter = allList.DateLetter;
                 //    list.ParticipantId = allList.ParticipantId;
-                //    //RightOfMissionTbl miss = new RightOfMissionTbl();
+                    //RightOfMissionTbl miss = new RightOfMissionTbl();
 
-                //    //foreach (var item in allList.RightOfMissionId.split(','))
-                //    //{
-                //    //    miss.RightOfMissionId=
-                //    //}
-                //    //list.RightOfMissionId =
+                    //    //foreach (var item in allList.RightOfMissionId.split(','))
+                    //    //{
+                    //    //    miss.RightOfMissionId=
+                    //    //}
+                    //    //list.RightOfMissionId =
 
-                //}
+                    //}
 
 
-                return (IEnumerable<AllListDto?>)list;
+                    return (IEnumerable<AllListDto?>)list;
             }
             catch (System.Exception ex)
             {

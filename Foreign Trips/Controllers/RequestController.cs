@@ -3,6 +3,7 @@ using Foreign_Trips.Entities;
 using Foreign_Trips.Model;
 using Foreign_Trips.Repositories;
 using Microsoft.AspNetCore.Mvc;
+using static NPOI.HSSF.Util.HSSFColor;
 
 namespace Foreign_Trips.Controllers
 {
@@ -46,6 +47,11 @@ namespace Foreign_Trips.Controllers
         {
 
             var req = await _requestRepository.GetRequestAsync(Model.RequestId);
+            if (req == null)
+            {
+                return BadRequest();
+            }
+
             return Ok(
          _mapper.Map<RequestTbl>(req)
          );
@@ -60,6 +66,12 @@ namespace Foreign_Trips.Controllers
         {
 
             var req = await _requestRepository.GetRequestsExpert(Convert.ToInt32(Model.InternationalExpertId));
+            if (req == null)
+            {
+                return BadRequest();
+            }
+      
+
             return Ok(
        req
          );
@@ -75,6 +87,12 @@ namespace Foreign_Trips.Controllers
         {
 
             var req = await _requestRepository.GetRequestEmployeeAsync(Model.RequestId);
+            if (req == null)
+            {
+                return BadRequest();
+            }
+            return Ok(req);
+
             return Ok(
          req
          );
@@ -90,6 +108,11 @@ namespace Foreign_Trips.Controllers
         {
 
             var req = await _requestRepository.GetNewRequest(Model.RequestId);
+            if (req == null)
+            {
+                return BadRequest();
+            }
+
             return Ok(
          _mapper.Map<RequestTbl>(req)
          );

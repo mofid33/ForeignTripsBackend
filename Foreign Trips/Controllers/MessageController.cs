@@ -57,6 +57,10 @@ namespace Foreign_Trips.Controllers
         {
 
             var messages = await _messageRepository.GetMessageAsync(Model.MessageId);
+            if (messages == null)
+            {
+                return BadRequest();
+            }
             return Ok(messages);
 
         }

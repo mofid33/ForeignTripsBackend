@@ -4,6 +4,7 @@ using Foreign_Trips.Model;
 using Foreign_Trips.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using static NPOI.HSSF.Util.HSSFColor;
 
 namespace Foreign_Trips.Controllers
 {
@@ -48,6 +49,12 @@ namespace Foreign_Trips.Controllers
         {
 
             var sup = await _supervisorRepository.GetSupervisorAsync(Model.SupervisorId);
+            if (sup == null)
+            {
+                return BadRequest();
+            }
+ 
+
             return Ok(
          _mapper.Map<SupervisorTbl>(sup)
          );
@@ -80,9 +87,13 @@ namespace Foreign_Trips.Controllers
             {
                 return NoContent();
             }
-            _supervisorRepository.UpdateSupervisorAsync(Model);
+            var sup = await _supervisorRepository.UpdateSupervisorAsync(Model);
+            if (sup == null)
+            {
+                return BadRequest();
+            }
 
-            return Ok(); ;
+            return Ok(sup); ;
 
         }
 
@@ -92,13 +103,14 @@ namespace Foreign_Trips.Controllers
        [FromBody] SupervisorTbl Model
        )
         {
-            if (!await _supervisorRepository.SupervisorExistsAsync(Model.SupervisorId))
+           
+            var sup = await _supervisorRepository.RemoveSupervisorAsync(Model.SupervisorId);
+            if (sup == null)
             {
-                return NotFound();
-            }
-            _supervisorRepository.RemoveSupervisorAsync(Model.SupervisorId);
+                return BadRequest();
+            } 
 
-            return Ok();
+            return Ok(sup);
 
         }
 

@@ -26,6 +26,10 @@ namespace Foreign_Trips.Controllers
         public async Task<ActionResult<IEnumerable<ReportTbl>>> GetReport()
         {
             var reports = await _reportRepository.GetReport();
+            if (reports == null)
+            {
+                return BadRequest();
+            }
 
             return Ok(
                 reports
@@ -39,6 +43,10 @@ namespace Foreign_Trips.Controllers
         {
 
             var req = await _reportRepository.GetReportByRequest(Convert.ToInt32(Model.RequestId));
+            if (req == null)
+            {
+                return BadRequest();
+            }
             return Ok(
        req
          );
@@ -52,6 +60,10 @@ namespace Foreign_Trips.Controllers
         {
 
             var rep = await _reportRepository.GetReportAsync(Model.ReportId);
+            if (rep == null)
+            {
+                return BadRequest();
+            }
             return Ok(
          rep
          );
@@ -94,7 +106,7 @@ namespace Foreign_Trips.Controllers
             {
                 return BadRequest();
             }
-            return Ok();
+            return Ok(Rep);
         }
 
 
@@ -105,23 +117,18 @@ namespace Foreign_Trips.Controllers
         [FromBody] ReportTbl Model
         )
                 {
-                    try
-                    {
-                        if (!await _reportRepository.ReportExistsAsync(Model.ReportId))
-                        {
-                            return NoContent();
-                        }
-                        _reportRepository.RemoveReport(Model.ReportId);
-
-                        return Ok();
-                    }
-
-                    catch (System.Exception ex)
-                    {
-                        return null;
-
-                    }
+           
+                       
+                var Rep = await _reportRepository.RemoveReport(Model.ReportId);
+                if (Rep == null)
+                {
+                    return BadRequest();
                 }
+                return Ok(Rep);
+              
+                }
+
+            
 
 
            

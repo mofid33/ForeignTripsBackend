@@ -97,12 +97,25 @@ namespace Foreign_Trips.Repositories
             return await _context.InternationalExpertTbl.AnyAsync(f => f.InternationalExpertId == internationalexpertId);
         }
 
-        public async Task RemoveInternationalExpert(int internationalexpertId)
+        public async Task<string> RemoveInternationalExpert(int internationalexpertId)
         {
-            var data = _context.InternationalExpertTbl.Find(internationalexpertId);
-            _context.InternationalExpertTbl.Remove(data);
+            try 
+            {
+                var data = _context.InternationalExpertTbl.Find(internationalexpertId);
+                _context.InternationalExpertTbl.Remove(data);
 
-            await _context.SaveChangesAsync();
+                await _context.SaveChangesAsync();
+                return "ok";
+            }
+
+            catch (System.Exception ex)
+            {
+                return null;
+
+            }
+
+
+
         }
 
         public async Task<InternationalExpertTbl?> UpdateInternationalExpert(InternationalExpertTbl internationalexpert)

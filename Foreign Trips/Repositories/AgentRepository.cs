@@ -209,13 +209,23 @@ namespace Foreign_Trips.Repositories
 
 
 
-        public async Task DeleteAgent(int agentId)
+        public async Task<string> DeleteAgent(int agentId)
         {
-           
+            try
+            {
                 var data = _context.AgentTbl.Find(agentId);
                 _context.AgentTbl.Remove(data);
 
                 await _context.SaveChangesAsync();
+                return "Ok";
+                    
+            }
+            catch (System.Exception ex)
+            {
+                return null;
+            }
+
+
         }
 
         public async Task<IEnumerable<CountryTbl>> GetCountriesAcync()
@@ -344,7 +354,7 @@ namespace Foreign_Trips.Repositories
             }
         }
 
-        public async Task SuspendAgentAsync(long agentId)
+        public async Task<string> SuspendAgentAsync(long agentId)
         {
             try
             {
@@ -354,9 +364,11 @@ namespace Foreign_Trips.Repositories
 
                 await _context.SaveChangesAsync();
 
+                return "Ok";
             }
             catch (System.Exception e)
             {
+                return null;
             }
 
         }

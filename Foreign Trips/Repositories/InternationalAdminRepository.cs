@@ -1,6 +1,7 @@
 ﻿using Foreign_Trips.DbContexts;
 using Foreign_Trips.Entities;
 using Foreign_Trips.Model;
+using Foreign_Trips.Utility;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using NPOI.SS.UserModel;
@@ -30,9 +31,33 @@ namespace Foreign_Trips.Repositories
             return await _context.InternationalAdminTbl.AnyAsync(f => f.AdminId == adminId);
         }
 
-        public async Task<IEnumerable<InternationalAdminTbl?>> GetAdmins()
+        public async Task<InternationalAdminTbl?> GetAdmins(int adminId)
         {
-            return await _context.InternationalAdminTbl.ToListAsync();
+            return await _context.InternationalAdminTbl.Where(c => c.AdminId == adminId).FirstOrDefaultAsync();
+        }
+
+        public async Task<AdminPageDto> GetAdmin(int page, int pagesize, string search)
+        {
+            try
+            {
+                var admin = await _context.InternationalAdminTbl
+                .Where(t => (search != "" && search != null) ? (t.AdminName.Contains(search) || t.AdminUsername.Contains(search)) : t.AdminName != null)
+
+
+                    .ToListAsync();
+
+                var ss = await PaginatedList<InternationalAdminTbl>.CreateAsync(admin, page, pagesize);
+                return new AdminPageDto
+                {
+                    Count = admin.Count(),
+                    Data = ss
+
+                };
+            }
+            catch (System.Exception ex)
+            {
+                return null;
+            }
         }
 
         public static void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
@@ -72,12 +97,23 @@ namespace Foreign_Trips.Repositories
                 }
             }
 
-        public async Task RemoveAdmin(int adminId)
+        public async Task<string> RemoveAdmin(int adminId)
         {
-            var data = _context.InternationalAdminTbl.Find(adminId);
-            _context.InternationalAdminTbl.Remove(data);
+            try
+            {
+                var data = _context.InternationalAdminTbl.Find(adminId);
+                _context.InternationalAdminTbl.Remove(data);
 
-            await _context.SaveChangesAsync();
+                await _context.SaveChangesAsync();
+
+                return "Ok";
+            }
+            catch (System.Exception ex)
+            {
+                return null;
+
+            }
+
         }
 
         public async Task<InternationalAdminTbl?> UpdateAdmin(InternationalAdminTbl admin)

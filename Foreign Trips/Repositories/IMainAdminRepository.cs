@@ -6,8 +6,9 @@ namespace Foreign_Trips.Repositories
     public interface IMainAdminRepository
     {
         Task<bool> MainAdminExistsAsync(int mainadminId);
-        Task<IEnumerable<MainAdminTbl?>> GetMainAdmin();
+        Task<MainAdminPageDto> GetMainAdmin(int page, int pageSize, string search);
         Task<MainAdminTbl?> GetMainAdminAsync(int  mainadminId);
+        Task<IEnumerable<AllListManagetDto?>> GetAllManagerList();
         Task<MainAdminDto> InsertMainAdmin(MainAdminDto mainadmin);
         Task<MainAdminTbl?> UpdateMainAdminAsync(MainAdminTbl mainadmin);
         Task UpdatePassAgentAsync(int agentId);
