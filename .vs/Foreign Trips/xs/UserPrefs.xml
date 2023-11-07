@@ -1,6 +1,5 @@
 ﻿<Properties StartupConfiguration="{8F23E8CC-3E31-49FF-AD10-C6C79B4877E0}|Default" GitUserInfo="UsingGIT">
-  <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.ItemProperties.Foreign_220Trips PreferredExecutionTarget="/Applications/Google Chrome.app" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
@@ -16,17 +15,17 @@
       <File FileName="Foreign Trips/Repositories/AuthRepository.cs" />
       <File FileName="Foreign Trips/Controllers/AuthController.cs" />
       <File FileName="Foreign Trips/Entities/LoginDto.cs" />
-      <File FileName="Foreign Trips/Repositories/AgentRepository.cs" />
-      <File FileName="Foreign Trips/Controllers/AgentController.cs" Line="39" Column="57" />
-      <File FileName="Foreign Trips/Controllers/MainAdminController.cs" Line="114" Column="73" />
-      <File FileName="Foreign Trips/Utility/PaginatedList.cs" Line="6" Column="44" />
+      <File FileName="Foreign Trips/Repositories/AgentRepository.cs" Line="102" Column="43" />
+      <File FileName="Foreign Trips/Controllers/AgentController.cs" />
+      <File FileName="Foreign Trips/Controllers/MainAdminController.cs" />
+      <File FileName="Foreign Trips/Utility/PaginatedList.cs" />
       <File FileName="Foreign Trips/Repositories/IAgentRepository.cs" />
       <File FileName="Foreign Trips/Controllers/SupervisorController.cs" />
       <File FileName="Foreign Trips/Controllers/InternationalAdminController.cs" />
       <File FileName="Foreign Trips/Controllers/RequestController.cs" />
-      <File FileName="Foreign Trips/Repositories/RequestRepository.cs" Line="11" Column="20" />
+      <File FileName="Foreign Trips/Repositories/RequestRepository.cs" />
       <File FileName="../../../../usr/local/share/dotnet/sdk/7.0.202/Sdks/Microsoft.NET.Sdk/targets/Microsoft.PackageDependencyResolution.targets" />
-      <File FileName="Foreign Trips/Repositories/IRequestRepository.cs" Line="9" Column="90" />
+      <File FileName="Foreign Trips/Repositories/IRequestRepository.cs" />
       <File FileName="Foreign Trips/Repositories/InternationalExpertRepository.cs" Line="30" Column="54" />
     </Files>
     <Pads>
@@ -49,5 +48,6 @@
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.ItemProperties.Foreign_220Trips PreferredExecutionTarget="/Applications/Google Chrome.app" />
+  <MultiItemStartupConfigurations />
 </Properties>
