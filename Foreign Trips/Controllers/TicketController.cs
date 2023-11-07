@@ -10,13 +10,16 @@ namespace Foreign_Trips.Controllers
     public class TicketController :ControllerBase
     {
         private readonly ITicketRepository _ticketRepository;
+        private readonly IMessageRepository _messageRepository;
         private readonly IMapper _mapper;
 
-        public TicketController(ITicketRepository ticketRepository,
+        public TicketController(ITicketRepository ticketRepository, IMessageRepository messageRepository,
                                 IMapper mapper)
         {
             _ticketRepository = ticketRepository ??
                 throw new ArgumentNullException(nameof(ticketRepository));
+            _messageRepository = messageRepository ??
+                throw new ArgumentNullException(nameof(messageRepository));
 
 
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
@@ -116,14 +119,14 @@ namespace Foreign_Trips.Controllers
 
 
 
-        [HttpPost]
-        [Route("GetTickets")]
-        public async Task<ActionResult<TicketTbl>> GetTickets([FromBody] GetTicket Model)
+        [HttpGet]
+        [Route("GetMessages")]
+        public async Task<ActionResult<MessageTbl>> GetMessage([FromQuery(Name = "page")] int page, [FromQuery(Name = "pageSize")] int pageSize, string search)
         {
 
-            var Tickets = await _ticketRepository.GetTickets(Model.AgentID);
+            var messages = await _messageRepository.GetMessage(page == 0 ? 1 : page, pageSize == 0 ? 10 : pageSize, search);
 
-            return Ok(_mapper.Map<IEnumerable<TicketTbl>>(Tickets));
+            return Ok(_mapper.Map<IEnumerable<MessageTbl>>(messages));
 
         }
 

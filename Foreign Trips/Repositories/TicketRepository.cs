@@ -2,6 +2,7 @@
 using Foreign_Trips.DbContexts;
 using Foreign_Trips.Entities;
 using Foreign_Trips.Model;
+using Foreign_Trips.Utility;
 using Microsoft.EntityFrameworkCore;
 
 namespace Foreign_Trips.Repositories
@@ -46,21 +47,32 @@ namespace Foreign_Trips.Repositories
             }
         }
 
-        public async Task<IEnumerable<TicketTbl?>> GetTickets(long agentId)
+        public async Task<TicketPageDto> GetTickets(int page, int pageSize, string search)
         {
             try
             {
+                var ticket = await _context.TicketTbl
+                .Include(t => t.TicketStatus)
+                .Include(t => t.Agent)
+                .Where(t => (search != "" && search != null) ? (t.Agent.AgentName.Contains(search) || t.Agent.AgentFamily.Contains(search)) : t.Agent.AgentName != null)
 
-                return await _context.TicketTbl
-                   .Include(t => t.TicketStatus)
-                   .Where(t => t.AgentId == agentId)
-                   .ToListAsync();
+
+                .ToListAsync();
+
+                var ss = await PaginatedList<TicketTbl>.CreateAsync(ticket, page, pageSize);
+                return new TicketPageDto
+                {
+                    Count = ticket.Count(),
+                    Data = ss
+
+                };
             }
             catch (System.Exception ex)
             {
                 return null;
             }
         }
+
         public async Task<IEnumerable<TicketTbl?>> GetTicketExpert(int ExpertId)
         {
             try
