@@ -8,9 +8,9 @@ namespace Foreign_Trips.Repositories
     {
         Task<RequestPageDto> GetRequest(int page, int pageSize, string search);
         Task<IEnumerable<AllListDto?>> GetAllList(int page, int pageSize, string search);
-        Task<IEnumerable<RequestTbl?>> GetRequestsExpert(int ExpertId);
-        Task<IEnumerable<RequestTbl?>> GetRequestsAdmin(int AdminId);
-        Task<IEnumerable<RequestTbl?>> GetRequestsMainAdmin(int MainAdminId);
+        Task<RequestPageDto> GetRequestsExpert(int page, int pageSize, string search,int ExpertId);
+        Task<RequestPageDto> GetRequestsAdmin(int page, int pageSize, string search,int AdminId);
+        Task<IEnumerable<RequestTbl?>> GetRequestsMainAdmin(int page, int pageSize, string search,int MainAdminId);
         Task<RequestTbl?> GetRequestAsync(int requestId);
         Task<RequestPageDto> GetRequestsAgent(int page, int pageSize, string search, int agentId);
         Task<IEnumerable<RequestEmployeeTbl?>> GetRequestEmployeeAsync(int requestId);
