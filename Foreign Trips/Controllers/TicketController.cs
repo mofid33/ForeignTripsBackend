@@ -114,12 +114,12 @@ namespace Foreign_Trips.Controllers
 
 
 
-        [HttpGet]
+        [HttpPost]
         [Route("GetTickets")]
         public async Task<ActionResult<TicketTbl>> GetTickets([FromQuery(Name = "page")] int page, [FromQuery(Name = "pageSize")] int pageSize, string search, [FromBody] TicketTbl Model)
         {
 
-            var tickets = await _ticketRepository.GetTickets(page == 0 ? 1 : page, pageSize == 0 ? 10 : pageSize, search, Convert.ToInt32(Model.AgentId));
+            var tickets = await _ticketRepository.GetTickets(page == 0 ? 1 : page, pageSize == 0 ? 10 : pageSize, search, Convert.ToInt32(Model.Age));
             if (tickets == null)
             {
                 return BadRequest();
@@ -161,7 +161,7 @@ namespace Foreign_Trips.Controllers
 
         }
 
-        [HttpGet]
+        [HttpPost]
         [Route("GetMainAdmin")]
         public async Task<ActionResult<TicketTbl>> GetTicketMainAdmin([FromQuery(Name = "page")] int page, [FromQuery(Name = "pageSize")] int pageSize, string search)
         {

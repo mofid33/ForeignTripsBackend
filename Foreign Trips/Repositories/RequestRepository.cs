@@ -68,9 +68,8 @@ namespace Foreign_Trips.Repositories
                  .Include(c => c.TravelType)
                  .Include(c => c.TypeAccommodation)
                  .Include(c => c.TollAmount)
-                 
-
                  .Where(t => t.InternationalExpertId == ExpertId || t.InternationalExpertId == null)
+
                  .ToListAsync();
             }
             catch (System.Exception ex)
