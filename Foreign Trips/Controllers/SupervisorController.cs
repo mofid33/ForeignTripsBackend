@@ -164,7 +164,7 @@ namespace Foreign_Trips.Controllers
         {
 
             var rep = await _reportRepository.GetReportAsync(Model.ReportId);
-            if (reports == null)
+            if (rep == null)
             {
                 return BadRequest();
             }

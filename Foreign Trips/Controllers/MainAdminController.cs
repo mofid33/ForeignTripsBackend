@@ -53,7 +53,7 @@ namespace Foreign_Trips.Controllers
         public async Task<ActionResult<IEnumerable<MainAdminTbl>>> GetMainAdmin([FromQuery(Name = "page")] int page, [FromQuery(Name = "pageSize")] int pageSize, string search)
 
         {
-            var Admin = await _internationaladminRepository.GetMainAdmin(page == 0 ? 1 : page, pageSize == 0 ? 10 : pageSize, search);
+            var Admin = await _mainadminRepository.GetMainAdmin(page == 0 ? 1 : page, pageSize == 0 ? 10 : pageSize, search);
             if (Admin == null)
             {
                 return BadRequest();

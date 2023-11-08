@@ -15,11 +15,12 @@ namespace Foreign_Trips.Controllers
         private readonly IMessageRepository _messageRepository;
         private readonly IRequestRepository _requestRepository;
         private readonly IReportRepository _reportRepository;
+        private readonly IMainAdminRepository _mainadminRepository;
         private readonly IMapper _mapper;
 
 
         public InternationalExpertController(IInternationalExpertRepository internationalexpertRepository, IMessageRepository messageRepository , IInternationalAdminRepository internationaladminRepository,
-                                             IRequestRepository requestRepository, IReportRepository reportRepository, IMapper mapper)
+                                             IRequestRepository requestRepository, IReportRepository reportRepository, IMainAdminRepository mainadminRepository, IMapper mapper)
 
         {
             _internationalexpertRepository = internationalexpertRepository ??
@@ -32,6 +33,8 @@ namespace Foreign_Trips.Controllers
                 throw new ArgumentNullException(nameof(requestRepository));
             _reportRepository = reportRepository ??
                 throw new ArgumentNullException(nameof(reportRepository));
+            _mainadminRepository = mainadminRepository ??
+                throw new ArgumentNullException(nameof(mainadminRepository));
 
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
@@ -389,7 +392,7 @@ namespace Foreign_Trips.Controllers
         public async Task<ActionResult<IEnumerable<MainAdminTbl>>> GetMainAdmin([FromQuery(Name = "page")] int page, [FromQuery(Name = "pageSize")] int pageSize, string search)
 
         {
-            var Admin = await _internationaladminRepository.GetMainAdmin(page == 0 ? 1 : page, pageSize == 0 ? 10 : pageSize, search);
+            var Admin = await _mainadminRepository.GetMainAdmin(page == 0 ? 1 : page, pageSize == 0 ? 10 : pageSize, search);
             if (Admin == null)
             {
                 return BadRequest();
