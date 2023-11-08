@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "LRk5191WwUKvk/nMOKGD5E7u/qeicfTQnqU1Ve3Bvnk=",
+  "Hash": "hCxNt58q8Illv5vPWtwRGigqaKrltHGetH6ZhaDjiR8=",
   "Source": "Foreign Trips",
   "BasePath": "_content/Foreign Trips",
   "Mode": "Default",
@@ -32,6 +32,40 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\uploads\\Agents.xlsx"
+    },
+    {
+      "Identity": "F:\\Visual stadio\\Foreign Trips\\Foreign Trips\\wwwroot\\uploads\\sara_15c4.jpg",
+      "SourceId": "Foreign Trips",
+      "SourceType": "Discovered",
+      "ContentRoot": "F:\\Visual stadio\\Foreign Trips\\Foreign Trips\\wwwroot\\",
+      "BasePath": "_content/Foreign Trips",
+      "RelativePath": "uploads/sara_15c4.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\sara_15c4.jpg"
+    },
+    {
+      "Identity": "F:\\Visual stadio\\Foreign Trips\\Foreign Trips\\wwwroot\\uploads\\sara_2a8b.jpg",
+      "SourceId": "Foreign Trips",
+      "SourceType": "Discovered",
+      "ContentRoot": "F:\\Visual stadio\\Foreign Trips\\Foreign Trips\\wwwroot\\",
+      "BasePath": "_content/Foreign Trips",
+      "RelativePath": "uploads/sara_2a8b.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\sara_2a8b.jpg"
     }
   ]
 }

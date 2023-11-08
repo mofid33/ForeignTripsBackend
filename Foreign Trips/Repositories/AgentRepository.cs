@@ -418,6 +418,66 @@ namespace Foreign_Trips.Repositories
 
         #endregion
 
+        #region photo
+
+        public static string GetUniquePhotoName(string photoName)
+
+
+        {
+
+
+            photoName = Path.GetFileName(photoName);
+
+
+            return string.Concat(Path.GetFileNameWithoutExtension(photoName)
+
+
+                                , "_"
+
+
+                                , Guid.NewGuid().ToString().AsSpan(0, 4)
+
+
+                                , Path.GetExtension(photoName));
+
+
+        }
+
+        public async Task<string> PhotoAsync(PhotoUploadModel photoData)
+        {
+            try
+            {
+                PersianDateTime persianDateTime = new PersianDateTime(DateTime.Now);
+                string date = persianDateTime.ToString().Substring(0, 10);
+                var uniquePhotoName = GetUniquePhotoName(photoData.FileDetails.FileName);
+                var uploads = Path.Combine(_hostingEnvironment.WebRootPath, "uploads");
+              
+
+
+                var photoPath = Path.Combine(uploads, uniquePhotoName);
+
+                using (var stream = new FileStream(photoPath, FileMode.Create))
+                {
+                    stream.Close();
+                    photoData.FileDetails.CopyTo(new FileStream(photoPath, FileMode.Create));
+                }
+
+
+                //var result = _context.FileDetails.Add(fileDetails);
+                var dataUp =await _context.AgentTbl.Where(t => t.AgentId == photoData.AgentId).FirstOrDefaultAsync();
+                dataUp.Photo = uniquePhotoName;
+
+                await _context.SaveChangesAsync();
+                return "true";
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
+        #endregion
+
         public async Task<bool> SaveChangesAsync()
         {
             return (await _context.SaveChangesAsync() > 0);

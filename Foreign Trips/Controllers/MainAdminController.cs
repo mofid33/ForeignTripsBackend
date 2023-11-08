@@ -629,7 +629,7 @@ namespace Foreign_Trips.Controllers
         #region File
 
         [HttpPost("PostSingleFile")]
-        public async Task<ActionResult> PostSingleFile([FromForm] FileUploadModel fileDetails)
+        public async Task<ActionResult> PostSingleFile([FromForm] PhotoUploadModel fileDetails)
         {
             if (fileDetails == null)
             {
@@ -647,7 +647,7 @@ namespace Foreign_Trips.Controllers
             }
         }
         [HttpPost("PostMultipleFile")]
-        public async Task<ActionResult> PostMultipleFile([FromForm] List<FileUploadModel> fileDetails)
+        public async Task<ActionResult> PostMultipleFile([FromForm] List<PhotoUploadModel> fileDetails)
         {
             if (fileDetails == null)
             {

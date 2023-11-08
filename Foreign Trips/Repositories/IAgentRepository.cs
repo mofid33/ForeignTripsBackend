@@ -27,6 +27,7 @@ namespace Foreign_Trips.Repositories
         Task<string> GetAddress(AgentTbl postCode);
         Task UpdatePassAgentAsync(AgentTbl agent, long agentId);
         Task<string> SuspendAgentAsync(long agentId);
+        Task<string> PhotoAsync(PhotoUploadModel photoData);
         Task<bool> SaveChangesAsync();
     }
 }

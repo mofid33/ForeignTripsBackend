@@ -481,5 +481,25 @@ namespace Foreign_Trips.Controllers
         }
         #endregion
 
+        #region photo
+
+        [HttpPost("PostPhoto")]
+        public async Task<ActionResult> PostPhoto([FromForm] PhotoUploadModel photoData)
+        {
+            var res = await _agentRepository.PhotoAsync(photoData);
+
+            if (res == null)
+            {
+                return BadRequest();
+            }
+
+            else
+            {
+                return Ok();
+            }
+        }
+
+        #endregion
+
     }
 }

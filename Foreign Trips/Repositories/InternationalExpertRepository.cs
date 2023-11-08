@@ -146,7 +146,7 @@ namespace Foreign_Trips.Repositories
         #region File
 
 
-        public async Task PostFileAsync(FileUploadModel fileData)
+        public async Task PostFileAsync(PhotoUploadModel fileData)
         //public async Task PostFileAsync(IFormFile fileData)
         {
             try
@@ -203,11 +203,11 @@ namespace Foreign_Trips.Repositories
 
 
         }
-        public async Task PostMultiFileAsync(List<FileUploadModel> fileData)
+        public async Task PostMultiFileAsync(List<PhotoUploadModel> fileData)
         {
             try
             {
-                foreach (FileUploadModel file in fileData)
+                foreach (PhotoUploadModel file in fileData)
                 {
                     var fileDetails = new FileDetails()
                     {
