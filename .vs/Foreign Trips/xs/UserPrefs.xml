@@ -1,11 +1,11 @@
 ﻿<Properties StartupConfiguration="{8F23E8CC-3E31-49FF-AD10-C6C79B4877E0}|Default" GitUserInfo="UsingGIT">
   <MonoDevelop.Ide.ItemProperties.Foreign_220Trips PreferredExecutionTarget="/Applications/Google Chrome.app" />
   <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.Workbench ActiveDocument="../../../../usr/local/share/dotnet/sdk/7.0.202/Sdks/Microsoft.NET.Sdk.Razor/targets/Microsoft.NET.Sdk.Razor.StaticWebAssets.targets">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Foreign Trips/Repositories/AuthRepository.cs">
     <Files>
       <File FileName="Foreign Trips/Controllers/ForeignDelegrationController.cs" />
-      <File FileName="Foreign Trips/Repositories/AuthRepository.cs" />
-      <File FileName="Foreign Trips/Controllers/AuthController.cs" />
+      <File FileName="Foreign Trips/Repositories/AuthRepository.cs" Line="212" Column="1" />
+      <File FileName="Foreign Trips/Controllers/AuthController.cs" Line="34" Column="50" />
       <File FileName="Foreign Trips/Entities/LoginDto.cs" />
       <File FileName="Foreign Trips/Repositories/AgentRepository.cs" />
       <File FileName="Foreign Trips/Controllers/AgentController.cs" />
@@ -20,18 +20,23 @@
       <File FileName="Foreign Trips/Repositories/IRequestRepository.cs" />
       <File FileName="Foreign Trips/Repositories/InternationalExpertRepository.cs" />
       <File FileName="../../../../usr/local/share/dotnet/sdk/7.0.202/Sdks/Microsoft.NET.Sdk.Razor/targets/Microsoft.NET.Sdk.Razor.StaticWebAssets.targets" Line="391" Column="5" />
+      <File FileName="Foreign Trips/Repositories/TicketRepository.cs" Line="1" Column="1" />
+      <File FileName="Foreign Trips/Controllers/TicketController.cs" Line="126" Column="11" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="Foreign Trips" expanded="True">
-            <Node name="Foreign Trips" expanded="True" selected="True">
+            <Node name="Foreign Trips" expanded="True">
               <Node name="Controllers" expanded="True" />
               <Node name="DbContexts" expanded="True" />
               <Node name="Entities" expanded="True" />
               <Node name="Model" expanded="True" />
               <Node name="Repositories" expanded="True" />
               <Node name="Utility" expanded="True" />
+              <Node name="wwwroot" expanded="True">
+                <Node name="uploads" expanded="True" />
+              </Node>
               <Node name="appsettings.json" expanded="True" />
             </Node>
           </Node>
