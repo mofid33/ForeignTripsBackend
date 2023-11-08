@@ -1,14 +1,15 @@
 ﻿using Foreign_Trips.Entities;
 using Foreign_Trips.Model;
+using NPOI.SS.Formula.Functions;
 
 namespace Foreign_Trips.Repositories
 {
     public interface ITicketRepository
     {
         Task<bool> TicketExistsAsync(int ticketId);
-        Task<TicketPageDto> GetTickets(int page, int pageSize, string search);
-        Task<TicketPageDto> GetTicketExpert(int page, int pageSize, string search);
-        Task<TicketPageDto> GetTicketAdmin(int page, int pageSize, string search);
+        Task<TicketPageDto> GetTickets(int page, int pageSize, string search,int agentId);
+        Task<TicketPageDto> GetTicketExpert(int page, int pageSize, string search, int ExpertId);
+        Task<TicketPageDto> GetTicketAdmin(int page, int pageSize, string search, int AdminId);
         Task<TicketPageDto> GetTicketMainAdmin(int page, int pageSize, string search);
         Task<TicketTbl?> GetTicketAsync(int ticketId);
         Task<TicketDetailsTbl?> InsertSubTicketExpertToAgent(TicketDetailsDto ticket);
