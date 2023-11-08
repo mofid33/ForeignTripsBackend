@@ -121,62 +121,64 @@ namespace Foreign_Trips.Controllers
 
 
         [HttpGet]
-        [Route("GetMessages")]
-        public async Task<ActionResult<MessageTbl>> GetMessage([FromQuery(Name = "page")] int page, [FromQuery(Name = "pageSize")] int pageSize, string search)
+        [Route("GetTickets")]
+        public async Task<ActionResult<TicketTbl>> GetTickets([FromQuery(Name = "page")] int page, [FromQuery(Name = "pageSize")] int pageSize, string search)
         {
 
-            var messages = await _messageRepository.GetMessage(page == 0 ? 1 : page, pageSize == 0 ? 10 : pageSize, search);
-            if (messages == null)
+            var tickets = await _ticketRepository.GetTickets(page == 0 ? 1 : page, pageSize == 0 ? 10 : pageSize, search);
+            if (tickets == null)
             {
                 return BadRequest();
             }
-            return Ok(_mapper.Map<IEnumerable<MessageTbl>>(messages));
+            return Ok(_mapper.Map<IEnumerable<MessageTbl>>(tickets));
 
         }
 
 
         [HttpPost]
         [Route("GetTicketExpert")]
-        public async Task<ActionResult<TicketTbl>> GetTicketExpert([FromBody] TicketTbl Model)
+
+        public async Task<ActionResult<TicketTbl>> GetTicketExpert([FromQuery(Name = "page")] int page, [FromQuery(Name = "pageSize")] int pageSize, string search)
         {
 
-            var Tickets = await _ticketRepository.GetTicketExpert(Convert.ToInt32(Model.InternationalExpertId));
-            if (Tickets == null)
+            var tickets = await _ticketRepository.GetTicketExpert(page == 0 ? 1 : page, pageSize == 0 ? 10 : pageSize, search);
+            if (tickets == null)
             {
                 return BadRequest();
             }
-
-            return Ok(_mapper.Map<IEnumerable<TicketTbl>>(Tickets));
+            return Ok(_mapper.Map<IEnumerable<MessageTbl>>(tickets));
 
         }
 
 
         [HttpPost]
         [Route("GetTicketAdmin")]
-        public async Task<ActionResult<TicketTbl>> GetTicketAdmin([FromBody] TicketTbl Model)
+
+
+        public async Task<ActionResult<TicketTbl>> GetTicketAdmin([FromQuery(Name = "page")] int page, [FromQuery(Name = "pageSize")] int pageSize, string search)
         {
 
-            var Tickets = await _ticketRepository.GetTicketExpert(Convert.ToInt32(Model.AdminId));
-            if (Tickets == null)
+            var tickets = await _ticketRepository.GetTicketAdmin(page == 0 ? 1 : page, pageSize == 0 ? 10 : pageSize, search);
+            if (tickets == null)
             {
                 return BadRequest();
             }
-            return Ok(_mapper.Map<IEnumerable<TicketTbl>>(Tickets));
+            return Ok(_mapper.Map<IEnumerable<MessageTbl>>(tickets));
 
         }
 
         [HttpGet]
         [Route("GetMainAdmin")]
-        public async Task<ActionResult<IEnumerable<TicketTbl>>> GetTicketMainAdmin()
+        public async Task<ActionResult<TicketTbl>> GetTicketMainAdmin([FromQuery(Name = "page")] int page, [FromQuery(Name = "pageSize")] int pageSize, string search)
         {
-            var MainAdmin = await _ticketRepository.GetTicketMainAdmin();
-            if (MainAdmin == null)
+
+            var tickets = await _ticketRepository.GetTicketMainAdmin(page == 0 ? 1 : page, pageSize == 0 ? 10 : pageSize, search);
+            if (tickets == null)
             {
                 return BadRequest();
             }
-            return Ok(
-                MainAdmin
-                );
+            return Ok(_mapper.Map<IEnumerable<MessageTbl>>(tickets));
+
         }
 
 
