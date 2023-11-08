@@ -16,8 +16,9 @@
             Password = password;
             Role = role;
             ID = id;
-            Token = token;
             Photo = photo;
+            Token = token;
+            
 
         }
 
