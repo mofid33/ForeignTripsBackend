@@ -97,12 +97,25 @@ namespace Foreign_Trips.Repositories
             return await _context.InternationalExpertTbl.AnyAsync(f => f.InternationalExpertId == internationalexpertId);
         }
 
-        public async Task RemoveInternationalExpert(int internationalexpertId)
+        public async Task<string> RemoveInternationalExpert(int internationalexpertId)
         {
-            var data = _context.InternationalExpertTbl.Find(internationalexpertId);
-            _context.InternationalExpertTbl.Remove(data);
+            try 
+            {
+                var data = _context.InternationalExpertTbl.Find(internationalexpertId);
+                _context.InternationalExpertTbl.Remove(data);
 
-            await _context.SaveChangesAsync();
+                await _context.SaveChangesAsync();
+                return "ok";
+            }
+
+            catch (System.Exception ex)
+            {
+                return null;
+
+            }
+
+
+
         }
 
         public async Task<InternationalExpertTbl?> UpdateInternationalExpert(InternationalExpertTbl internationalexpert)
@@ -133,7 +146,7 @@ namespace Foreign_Trips.Repositories
         #region File
 
 
-        public async Task PostFileAsync(FileUploadModel fileData)
+        public async Task PostFileAsync(PhotoUploadModel fileData)
         //public async Task PostFileAsync(IFormFile fileData)
         {
             try
@@ -190,11 +203,11 @@ namespace Foreign_Trips.Repositories
 
 
         }
-        public async Task PostMultiFileAsync(List<FileUploadModel> fileData)
+        public async Task PostMultiFileAsync(List<PhotoUploadModel> fileData)
         {
             try
             {
-                foreach (FileUploadModel file in fileData)
+                foreach (PhotoUploadModel file in fileData)
                 {
                     var fileDetails = new FileDetails()
                     {

@@ -3,6 +3,7 @@ using Foreign_Trips.Entities;
 using Foreign_Trips.Model;
 using Foreign_Trips.Repositories;
 using Microsoft.AspNetCore.Mvc;
+using static NPOI.HSSF.Util.HSSFColor;
 
 namespace Foreign_Trips.Controllers
 {
@@ -14,11 +15,12 @@ namespace Foreign_Trips.Controllers
         private readonly IMessageRepository _messageRepository;
         private readonly IRequestRepository _requestRepository;
         private readonly IReportRepository _reportRepository;
+        private readonly IMainAdminRepository _mainadminRepository;
         private readonly IMapper _mapper;
 
 
         public InternationalExpertController(IInternationalExpertRepository internationalexpertRepository, IMessageRepository messageRepository , IInternationalAdminRepository internationaladminRepository,
-                                             IRequestRepository requestRepository, IReportRepository reportRepository, IMapper mapper)
+                                             IRequestRepository requestRepository, IReportRepository reportRepository, IMainAdminRepository mainadminRepository, IMapper mapper)
 
         {
             _internationalexpertRepository = internationalexpertRepository ??
@@ -31,6 +33,8 @@ namespace Foreign_Trips.Controllers
                 throw new ArgumentNullException(nameof(requestRepository));
             _reportRepository = reportRepository ??
                 throw new ArgumentNullException(nameof(reportRepository));
+            _mainadminRepository = mainadminRepository ??
+                throw new ArgumentNullException(nameof(mainadminRepository));
 
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
@@ -41,7 +45,10 @@ namespace Foreign_Trips.Controllers
         public async Task<ActionResult<IEnumerable<InternationalExpertTbl>>> GetInternationalExpert([FromQuery(Name = "page")] int page, [FromQuery(Name = "pageSize")] int pageSize, string search)
         {
             var interexpert = await _internationalexpertRepository.GetInternationalExpert(page == 0 ? 1 : page, pageSize == 0 ? 10 : pageSize, search);
-
+            if (interexpert == null)
+            {
+                return BadRequest();
+            }
             return Ok(
                 interexpert
                 );
@@ -55,6 +62,10 @@ namespace Foreign_Trips.Controllers
         {
 
             var intexpert = await _internationalexpertRepository.GetInternationalExpertAsync(Model.InternationalExpertId);
+            if (intexpert == null)
+            {
+                return BadRequest();
+            }
             return Ok(
          _mapper.Map<InternationalExpertTbl>(intexpert)
          );
@@ -112,13 +123,13 @@ namespace Foreign_Trips.Controllers
         {
             try
             {
-                if (!await _internationalexpertRepository.InternationalExpertExistsAsync(Model.InternationalExpertId))
+                var exp = await _internationalexpertRepository.RemoveInternationalExpert(Model.InternationalExpertId);
+                if (exp == null)
                 {
-                    return NoContent();
+                    return BadRequest();
                 }
-                _internationalexpertRepository.RemoveInternationalExpert(Model.InternationalExpertId);
 
-                return Ok();
+                return Ok(exp);
             }
 
             catch (System.Exception ex)
@@ -149,6 +160,10 @@ namespace Foreign_Trips.Controllers
         {
 
             var messages = await _messageRepository.GetMessageAsync(Model.MessageId);
+            if (messages == null)
+            {
+                return BadRequest();
+            }
             return Ok(messages);
 
         }
@@ -194,6 +209,10 @@ namespace Foreign_Trips.Controllers
         {
 
             var req = await _requestRepository.GetRequestAsync(Model.RequestId);
+            if (req == null)
+            {
+                return BadRequest();
+            }
             return Ok(
          _mapper.Map<RequestTbl>(req)
          );
@@ -208,6 +227,10 @@ namespace Foreign_Trips.Controllers
         {
 
             var req = await _requestRepository.GetNewRequest(Model.RequestId);
+            if (req == null)
+            {
+                return BadRequest();
+            }
             return Ok(
          _mapper.Map<RequestTbl>(req)
          );
@@ -258,7 +281,7 @@ namespace Foreign_Trips.Controllers
         #region File
 
         [HttpPost("PostSingleFile")]
-        public async Task<ActionResult> PostSingleFile([FromForm] FileUploadModel fileDetails)
+        public async Task<ActionResult> PostSingleFile([FromForm] PhotoUploadModel fileDetails)
         {
             if (fileDetails == null)
             {
@@ -276,7 +299,7 @@ namespace Foreign_Trips.Controllers
             }
         }
         [HttpPost("PostMultipleFile")]
-        public async Task<ActionResult> PostMultipleFile([FromForm] List<FileUploadModel> fileDetails)
+        public async Task<ActionResult> PostMultipleFile([FromForm] List<PhotoUploadModel> fileDetails)
         {
             if (fileDetails == null)
             {
@@ -363,18 +386,22 @@ namespace Foreign_Trips.Controllers
         #endregion
 
         #region Admin
-
         [HttpGet]
-        [Route("GetInternationalAdmin")]
-        public async Task<ActionResult<IEnumerable<InternationalAdminTbl>>> GetAdmin()
-        {
-            var Int = await _internationaladminRepository.GetAdmins();
+        [Route("GetMainAdmin")]
 
+        public async Task<ActionResult<IEnumerable<MainAdminTbl>>> GetMainAdmin([FromQuery(Name = "page")] int page, [FromQuery(Name = "pageSize")] int pageSize, string search)
+
+        {
+            var Admin = await _mainadminRepository.GetMainAdmin(page == 0 ? 1 : page, pageSize == 0 ? 10 : pageSize, search);
+            if (Admin == null)
+            {
+                return BadRequest();
+            }
             return Ok(
-                _mapper.Map<IEnumerable<InternationalAdminTbl>>(Int)
+                //_mapper.Map<IEnumerable<AgentTbl>>(Agents)
+                Admin
                 );
         }
-
         #endregion
 
     }

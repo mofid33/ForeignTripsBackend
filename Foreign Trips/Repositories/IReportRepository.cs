@@ -11,7 +11,7 @@ namespace Foreign_Trips.Repositories
         Task<ReportTbl?> GetReportAsync(int reportId);
         Task<ReportTbl?> InsertReport(ReportTbl report);
         Task<ReportTbl?> UpdateReport(ReportTbl report);
-        Task RemoveReport(int reportId);
+        Task<string> RemoveReport(int reportId);
 
 
         //Task PostFileAsync(FileUploadModel fileData);

@@ -1,6 +1,10 @@
 {
   "Version": 1,
+<<<<<<< HEAD
   "Hash": "B9YPUju7L/n+1D9xADh85ggEIMIeVldtMZNbmUOQwLM=",
+=======
+  "Hash": "hCxNt58q8Illv5vPWtwRGigqaKrltHGetH6ZhaDjiR8=",
+>>>>>>> 8ccd1126373c5a5841c7c96865a4275a80d238a3
   "Source": "Foreign Trips",
   "BasePath": "_content/Foreign Trips",
   "Mode": "Default",
@@ -31,7 +35,45 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
+<<<<<<< HEAD
       "OriginalItemSpec": "wwwroot/uploads/Agents.xlsx"
+=======
+      "OriginalItemSpec": "wwwroot\\uploads\\Agents.xlsx"
+    },
+    {
+      "Identity": "F:\\Visual stadio\\Foreign Trips\\Foreign Trips\\wwwroot\\uploads\\sara_15c4.jpg",
+      "SourceId": "Foreign Trips",
+      "SourceType": "Discovered",
+      "ContentRoot": "F:\\Visual stadio\\Foreign Trips\\Foreign Trips\\wwwroot\\",
+      "BasePath": "_content/Foreign Trips",
+      "RelativePath": "uploads/sara_15c4.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\sara_15c4.jpg"
+    },
+    {
+      "Identity": "F:\\Visual stadio\\Foreign Trips\\Foreign Trips\\wwwroot\\uploads\\sara_2a8b.jpg",
+      "SourceId": "Foreign Trips",
+      "SourceType": "Discovered",
+      "ContentRoot": "F:\\Visual stadio\\Foreign Trips\\Foreign Trips\\wwwroot\\",
+      "BasePath": "_content/Foreign Trips",
+      "RelativePath": "uploads/sara_2a8b.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\sara_2a8b.jpg"
+>>>>>>> 8ccd1126373c5a5841c7c96865a4275a80d238a3
     }
   ]
 }

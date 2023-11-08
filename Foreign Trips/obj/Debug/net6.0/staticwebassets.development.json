@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 {"ContentRoots":["/Users/amirhossein/Projects/Foreign Trips/Foreign Trips/wwwroot/"],"Root":{"Children":{"uploads":{"Children":{"Agents.xlsx":{"Children":null,"Asset":{"ContentRootIndex":0,"SubPath":"uploads/Agents.xlsx"},"Patterns":null}},"Asset":null,"Patterns":null}},"Asset":null,"Patterns":[{"ContentRootIndex":0,"Pattern":"**","Depth":0}]}}
+=======
+{"ContentRoots":["F:\\Visual stadio\\Foreign Trips\\Foreign Trips\\wwwroot\\"],"Root":{"Children":{"uploads":{"Children":{"Agents.xlsx":{"Children":null,"Asset":{"ContentRootIndex":0,"SubPath":"uploads/Agents.xlsx"},"Patterns":null},"sara_15c4.jpg":{"Children":null,"Asset":{"ContentRootIndex":0,"SubPath":"uploads/sara_15c4.jpg"},"Patterns":null},"sara_2a8b.jpg":{"Children":null,"Asset":{"ContentRootIndex":0,"SubPath":"uploads/sara_2a8b.jpg"},"Patterns":null}},"Asset":null,"Patterns":null}},"Asset":null,"Patterns":[{"ContentRootIndex":0,"Pattern":"**","Depth":0}]}}
+>>>>>>> 8ccd1126373c5a5841c7c96865a4275a80d238a3

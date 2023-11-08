@@ -3,6 +3,7 @@ using Foreign_Trips.Entities;
 using Foreign_Trips.Model;
 using Foreign_Trips.Repositories;
 using Microsoft.AspNetCore.Mvc;
+using static NPOI.HSSF.Util.HSSFColor;
 
 namespace Foreign_Trips.Controllers
 {
@@ -31,7 +32,10 @@ namespace Foreign_Trips.Controllers
         public async Task<ActionResult<IEnumerable<RequestTbl>>> GetRequest([FromQuery(Name = "page")] int page, [FromQuery(Name = "pageSize")] int pageSize, string search)
         {
             var Requests = await _requestRepository.GetRequest(page == 0 ? 1 : page, pageSize == 0 ? 10 : pageSize, search);
-
+            if (Requests == null)
+            {
+                return BadRequest();
+            }
             return Ok(
                 Requests
                 );
@@ -46,6 +50,11 @@ namespace Foreign_Trips.Controllers
         {
 
             var req = await _requestRepository.GetRequestAsync(Model.RequestId);
+            if (req == null)
+            {
+                return BadRequest();
+            }
+
             return Ok(
          _mapper.Map<RequestTbl>(req)
          );
@@ -60,6 +69,12 @@ namespace Foreign_Trips.Controllers
         {
 
             var req = await _requestRepository.GetRequestsExpert(Convert.ToInt32(Model.InternationalExpertId));
+            if (req == null)
+            {
+                return BadRequest();
+            }
+      
+
             return Ok(
        req
          );
@@ -75,9 +90,11 @@ namespace Foreign_Trips.Controllers
         {
 
             var req = await _requestRepository.GetRequestEmployeeAsync(Model.RequestId);
-            return Ok(
-         req
-         );
+            if (req == null)
+            {
+                return BadRequest();
+            }
+            return Ok(req);
 
         }
 
@@ -90,6 +107,11 @@ namespace Foreign_Trips.Controllers
         {
 
             var req = await _requestRepository.GetNewRequest(Model.RequestId);
+            if (req == null)
+            {
+                return BadRequest();
+            }
+
             return Ok(
          _mapper.Map<RequestTbl>(req)
          );

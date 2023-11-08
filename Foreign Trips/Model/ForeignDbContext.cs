@@ -151,7 +151,7 @@ public partial class ForeignDbContext : DbContext
             entity.Property(e => e.Mobile).HasMaxLength(11);
             entity.Property(e => e.NationalCode).HasMaxLength(10);
             entity.Property(e => e.Phone).HasMaxLength(11);
-            entity.Property(e => e.Photo).HasColumnType("image");
+            entity.Property(e => e.Photo).HasMaxLength(100);
             entity.Property(e => e.PostalCode).HasMaxLength(100);
             entity.Property(e => e.RegisterDate).HasMaxLength(10);
             entity.Property(e => e.RegisterTime).HasMaxLength(10);

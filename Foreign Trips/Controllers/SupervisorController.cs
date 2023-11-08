@@ -4,6 +4,9 @@ using Foreign_Trips.Model;
 using Foreign_Trips.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using NPOI.SS.Formula.Functions;
+using ShenaseMeliBac.Profiles;
+using static NPOI.HSSF.Util.HSSFColor;
 
 namespace Foreign_Trips.Controllers
 {
@@ -34,7 +37,10 @@ namespace Foreign_Trips.Controllers
         public async Task<ActionResult<IEnumerable<SupervisorTbl>>> GetSupervisor([FromQuery(Name = "page")] int page, [FromQuery(Name = "pageSize")] int pageSize, string search)
         {
             var sup = await _supervisorRepository.GetSupervisor(page == 0 ? 1 : page, pageSize == 0 ? 10 : pageSize, search);
-
+            if (sup == null)
+            {
+                return BadRequest();
+            }
             return Ok(
                 sup
                 );
@@ -48,6 +54,12 @@ namespace Foreign_Trips.Controllers
         {
 
             var sup = await _supervisorRepository.GetSupervisorAsync(Model.SupervisorId);
+            if (sup == null)
+            {
+                return BadRequest();
+            }
+ 
+
             return Ok(
          _mapper.Map<SupervisorTbl>(sup)
          );
@@ -80,9 +92,13 @@ namespace Foreign_Trips.Controllers
             {
                 return NoContent();
             }
-            _supervisorRepository.UpdateSupervisorAsync(Model);
+            var sup = await _supervisorRepository.UpdateSupervisorAsync(Model);
+            if (sup == null)
+            {
+                return BadRequest();
+            }
 
-            return Ok(); ;
+            return Ok(sup); ;
 
         }
 
@@ -92,13 +108,14 @@ namespace Foreign_Trips.Controllers
        [FromBody] SupervisorTbl Model
        )
         {
-            if (!await _supervisorRepository.SupervisorExistsAsync(Model.SupervisorId))
+           
+            var sup = await _supervisorRepository.RemoveSupervisorAsync(Model.SupervisorId);
+            if (sup == null)
             {
-                return NotFound();
-            }
-            _supervisorRepository.RemoveSupervisorAsync(Model.SupervisorId);
+                return BadRequest();
+            } 
 
-            return Ok();
+            return Ok(sup);
 
         }
 
@@ -111,7 +128,10 @@ namespace Foreign_Trips.Controllers
         public async Task<ActionResult<IEnumerable<AgentTbl>>> GetAgents([FromQuery(Name = "page")] int page, [FromQuery(Name = "pageSize")] int pageSize, String search)
         {
             var Agents = await _agentRepository.GetAgent(page == 0 ? 1 : page, pageSize == 0 ? 10 : pageSize, search);
-
+            if (Agents == null)
+            {
+                return BadRequest();
+            }
             return Ok(
                 //_mapper.Map<IEnumerable<AgentTbl>>(Agents)
                 Agents
@@ -127,7 +147,10 @@ namespace Foreign_Trips.Controllers
         public async Task<ActionResult<IEnumerable<ReportTbl>>> GetReport()
         {
             var reports = await _reportRepository.GetReport();
-
+            if (reports == null)
+            {
+                return BadRequest();
+            }
             return Ok(
                 reports
                 );
@@ -141,6 +164,10 @@ namespace Foreign_Trips.Controllers
         {
 
             var rep = await _reportRepository.GetReportAsync(Model.ReportId);
+            if (rep == null)
+            {
+                return BadRequest();
+            }
             return Ok(
          _mapper.Map<ReportTbl>(rep)
          );

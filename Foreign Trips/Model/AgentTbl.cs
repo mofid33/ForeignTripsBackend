@@ -45,8 +45,6 @@ public partial class AgentTbl
 
     public string Subset { get; set; } = null!;
 
-    public byte[]? Photo { get; set; }
-
     public string RegisterDate { get; set; } = null!;
 
     public string RegisterTime { get; set; } = null!;
@@ -62,6 +60,8 @@ public partial class AgentTbl
     public byte[]? PasswordSalt { get; set; }
 
     public byte[]? Password { get; set; }
+
+    public string? Photo { get; set; }
 
     public virtual AgentStatusTbl? AgentStatus { get; set; }
 
