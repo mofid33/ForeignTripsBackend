@@ -10,7 +10,7 @@
         public string Token { get; set; }
         
 
-        public LoginDto(string userName, string password, string role, long id, string token, string photo)
+        public LoginDto(string userName, string password, string role, long id, string photo, string token)
         {
             Username = userName;
             Password = password;
