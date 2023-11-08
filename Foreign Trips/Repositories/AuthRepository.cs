@@ -67,6 +67,7 @@ namespace Foreign_Trips.Repositories
                     model.Password,
                     model.Role,
                     model.ID,
+                    model.Photo,
                     tokenToReturn
                     );
 

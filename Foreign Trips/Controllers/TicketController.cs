@@ -113,6 +113,7 @@ namespace Foreign_Trips.Controllers
 
 
 
+
         [HttpGet]
         [Route("GetTickets")]
         public async Task<ActionResult<TicketTbl>> GetTickets([FromQuery(Name = "page")] int page, [FromQuery(Name = "pageSize")] int pageSize, string search)
