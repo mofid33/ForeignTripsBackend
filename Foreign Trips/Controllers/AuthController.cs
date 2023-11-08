@@ -37,6 +37,7 @@ namespace Foreign_Trips.Controllers
                 user.Result.Password,
                 user.Result.Role,
                 user.Result.ID,
+                user.Result.Photo,
                 null
             ));
 

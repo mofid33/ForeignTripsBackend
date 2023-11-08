@@ -103,7 +103,8 @@ namespace Foreign_Trips.Repositories
                 password,
                 "MainAdmin",
                 mainadmin[0].MainAdminId,
-               null
+                null,
+                null
                );
                 }
 
@@ -131,7 +132,8 @@ namespace Foreign_Trips.Repositories
                     password,
                     "Supervisor",
                    supervisor[0].SupervisorId,
-           null);
+                   null,
+                   null);
                     }
 
 
@@ -160,7 +162,8 @@ namespace Foreign_Trips.Repositories
                         password,
                         "InternationalExpert",
                        intexpert[0].InternationalExpertId,
-               null);
+                        null,
+                        null);
                         }
 
                         else
@@ -187,7 +190,8 @@ namespace Foreign_Trips.Repositories
                             password,
                             "InternationalAdmin",
                            intadmin[0].AdminId,
-                   null);
+                           null,
+                           null);
                             }
 
 
@@ -215,7 +219,8 @@ namespace Foreign_Trips.Repositories
                                 password,
                                 "Agent",
                                agent[0].AgentId,
-                       null);
+                               agent[0].Photo,
+                               null);
                                 }
                                 else
                                 {
