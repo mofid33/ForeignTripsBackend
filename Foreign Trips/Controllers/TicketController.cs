@@ -11,18 +11,11 @@ namespace Foreign_Trips.Controllers
     public class TicketController :ControllerBase
     {
         private readonly ITicketRepository _ticketRepository;
-        private readonly IMessageRepository _messageRepository;
         private readonly IMapper _mapper;
 
-        public TicketController(ITicketRepository ticketRepository, IMessageRepository messageRepository,
-                                IMapper mapper)
+        public TicketController(ITicketRepository ticketRepository,IMapper mapper)
         {
-            _ticketRepository = ticketRepository ??
-                throw new ArgumentNullException(nameof(ticketRepository));
-            _messageRepository = messageRepository ??
-                throw new ArgumentNullException(nameof(messageRepository));
-
-
+            _ticketRepository = ticketRepository ?? throw new ArgumentNullException(nameof(ticketRepository));
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
 
