@@ -10,7 +10,7 @@ namespace Foreign_Trips.Repositories
         Task<TicketPageDto> GetTickets(int page, int pageSize, string search,int agentId);
         Task<TicketPageDto> GetTicketExpert(int page, int pageSize, string search, int ExpertId);
         Task<TicketPageDto> GetTicketAdmin(int page, int pageSize, string search, int AdminId);
-        Task<TicketPageDto> GetTicketMainAdmin(int page, int pageSize, string search);
+        Task<TicketPageDto> GetTicketMainAdmin(int page, int pageSize, string search, int MainAdminId);
         Task<TicketTbl?> GetTicketAsync(int ticketId);
         Task<TicketDetailsTbl?> InsertSubTicketExpertToAgent(TicketDetailsDto ticket);
         Task<TicketDetailsTbl?> InsertSubTicketExpertAdmin(TicketDetailsTbl ticket);

@@ -57,11 +57,12 @@ namespace Foreign_Trips.Repositories
 
         //LevelRightOfMission  table nadare
         //نوع اقامت کدومه
-        public async Task<IEnumerable<RequestTbl?>> GetRequestsExpert(int ExpertId)
+        public async  Task<RequestPageDto> GetRequestsExpert(int page, int pageSize, string search, int ExpertId)
         {
             try
             {
-                return await _context.RequestTbl
+                var request = await _context.RequestTbl
+              
                  .Include(c => c.Agent)
                  .Include(c => c.RequestStatus)
                  .Include(c => c.InternationalExpert)
@@ -69,8 +70,17 @@ namespace Foreign_Trips.Repositories
                  .Include(c => c.TypeAccommodation)
                  .Include(c => c.TollAmount)
                  .Where(t => t.InternationalExpertId == ExpertId || t.InternationalExpertId == null)
+                 .Where(t => (search != "" && search != null) ? (t.InternationalExpert.InternationalExpertName.Contains(search) || t.InternationalExpert.InternationalExpertFamily.Contains(search)) : t.InternationalExpert.InternationalExpertName != null)
 
                  .ToListAsync();
+
+                var ss = await PaginatedList<RequestTbl>.CreateAsync(request, page, pageSize);
+                return new RequestPageDto
+                {
+                    Count = request.Count(),
+                    Data = ss
+
+                };
             }
             catch (System.Exception ex)
             {
@@ -124,13 +134,24 @@ namespace Foreign_Trips.Repositories
         }
 
 
-        public async Task<IEnumerable<RequestTbl?>> GetRequestsAdmin(int AdminId)
+        public async Task<RequestPageDto> GetRequestsAdmin(int page, int pageSize, string search, int AdminId)
         {
             try
             {
-                return await _context.RequestTbl
-                 .Include(c => c.Agent).Where(t => t.AdminId == AdminId || t.AdminId == null)
+                var request = await _context.RequestTbl
+               
+                 .Include(c => c.Agent)
+                 .Where(t => t.AdminId == AdminId || t.AdminId == null)
+                 .Where(t => (search != "" && search != null) ? (t.Admin.AdminName.Contains(search) || t.Admin.AdminUsername.Contains(search)) : t.Admin.AdminName != null)
                  .ToListAsync();
+
+                var ss = await PaginatedList<RequestTbl>.CreateAsync(request, page, pageSize);
+                return new RequestPageDto
+                {
+                    Count = request.Count(),
+                    Data = ss
+
+                };
             }
             catch (System.Exception ex)
             {
@@ -138,14 +159,25 @@ namespace Foreign_Trips.Repositories
             }
         }
 
-        public async Task<IEnumerable<RequestTbl?>> GetRequestsMainAdmin(int MainAdminId)
+        public async Task<RequestPageDto> GetRequestsMainAdmin(int page, int pageSize, string search, int MainAdminId)
         {
             try
             {
 
-                return await _context.RequestTbl
-                 .Include(c => c.Agent).Where(t => t.MainAdminId == MainAdminId || t.MainAdminId == null)
+                 var request = await _context.RequestTbl
+                 .Include(c => c.Agent)
+                 .Where(t => t.MainAdminId == MainAdminId || t.MainAdminId == null)
+                 .Where(t => (search != "" && search != null) ? (t.MainAdmin.MainAdminName.Contains(search) || t.MainAdmin.MainAdminUserName.Contains(search)) : t.MainAdmin.MainAdminName != null)
                  .ToListAsync();
+
+                var ss = await PaginatedList<RequestTbl>.CreateAsync(request, page, pageSize);
+                return new RequestPageDto
+                {
+                    Count = request.Count(),
+                    Data = ss
+
+                };
+
             }
             catch (System.Exception ex)
             {

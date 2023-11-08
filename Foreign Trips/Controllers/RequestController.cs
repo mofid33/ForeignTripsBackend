@@ -91,23 +91,52 @@ namespace Foreign_Trips.Controllers
 
         [HttpPost]
         [Route("GetRequestsExpert")]
-        public async Task<ActionResult<RequestTbl>> GetRequestExpert(
-   [FromBody] RequestTbl Model
-   )
+
+
+        public async Task<ActionResult<TicketTbl>> GetRequestExpert([FromQuery(Name = "page")] int page, [FromQuery(Name = "pageSize")] int pageSize, string search, [FromBody] RequestTbl Model)
         {
 
-            var req = await _requestRepository.GetRequestsExpert(Convert.ToInt32(Model.InternationalExpertId));
+            var req = await _requestRepository.GetRequestsExpert(page == 0 ? 1 : page, pageSize == 0 ? 10 : pageSize, search, Convert.ToInt32(Model.InternationalExpertId));
             if (req == null)
             {
                 return BadRequest();
             }
-      
-
-            return Ok(
-       req
-         );
+            return Ok(_mapper.Map<IEnumerable<MessageTbl>>(req));
 
         }
+
+        [HttpPost]
+        [Route("GetRequestsAdmin")]
+
+
+        public async Task<ActionResult<TicketTbl>> GetRequestAdmin([FromQuery(Name = "page")] int page, [FromQuery(Name = "pageSize")] int pageSize, string search, [FromBody] RequestTbl Model)
+        {
+
+            var req = await _requestRepository.GetRequestsAdmin(page == 0 ? 1 : page, pageSize == 0 ? 10 : pageSize, search, Convert.ToInt32(Model.AdminId));
+            if (req == null)
+            {
+                return BadRequest();
+            }
+            return Ok(_mapper.Map<IEnumerable<MessageTbl>>(req));
+
+        }
+
+        [HttpPost]
+        [Route("GetRequestsMainAdmin")]
+
+
+        public async Task<ActionResult<TicketTbl>> GetRequestMainAdmin([FromQuery(Name = "page")] int page, [FromQuery(Name = "pageSize")] int pageSize, string search, [FromBody] RequestTbl Model)
+        {
+
+            var req = await _requestRepository.GetRequestsMainAdmin(page == 0 ? 1 : page, pageSize == 0 ? 10 : pageSize, search, Convert.ToInt32(Model.MainAdminId));
+            if (req == null)
+            {
+                return BadRequest();
+            }
+            return Ok(_mapper.Map<IEnumerable<MessageTbl>>(req));
+
+        }
+
 
 
         [HttpPost]
