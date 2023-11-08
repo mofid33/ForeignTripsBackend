@@ -125,13 +125,14 @@ namespace Foreign_Trips.Repositories
             }
         }
 
-        public async Task<TicketPageDto> GetTicketMainAdmin(int page, int pageSize, string search)
+        public async Task<TicketPageDto> GetTicketMainAdmin(int page, int pageSize, string search, int MainAdminId)
         {
             try
             {
                    var ticket = await _context.TicketTbl
                    .Include(t => t.MainAdmin)
                    .Include(t => t.TicketStatus)
+                   .Where(t => t.MainAdminId == MainAdminId || t.MainAdminId == null)
                    .Where(t => (search != "" && search != null) ? (t.MainAdmin.MainAdminName.Contains(search) || t.MainAdmin.MainAdminUserName.Contains(search)) : t.MainAdmin.MainAdminName != null)
                    .ToListAsync();
 
