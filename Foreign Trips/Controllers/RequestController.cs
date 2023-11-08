@@ -12,6 +12,7 @@ namespace Foreign_Trips.Controllers
     {
         private readonly IRequestRepository _requestRepository;
         private readonly IAgentRepository _agentRepository;
+        private readonly IAuthRepository _authRepository;
         private readonly IMapper _mapper;
 
 
@@ -60,6 +61,33 @@ namespace Foreign_Trips.Controllers
          );
 
         }
+
+        [HttpGet]
+        [Route("GetRequestsAgent")]
+        public async Task<ActionResult<IEnumerable<RequestTbl>>> GetRequestAgent([FromQuery(Name = "page")] int page, [FromQuery(Name = "pageSize")] int pageSize, string search)
+        {
+            string authHeader = HttpContext.Request.Headers["Authorization"].ToString().Replace("Bearer ", string.Empty);
+
+            var AgentID = _authRepository.GetIDFromToken(authHeader);
+            if (!await _agentRepository.AgentExistsAsync(AgentID))
+            {
+                return NotFound();
+            }
+            var Agent = await _agentRepository.GetAgentAsync(AgentID);
+            if (Agent == null)
+            {
+                return BadRequest();
+            }
+            var Requests = await _requestRepository.GetRequestsAgent(page == 0 ? 1 : page, pageSize == 0 ? 10 : pageSize, search, AgentID);
+            if (Requests == null)
+            {
+                return BadRequest();
+            }
+            return Ok(
+                Requests
+                );
+        }
+
 
         [HttpPost]
         [Route("GetRequestsExpert")]

@@ -175,15 +175,25 @@ namespace Foreign_Trips.Repositories
                 return null;
             }
         }
-        public async Task<IEnumerable<RequestTbl?>> GetRequestsAgent(int agentId)
+        public async Task<RequestPageDto> GetRequestsAgent(int page, int pageSize, string search,int agentId)
         {
             try
             {
-                return await _context.RequestTbl
+                 var request = await _context.RequestTbl
                  .Include(c => c.Agent)
                  .Include(c => c.RequestStatus)
+                 .Where(t=>t.AgentId==agentId)
+                 .Where(t => (search != "" && search != null) ? (t.Agent.AgentName == search || t.Agent.AgentFamily == search) : t.Agent.AgentName != null)
 
-                 .Where(c => c.AgentId == agentId).ToListAsync();
+                 .ToListAsync();
+
+                var ss = await PaginatedList<RequestTbl>.CreateAsync(request, page, pageSize);
+                return new RequestPageDto
+                {
+                    Count = request.Count(),
+                    Data = ss
+
+                };
             }
             catch (System.Exception ex)
             {
