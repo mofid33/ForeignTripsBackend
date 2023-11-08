@@ -10,7 +10,6 @@ namespace Foreign_Trips.Entities
         public int FileId { get; set; }
         public string FileName { get; set; }
         public long? AgentId { get; set; }
-        public int? FileTypeId { get; set; }
         public string Date { get; set; }
     }
 }

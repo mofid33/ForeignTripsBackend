@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "hCxNt58q8Illv5vPWtwRGigqaKrltHGetH6ZhaDjiR8=",
+  "Hash": "iSMPcI5wTBHoHChaqaLhI8h9DXgqj565NuuRKzrbqhA=",
   "Source": "Foreign Trips",
   "BasePath": "_content/Foreign Trips",
   "Mode": "Default",
@@ -32,6 +32,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\uploads\\Agents.xlsx"
+    },
+    {
+      "Identity": "F:\\Visual stadio\\Foreign Trips\\Foreign Trips\\wwwroot\\uploads\\sara_1399.jpg",
+      "SourceId": "Foreign Trips",
+      "SourceType": "Discovered",
+      "ContentRoot": "F:\\Visual stadio\\Foreign Trips\\Foreign Trips\\wwwroot\\",
+      "BasePath": "_content/Foreign Trips",
+      "RelativePath": "uploads/sara_1399.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\sara_1399.jpg"
     },
     {
       "Identity": "F:\\Visual stadio\\Foreign Trips\\Foreign Trips\\wwwroot\\uploads\\sara_15c4.jpg",
