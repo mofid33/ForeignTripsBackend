@@ -32,7 +32,10 @@ namespace Foreign_Trips.Controllers
         public async Task<ActionResult<IEnumerable<RequestTbl>>> GetRequest([FromQuery(Name = "page")] int page, [FromQuery(Name = "pageSize")] int pageSize, string search)
         {
             var Requests = await _requestRepository.GetRequest(page == 0 ? 1 : page, pageSize == 0 ? 10 : pageSize, search);
-
+            if (Requests == null)
+            {
+                return BadRequest();
+            }
             return Ok(
                 Requests
                 );
@@ -92,10 +95,6 @@ namespace Foreign_Trips.Controllers
                 return BadRequest();
             }
             return Ok(req);
-
-            return Ok(
-         req
-         );
 
         }
 

@@ -4,6 +4,7 @@ using Foreign_Trips.Model;
 using Foreign_Trips.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using NPOI.SS.Formula.Functions;
 using ShenaseMeliBac.Profiles;
 
 namespace Foreign_Trips.Controllers
@@ -38,7 +39,10 @@ namespace Foreign_Trips.Controllers
 
         {
             var Agents = await _agentRepository.GetAgent(page==0?1:page , pageSize == 0 ? 10 : pageSize , search);
-
+            if (Agents == null)
+            {
+                return BadRequest();
+            }
             return Ok(
                 //_mapper.Map<IEnumerable<AgentTbl>>(Agents)
                 Agents
@@ -183,57 +187,20 @@ namespace Foreign_Trips.Controllers
 
         #region Request
 
-
         [HttpGet]
         [Route("GetRequests")]
         public async Task<ActionResult<IEnumerable<RequestTbl>>> GetRequest([FromQuery(Name = "page")] int page, [FromQuery(Name = "pageSize")] int pageSize, string search)
         {
             var Requests = await _requestRepository.GetRequest(page == 0 ? 1 : page, pageSize == 0 ? 10 : pageSize, search);
-
+            if (Requests == null)
+            {
+                return BadRequest();
+            }
             return Ok(
                 Requests
                 );
         }
 
-        [HttpGet]
-        [Route("GetRequestsAgent")]
-        public async Task<ActionResult<RequestEmployeeTbl>> GetRequestsAgent()
-        {
-
-            string authHeader = HttpContext.Request.Headers["Authorization"].ToString().Replace("Bearer ", string.Empty);
-
-            var AgentID = _authRepository.GetIDFromToken(authHeader);
-            if (!await _agentRepository.AgentExistsAsync(AgentID))
-            {
-                return NotFound();
-            }
-            var Agent = await _requestRepository.GetRequestsAgent(AgentID);
-            if (Agent == null)
-            {
-                return BadRequest();
-            }
-            return Ok(Agent);
-
-        }
-
-        [HttpPost]
-        [Route("GetRequestEmployee")]
-        public async Task<ActionResult<RequestEmployeeTbl>> GetRequestEmployee(
-     [FromBody] RequestEmployeeTbl Model
-     )
-        {
-
-            var req = await _requestRepository.GetRequestEmployeeAsync(Model.RequestId);
-            if (req == null)
-            {
-                return BadRequest();
-            }
-
-            return Ok(
-         _mapper.Map<RequestTbl>(req)
-         );
-
-        }
 
         [HttpPost]
         [Route("GetRequest")]
@@ -254,7 +221,63 @@ namespace Foreign_Trips.Controllers
 
         }
 
+        [HttpPost]
+        [Route("GetRequestsExpert")]
+        public async Task<ActionResult<RequestTbl>> GetRequestExpert(
+   [FromBody] RequestTbl Model
+   )
+        {
 
+            var req = await _requestRepository.GetRequestsExpert(Convert.ToInt32(Model.InternationalExpertId));
+            if (req == null)
+            {
+                return BadRequest();
+            }
+
+
+            return Ok(
+       req
+         );
+
+        }
+
+
+        [HttpPost]
+        [Route("GetRequestEmployee")]
+        public async Task<ActionResult<RequestEmployeeTbl>> GetRequestEmployee(
+     [FromBody] RequestEmployeeTbl Model
+     )
+        {
+
+            var req = await _requestRepository.GetRequestEmployeeAsync(Model.RequestId);
+            if (req == null)
+            {
+                return BadRequest();
+            }
+            return Ok(req);
+
+
+        }
+
+
+        [HttpPost]
+        [Route("GetnewRequest")]
+        public async Task<ActionResult<RequestTbl>> GetNewRequest(
+    [FromBody] RequestTbl Model
+    )
+        {
+
+            var req = await _requestRepository.GetNewRequest(Model.RequestId);
+            if (req == null)
+            {
+                return BadRequest();
+            }
+
+            return Ok(
+         _mapper.Map<RequestTbl>(req)
+         );
+
+        }
 
 
 
@@ -262,7 +285,7 @@ namespace Foreign_Trips.Controllers
         [Route("InsertRequest")]
         public async Task<ActionResult<RequestTbl>> InsertRequest(
 [FromBody] RequestTbl Model
-           )
+            )
 
         {
 
@@ -364,7 +387,6 @@ namespace Foreign_Trips.Controllers
 
         }
 
-
         #endregion
 
         #region Report
@@ -378,7 +400,6 @@ namespace Foreign_Trips.Controllers
                 return BadRequest();
             }
 
-
             return Ok(
                 reports
                 );
@@ -387,8 +408,8 @@ namespace Foreign_Trips.Controllers
         [HttpPost]
         [Route("GetReport")]
         public async Task<ActionResult<ReportTbl>> GetReport(
-     [FromBody] ReportTbl Model
-     )
+    [FromBody] ReportTbl Model
+    )
         {
 
             var rep = await _reportRepository.GetReportAsync(Model.ReportId);
@@ -396,9 +417,8 @@ namespace Foreign_Trips.Controllers
             {
                 return BadRequest();
             }
-
             return Ok(
-         _mapper.Map<ReportTbl>(rep)
+         rep
          );
 
         }
@@ -407,8 +427,8 @@ namespace Foreign_Trips.Controllers
         [HttpPost]
         [Route("InsertReport")]
         public async Task<ActionResult<ReportTbl>> InsertReport(
-    [FromBody] ReportTbl Model
-    )
+   [FromBody] ReportTbl Model
+   )
         {
 
             var Rep = await _reportRepository.InsertReport(Model);
@@ -420,7 +440,6 @@ namespace Foreign_Trips.Controllers
 
         }
         #endregion
-
 
         #region Country
         [HttpGet]

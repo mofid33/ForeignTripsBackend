@@ -3,6 +3,7 @@ using Foreign_Trips.Entities;
 using Foreign_Trips.Model;
 using Foreign_Trips.Repositories;
 using Microsoft.AspNetCore.Mvc;
+using static NPOI.HSSF.Util.HSSFColor;
 
 namespace Foreign_Trips.Controllers
 {
@@ -41,7 +42,10 @@ namespace Foreign_Trips.Controllers
         public async Task<ActionResult<IEnumerable<InternationalExpertTbl>>> GetInternationalExpert([FromQuery(Name = "page")] int page, [FromQuery(Name = "pageSize")] int pageSize, string search)
         {
             var interexpert = await _internationalexpertRepository.GetInternationalExpert(page == 0 ? 1 : page, pageSize == 0 ? 10 : pageSize, search);
-
+            if (interexpert == null)
+            {
+                return BadRequest();
+            }
             return Ok(
                 interexpert
                 );
@@ -385,11 +389,14 @@ namespace Foreign_Trips.Controllers
         public async Task<ActionResult<IEnumerable<MainAdminTbl>>> GetMainAdmin([FromQuery(Name = "page")] int page, [FromQuery(Name = "pageSize")] int pageSize, string search)
 
         {
-            var admin = await _internationaladminRepository.GetMainAdmin(page == 0 ? 1 : page, pageSize == 0 ? 10 : pageSize, search);
-
+            var Admin = await _internationaladminRepository.GetMainAdmin(page == 0 ? 1 : page, pageSize == 0 ? 10 : pageSize, search);
+            if (Admin == null)
+            {
+                return BadRequest();
+            }
             return Ok(
                 //_mapper.Map<IEnumerable<AgentTbl>>(Agents)
-                admin
+                Admin
                 );
         }
         #endregion

@@ -54,7 +54,10 @@ namespace Foreign_Trips.Controllers
 
         {
             var Admin = await _internationaladminRepository.GetMainAdmin(page == 0 ? 1 : page, pageSize == 0 ? 10 : pageSize, search);
-
+            if (Admin == null)
+            {
+                return BadRequest();
+            }
             return Ok(
                 //_mapper.Map<IEnumerable<AgentTbl>>(Agents)
                 Admin

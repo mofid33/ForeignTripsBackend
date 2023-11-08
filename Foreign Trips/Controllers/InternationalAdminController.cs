@@ -139,11 +139,12 @@ namespace Foreign_Trips.Controllers
                 }
                 return Ok(admin);
             }
-            
-         
+
+
 
 
         #region Supervisor
+
         [HttpGet]
         [Route("GetSupervisor")]
         public async Task<ActionResult<IEnumerable<SupervisorTbl>>> GetSupervisor([FromQuery(Name = "page")] int page, [FromQuery(Name = "pageSize")] int pageSize, string search)
@@ -156,6 +157,26 @@ namespace Foreign_Trips.Controllers
             return Ok(
                 sup
                 );
+        }
+
+        [HttpPost]
+        [Route("GetSupervisors")]
+        public async Task<ActionResult<SupervisorTbl>> GetSupervisors(
+             [FromBody] SupervisorTbl Model
+             )
+        {
+
+            var sup = await _supervisorRepository.GetSupervisorAsync(Model.SupervisorId);
+            if (sup == null)
+            {
+                return BadRequest();
+            }
+
+
+            return Ok(
+         _mapper.Map<SupervisorTbl>(sup)
+         );
+
         }
 
         [HttpPost]
@@ -180,12 +201,17 @@ namespace Foreign_Trips.Controllers
 [FromBody] SupervisorTbl Model
 )
         {
+            if (!await _supervisorRepository.SupervisorExistsAsync(Model.SupervisorId))
+            {
+                return NoContent();
+            }
             var sup = await _supervisorRepository.UpdateSupervisorAsync(Model);
             if (sup == null)
             {
                 return BadRequest();
             }
-            return Ok();
+
+            return Ok(sup); ;
 
         }
 
@@ -195,13 +221,14 @@ namespace Foreign_Trips.Controllers
        [FromBody] SupervisorTbl Model
        )
         {
-            if (!await _supervisorRepository.SupervisorExistsAsync(Model.SupervisorId))
-            {
-                return NotFound();
-            }
-            _supervisorRepository.RemoveSupervisorAsync(Model.SupervisorId);
 
-            return Ok();
+            var sup = await _supervisorRepository.RemoveSupervisorAsync(Model.SupervisorId);
+            if (sup == null)
+            {
+                return BadRequest();
+            }
+
+            return Ok(sup);
 
         }
         #endregion
@@ -213,20 +240,22 @@ namespace Foreign_Trips.Controllers
         public async Task<ActionResult<IEnumerable<InternationalExpertTbl>>> GetInternationalExpert([FromQuery(Name = "page")] int page, [FromQuery(Name = "pageSize")] int pageSize, string search)
         {
             var interexpert = await _internationalexpertRepository.GetInternationalExpert(page == 0 ? 1 : page, pageSize == 0 ? 10 : pageSize, search);
+            if (interexpert == null)
+            {
+                return BadRequest();
+            }
             return Ok(
                 interexpert
                 );
-
         }
 
 
 
-
-            [HttpPost]
+        [HttpPost]
         [Route("InsertInternationalExpert")]
         public async Task<ActionResult<InternationalExpertDto>> InsertInternationalExpert(
-    [FromBody] InternationalExpertDto Model
-    )
+   [FromBody] InternationalExpertDto Model
+   )
         {
 
             var Inter = await _internationalexpertRepository.InsertInternationalExpert(Model);
@@ -270,14 +299,13 @@ namespace Foreign_Trips.Controllers
         {
             try
             {
-                var Intexp = await _internationalexpertRepository.RemoveInternationalExpert(Model.InternationalExpertId);
-                if (Intexp == null)
+                var exp = await _internationalexpertRepository.RemoveInternationalExpert(Model.InternationalExpertId);
+                if (exp == null)
                 {
                     return BadRequest();
                 }
 
-
-                return Ok();
+                return Ok(exp);
             }
 
             catch (System.Exception ex)
@@ -294,10 +322,14 @@ namespace Foreign_Trips.Controllers
         [HttpGet]
         [Route("GetAgents")]
 
-        public async Task<ActionResult<IEnumerable<AgentTbl>>> GetAgents([FromQuery(Name = "page")] int page, [FromQuery(Name = "pageSize")] int pageSize, String search)
+        public async Task<ActionResult<IEnumerable<AgentTbl>>> GetAgents([FromQuery(Name = "page")] int page, [FromQuery(Name = "pageSize")] int pageSize, string search)
+
         {
             var Agents = await _agentRepository.GetAgent(page == 0 ? 1 : page, pageSize == 0 ? 10 : pageSize, search);
-
+            if (Agents == null)
+            {
+                return BadRequest();
+            }
             return Ok(
                 //_mapper.Map<IEnumerable<AgentTbl>>(Agents)
                 Agents
@@ -320,11 +352,12 @@ namespace Foreign_Trips.Controllers
             return Ok(Eagent);
 
         }
+
         [HttpPost]
         [Route("InsertAgent")]
         public async Task<ActionResult<AgentDto>> InsertAgnet(
-       [FromBody] AgentDto Model
-       )
+        [FromBody] AgentDto Model
+        )
         {
 
             var Eagent = await _agentRepository.InsertAgentAsync(Model);
@@ -333,11 +366,9 @@ namespace Foreign_Trips.Controllers
                 return BadRequest();
             }
 
-            return Ok();
+            return Ok(Eagent);
 
         }
-
-
 
         [HttpPost]
         [Route("UpdateAgnet")]
@@ -347,7 +378,7 @@ namespace Foreign_Trips.Controllers
         {
             if (!await _agentRepository.AgentExistsAsync(Model.AgentId))
             {
-                return NotFound();
+                return NoContent();
             }
 
             var Eagent = await _agentRepository.UpdateAgentAsync(Model);
@@ -357,8 +388,8 @@ namespace Foreign_Trips.Controllers
             }
 
             return Ok(Eagent);
-
-          
+           
+        
         }
 
 
@@ -421,7 +452,10 @@ namespace Foreign_Trips.Controllers
         {
 
             var messages = await _messageRepository.GetMessage(page == 0 ? 1 : page, pageSize == 0 ? 10 : pageSize, search);
-
+            if (messages == null)
+            {
+                return BadRequest();
+            }
             return Ok(_mapper.Map<IEnumerable<MessageTbl>>(messages));
 
         }

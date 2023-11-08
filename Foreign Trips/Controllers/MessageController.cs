@@ -44,7 +44,10 @@ namespace Foreign_Trips.Controllers
         {
 
             var messages = await _messageRepository.GetMessage(page == 0 ? 1 : page, pageSize == 0 ? 10 : pageSize, search);
-
+            if (messages == null)
+            {
+                return BadRequest();
+            }
             return Ok(_mapper.Map<IEnumerable<MessageTbl>>(messages));
 
         }

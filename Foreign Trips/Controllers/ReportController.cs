@@ -52,6 +52,7 @@ namespace Foreign_Trips.Controllers
          );
 
         }
+
         [HttpPost]
         [Route("GetReport")]
         public async Task<ActionResult<ReportTbl>> GetReport(
