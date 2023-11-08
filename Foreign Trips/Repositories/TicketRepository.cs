@@ -47,13 +47,14 @@ namespace Foreign_Trips.Repositories
             }
         }
 
-        public async Task<TicketPageDto> GetTickets(int page, int pageSize, string search)
+        public async Task<TicketPageDto> GetTickets(int page, int pageSize, string search, int agentId)
         {
             try
             {
                 var ticket = await _context.TicketTbl
                 .Include(t => t.TicketStatus)
                 .Include(t => t.Agent)
+                .Where(t => t.AgentId == agentId)
                 .Where(t => (search != "" && search != null) ? (t.Agent.AgentName.Contains(search) || t.Agent.AgentFamily.Contains(search)) : t.Agent.AgentName != null)
 
 
@@ -73,16 +74,17 @@ namespace Foreign_Trips.Repositories
             }
         }
 
-        public async Task<TicketPageDto> GetTicketExpert(int page, int pageSize, string search)
+        public async Task<TicketPageDto> GetTicketExpert(int page, int pageSize, string search, int ExpertId)
         {
             try
             {
                    var ticket = await _context.TicketTbl
                    .Include(t => t.InternationalExpert)
                    .Include(t => t.TicketStatus)
+                   .Where(t => t.InternationalExpertId == ExpertId || t.InternationalExpertId == null)
                    .Where(t => (search != "" && search != null) ? (t.InternationalExpert.InternationalExpertName.Contains(search) || t.InternationalExpert.InternationalExpertFamily.Contains(search)) : t.InternationalExpert.InternationalExpertName != null)
                    .ToListAsync();
-
+                   
 
                 var ss = await PaginatedList<TicketTbl>.CreateAsync(ticket, page, pageSize);
                 return new TicketPageDto
@@ -98,13 +100,14 @@ namespace Foreign_Trips.Repositories
             }
         }
 
-        public async Task<TicketPageDto> GetTicketAdmin(int page, int pageSize, string search)
+        public async Task<TicketPageDto> GetTicketAdmin(int page, int pageSize, string search, int AdminId)
         {
             try
             {
                 var ticket = await _context.TicketTbl
                 .Include(t => t.Admin)
                 .Include(t => t.TicketStatus)
+                .Where(t => t.AdminId == AdminId)
                 .Where(t => (search != "" && search != null) ? (t.Admin.AdminName.Contains(search) || t.Admin.AdminUsername.Contains(search)) : t.Admin.AdminName != null)
                 .ToListAsync();
 
