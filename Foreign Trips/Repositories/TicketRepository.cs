@@ -73,14 +73,24 @@ namespace Foreign_Trips.Repositories
             }
         }
 
-        public async Task<IEnumerable<TicketTbl?>> GetTicketExpert(int ExpertId)
+        public async Task<TicketPageDto> GetTicketExpert(int page, int pageSize, string search)
         {
             try
             {
-                return await _context.TicketTbl
+                   var ticket = await _context.TicketTbl
+                   .Include(t => t.InternationalExpert)
                    .Include(t => t.TicketStatus)
-                   .Where(t => t.InternationalExpertId == ExpertId || t.InternationalExpertId == null)
+                   .Where(t => (search != "" && search != null) ? (t.InternationalExpert.InternationalExpertName.Contains(search) || t.InternationalExpert.InternationalExpertFamily.Contains(search)) : t.InternationalExpert.InternationalExpertName != null)
                    .ToListAsync();
+
+
+                var ss = await PaginatedList<TicketTbl>.CreateAsync(ticket, page, pageSize);
+                return new TicketPageDto
+                {
+                    Count = ticket.Count(),
+                    Data = ss
+
+                };
             }
             catch (System.Exception ex)
             {
@@ -88,28 +98,47 @@ namespace Foreign_Trips.Repositories
             }
         }
 
-        public async Task<IEnumerable<TicketTbl?>> GetTicketAdmi(int AdminId)
+        public async Task<TicketPageDto> GetTicketAdmin(int page, int pageSize, string search)
         {
             try
             {
-                return await _context.TicketTbl
-                   .Include(t => t.TicketStatus)
-                   .Where(t => t.AdminId == AdminId)
-                   .ToListAsync();
-            }
+                var ticket = await _context.TicketTbl
+                .Include(t => t.Admin)
+                .Include(t => t.TicketStatus)
+                .Where(t => (search != "" && search != null) ? (t.Admin.AdminName.Contains(search) || t.Admin.AdminUsername.Contains(search)) : t.Admin.AdminName != null)
+                .ToListAsync();
+
+
+                var ss = await PaginatedList<TicketTbl>.CreateAsync(ticket, page, pageSize);
+                return new TicketPageDto
+                {
+                    Count = ticket.Count(),
+                    Data = ss
+                };
+             }
             catch (System.Exception ex)
             {
                 return null;
             }
         }
 
-        public async Task<IEnumerable<TicketTbl?>> GetTicketMainAdmin()
+        public async Task<TicketPageDto> GetTicketMainAdmin(int page, int pageSize, string search)
         {
             try
             {
-                return await _context.TicketTbl
+                   var ticket = await _context.TicketTbl
+                   .Include(t => t.MainAdmin)
                    .Include(t => t.TicketStatus)
+                   .Where(t => (search != "" && search != null) ? (t.MainAdmin.MainAdminName.Contains(search) || t.MainAdmin.MainAdminUserName.Contains(search)) : t.MainAdmin.MainAdminName != null)
                    .ToListAsync();
+
+
+                var ss = await PaginatedList<TicketTbl>.CreateAsync(ticket, page, pageSize);
+                return new TicketPageDto
+                {
+                    Count = ticket.Count(),
+                    Data = ss
+                };
             }
             catch (System.Exception ex)
             {

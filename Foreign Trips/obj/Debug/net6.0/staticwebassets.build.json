@@ -1,6 +1,10 @@
 {
   "Version": 1,
+<<<<<<< HEAD
   "Hash": "sKwy3bKBQO7xUuvWTjfzwD2xTDdTyYp4mtBOu/AsnTE=",
+=======
+  "Hash": "iSMPcI5wTBHoHChaqaLhI8h9DXgqj565NuuRKzrbqhA=",
+>>>>>>> ca412632dbd71d4843998dc6d227b1c94cfbb78c
   "Source": "Foreign Trips",
   "BasePath": "_content/Foreign Trips",
   "Mode": "Default",
@@ -34,7 +38,28 @@
       "OriginalItemSpec": "wwwroot/uploads/Agents.xlsx"
     },
     {
+<<<<<<< HEAD
       "Identity": "/Users/amirhossein/Projects/Foreign Trips/Foreign Trips/wwwroot/uploads/sara_1399.jpg",
+=======
+      "Identity": "F:\\Visual stadio\\Foreign Trips\\Foreign Trips\\wwwroot\\uploads\\sara_1399.jpg",
+      "SourceId": "Foreign Trips",
+      "SourceType": "Discovered",
+      "ContentRoot": "F:\\Visual stadio\\Foreign Trips\\Foreign Trips\\wwwroot\\",
+      "BasePath": "_content/Foreign Trips",
+      "RelativePath": "uploads/sara_1399.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\sara_1399.jpg"
+    },
+    {
+      "Identity": "F:\\Visual stadio\\Foreign Trips\\Foreign Trips\\wwwroot\\uploads\\sara_15c4.jpg",
+>>>>>>> ca412632dbd71d4843998dc6d227b1c94cfbb78c
       "SourceId": "Foreign Trips",
       "SourceType": "Discovered",
       "ContentRoot": "/Users/amirhossein/Projects/Foreign Trips/Foreign Trips/wwwroot/",

@@ -7,9 +7,9 @@ namespace Foreign_Trips.Repositories
     {
         Task<bool> TicketExistsAsync(int ticketId);
         Task<TicketPageDto> GetTickets(int page, int pageSize, string search);
-        Task<IEnumerable<TicketTbl?>> GetTicketExpert(int ExpertId);
-        Task<IEnumerable<TicketTbl?>> GetTicketAdmi(int AdminId);
-        Task<IEnumerable<TicketTbl?>> GetTicketMainAdmin();
+        Task<TicketPageDto> GetTicketExpert(int page, int pageSize, string search);
+        Task<TicketPageDto> GetTicketAdmin(int page, int pageSize, string search);
+        Task<TicketPageDto> GetTicketMainAdmin(int page, int pageSize, string search);
         Task<TicketTbl?> GetTicketAsync(int ticketId);
         Task<TicketDetailsTbl?> InsertSubTicketExpertToAgent(TicketDetailsDto ticket);
         Task<TicketDetailsTbl?> InsertSubTicketExpertAdmin(TicketDetailsTbl ticket);

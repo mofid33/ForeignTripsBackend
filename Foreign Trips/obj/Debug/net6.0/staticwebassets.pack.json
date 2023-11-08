@@ -5,8 +5,17 @@
       "PackagePath": "staticwebassets/uploads/Agents.xlsx"
     },
     {
+<<<<<<< HEAD
       "Id": "/Users/amirhossein/Projects/Foreign Trips/Foreign Trips/wwwroot/uploads/sara_1399.jpg",
       "PackagePath": "staticwebassets/uploads/sara_1399.jpg"
+=======
+      "Id": "F:\\Visual stadio\\Foreign Trips\\Foreign Trips\\wwwroot\\uploads\\sara_1399.jpg",
+      "PackagePath": "staticwebassets\\uploads\\sara_1399.jpg"
+    },
+    {
+      "Id": "F:\\Visual stadio\\Foreign Trips\\Foreign Trips\\wwwroot\\uploads\\sara_15c4.jpg",
+      "PackagePath": "staticwebassets\\uploads\\sara_15c4.jpg"
+>>>>>>> ca412632dbd71d4843998dc6d227b1c94cfbb78c
     },
     {
       "Id": "/Users/amirhossein/Projects/Foreign Trips/Foreign Trips/wwwroot/uploads/sara_15c4.jpg",
