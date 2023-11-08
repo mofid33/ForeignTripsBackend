@@ -143,7 +143,121 @@ namespace Foreign_Trips.Repositories
             }
         }
 
-       
+        #region File
+
+
+        public async Task PostFileAsync(PhotoUploadModel fileData)
+        //public async Task PostFileAsync(IFormFile fileData)
+        {
+            try
+            {
+                var fileDetails = new FileDetails()
+                {
+                    FileId = 0,
+                    FileName = fileData.FileDetails.FileName,
+                };
+                var uniqueFileName = GetUniqueFileName(fileData.FileDetails.FileName);
+                //var uploads = Path.Combine(environment.WebRootPath, "users", "posts", postRequest.UserId.ToString());
+                var uploads = Path.Combine(_hostingEnvironment.WebRootPath, "uploads");
+
+                var filePath = Path.Combine(uploads, uniqueFileName);
+
+                //using (var stream = System.IO.File.Create(filePath))
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    fileData.FileDetails.CopyTo(new FileStream(filePath, FileMode.Create));
+                    //fileDetails.FileData = stream.ToArray();
+                }
+                PersianDateTime persianDateTime = new PersianDateTime(DateTime.Now);
+
+                string date = persianDateTime.ToString().Substring(0, 10);
+                //fileDetails.Date = date;
+
+                var result = _context.FileDetails.Add(fileDetails);
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public static string GetUniqueFileName(string fileName)
+
+
+        {
+
+
+            fileName = Path.GetFileName(fileName);
+
+
+            return string.Concat(Path.GetFileNameWithoutExtension(fileName)
+
+
+                                , "_"
+
+
+                                , Guid.NewGuid().ToString().AsSpan(0, 4)
+
+
+                                , Path.GetExtension(fileName));
+
+
+        }
+        public async Task PostMultiFileAsync(List<PhotoUploadModel> fileData)
+        {
+            try
+            {
+                foreach (PhotoUploadModel file in fileData)
+                {
+                    var fileDetails = new FileDetails()
+                    {
+                        FileId = 0,
+                        FileName = file.FileDetails.FileName,
+                    };
+
+                    using (var stream = new MemoryStream())
+                    {
+                        file.FileDetails.CopyTo(stream);
+                        //fileDetails.FileData = stream.ToArray();
+                    }
+
+                    var result = _context.FileDetails.Add(fileDetails);
+                }
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public async Task DownloadFileById(int Id)
+        {
+            try
+            {
+                var file = _context.FileDetails.Where(x => x.FileId == Id).FirstOrDefaultAsync();
+
+                //var content = new System.IO.MemoryStream(file.Result.FileData);
+                var path = Path.Combine(
+                   Directory.GetCurrentDirectory(), "FileDownloaded",
+                   file.Result.FileName);
+
+                //await CopyStream(content, path);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public async Task CopyStream(Stream stream, string downloadPath)
+        {
+            using (var fileStream = new FileStream(downloadPath, FileMode.Create, FileAccess.Write))
+            {
+                await stream.CopyToAsync(fileStream);
+            }
+        }
+        #endregion
 
     }
 

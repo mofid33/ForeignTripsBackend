@@ -11,6 +11,10 @@ namespace Foreign_Trips.Repositories
         Task<InternationalExpertDto> InsertInternationalExpert(InternationalExpertDto internationalexpert);
         Task<InternationalExpertTbl?> UpdateInternationalExpert(InternationalExpertTbl internationalexpert);
         Task<string> RemoveInternationalExpert(int internationalexpertId);
+        Task PostFileAsync(PhotoUploadModel fileData);
+        Task PostMultiFileAsync(List<PhotoUploadModel> fileData);
+        Task DownloadFileById(int fileName);
+
 
     }
 }
