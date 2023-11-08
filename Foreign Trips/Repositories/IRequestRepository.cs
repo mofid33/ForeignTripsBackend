@@ -1,5 +1,6 @@
 ﻿using Foreign_Trips.Entities;
 using Foreign_Trips.Model;
+using System.Net;
 
 namespace Foreign_Trips.Repositories
 {
@@ -11,7 +12,7 @@ namespace Foreign_Trips.Repositories
         Task<IEnumerable<RequestTbl?>> GetRequestsAdmin(int AdminId);
         Task<IEnumerable<RequestTbl?>> GetRequestsMainAdmin(int MainAdminId);
         Task<RequestTbl?> GetRequestAsync(int requestId);
-        Task<IEnumerable<RequestTbl?>> GetRequestsAgent(int agentId);
+        Task<RequestPageDto> GetRequestsAgent(int page, int pageSize, string search, int agentId);
         Task<IEnumerable<RequestEmployeeTbl?>> GetRequestEmployeeAsync(int requestId);
         Task<bool> RequestExistsAsync(int RequestId);
         Task<RequestTbl?> InsertRequestAsync(RequestTbl request);
