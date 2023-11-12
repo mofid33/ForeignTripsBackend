@@ -323,25 +323,25 @@ namespace Foreign_Trips.Controllers
 
         }
 
-        //#region signature
+        #region signature
 
-        //[HttpPost("Post Signature")]
-        //public async Task<ActionResult> PostPhoto([FromForm] PhotoUploadModel signature)
-        //{
-        //    var sign = await _requestRepository.SignatureAsync(signature);
+        [HttpPost("PostSignature")]
+        public async Task<ActionResult> PostSignature([FromForm] SignatureUploadModel signature)
+        {
+            var sign = await _requestRepository.SignatureAsync(signature);
 
-        //    if (sign == null)
-        //    {
-        //        return BadRequest();
-        //    }
+            if (sign == null)
+            {
+                return BadRequest();
+            }
 
-        //    else
-        //    {
-        //        return Ok();
-        //    }
-        //}
+            else
+            {
+                return Ok();
+            }
+        }
 
-        //#endregion
+        #endregion
 
 
         //        [HttpPost]

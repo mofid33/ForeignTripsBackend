@@ -81,6 +81,8 @@ public partial class ForeignDbContext : DbContext
 
     public virtual DbSet<RightToEducationTbl> RightToEducationTbls { get; set; }
 
+    public virtual DbSet<SignatureRequestTbl> SignatureRequestTbls { get; set; }
+
     public virtual DbSet<SubCategoryTbl> SubCategoryTbls { get; set; }
 
     public virtual DbSet<SubsidiaryOrganizationTypeTbl> SubsidiaryOrganizationTypeTbls { get; set; }
@@ -819,6 +821,22 @@ public partial class ForeignDbContext : DbContext
 
             entity.Property(e => e.RightToEducationId).HasColumnName("RightToEducationID");
             entity.Property(e => e.RightToEducationType).HasMaxLength(100);
+        });
+
+        modelBuilder.Entity<SignatureRequestTbl>(entity =>
+        {
+            entity.HasKey(e => e.SignutureId).HasName("PK__Signatur__9E5896E5C8363817");
+
+            entity.ToTable("SignatureRequestTbl", "dbo");
+
+            entity.Property(e => e.SignutureId).HasColumnName("SignutureID");
+            entity.Property(e => e.FileName).HasMaxLength(100);
+            entity.Property(e => e.RequestId).HasColumnName("RequestID");
+            entity.Property(e => e.Signatory).HasMaxLength(100);
+
+            entity.HasOne(d => d.Request).WithMany(p => p.SignatureRequestTbls)
+                .HasForeignKey(d => d.RequestId)
+                .HasConstraintName("FK_SignatureRequestTbl_RequestTbl");
         });
 
         modelBuilder.Entity<SubCategoryTbl>(entity =>

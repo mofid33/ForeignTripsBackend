@@ -161,6 +161,8 @@ public partial class RequestTbl
 
     public virtual RequestStatusTbl? RequestStatus { get; set; }
 
+    public virtual ICollection<SignatureRequestTbl> SignatureRequestTbls { get; set; } = new List<SignatureRequestTbl>();
+
     public virtual TollAmountTypeTbl? TollAmount { get; set; }
 
     public virtual TravelTypeTbl? TravelType { get; set; }

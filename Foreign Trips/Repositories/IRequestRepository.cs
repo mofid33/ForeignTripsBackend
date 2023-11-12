@@ -41,7 +41,7 @@ namespace Foreign_Trips.Repositories
         Task<IEnumerable<RightToEducationTbl>> RightToEducationAsync();
         Task<IEnumerable<TollAmountTypeTbl>> TollAmountTypeAsync();
         Task<IEnumerable<TravelTypeTbl>>TravelTypeAsync();
-        //Task SignatureAsync(PhotoUploadModel signature);
+        Task<string> SignatureAsync(SignatureUploadModel signature);
         Task<bool> SaveChangesAsync();
 
     }

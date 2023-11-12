@@ -1,4 +1,6 @@
-﻿using System.Xml.Linq;
+﻿using System.Security.Cryptography.Xml;
+using System.Xml.Linq;
+using AutoMapper;
 using Azure.Core;
 using Foreign_Trips.DbContexts;
 using Foreign_Trips.Entities;
@@ -17,11 +19,16 @@ namespace Foreign_Trips.Repositories
     public class RequestRepository : IRequestRepository
     {
         private readonly AgentDbContext _context;
+        private readonly Microsoft.AspNetCore.Hosting.IHostingEnvironment _hostingEnvironment;
+        private readonly IMapper _mapper;
 
-        public RequestRepository(AgentDbContext context)
+
+        public RequestRepository(AgentDbContext context, Microsoft.AspNetCore.Hosting.IHostingEnvironment hostingEnvironment, IMapper mapper)
 
         {
             _context = context ?? throw new ArgumentException(nameof(context));
+            _hostingEnvironment = hostingEnvironment ?? throw new ArgumentNullException(nameof(hostingEnvironment));
+            _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
 
         }
 
@@ -659,13 +666,67 @@ namespace Foreign_Trips.Repositories
             }
         }
 
-        //#region Signature
-        //public Task SignatureAsync(PhotoUploadModel signature)
-        //{
-        //    throw new NotImplementedException();
-        //}
+        #region Signature
+        public static string GetUniqueSignatureName(string signatureName)
+        {
 
-        //#endregion
+
+            signatureName = Path.GetFileName(signatureName);
+
+
+            return string.Concat(Path.GetFileNameWithoutExtension(signatureName)
+
+
+                                , "_"
+
+
+                                , Guid.NewGuid().ToString().AsSpan(0, 4)
+
+
+                                , Path.GetExtension(signatureName));
+
+
+        }
+
+        public async Task<string> SignatureAsync(SignatureUploadModel signature)
+        {
+            try
+            {
+                PersianDateTime persianDateTime = new PersianDateTime(DateTime.Now);
+                string date = persianDateTime.ToString().Substring(0, 10);
+                var uniqueSignatureName = GetUniqueSignatureName(signature.FileDetails.FileName);
+                var uploads = Path.Combine(_hostingEnvironment.WebRootPath, "uploads");
+
+
+
+                var signaturePath = Path.Combine(uploads, uniqueSignatureName);
+
+                using (var stream = new FileStream(signaturePath, FileMode.Create))
+                {
+                    stream.Close();
+                    signature.FileDetails.CopyTo(new FileStream(signaturePath, FileMode.Create));
+                }
+
+
+                //var result = _context.FileDetails.Add(fileDetails);
+                SignatureRequestTbl signInsert = new SignatureRequestTbl();
+                signInsert.Signatory = signature.Signatory;
+                signInsert.FileName = uniqueSignatureName;
+                signInsert.RequestId = signature.RequestId;
+
+                await _context.SignatureRequestTbl.AddAsync(signInsert);
+                await _context.SaveChangesAsync();
+                return "true";
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
+        #endregion
+
+       
 
 
         #region Request Status

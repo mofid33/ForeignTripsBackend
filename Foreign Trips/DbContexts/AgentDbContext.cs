@@ -47,6 +47,7 @@ namespace Foreign_Trips.DbContexts
         public DbSet<TravelTypeTbl> TravelTypeTbl { get; set; } = null!;
         public DbSet<RequestEmployeeTbl> RequestEmployeeTbl { get; set; } = null!;
         public DbSet<SubCategoryTbl> SubCategoryTbl { get; set; } = null!;
+        public DbSet<SignatureRequestTbl> SignatureRequestTbl { get; set; } = null!;
 
     }
 }

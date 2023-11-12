@@ -3,8 +3,8 @@
     public class SignatureUploadModel
     {
         public IFormFile FileDetails { get; set; }
-        public long? AdmintId { get; set; }
-        public long? MainAdmintId { get; set; }
+        public int RequestId { get; set; }
+        public string Signatory { get; set; } = null!;
         public int? FileTypeId { get; set; }
     }
 }
