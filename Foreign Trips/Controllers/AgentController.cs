@@ -250,7 +250,6 @@ namespace Foreign_Trips.Controllers
         [HttpPost]
         [Route("GetRequestsExpert")]
 
-
         public async Task<ActionResult<TicketTbl>> GetRequestExpert([FromQuery(Name = "page")] int page, [FromQuery(Name = "pageSize")] int pageSize, string search, [FromBody] RequestTbl Model)
         {
 

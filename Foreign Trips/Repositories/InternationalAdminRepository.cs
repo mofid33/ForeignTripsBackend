@@ -31,9 +31,16 @@ namespace Foreign_Trips.Repositories
             return await _context.InternationalAdminTbl.AnyAsync(f => f.AdminId == adminId);
         }
 
-        public async Task<InternationalAdminTbl?> GetAdmins(int adminId)
+        public async Task<IEnumerable<InternationalAdminTbl>> GetAdmins()
         {
-            return await _context.InternationalAdminTbl.Where(c => c.AdminId == adminId).FirstOrDefaultAsync();
+            try
+            {
+                return await _context.InternationalAdminTbl.ToListAsync();
+            }
+            catch (System.Exception ex)
+            {
+                return null;
+            }
         }
 
         public async Task<AdminPageDto> GetAdmin(int page, int pagesize, string search)

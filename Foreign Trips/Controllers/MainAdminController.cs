@@ -425,9 +425,9 @@ namespace Foreign_Trips.Controllers
             )
         {
 
-            var Int = await _internationaladminRepository.GetAdmins(Model.AdminId);
+            var Int = await _internationaladminRepository.GetAdmins();
             return Ok(
-         _mapper.Map<SupervisorTbl>(Int)
+         _mapper.Map<InternationalAdminTbl>(Int)
          );
 
         }

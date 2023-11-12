@@ -405,6 +405,7 @@ namespace Foreign_Trips.Controllers
         #endregion
 
         #region Admin
+
         [HttpGet]
         [Route("GetInternationalAdmins")]
 
@@ -413,17 +414,17 @@ namespace Foreign_Trips.Controllers
         )
         {
 
-            var Int = await _internationaladminRepository.GetAdmins(Model.AdminId);
+            var Int = await _internationaladminRepository.GetAdmins();
             if (Int == null)
             {
                 return BadRequest();
             }
 
             return Ok(
-         _mapper.Map<SupervisorTbl>(Int)
+         _mapper.Map<InternationalAdminTbl>(Int)
          );
 
-            #endregion
+        #endregion
 
         }
     }
