@@ -35,6 +35,7 @@ namespace Foreign_Trips.Repositories
         {
             try
             {
+
                 return await _context.InternationalAdminTbl.ToListAsync();
             }
             catch (System.Exception ex)
@@ -77,7 +78,7 @@ namespace Foreign_Trips.Repositories
         }
 
 
-        public async Task<InternationalAdminDto> InsertAdmin(InternationalAdminDto admin)
+        public async Task<InternationalAdminTbl> InsertAdmin(InternationalAdminTbl admin)
         {
             try
             {

@@ -420,14 +420,12 @@ namespace Foreign_Trips.Controllers
         [HttpGet]
         [Route("GetInternationalAdmin")]
 
-        public async Task<ActionResult<InternationalAdminTbl>> GetAdmin(
-            [FromBody] InternationalAdminTbl Model
-            )
+        public async Task<ActionResult<InternationalAdminDto>> GetAdmin( )
         {
 
             var Int = await _internationaladminRepository.GetAdmins();
             return Ok(
-         _mapper.Map<InternationalAdminTbl>(Int)
+         _mapper.Map<InternationalAdminDto>(Int)
          );
 
         }
@@ -436,8 +434,8 @@ namespace Foreign_Trips.Controllers
 
         [HttpPost]
         [Route("InsertInternationalAdmin")]
-        public async Task<ActionResult<InternationalAdminDto>> InsertAdmin(
-    [FromBody] InternationalAdminDto Model
+        public async Task<ActionResult<InternationalAdminTbl>> InsertAdmin(
+    [FromBody] InternationalAdminTbl Model
     )
         {
 

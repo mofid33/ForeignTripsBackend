@@ -13,6 +13,7 @@ namespace ShenaseMeliBac.Profiles
             //CreateMap<Entities.Organization, Model.OrganizationTbl>();
             //CreateMap<Model.OrganizationTbl, Entities.Organization>();
             CreateMap<AgentTbl,AgentDto>();
+            CreateMap<InternationalAdminTbl, InternationalAdminDto>();
             //CreateMap<Model.ManagerStatusTbl, Entities.ManagerStatusDto>();
 
         }

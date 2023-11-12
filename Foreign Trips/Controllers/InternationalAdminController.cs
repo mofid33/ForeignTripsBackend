@@ -54,9 +54,7 @@ namespace Foreign_Trips.Controllers
         [HttpGet]
         [Route("GetInternationalAdmins")]
 
-        public async Task<ActionResult<InternationalAdminTbl>> GetAdmins(
-             [FromBody] InternationalAdminTbl Model
-             )
+        public async Task<ActionResult<InternationalAdminTbl>> GetAdmins()
         {
 
 
@@ -90,8 +88,8 @@ namespace Foreign_Trips.Controllers
 
         [HttpPost]
         [Route("InsertInternationalAdmin")]
-        public async Task<ActionResult<InternationalAdminDto>> InsertAdmin(
-    [FromBody] InternationalAdminDto Model
+        public async Task<ActionResult<InternationalAdminTbl>> InsertAdmin(
+    [FromBody] InternationalAdminTbl Model
     )
         {
 
