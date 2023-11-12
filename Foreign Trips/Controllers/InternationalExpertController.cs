@@ -19,7 +19,7 @@ namespace Foreign_Trips.Controllers
         private readonly IMapper _mapper;
 
 
-        public InternationalExpertController(IInternationalExpertRepository internationalexpertRepository, IMessageRepository messageRepository , IInternationalAdminRepository internationaladminRepository,
+        public InternationalExpertController(IInternationalExpertRepository internationalexpertRepository, IMessageRepository messageRepository, IInternationalAdminRepository internationaladminRepository,
                                              IRequestRepository requestRepository, IReportRepository reportRepository, IMainAdminRepository mainadminRepository, IMapper mapper)
 
         {
@@ -385,7 +385,7 @@ namespace Foreign_Trips.Controllers
         }
         #endregion
 
-        #region Admin
+        #region MainAdmin
         [HttpGet]
         [Route("GetMainAdmin")]
 
@@ -404,5 +404,27 @@ namespace Foreign_Trips.Controllers
         }
         #endregion
 
+        #region Admin
+        [HttpGet]
+        [Route("GetInternationalAdmins")]
+
+        public async Task<ActionResult<InternationalAdminTbl>> GetAdmins(
+        [FromBody] InternationalAdminTbl Model
+        )
+        {
+
+            var Int = await _internationaladminRepository.GetAdmins(Model.AdminId);
+            if (Int == null)
+            {
+                return BadRequest();
+            }
+
+            return Ok(
+         _mapper.Map<SupervisorTbl>(Int)
+         );
+
+            #endregion
+
+        }
     }
-}
+ }
