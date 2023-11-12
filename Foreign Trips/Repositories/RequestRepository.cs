@@ -657,11 +657,13 @@ namespace Foreign_Trips.Repositories
             }
         }
 
+        //#region Signature
+        //public Task SignatureAsync(PhotoUploadModel signature)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
-        public async Task<bool> SaveChangesAsync()
-        {
-            return (await _context.SaveChangesAsync() > 0);
-        }
+        //#endregion
 
 
         #region Request Status
@@ -738,6 +740,11 @@ namespace Foreign_Trips.Repositories
 
         #endregion
 
+
+        public async Task<bool> SaveChangesAsync()
+        {
+            return (await _context.SaveChangesAsync() > 0);
+        }
 
     }
 }

@@ -508,9 +508,9 @@ namespace Foreign_Trips.Controllers
         [HttpPost("PostPhoto")]
         public async Task<ActionResult> PostPhoto([FromForm] PhotoUploadModel photoData)
         {
-            var res = await _agentRepository.PhotoAsync(photoData);
+            var photo = await _agentRepository.PhotoAsync(photoData);
 
-            if (res == null)
+            if (photo == null)
             {
                 return BadRequest();
             }

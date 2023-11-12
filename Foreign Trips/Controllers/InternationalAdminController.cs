@@ -678,6 +678,28 @@ namespace Foreign_Trips.Controllers
 
         #endregion
 
+        #region signature
+
+        [HttpPost("PostPhoto")]
+        public async Task<ActionResult> PostPhoto([FromForm] PhotoUploadModel photoData)
+        {
+            var sign = await _requestRepository.PhotoAsync(photoData);
+
+            if (sign == null)
+            {
+                return BadRequest();
+            }
+
+            else
+            {
+                return Ok();
+            }
+        }
+
+        #endregion
+
+
+
 
 
     }

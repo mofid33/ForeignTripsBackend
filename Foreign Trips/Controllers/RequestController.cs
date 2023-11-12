@@ -322,7 +322,28 @@ namespace Foreign_Trips.Controllers
             return Ok(request);
 
         }
-       
+
+        //#region signature
+
+        //[HttpPost("Post Signature")]
+        //public async Task<ActionResult> PostPhoto([FromForm] PhotoUploadModel signature)
+        //{
+        //    var sign = await _requestRepository.SignatureAsync(signature);
+
+        //    if (sign == null)
+        //    {
+        //        return BadRequest();
+        //    }
+
+        //    else
+        //    {
+        //        return Ok();
+        //    }
+        //}
+
+        //#endregion
+
+
         //        [HttpPost]
         //        [Route("AcceptRequest")]
         //        public async Task<ActionResult<RequestTbl>> AcceptRequest(
