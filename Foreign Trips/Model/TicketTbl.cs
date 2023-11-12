@@ -11,7 +11,7 @@ public partial class TicketTbl
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int TicketId { get; set; }
 
-    public int AgentId { get; set; }
+    public int? AgentId { get; set; }
 
     public int TicketStatusId { get; set; }
 
@@ -33,7 +33,7 @@ public partial class TicketTbl
 
     public virtual InternationalAdminTbl? Admin { get; set; }
 
-    public virtual AgentTbl Agent { get; set; } = null!;
+    public virtual AgentTbl? Agent { get; set; }
 
     public virtual InternationalExpertTbl? InternationalExpert { get; set; }
 

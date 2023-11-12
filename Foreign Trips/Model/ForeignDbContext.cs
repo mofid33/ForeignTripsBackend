@@ -909,6 +909,7 @@ public partial class ForeignDbContext : DbContext
 
             entity.HasOne(d => d.Agent).WithMany(p => p.TicketTbls)
                 .HasForeignKey(d => d.AgentId)
+                .OnDelete(DeleteBehavior.Cascade)
                 .HasConstraintName("FK_TicketTbl_AgentTbl");
 
             entity.HasOne(d => d.InternationalExpert).WithMany(p => p.TicketTbls)

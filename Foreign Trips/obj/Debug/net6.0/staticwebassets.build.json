@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "xZ7UcjnAhxZLI1csBywjilNBNj+o5goaGg0/+PLiYEo=",
+  "Hash": "xXR6j71egVA37xQj5jHAqMJuE8RGC/VbfqXsrA27luI=",
   "Source": "Foreign Trips",
   "BasePath": "_content/Foreign Trips",
   "Mode": "Default",
@@ -8,19 +8,19 @@
   "ReferencedProjectsConfiguration": [],
   "DiscoveryPatterns": [
     {
-      "Name": "Foreign Trips/wwwroot",
+      "Name": "Foreign Trips\\wwwroot",
       "Source": "Foreign Trips",
-      "ContentRoot": "/Users/amirhossein/Projects/Foreign Trips/Foreign Trips/wwwroot/",
+      "ContentRoot": "F:\\Visual stadio\\Foreign Trips\\Foreign Trips\\wwwroot\\",
       "BasePath": "_content/Foreign Trips",
       "Pattern": "**"
     }
   ],
   "Assets": [
     {
-      "Identity": "/Users/amirhossein/Projects/Foreign Trips/Foreign Trips/wwwroot/.DS_Store",
+      "Identity": "F:\\Visual stadio\\Foreign Trips\\Foreign Trips\\wwwroot\\.DS_Store",
       "SourceId": "Foreign Trips",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/amirhossein/Projects/Foreign Trips/Foreign Trips/wwwroot/",
+      "ContentRoot": "F:\\Visual stadio\\Foreign Trips\\Foreign Trips\\wwwroot\\",
       "BasePath": "_content/Foreign Trips",
       "RelativePath": ".DS_Store",
       "AssetKind": "All",
@@ -31,13 +31,13 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot/.DS_Store"
+      "OriginalItemSpec": "wwwroot\\.DS_Store"
     },
     {
-      "Identity": "/Users/amirhossein/Projects/Foreign Trips/Foreign Trips/wwwroot/uploads/Agents.xlsx",
+      "Identity": "F:\\Visual stadio\\Foreign Trips\\Foreign Trips\\wwwroot\\uploads\\Agents.xlsx",
       "SourceId": "Foreign Trips",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/amirhossein/Projects/Foreign Trips/Foreign Trips/wwwroot/",
+      "ContentRoot": "F:\\Visual stadio\\Foreign Trips\\Foreign Trips\\wwwroot\\",
       "BasePath": "_content/Foreign Trips",
       "RelativePath": "uploads/Agents.xlsx",
       "AssetKind": "All",
@@ -48,13 +48,13 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot/uploads/Agents.xlsx"
+      "OriginalItemSpec": "wwwroot\\uploads\\Agents.xlsx"
     },
     {
-      "Identity": "/Users/amirhossein/Projects/Foreign Trips/Foreign Trips/wwwroot/uploads/sara_1399.jpg",
+      "Identity": "F:\\Visual stadio\\Foreign Trips\\Foreign Trips\\wwwroot\\uploads\\sara_1399.jpg",
       "SourceId": "Foreign Trips",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/amirhossein/Projects/Foreign Trips/Foreign Trips/wwwroot/",
+      "ContentRoot": "F:\\Visual stadio\\Foreign Trips\\Foreign Trips\\wwwroot\\",
       "BasePath": "_content/Foreign Trips",
       "RelativePath": "uploads/sara_1399.jpg",
       "AssetKind": "All",
@@ -65,13 +65,13 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot/uploads/sara_1399.jpg"
+      "OriginalItemSpec": "wwwroot\\uploads\\sara_1399.jpg"
     },
     {
-      "Identity": "/Users/amirhossein/Projects/Foreign Trips/Foreign Trips/wwwroot/uploads/sara_15c4.jpg",
+      "Identity": "F:\\Visual stadio\\Foreign Trips\\Foreign Trips\\wwwroot\\uploads\\sara_15c4.jpg",
       "SourceId": "Foreign Trips",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/amirhossein/Projects/Foreign Trips/Foreign Trips/wwwroot/",
+      "ContentRoot": "F:\\Visual stadio\\Foreign Trips\\Foreign Trips\\wwwroot\\",
       "BasePath": "_content/Foreign Trips",
       "RelativePath": "uploads/sara_15c4.jpg",
       "AssetKind": "All",
@@ -82,13 +82,13 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot/uploads/sara_15c4.jpg"
+      "OriginalItemSpec": "wwwroot\\uploads\\sara_15c4.jpg"
     },
     {
-      "Identity": "/Users/amirhossein/Projects/Foreign Trips/Foreign Trips/wwwroot/uploads/sara_2a8b.jpg",
+      "Identity": "F:\\Visual stadio\\Foreign Trips\\Foreign Trips\\wwwroot\\uploads\\sara_2a8b.jpg",
       "SourceId": "Foreign Trips",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/amirhossein/Projects/Foreign Trips/Foreign Trips/wwwroot/",
+      "ContentRoot": "F:\\Visual stadio\\Foreign Trips\\Foreign Trips\\wwwroot\\",
       "BasePath": "_content/Foreign Trips",
       "RelativePath": "uploads/sara_2a8b.jpg",
       "AssetKind": "All",
@@ -99,13 +99,13 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot/uploads/sara_2a8b.jpg"
+      "OriginalItemSpec": "wwwroot\\uploads\\sara_2a8b.jpg"
     },
     {
-      "Identity": "/Users/amirhossein/Projects/Foreign Trips/Foreign Trips/wwwroot/uploads/txt_08b6.png",
+      "Identity": "F:\\Visual stadio\\Foreign Trips\\Foreign Trips\\wwwroot\\uploads\\txt_08b6.png",
       "SourceId": "Foreign Trips",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/amirhossein/Projects/Foreign Trips/Foreign Trips/wwwroot/",
+      "ContentRoot": "F:\\Visual stadio\\Foreign Trips\\Foreign Trips\\wwwroot\\",
       "BasePath": "_content/Foreign Trips",
       "RelativePath": "uploads/txt_08b6.png",
       "AssetKind": "All",
@@ -116,13 +116,13 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot/uploads/txt_08b6.png"
+      "OriginalItemSpec": "wwwroot\\uploads\\txt_08b6.png"
     },
     {
-      "Identity": "/Users/amirhossein/Projects/Foreign Trips/Foreign Trips/wwwroot/uploads/txt_3e6f.png",
+      "Identity": "F:\\Visual stadio\\Foreign Trips\\Foreign Trips\\wwwroot\\uploads\\txt_3e6f.png",
       "SourceId": "Foreign Trips",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/amirhossein/Projects/Foreign Trips/Foreign Trips/wwwroot/",
+      "ContentRoot": "F:\\Visual stadio\\Foreign Trips\\Foreign Trips\\wwwroot\\",
       "BasePath": "_content/Foreign Trips",
       "RelativePath": "uploads/txt_3e6f.png",
       "AssetKind": "All",
@@ -133,13 +133,13 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot/uploads/txt_3e6f.png"
+      "OriginalItemSpec": "wwwroot\\uploads\\txt_3e6f.png"
     },
     {
-      "Identity": "/Users/amirhossein/Projects/Foreign Trips/Foreign Trips/wwwroot/uploads/txt_7a0d.png",
+      "Identity": "F:\\Visual stadio\\Foreign Trips\\Foreign Trips\\wwwroot\\uploads\\txt_7a0d.png",
       "SourceId": "Foreign Trips",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/amirhossein/Projects/Foreign Trips/Foreign Trips/wwwroot/",
+      "ContentRoot": "F:\\Visual stadio\\Foreign Trips\\Foreign Trips\\wwwroot\\",
       "BasePath": "_content/Foreign Trips",
       "RelativePath": "uploads/txt_7a0d.png",
       "AssetKind": "All",
@@ -150,13 +150,13 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot/uploads/txt_7a0d.png"
+      "OriginalItemSpec": "wwwroot\\uploads\\txt_7a0d.png"
     },
     {
-      "Identity": "/Users/amirhossein/Projects/Foreign Trips/Foreign Trips/wwwroot/uploads/txt_b1a6.png",
+      "Identity": "F:\\Visual stadio\\Foreign Trips\\Foreign Trips\\wwwroot\\uploads\\txt_b1a6.png",
       "SourceId": "Foreign Trips",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/amirhossein/Projects/Foreign Trips/Foreign Trips/wwwroot/",
+      "ContentRoot": "F:\\Visual stadio\\Foreign Trips\\Foreign Trips\\wwwroot\\",
       "BasePath": "_content/Foreign Trips",
       "RelativePath": "uploads/txt_b1a6.png",
       "AssetKind": "All",
@@ -167,13 +167,13 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot/uploads/txt_b1a6.png"
+      "OriginalItemSpec": "wwwroot\\uploads\\txt_b1a6.png"
     },
     {
-      "Identity": "/Users/amirhossein/Projects/Foreign Trips/Foreign Trips/wwwroot/uploads/txt_de69.png",
+      "Identity": "F:\\Visual stadio\\Foreign Trips\\Foreign Trips\\wwwroot\\uploads\\txt_de69.png",
       "SourceId": "Foreign Trips",
       "SourceType": "Discovered",
-      "ContentRoot": "/Users/amirhossein/Projects/Foreign Trips/Foreign Trips/wwwroot/",
+      "ContentRoot": "F:\\Visual stadio\\Foreign Trips\\Foreign Trips\\wwwroot\\",
       "BasePath": "_content/Foreign Trips",
       "RelativePath": "uploads/txt_de69.png",
       "AssetKind": "All",
@@ -184,7 +184,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot/uploads/txt_de69.png"
+      "OriginalItemSpec": "wwwroot\\uploads\\txt_de69.png"
     }
   ]
 }
