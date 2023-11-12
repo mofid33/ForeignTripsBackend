@@ -708,7 +708,6 @@ namespace Foreign_Trips.Repositories
                 }
 
 
-                //var result = _context.FileDetails.Add(fileDetails);
                 SignatureRequestTbl signInsert = new SignatureRequestTbl();
                 signInsert.Signatory = signature.Signatory;
                 signInsert.FileName = uniqueSignatureName;
