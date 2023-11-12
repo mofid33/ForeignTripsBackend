@@ -70,7 +70,7 @@ namespace Foreign_Trips.Repositories
                  .Include(c => c.TypeAccommodation)
                  .Include(c => c.TollAmount)
                  .Where(t => t.InternationalExpertId == ExpertId || t.InternationalExpertId == null)
-                 .Where(t => (search != "" && search != null) ? (t.InternationalExpert.InternationalExpertName.Contains(search) || t.InternationalExpert.InternationalExpertFamily.Contains(search)) : t.InternationalExpert.InternationalExpertName != null)
+                 .Where(t => (search != "" && search != null) ? (t.Agent.AgentFamily.Contains(search) || t.Agent.AgentName.Contains(search)) : t.Agent.AgentName != null)
 
                  .ToListAsync();
 
@@ -522,6 +522,8 @@ namespace Foreign_Trips.Repositories
                 var data = await GetNewRequest(request.RequestId);
                 data.RequestStatusId = 3;
                 data.RejectRequest = request.RejectRequest;
+                data.InternationalExpertId = request.InternationalExpertId;
+
                 await _context.SaveChangesAsync();
                 return request;
 

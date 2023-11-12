@@ -1,33 +1,40 @@
 ﻿<Properties StartupConfiguration="{8F23E8CC-3E31-49FF-AD10-C6C79B4877E0}|Default" GitUserInfo="UsingGIT">
-  <MultiItemStartupConfigurations />
-  <MonoDevelop.Ide.ItemProperties.Foreign_220Trips PreferredExecutionTarget="/Applications/Google Chrome.app" />
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
-      <Breakpoint file="/Users/amirhossein/Projects/Foreign Trips/Foreign Trips/Repositories/TicketRepository.cs" relfile="Foreign Trips/Repositories/TicketRepository.cs" line="72" column="1" />
+      <Breakpoint file="/Users/amirhossein/Projects/Foreign Trips/Foreign Trips/Repositories/TicketRepository.cs" relfile="Foreign Trips/Repositories/TicketRepository.cs" line="73" column="1" />
       <Breakpoint file="/Users/amirhossein/Projects/Foreign Trips/Foreign Trips/Repositories/RequestRepository.cs" relfile="Foreign Trips/Repositories/RequestRepository.cs" line="358" column="1" />
-      <Breakpoint file="/Users/amirhossein/Projects/Foreign Trips/Foreign Trips/Controllers/RequestController.cs" relfile="Foreign Trips/Controllers/RequestController.cs" line="138" column="1" />
+      <Breakpoint file="/Users/amirhossein/Projects/Foreign Trips/Foreign Trips/Controllers/RequestController.cs" relfile="Foreign Trips/Controllers/RequestController.cs" line="195" column="1" />
       <Breakpoint file="/Users/amirhossein/Projects/Foreign Trips/Foreign Trips/Repositories/ReportRepository.cs" relfile="Foreign Trips/Repositories/ReportRepository.cs" line="91" column="1" />
+      <Breakpoint file="/Users/amirhossein/Projects/Foreign Trips/Foreign Trips/Controllers/TicketController.cs" relfile="Foreign Trips/Controllers/TicketController.cs" line="203" column="1" />
+      <Breakpoint file="/Users/amirhossein/Projects/Foreign Trips/Foreign Trips/Repositories/TicketRepository.cs" relfile="Foreign Trips/Repositories/TicketRepository.cs" line="32" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.Workbench ActiveDocument="Foreign Trips/Repositories/InternationalExpertRepository.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Foreign Trips/Repositories/TicketRepository.cs">
     <Files>
       <File FileName="Foreign Trips/Controllers/ForeignDelegrationController.cs" />
       <File FileName="Foreign Trips/Repositories/AuthRepository.cs" />
       <File FileName="Foreign Trips/Controllers/AuthController.cs" />
       <File FileName="Foreign Trips/Entities/LoginDto.cs" />
       <File FileName="Foreign Trips/Repositories/AgentRepository.cs" />
-      <File FileName="Foreign Trips/Controllers/AgentController.cs" Line="39" Column="57" />
-      <File FileName="Foreign Trips/Controllers/MainAdminController.cs" Line="114" Column="73" />
-      <File FileName="Foreign Trips/Utility/PaginatedList.cs" Line="6" Column="44" />
+      <File FileName="Foreign Trips/Controllers/AgentController.cs" />
+      <File FileName="Foreign Trips/Controllers/MainAdminController.cs" />
+      <File FileName="Foreign Trips/Utility/PaginatedList.cs" />
       <File FileName="Foreign Trips/Repositories/IAgentRepository.cs" />
       <File FileName="Foreign Trips/Controllers/SupervisorController.cs" />
       <File FileName="Foreign Trips/Controllers/InternationalAdminController.cs" />
       <File FileName="Foreign Trips/Controllers/RequestController.cs" />
-      <File FileName="Foreign Trips/Repositories/RequestRepository.cs" Line="11" Column="20" />
+      <File FileName="Foreign Trips/Repositories/RequestRepository.cs" />
       <File FileName="../../../../usr/local/share/dotnet/sdk/7.0.202/Sdks/Microsoft.NET.Sdk/targets/Microsoft.PackageDependencyResolution.targets" />
-      <File FileName="Foreign Trips/Repositories/IRequestRepository.cs" Line="9" Column="90" />
-      <File FileName="Foreign Trips/Repositories/InternationalExpertRepository.cs" Line="30" Column="54" />
+      <File FileName="Foreign Trips/Repositories/IRequestRepository.cs" />
+      <File FileName="Foreign Trips/Repositories/InternationalExpertRepository.cs" />
+      <File FileName="../../../../usr/local/share/dotnet/sdk/7.0.202/Sdks/Microsoft.NET.Sdk.Razor/targets/Microsoft.NET.Sdk.Razor.StaticWebAssets.targets" />
+      <File FileName="Foreign Trips/Repositories/TicketRepository.cs" Line="32" Column="1" />
+      <File FileName="Foreign Trips/Controllers/TicketController.cs" />
+      <File FileName="Foreign Trips/Controllers/InternationalExpertController.cs" />
+      <File FileName="Foreign Trips/Repositories/ITicketRepository.cs" />
+      <File FileName="Foreign Trips/DbContexts/AgentDbContext.cs" />
+      <File FileName="Foreign Trips/Model/TicketDetailsTbl.cs" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -39,9 +46,12 @@
               <Node name="Entities" expanded="True" />
               <Node name="Model" expanded="True" />
               <Node name="Repositories" expanded="True">
-                <Node name="InternationalExpertRepository.cs" selected="True" />
+                <Node name="TicketRepository.cs" selected="True" />
               </Node>
               <Node name="Utility" expanded="True" />
+              <Node name="wwwroot" expanded="True">
+                <Node name="uploads" expanded="True" />
+              </Node>
               <Node name="appsettings.json" expanded="True" />
             </Node>
           </Node>
@@ -49,5 +59,7 @@
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.ItemProperties.Foreign_220Trips PreferredExecutionTarget="/Applications/Google Chrome.app" />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MultiItemStartupConfigurations />
 </Properties>

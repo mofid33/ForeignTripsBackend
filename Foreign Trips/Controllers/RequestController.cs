@@ -101,7 +101,7 @@ namespace Foreign_Trips.Controllers
             {
                 return BadRequest();
             }
-            return Ok(_mapper.Map<IEnumerable<MessageTbl>>(req));
+            return Ok(req);
 
         }
 

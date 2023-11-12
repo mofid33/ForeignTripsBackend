@@ -124,7 +124,7 @@ namespace Foreign_Trips.Controllers
             {
                 return BadRequest();
             }
-            return Ok(_mapper.Map<IEnumerable<MessageTbl>>(tickets));
+            return Ok(tickets);
 
         }
 
@@ -140,7 +140,7 @@ namespace Foreign_Trips.Controllers
             {
                 return BadRequest();
             }
-            return Ok(_mapper.Map<IEnumerable<MessageTbl>>(tickets));
+            return Ok(tickets);
 
         }
 
@@ -157,7 +157,7 @@ namespace Foreign_Trips.Controllers
             {
                 return BadRequest();
             }
-            return Ok(_mapper.Map<IEnumerable<MessageTbl>>(tickets));
+            return Ok(tickets);
 
         }
 
@@ -171,7 +171,7 @@ namespace Foreign_Trips.Controllers
             {
                 return BadRequest();
             }
-            return Ok(_mapper.Map<IEnumerable<MessageTbl>>(tickets));
+            return Ok(tickets);
 
         }
 
@@ -206,7 +206,7 @@ namespace Foreign_Trips.Controllers
                 return BadRequest();
             }
             return Ok(
-         _mapper.Map<IEnumerable<TicketDetailsTbl>>(Tickets)
+        Tickets
          );
 
         }
